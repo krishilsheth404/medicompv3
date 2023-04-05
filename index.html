@@ -40,7 +40,7 @@
 	*::-webkit-scrollbar {
   display: none;
 }
-  #foodItem:hover{
+  #foodItem,#addbtn:hover{
 	cursor: pointer;
   }
  </style>
@@ -68,13 +68,17 @@
   </nav>
     <!-- END nav -->
     
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');">
+    <div class="hero-wrap js-fullheight" id="fullheight" style="background: #6190E8;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #A7BFE8, #6190E8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	">
+	<!-- <span><img src="doctoon-removebg-preview.png" style="position: absolute;bottom:0px;right: 0px;height: 50vh;width: auto;" alt=""></span> -->
       <div class="overlay"></div>
       <div class="container" id="idcontainer">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
           <div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-            <h1 class="mb-4" style="margin-top: 50px;" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Save money on prescriptions</strong> </h1>
-            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><b>compare prices now!</b>	</p>
+            <h1 class="mb-4" style="margin-top: 100px;" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong style="text-shadow: 1px 1px 4px white;">Save money on prescriptions</strong> </h1>
+            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><b style="text-shadow: 1px 1px 4px white;">compare prices now!</b>	</p>
             <div class="block-17 my-4">
               <form action="" method="post" class="d-block d-flex">
                 <div class="fields d-block d-flex">
@@ -157,10 +161,10 @@
 		
 		async function formVal(){
 
-			if(document.getElementById('q').value.length>3){
+			if(document.getElementById('q').value.trim().length>3){
 
 				document.getElementById('medlist').innerHTML='';
-				document.getElementById('mlblock').style.display='none';
+				// document.getElementById('mlblock').style.display='none';
 				
 				document.getElementById('medlist').innerHTML=`
 				<div class="skeleton">
@@ -177,10 +181,15 @@
 					console.log(res.data.length);
 					document.getElementById('text_change').innerHTML=`${res.data.length} Results Found.`;
 					console.log(document.getElementById('idcontainer').style.height)
-					document.getElementById('idcontainer').style.height=`110vh`;
+
+					document.getElementById('idcontainer').style.height=`${(res.data.length*80)+250}px`;
+					// document.getElementById('idcontainer').style.transition='all 1s';
+					document.getElementById('fullheight').style.height=`${(res.data.length*80)+250}px`;
+					// document.getElementById('fullheight').style.transition='all 1s';
+
 					document.getElementById('medlist').innerHTML='';
-					document.getElementById('medlist').style.height=`200px`;
-					document.getElementById('medlist').style.overflow='scroll';
+					document.getElementById('medlist').style.height=`auto`;
+					// document.getElementById('medlist').style.overflow='scroll';
 					for(var i=0;i<res.data.length;i++){
 						if(res.data[i]['name']){
 
@@ -190,8 +199,9 @@
 							<div onclick="loader()">
 							<form id="msform${i+1}"  action="/compare" method="POST" class="ss searchString${i+1}">
 								<a onclick="this.parentNode.submit()" >
-									<div  class="textfield-search one-third">
+									<div  class="textfield-search one-third" style="position:relative">
 									<input type="text" autocomplete="off" id="foodItem" contenteditable='false'  name="foodItem" class="form-control"   value="${res.data[i]['name']}">
+									<span id="addbtn" style='position: absolute;right: 0px;top: 0px;color: black;font-size: 2rem;transform:translate(0%, 0%);padding-right: 10px;'>+</span>
 									</div>
 									</a>
 									</form>
@@ -534,7 +544,7 @@
     	</div>
     </section>
 
-    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_1.jpg);">
+    <section class="ftco-section ftco-counter img" id="section-counter" >
     	<div class="container">
     		<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
@@ -1022,7 +1032,9 @@
     </section>
 		
 		<section class="ftco-section-parallax">
-      <div class="parallax-img d-flex align-items-center">
+      <div class="parallax-img d-flex align-items-center" style="background: #6190E8;  /* fallback for old browsers */
+	  background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
+	  background: linear-gradient(to right, #A7BFE8, #6190E8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
         <div class="container">
           <div class="row d-flex justify-content-center">
             <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
