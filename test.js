@@ -655,16 +655,20 @@ app.post('/description', async (req, res) => {
 extractLinkFromBing = async (url) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        // console.log(url);
+        const  data  = await axiosParallel(url)
         // console.log(typeof(data));
         // console.log(data)
 
         // Using cheerio to extract <a> tags
-        const $ = cheerio.load(data);
+        const rawUrl=[];
+        for(var i=0; i< data.length;i++){
+            const $ = cheerio.load(data[i]);
+            rawUrl.push($('li[class=b_algo] h2 a').first().attr('href'));
+            console.log(rawUrl);
+        }
         // console.log($.html());
 
-        const rawUrl = $('li[class=b_algo] h2 a').first().attr('href');
-        console.log(rawUrl);
         if (rawUrl != undefined) {
             return rawUrl
         } else {
@@ -1531,20 +1535,38 @@ extractDataOfEgmedi = async (data, url) => {
 };
 
 
+app.post('/results',async(req,res)=>{
+
+    
+    const nameOfMed = req.body.foodItem;
+    console.log(nameOfMed[0]+nameOfMed[1]);
+
+  var temp= await axiosParallel([
+        `http://localhost:5000/compare?q=${nameOfMed[0]}`,
+        `http://localhost:5000/compare?q=${nameOfMed[1]}`,
+  ]);
+
+  const final =[];
+  final.push(temp[0].data)
+  final.push(temp[1].data)
+  console.log("Data:")
+  console.log(final);
+    // res.render(__dirname + '/premiumMultiSearch', { final: final });
+
+
+    // console.log(JSON.parse(a[1].data))
+});
 
 
 
-
-app.post('/compare', async (req, res) => {
+app.get('/compare', async (req, res) => {
     // Insert Login Code Here
+    
 
-
-    // const nameOfMed = req.query['q'] + '\n';
-    // console.log(req.query['q']);
+    const nameOfMed = req.query['foodItem'] + '\n';
+    console.log(req.query['foodItem']);
     const presReq = ["No"];
 
-    const nameOfMed = req.body.foodItem + '\n';
-    console.log(req.body.foodItem);
     // console.log('Name')
     // try {
     //     let date_ob = new Date();
@@ -1593,19 +1615,19 @@ app.post('/compare', async (req, res) => {
     //     console.log("The file was saved!");
     // });
     // https://www.ask.com/web?q=site:apollopharmacy.in%20crocin%20advance+&ad=dirN&o=0
-    const urlForPharmEasy = `https://in.search.yahoo.com/search;_ylt=?p=site:pharmeasy.in+${nameOfMed} medicine`;  //*//
-    const urlForNetMeds = `https://in.search.yahoo.com/search;_ylt=?p=site:netmeds.com+${nameOfMed} medicine`;
-    const urlForApollo = `https://in.search.yahoo.com/search;_ylt=?p=site:apollopharmacy.in+${nameOfMed} medicine`;
-    const urlForHealthsKool = `https://in.search.yahoo.com/search;_ylt=?p=site:healthskoolpharmacy.com+${nameOfMed} medicine`;
+    const urlForPharmEasy = `https://www.bing.com/search?q=site:pharmeasy.in+${nameOfMed} medicine`;  //*//
+    const urlForNetMeds = `https://www.bing.com/search?q=site:netmeds.com+${nameOfMed} medicine`;
+    const urlForApollo = `https://www.bing.com/search?q=site:apollopharmacy.in+${nameOfMed} medicine`;
+    const urlForHealthsKool = `https://www.bing.com/search?q=site:healthskoolpharmacy.com+${nameOfMed} medicine`;
     // const urlForHealthmug = `https://www.healthmug.com/search?keywords=${nameOfMed}`;
-    const urlForTata = `https://in.search.yahoo.com/search;_ylt=?p=site:1mg.com+${nameOfMed} medicine`;
-    const urlForOBP = `https://in.search.yahoo.com/search;_ylt=?p=site:tabletshablet.com+${nameOfMed} medicine`;
-    const urlFormedplusMart = `https://in.search.yahoo.com/search;_ylt=?p=site:pulseplus.in+${nameOfMed} medicine`;
-    const urlForMyUpChar = `https://in.search.yahoo.com/search;_ylt=?p=site:myupchar.com+${nameOfMed} medicine`;
-    // const urlFor3Meds = `https://in.search.yahoo.com/search;_ylt=?p=site:3meds.com+${nameOfMed}`
-    const urlForHealthmug = `https://in.search.yahoo.com/search;_ylt=?p=site:healthmug.com+${nameOfMed} medicine`;
-    const urlForPP = `https://in.search.yahoo.com/search;_ylt=?p=site:pasumaipharmacy.com+${nameOfMed} medicine`;
-    const urlForFH = `https://in.search.yahoo.com/search;_ylt=?p=site:healthplus.flipkart.com+${nameOfMed} medicine`;
+    const urlForTata = `https://www.bing.com/search?q=site:1mg.com+${nameOfMed} medicine`;
+    const urlForOBP = `https://www.bing.com/search?q=site:tabletshablet.com+${nameOfMed} medicine`;
+    const urlFormedplusMart = `https://www.bing.com/search?q=site:pulseplus.in+${nameOfMed} medicine`;
+    const urlForMyUpChar = `https://www.bing.com/search?q=site:myupchar.com+${nameOfMed} medicine`;
+    // const urlFor3Meds = `https://www.bing.com/search?qsite:3meds.com+${nameOfMed}`
+    const urlForHealthmug = `https://www.bing.com/search?q=site:healthmug.com+${nameOfMed} medicine`;
+    const urlForPP = `https://www.bing.com/search?q=site:pasumaipharmacy.com+${nameOfMed} medicine`;
+    const urlForFH = `https://www.bing.com/search?q=site:healthplus.flipkart.com+${nameOfMed} medicine`;
 
     const
         final = [];
@@ -1749,14 +1771,14 @@ app.post('/compare', async (req, res) => {
     };
 
     const start = performance.now();
-    const item = await Promise.all([extractLinkFromyahoo(urlForNetMeds), extractLinkFromyahoo(urlForPharmEasy), extractLinkFromyahoo(urlForOBP),
-    extractLinkFromyahoo(urlFormedplusMart), extractLinkFromyahoo(urlForMyUpChar), extractLinkFromyahoo(urlForHealthmug),
-    extractLinkFromyahoo(urlForPP), extractLinkFromyahoo(urlForApollo), extractLinkFromyahoo(urlForFH), extractLinkFromyahoo(urlForHealthsKool)])
-
-    const end = performance.now() - start;
+    const item = await (extractLinkFromBing([urlForNetMeds,urlForPharmEasy,urlForOBP,urlFormedplusMart,urlForMyUpChar
+                                                        ,urlForHealthmug,urlForPP,urlForApollo,urlForFH,urlForHealthsKool]));
+        
+                                                        console.log(item)
+        const LinkDataResponses = await axiosParallel(item);
+        const end = performance.now() - start;
     console.log(`Execution time: ${end}ms`);
 
-    const LinkDataResponses = await axiosParallel(item);
 
     const responses = await Promise.all([extractDataOfNetMeds(LinkDataResponses[0].data, item[0]), extractDataOfPharmEasy(LinkDataResponses[1].data, item[1], presReq),
     extractDataOfOBP(LinkDataResponses[2].data, item[2]),
@@ -1794,14 +1816,16 @@ app.post('/compare', async (req, res) => {
     console.log('Found Everything Sir!..')
 
 
+    // res.send(final);
 
 
 
     res.render(__dirname + '/tour', { final: final });
 
+
 });
 
-const port = process.env.PORT || 5000 // Port we will listen on
+const port = process.env.PORT || 1000 // Port we will listen on
 
 // Function to listen on the port
 app.listen(port, () => console.log(`This app is listening on port ${port}`));
