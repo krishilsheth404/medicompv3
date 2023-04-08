@@ -97,7 +97,7 @@
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
 									<input type="text" oninput="formVal()" autocomplete="off" id="q" name="q" 
-										class="form-control" placeholder="Ex: Medicine, Symptom, Salt ">
+										class="form-control" placeholder=" Medicine, Symptom, Salt ">
 
 								</div>
 							</div>
@@ -194,8 +194,8 @@
 				document.getElementById('invisibleBlock').innerHTML='';
 				document.getElementById(`addbtn_${finalmednames}`).innerHTML='✓';
 				for (const item of medsearchlist.keys()) {
-					document.getElementById('mlblock').innerHTML += `	<span class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="foodItem" name="foodItem" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
-					document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="foodItem" name="foodItem" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
+					document.getElementById('mlblock').innerHTML += `	<span class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
+					document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
 				}
 			}
 			async function formVal() {
@@ -242,8 +242,8 @@
 
 									document.getElementById('medlist').innerHTML += `
 							<div style="position:relative">
-							<form id="msform${i + 1}"  action="/compare" method="POST" class="ss searchString${i + 1}">
-								<a>
+							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
+								<a onclick="this.parentNode.submit()">
 									<div    class="textfield-search one-third" style="background:white;color:black;padding:10px" >
 										<p style="width: 90%;
     color: black;
@@ -251,7 +251,7 @@
     display: inline-block;margin:2px">
 											${res.data[i]['name']}
 											</p>
-									<input type="text" autocomplete="off" id="foodItem" style='word-wrap: break-word;display:none' contenteditable='false'  name="foodItem" class="form-control foodItem_${i + 1}"   value="${res.data[i]['name']}">
+									<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['name']}">
 									</div>
 									</a>
 									</form>
