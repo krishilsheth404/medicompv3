@@ -40,6 +40,25 @@ app.post('/', (req, res) => {
 });
 
 
+app.get('/limitedTimeOffers',async (req, res) => {
+
+    const { data } = await axios.get("https://netmeds.com");
+    const $ = cheerio.load(data);
+
+    const final=[];
+    $('.flashsale .swiper-slide').map((i, elm) => {
+        final.push({
+        title:($(elm).find('.cat_title').first().text()),
+        imgsrc:($(elm).find('.cat-img img').first().attr('src')),
+        fprice:($(elm).find('#final_price').first().text()),
+        oprice:($(elm).find('.price').first().text()),
+      });
+    });
+      res.send(final);
+
+});
+
+
 
 app.get('/medname', async (req, res) => {
     // Insert Login Code Here

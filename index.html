@@ -89,7 +89,8 @@
 				<div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 					<h1 class="mb-4" style="margin-top: 100px;"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong
-							style="text-shadow: 1px 1px 4px white;">Save money on prescriptions</strong> </h1>
+							style="text-shadow: 1px 1px 4px white;    overflow-wrap: anywhere;
+							">Save money on prescriptions</strong> </h1>
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><b
 							style="text-shadow: 1px 1px 4px white;">compare prices now!</b> </p>
 					<div class="block-17 my-4">
@@ -179,6 +180,18 @@
 		</style>
 		<script>
 
+			
+window.onload =async function() {
+	await axios({
+				method: "GET",
+				url: `/limitedTimeOffers`,
+			})
+			.then((res) => {
+				console.log(res.data)
+			});
+
+
+}
 			const medsearchlist = new Set();
 			console.log(document.getElementById('q').value);
 
@@ -210,6 +223,9 @@
   <div class="skeleton__block"></div>
   </div>
   `;
+
+ 
+			
 
 
 					await axios({
@@ -299,8 +315,8 @@
 								<div class="icon"><span class="flaticon-like"></span></div>
 							</div>
 							<div class="media-body p-2 mt-2">
-								<h3 class="heading mb-3">Travellers Love Us</h3>
-								<p>A small river named Duden flows by their place and supplies.</p>
+								<h3 class="heading mb-3">Peace of mind</h3>
+								<p>By using our platform, users can be confident that they are getting the best possible price for their medication.</p>
 							</div>
 						</div>
 					</div>
@@ -310,8 +326,8 @@
 								<div class="icon"><span class="flaticon-detective"></span></div>
 							</div>
 							<div class="media-body p-2 mt-2">
-								<h3 class="heading mb-3">Best Travel Agent</h3>
-								<p>A small river named Duden flows by their place and supplies.</p>
+								<h3 class="heading mb-3">Transparency</h3>
+								<p>Our platform provides transparency in pricing, so users can make informed decisions about their healthcare expenses.</p>
 							</div>
 						</div>
 					</div>
@@ -321,8 +337,8 @@
 								<div class="icon"><span class="flaticon-support"></span></div>
 							</div>
 							<div class="media-body p-2 mt-2">
-								<h3 class="heading mb-3">Our Dedicated Support</h3>
-								<p>A small river named Duden flows by their place and supplies.</p>
+								<h3 class="heading mb-3">Accessible 24/7</h3>
+								<p>Medicomp is accessible 24/7 from anywhere, so users can compare prices at any time that is convenient for them.</p>
 							</div>
 						</div>
 					</div>
@@ -436,21 +452,25 @@
 			</div>
 		</section>
 
+
+
+
+		
 		<section class="ftco-section bg-light">
 			<div class="container">
 				<div class="row justify-content-start mb-5 pb-3">
 					<div class="col-md-7 heading-section ftco-animate">
-						<span class="subheading">Special Offers</span>
-						<h2 class="mb-4"><strong>Top</strong> Tour Packages</h2>
+						<span class="subheading">Top Deals Of</span>
+						<h2 class="mb-4"><strong>Pain Relief </strong> , <strong>Cough & Cold</strong> </h2>
 					</div>
 				</div>
 			</div>
 			<div class="container-fluid">
-				<div class="row">
+				<div class="row" >
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(images/destination-1.jpg);">
+								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/v/o/vol0129_7_.jpg);background-size: contain;">
 								<div class="icon d-flex justify-content-center align-items-center">
 									<span class="icon-search2"></span>
 								</div>
@@ -458,26 +478,59 @@
 							<div class="text p-3">
 								<div class="d-flex">
 									<div class="one">
-										<h3><a href="#">Paris, Italy</a></h3>
-										<p class="rate">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
-										</p>
+										</p> -->
 									</div>
 									<div class="two">
-										<span class="price">$200</span>
+										<span class="price" style="opacity: 0.4;color: green;">₹227</span>
 									</div>
 								</div>
-								<p>Far far away, behind the word mountains, far from the countries</p>
-								<p class="days"><span>2 days 3 nights</span></p>
+								<div class="d-flex">
+									<div class="one">
+										<h3><a href="#">Volini Spray</a></h3>
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price">₹300</span>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="one">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price" style="opacity: 0.4;color: red;">₹330</span>
+									</div>
+								</div>
+								<p><b>Uses of Volini Pain Relief Spray </b> <br>
+									Pain Relief</p>
+								<p class="days"><span>In Stock</span></p>
 								<hr>
 								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> San Franciso, CA</span>
-									<span class="ml-auto"><a href="#">Discover</a></span>
+									<span><i class="icon-map-o"></i> 100 gm Spray</span>
+									<span class="ml-auto"><a href="#">Compare</a></span>
 								</p>
 							</div>
 						</div>
@@ -485,7 +538,7 @@
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(images/destination-2.jpg);">
+								style="background-image: url(https://onemg.gumlet.io/l_watermark_346,w_480,h_480/a_ignore,w_480,h_480,c_fit,q_auto,f_auto/58d70900d27340f8adbda63d59cdd222.jpg);background-size: contain;">
 								<div class="icon d-flex justify-content-center align-items-center">
 									<span class="icon-search2"></span>
 								</div>
@@ -493,26 +546,58 @@
 							<div class="text p-3">
 								<div class="d-flex">
 									<div class="one">
-										<h3><a href="#">Paris, Italy</a></h3>
-										<p class="rate">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
-										</p>
+										</p> -->
 									</div>
 									<div class="two">
-										<span class="price">$200</span>
+										<span class="price"  style="opacity: 0.4;color: green;">₹20</span>
 									</div>
 								</div>
-								<p>Far far away, behind the word mountains, far from the countries</p>
-								<p class="days"><span>2 days 3 nights</span></p>
+								<div class="d-flex">
+									<div class="one">
+										<h3><a href="#">Crocin Pain Relief Tablet</a></h3>
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price">₹55</span>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="one">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price" style="opacity: 0.4;color: red">₹60</span>
+									</div>
+								</div>
+								<p><b>Uses of Crocin Pain Relief Tablet 15's</b> <br> Pain relief</p>
+								<p class="days"><span>In Stock</span></p>
 								<hr>
 								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> San Franciso, CA</span>
-									<span class="ml-auto"><a href="#">Discover</a></span>
+									<span><i class="icon-map-o"></i> 15 tablets in 1 strip</span>
+									<span class="ml-auto"><a href="#" >Compare</a></span>
 								</p>
 							</div>
 						</div>
@@ -520,7 +605,7 @@
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(images/destination-3.jpg);">
+								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/3/_/3_7_3.png);background-size: contain;">
 								<div class="icon d-flex justify-content-center align-items-center">
 									<span class="icon-search2"></span>
 								</div>
@@ -528,26 +613,59 @@
 							<div class="text p-3">
 								<div class="d-flex">
 									<div class="one">
-										<h3><a href="#">Paris, Italy</a></h3>
-										<p class="rate">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
-										</p>
+										</p> -->
 									</div>
 									<div class="two">
-										<span class="price">$200</span>
+										<span class="price" style="opacity: 0.4;color: green;">₹38</span>
 									</div>
 								</div>
-								<p>Far far away, behind the word mountains, far from the countries</p>
-								<p class="days"><span>2 days 3 nights</span></p>
+								<div class="d-flex">
+									<div class="one">
+										<h3><a href="#">Saridon Advance Tablet 10's</a></h3>
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price">₹42</span>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="one">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price" style="opacity: 0.4;color: red">₹45</span>
+									</div>
+								</div>
+								<p><b>Uses of Saridon Advance Tablet 10's</b>	 <br>
+									Pain relief</p>
+								<!-- <p class="days"><span>2 days 3 nights</span></p> -->
 								<hr>
 								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> San Franciso, CA</span>
-									<span class="ml-auto"><a href="#">Discover</a></span>
+									<span><i class="icon-map-o"></i> 10 Tablet in 1 Strip</span>
+									<span class="ml-auto"><a href="#">Compare</a></span>
 								</p>
 							</div>
 						</div>
@@ -555,7 +673,7 @@
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(images/destination-4.jpg);">
+								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/c/o/cofsils_ginger_lemon.png);background-size: contain;">
 								<div class="icon d-flex justify-content-center align-items-center">
 									<span class="icon-search2"></span>
 								</div>
@@ -563,26 +681,58 @@
 							<div class="text p-3">
 								<div class="d-flex">
 									<div class="one">
-										<h3><a href="#">Paris, Italy</a></h3>
-										<p class="rate">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
-										</p>
+										</p> -->
 									</div>
 									<div class="two">
-										<span class="price">$200</span>
+										<span class="price" style="opacity: 0.4;color: green;">₹25</span>
 									</div>
 								</div>
-								<p>Far far away, behind the word mountains, far from the countries</p>
-								<p class="days"><span>2 days 3 nights</span></p>
+								<div class="d-flex">
+									<div class="one">
+										<h3><a href="#">Cofsils Lozenges Orange</a></h3>
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price">₹31</span>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="one">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price" style="opacity: 0.4;color: red">₹33</span>
+									</div>
+								</div>
+								<p><b>Uses Of Cofsils Lozenges Orange</b> <br> Sore throat, cough, and cold</p>
+								<!-- <p class="days"><span>2 days 3 nights</span></p> -->
 								<hr>
 								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> San Franciso, CA</span>
-									<span class="ml-auto"><a href="#">Discover</a></span>
+									<span><i class="icon-map-o"></i>10 Lozenges in 1 Strip</span>
+									<span class="ml-auto"><a href="#">Compare</a></span>
 								</p>
 							</div>
 						</div>
@@ -590,7 +740,7 @@
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(images/destination-5.jpg);">
+								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/m/o/moo0020_1_1.jpg);background-size: contain;">
 								<div class="icon d-flex justify-content-center align-items-center">
 									<span class="icon-search2"></span>
 								</div>
@@ -598,26 +748,59 @@
 							<div class="text p-3">
 								<div class="d-flex">
 									<div class="one">
-										<h3><a href="#">Paris, Italy</a></h3>
-										<p class="rate">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
-										</p>
+										</p> -->
 									</div>
 									<div class="two">
-										<span class="price">$200</span>
+										<span class="price" style="opacity: 0.4;color: green;">₹61</span>
 									</div>
 								</div>
-								<p>Far far away, behind the word mountains, far from the countries</p>
-								<p class="days"><span>2 days 3 nights</span></p>
+								<div class="d-flex">
+									<div class="one">
+										<h3><a href="#">Moov Pain Relief Cream</a></h3>
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price">₹70</span>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="one">
+										<!-- <h3><a href="#">Volini Spray</a></h3> -->
+										<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+									</div>
+									<div class="two">
+										<span class="price" style="opacity: 0.4;color: red;">₹75</span>
+									</div>
+								</div>
+								<p> <b>Uses of Moov Pain Relief Cream
+									</b> <br>Pain Relief</p>
+								<!-- <p class="days"><span>2 days 3 nights</span></p> -->
 								<hr>
 								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> San Franciso, CA</span>
-									<span class="ml-auto"><a href="#">Discover</a></span>
+									<span><i class="icon-map-o"></i> 15 gm Ointment in 1 Tube</span>
+									<span class="ml-auto"><a href="#">Compare</a></span>
 								</p>
 							</div>
 						</div>
@@ -626,7 +809,7 @@
 			</div>
 		</section>
 
-		<section class="ftco-section ftco-counter img" id="section-counter">
+		<section class="ftco-section ftco-counter img" id="section-counter" style="background: url(svgbackforextra.png);background-color: #0050ff;background-size: cover;background-repeat: no-repeat;">
 			<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
 					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
@@ -675,18 +858,18 @@
 			</div>
 		</section>
 
-
+	
+			
 		<section class="ftco-section">
 			<div class="container">
 				<div class="row justify-content-start mb-5 pb-3">
 					<div class="col-md-7 heading-section ftco-animate">
-						<span class="subheading">Special Offers</span>
-						<h2 class="mb-4"><strong>Popular</strong> Hotels &amp; Rooms</h2>
+						<h2 class="mb-4"><strong>Shop By Health Conditions</strong> </h2>
 					</div>
 				</div>
 			</div>
 			<div class="container-fluid">
-				<div class="row">
+				<div class="row destination-slider owl-carousel ftco-animate">
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
@@ -699,17 +882,10 @@
 								<div class="d-flex">
 									<div class="one">
 										<h3><a href="#">Hotel, Italy</a></h3>
-										<p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p>
+										
 									</div>
 									<div class="two">
-										<span class="price per-price">$40<br><small>/night</small></span>
+										<span class="price per-price"><small style="text-decoration:line-through;" id="oprice">₹10</small><br><span id="fprice">₹120</span></span>
 									</div>
 								</div>
 								<p>Far far away, behind the word mountains, far from the countries</p>
@@ -720,6 +896,7 @@
 								</p>
 							</div>
 						</div>
+						
 					</div>
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
