@@ -5344,7 +5344,7 @@ button.bg-dark:focus {
 .justify-content-start {
   -webkit-box-pack: start !important;
   -ms-flex-pack: start !important;
-  justify-content: flex-start !important; }
+  }
 
 .justify-content-end {
   -webkit-box-pack: end !important;
