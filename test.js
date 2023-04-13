@@ -343,6 +343,62 @@ app.post('/bookdoc', async (req, res) => {
     res.render(__dirname + '/orderDocOnline', { final: final });
 });
 
+
+app.get('/getNearbyChemistData', async (req, res) => {
+    // Insert Login Code Here
+
+    const final = []
+
+
+    urlForPe = `https://www.bing.com/search?q=chemist shops in ${req.query['chemCity']}  ${req.query['chemPin']}`;
+    extractdoe = async (url) => {
+        try {
+            // Fetching HTML
+            const { data } = await axios.get(url)
+
+            // Using cheerio to extract <a> tags
+            const $ = cheerio.load(data);
+            const chemist_name = [];
+            const chemist_direction = [];
+            const chemist_status = [];
+            const chemist_addr = [];
+
+            final.push({ map_img: $('#mv_baseMap').attr('src') });
+
+            $('.lc_content h2').map((i, elm) => {
+                chemist_name.push($(elm).text()); //gtext form bing for maps
+            })
+            $('.lc_content').map((i, elm) => {
+                chemist_addr.push($(elm).find('.b_factrow:nth-child(3)').text()); //gtext form bing for maps
+            })
+
+            $('a[aria-label="directions"]').map((i, elm) => {
+                chemist_direction.push($(elm).attr('href')); //gtext form bing for maps
+            })
+
+            $('.lc_content').map((i, elm) => {
+                chemist_status.push($(elm).find('.b_factrow:nth-child(4)').text())
+            })
+
+
+
+            for (var i = 0; i < chemist_name.length; i++) {
+                final.push({
+                    chemist_name: chemist_name[i],
+                    chemist_direction: "https://bing.com" + chemist_direction[i],
+                    chemist_status: chemist_status[i],
+                    chemist_addr: chemist_addr[i],
+                })
+            }
+            final.push($('.b_ilhTitle').text())
+        } catch (error) {
+            return {};
+        }
+    };
+    await extractdoe(urlForPe);
+    res.send(final);
+});
+
 app.post('/shops', async (req, res) => {
     // Insert Login Code Here
 
