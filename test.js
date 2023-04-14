@@ -356,9 +356,11 @@ app.get('/getNearbyChemistData', async (req, res) => {
             // Fetching HTML
 
             const browser = await puppeteer.launch({
-                headless: true,
-                executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
-            })
+                args : [ 
+                   '--no-sandbox',
+                   '--disable-setuid-sandbox',
+                ]
+            });;
             const page = await browser.newPage();
             await page.goto(url, { waitUntil: 'networkidle2' });
 // 
