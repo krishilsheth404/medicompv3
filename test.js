@@ -5,7 +5,7 @@ const bodyParser = require('body-parser'); // Middleware
 const axios = require('axios');
 const path = require('path');
 const cheerio = require('cheerio')
-// const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer');
 const request = require('request');
 
 const axiosParallel = require('axios-parallel');
@@ -350,11 +350,19 @@ app.get('/getNearbyChemistData', async (req, res) => {
     const final = []
 
 
-    urlForPe = `https://www.bing.com/search?q=chemist shops in ${req.query['chemCity']}  ${req.query['chemPin']}`;
+    urlForPe = `https://www.bing.com/search?q=chemists in ${req.query['chemCity']}  ${req.query['chemPin']}`;
     extractdoe = async (url) => {
         try {
             // Fetching HTML
-            const { data } = await axios.get(url)
+
+            const browser = await puppeteer.launch({
+                headless: true,
+                executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
+            })
+            const page = await browser.newPage();
+            await page.goto(url, { waitUntil: 'networkidle2' });
+// 
+            const  data  = await page.evaluate(() => document.querySelector('*').outerHTML);
 
             // Using cheerio to extract <a> tags
             const $ = cheerio.load(data);

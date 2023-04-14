@@ -105,7 +105,7 @@
 							<div id="invisibleBlock" style="display: none;">
 
 							</div>
-							<input type="submit" class="search-submit btn btn-primary" value="Search">
+							<!-- <input type="submit" class="search-submit btn btn-primary" value="Search"> -->
 						</form>
 					</div>
 					<p id="text_change"></p>
@@ -252,7 +252,7 @@
 			}
 			async function formVal() {
 
-				if (document.getElementById('q').value.trim().length > 3) {
+				if (document.getElementById('q').value.trim().length > 0) {
 
 					document.getElementById('medlist').innerHTML = '';
 					// document.getElementById('mlblock').style.display='none';
@@ -935,22 +935,28 @@
 							var cnt = 0;
 							async function getchem() {
 								if (document.getElementById('chemCity').value && document.getElementById('chemPin').value) {
-									if (cnt == 0) {
-										document.getElementById('skeletonId').style.display = 'none';
-										cnt++;
-									}
-									document.getElementById('rowId').innerHTML = '';
+									
+									document.getElementById('firsth3').style.display='block';
+									document.getElementById('firsth3').classList.add('skeleton');
+									document.getElementById('secondh3').style.display='block';
+									document.getElementById('secondh3').classList.add('skeleton');
 									console.log("inside func")
 									await axios({
 										method: "GET",
 										url: `/getNearbyChemistData?chemCity=${document.getElementById('chemCity').value}&chemPin=${document.getElementById('chemPin').value}`,
 									})
+
 										.then((res) => {
 											console.log("inside data")
 											console.log(res.data);
 											console.log(res.data.length);
 											document.getElementById('result').innerHTML=res.data[res.data.length-1];
 											for (var i = 1; i < res.data.length -1; i++) {
+												if (cnt == 0) {
+													document.getElementById('skeletonId').style.display = 'none';
+													document.getElementById('rowId').innerHTML = '';
+														cnt++;
+														}
 												document.getElementById('rowId').innerHTML += `
 								<div class="col-md-6 col-lg-3 ">
 						<div class="destination">
@@ -1013,11 +1019,11 @@
 						<div class="destination">
 
 							<div class="text p-3">
-								<h3 class="skeleton"><a href="#"></a></h3>
+								<h3 id="firsth3" style="display: none;" class="skeleton"><a href="#"></a></h3>
 								<p class="rate skeleton skeleton__block">
 
 								</p>
-								<h3 class="skeleton">
+								<h3 id="secondh3" style="display: none;" class="skeleton">
 									<p></p>
 								</h3>
 								<hr>
