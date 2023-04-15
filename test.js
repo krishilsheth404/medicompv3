@@ -363,8 +363,8 @@ app.get('/getNearbyChemistData', async (req, res) => {
             });;
             const page = await browser.newPage();
             await page.goto(url, { waitUntil: 'networkidle2' });
-// 
             const  data  = await page.evaluate(() => document.querySelector('*').outerHTML);
+            await  browser.close();
 
             // Using cheerio to extract <a> tags
             const $ = cheerio.load(data);
