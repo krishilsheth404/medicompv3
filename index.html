@@ -15,10 +15,24 @@
 	<script src="
 https://cdn.jsdelivr.net/npm/puppeteer@19.8.0/install.min.js
 "></script>
-<script src="
+	<script src="
 https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 "></script>
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css"
+		integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
+		integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css"
+		integrity="sha512-WidMaWaNmZqjk3gDE6KBFCoDpBz9stTsTZZTeocfq/eDNkLfpakEd7qR0bPejvy/x0iT0dvzIq4IirnBtVer5A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.1/css/all.css">
 
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
@@ -101,8 +115,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							">Save money on prescriptions</strong> </h1>
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><b
 							style="text-shadow: 1px 1px 4px white;">compare prices now!</b> </p>
-					<div class="block-17 my-4">
-						<form action="/compare" method="get" class="d-block d-flex">
+					<div class="block-17 my-4" style="display: flex;
+					align-items: center;
+					justify-content: space-between;">
+						<form action="#" class="d-block d-flex" style="    width: 100%;;">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
 									<input type="text" oninput="formVal()" autocomplete="off" id="q" name="q"
@@ -112,93 +128,174 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							</div>
 							<div id="invisibleBlock" style="display: none;">
 
-							</div>
-							<!-- <input type="submit" class="search-submit btn btn-primary" value="Search"> -->
+								<!-- <input type="submit" class="search-submit btn btn-primary" value="Search"> -->
 						</form>
 					</div>
-					<p id="text_change"></p>
-					<p class="browse d-md-flex" style="display: flex;
+					<style>
+						#uploadBtn {
+							background-color: #00000000;
+							/* Green */
+							border: none;
+							color: white;
+
+							text-align: center;
+							text-decoration: none;
+							display: inline-block;
+							font-size: 16px;
+						}
+
+						#uploadBtn i {
+							font-size: 2rem;
+							color: black;
+						}
+
+						#blah {
+							width: 100px;
+							height: 100px;
+						}
+					</style>
+					<button id="uploadBtn" onclick="importData()"> <i
+							class="fas fa-camera-alt fa-4x fa-fw"></i></i></button>
+							<form action="/getImageData" method="post" id="imgForm">
+								<input type="text" name="blah" id="blah" style="
+								width: 0px;
+								height: 0px;
+								visibility: hidden;
+							">
+							   <input type="submit" value="submit" id="sub" style="
+							   width: 0px;
+							   height: 0px;
+							   visibility: hidden;
+						   ">
+								
+								<!-- <img id="blah" src="http://placehold.it/180" alt="your image"> -->
+							</form>
+					<script>
+						function importData() {
+							let input = document.createElement('input');
+							input.type = 'file';
+							input.id = 'fileSec'
+							input.onchange = _ => {
+								console.log('in')
+								// you can use this method to get file and perform respective operations
+								let files = Array.from(input.files);
+								console.log(files[0]);
+								var reader = new FileReader();
+								reader.readAsDataURL(input.files[0]);
+								reader.onload = function (e) {
+									var image = new Image();
+									image.src = e.target.result;
+									// console.log(image.src);
+									document.getElementById('blah').value = image.src;
+
+									console.warn('loading...')
+									document.getElementById('ftco-loader').style.visibility = 'visible';
+									document.getElementById('ftco-loader').style.opacity = 1;
+									document.getElementById('sub').click();
+
+                                   
+								   
+
+
+
+								}
+
+
+								};
+
+								input.click();
+								
+
+
+
+								// reader.readAsDataURL(input.files[0]);
+
+							}
+					</script>
+				</div>
+				<p id="text_change"></p>
+				<p class="browse d-md-flex" style="display: flex;
 					align-items: center;
 					justify-content: start;
 					height: auto;
 					flex-wrap: wrap;" id="mlblock">
-						<!-- <span class="d-flex justify-content-md-center align-items-md-center" style="margin: 5px;"><a href="#"><img src="medicine.png" style="height: 100%;width: 20px;">NIVEA</a></span>
+					<!-- <span class="d-flex justify-content-md-center align-items-md-center" style="margin: 5px;"><a href="#"><img src="medicine.png" style="height: 100%;width: 20px;">NIVEA</a></span>
 						<span class="d-flex justify-content-md-center align-items-md-center" style="margin: 5px;"><a href="#"><i class="flaticon-hotel"></i>Hotel</a></span> 
             	<span class="d-flex justify-content-md-center align-items-md-center" style="margin: 5px;"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span> 
             	<span class="d-flex justify-content-md-center align-items-md-center" style="margin: 5px;"><a href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span> -->
-					</p>
-					<div id="medlist">
+				</p>
+				<div id="medlist">
 
-					</div>
 				</div>
 			</div>
 		</div>
-		<style>
-			*,
-			*::before,
-			*::after {
-				box-sizing: border-box;
-			}
+	</div>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
 
+		:root {
+			--background: rgba(255, 255, 255, 0);
+			--surface: rgba(0, 0, 0, 0);
+			--block: rgb(255, 255, 255);
+			--loader: rgb(170, 170, 170);
+			--space: 1rem;
+		}
+
+		@media (prefers-color-scheme: dark) {
 			:root {
-				--background: rgba(255, 255, 255, 0);
-				--surface: rgba(0, 0, 0, 0);
-				--block: rgb(255, 255, 255);
-				--loader: rgb(170, 170, 170);
-				--space: 1rem;
+				--background: #ffffff;
+				--surface: #1d283a;
+				--block: #344256;
+				--loader: white;
 			}
+		}
 
-			@media (prefers-color-scheme: dark) {
-				:root {
-					--background: #ffffff;
-					--surface: #1d283a;
-					--block: #344256;
-					--loader: white;
-				}
+		.skeleton {
+			/* width: clamp(200px, 50vmin, 20rem); */
+			height: 10px;
+			overflow: hidden;
+			padding: var(--space);
+			border: 1px solid #ffffff;
+			border-radius: calc(var(--space) * 0.5);
+			width: 100%;
+			background-color: var(--surface);
+		}
+
+		.skeleton__block {
+			background: linear-gradient(-75deg, transparent 40%, var(--loader), transparent 60%) 0 0 / 200% 100%, var(--block);
+			border-radius: calc(var(--space) * 0.5);
+			animation: load 2s infinite linear;
+			background-attachment: fixed;
+		}
+
+		@keyframes load {
+			to {
+				background-position: 200% 0;
 			}
+		}
 
-			.skeleton {
-				/* width: clamp(200px, 50vmin, 20rem); */
-				height: 10px;
-				overflow: hidden;
-				padding: var(--space);
-				border: 1px solid #ffffff;
-				border-radius: calc(var(--space) * 0.5);
-				width: 100%;
-				background-color: var(--surface);
-			}
-
-			.skeleton__block {
-				background: linear-gradient(-75deg, transparent 40%, var(--loader), transparent 60%) 0 0 / 200% 100%, var(--block);
-				border-radius: calc(var(--space) * 0.5);
-				animation: load 2s infinite linear;
-				background-attachment: fixed;
-			}
-
-			@keyframes load {
-				to {
-					background-position: 200% 0;
-				}
-			}
-
-			.skeleton__block:first-of-type {
-				grid-row: 1 / -1;
-				aspect-ratio: 1;
-			}
-		</style>
-		<script>
+		.skeleton__block:first-of-type {
+			grid-row: 1 / -1;
+			aspect-ratio: 1;
+		}
+	</style>
+	<script>
 
 
-			window.onload = async function () {
-				await axios({
-					method: "GET",
-					url: `/limitedTimeOffers`,
-				})
-					.then((res) => {
-						console.log(res.data[0].imgsrc)
-						for (var i = 0; i < 0; i++) {
+							window.onload = async function () {
+								await axios({
+									method: "GET",
+									url: `/limitedTimeOffers`,
+								})
+									.then((res) => {
+										console.log(res.data[0].imgsrc)
+										for (var i = 0; i < 0; i++) {
 
-							document.getElementById('limitedOffers').innerHTML += `
+											document.getElementById('limitedOffers').innerHTML += `
 				<div class="col-sm col-md-6 col-lg ftco-animate ">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
@@ -234,38 +331,38 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 													</div>
 													</div>
 													`;
-						}
-					});
+										}
+									});
 
 
-			}
-			const medsearchlist = new Set();
-			console.log(document.getElementById('q').value);
+							}
+							const medsearchlist = new Set();
+							console.log(document.getElementById('q').value);
 
-			function loader() {
-				console.warn('loading...')
-				document.getElementById('ftco-loader').style.visibility = 'visible';
-				document.getElementById('ftco-loader').style.opacity = 1;
-			}
-			function addEle(finalmednames) {
-				medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
-				console.log(medsearchlist)
-				document.getElementById('mlblock').innerHTML = '';
-				document.getElementById('invisibleBlock').innerHTML = '';
-				document.getElementById(`addbtn_${finalmednames}`).innerHTML = '✓';
-				for (const item of medsearchlist.keys()) {
-					document.getElementById('mlblock').innerHTML += `	<span class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
-					document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
-				}
-			}
-			async function formVal() {
+							function loader() {
+								console.warn('loading...')
+								document.getElementById('ftco-loader').style.visibility = 'visible';
+								document.getElementById('ftco-loader').style.opacity = 1;
+							}
+							function addEle(finalmednames) {
+								medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
+								console.log(medsearchlist)
+								document.getElementById('mlblock').innerHTML = '';
+								document.getElementById('invisibleBlock').innerHTML = '';
+								document.getElementById(`addbtn_${finalmednames}`).innerHTML = '✓';
+								for (const item of medsearchlist.keys()) {
+									document.getElementById('mlblock').innerHTML += `	<span class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
+									document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
+								}
+							}
+							async function formVal() {
 
-				if (document.getElementById('q').value.trim().length > 0) {
+								if (document.getElementById('q').value.trim().length > 0) {
 
-					document.getElementById('medlist').innerHTML = '';
-					// document.getElementById('mlblock').style.display='none';
+									document.getElementById('medlist').innerHTML = '';
+									// document.getElementById('mlblock').style.display='none';
 
-					document.getElementById('medlist').innerHTML = `
+									document.getElementById('medlist').innerHTML = `
 				<div class="skeleton">
   <div class="skeleton__block"></div>
   </div>
@@ -275,35 +372,35 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 
 
-					await axios({
-						method: "GET",
-						url: `/medname?q=${document.getElementById('q').value + ' '}`,
-					})
-						.then((res) => {
-							console.log(res.data.length);
-							document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
-							console.log(document.getElementById('idcontainer').style.height)
+									await axios({
+										method: "GET",
+										url: `/medname?q=${document.getElementById('q').value + ' '}`,
+									})
+										.then((res) => {
+											console.log(res.data.length);
+											document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
+											console.log(document.getElementById('idcontainer').style.height)
 
-							if (window.innerWidth > 500) {
-								document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300}px`;
-								// document.getElementById('fullheight').style.height = `${(res.data.length * 80) + 300}px`;
-							} else {
-								document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250}px`;
-								// document.getElementById('fullheight').style.height = `${(res.data.length * 100) + 250}px`;
-							}
-							// document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
-							// document.getElementById('idcontainer').style.transition='all 1s';
-							// document.getElementById('fullheight').style.transition='all 1s';
+											if (window.innerWidth > 500) {
+												document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300}px`;
+												// document.getElementById('fullheight').style.height = `${(res.data.length * 80) + 300}px`;
+											} else {
+												document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250}px`;
+												// document.getElementById('fullheight').style.height = `${(res.data.length * 100) + 250}px`;
+											}
+											// document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
+											// document.getElementById('idcontainer').style.transition='all 1s';
+											// document.getElementById('fullheight').style.transition='all 1s';
 
-							document.getElementById('medlist').innerHTML = '';
-							document.getElementById('medlist').style.height = `100vh`;
-							// document.getElementById('medlist').style.overflow='scroll';
-							for (var i = 0; i < res.data.length; i++) {
-								if (res.data[i]['name']) {
+											document.getElementById('medlist').innerHTML = '';
+											document.getElementById('medlist').style.height = `100vh`;
+											// document.getElementById('medlist').style.overflow='scroll';
+											for (var i = 0; i < res.data.length; i++) {
+												if (res.data[i]['name']) {
 
-									console.log(res.data[i]['name']);
+													console.log(res.data[i]['name']);
 
-									document.getElementById('medlist').innerHTML += `
+													document.getElementById('medlist').innerHTML += `
 							<div style="position:relative">
 							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
 								<a onclick="this.parentNode.submit()">
@@ -328,276 +425,208 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
     padding-left: 20px;'>+</span>
 									</div>
 									<br>`;
+												}
+
+
+											}
+										})
+										.catch((err) => {
+											throw err;
+										});
 								}
-
-
 							}
-						})
-						.catch((err) => {
-							throw err;
-						});
-				}
-			}
 
-		</script>
+	</script>
 
 
-		<section class="ftco-section services-section bg-light">
-			<div class="container">
-				<div class="row d-flex">
-					<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-						<div class="media block-6 services d-block text-center">
-							<div class="d-flex justify-content-center">
-								<div class="icon"><span class="flaticon-guarantee"></span></div>
-							</div>
-							<div class="media-body p-2 mt-2">
-								<h3 class="heading mb-3">Real-time</h3>
-								<p>Real-time updates on pricing , offers and availability.</p>
-							</div>
+	<section class="ftco-section services-section bg-light">
+		<div class="container">
+			<div class="row d-flex">
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block text-center">
+						<div class="d-flex justify-content-center">
+							<div class="icon"><span class="flaticon-guarantee"></span></div>
+						</div>
+						<div class="media-body p-2 mt-2">
+							<h3 class="heading mb-3">Real-time</h3>
+							<p>Real-time updates on pricing , offers and availability.</p>
 						</div>
 					</div>
-					<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-						<div class="media block-6 services d-block text-center">
-							<div class="d-flex justify-content-center">
-								<div class="icon"><span class="flaticon-like"></span></div>
-							</div>
-							<div class="media-body p-2 mt-2">
-								<h3 class="heading mb-3">Peace of mind</h3>
-								<p>By using our platform, users can be confident that they are getting the best possible
-									price for their medication.</p>
-							</div>
+				</div>
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block text-center">
+						<div class="d-flex justify-content-center">
+							<div class="icon"><span class="flaticon-like"></span></div>
+						</div>
+						<div class="media-body p-2 mt-2">
+							<h3 class="heading mb-3">Peace of mind</h3>
+							<p>By using our platform, users can be confident that they are getting the best possible
+								price for their medication.</p>
 						</div>
 					</div>
-					<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-						<div class="media block-6 services d-block text-center">
-							<div class="d-flex justify-content-center">
-								<div class="icon"><span class="flaticon-detective"></span></div>
-							</div>
-							<div class="media-body p-2 mt-2">
-								<h3 class="heading mb-3">Transparency</h3>
-								<p>Our platform provides transparency in pricing, so users can make informed decisions
-									about their healthcare expenses.</p>
-							</div>
+				</div>
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block text-center">
+						<div class="d-flex justify-content-center">
+							<div class="icon"><span class="flaticon-detective"></span></div>
+						</div>
+						<div class="media-body p-2 mt-2">
+							<h3 class="heading mb-3">Transparency</h3>
+							<p>Our platform provides transparency in pricing, so users can make informed decisions
+								about their healthcare expenses.</p>
 						</div>
 					</div>
-					<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-						<div class="media block-6 services d-block text-center">
-							<div class="d-flex justify-content-center">
-								<div class="icon"><span class="flaticon-support"></span></div>
-							</div>
-							<div class="media-body p-2 mt-2">
-								<h3 class="heading mb-3">Accessible 24/7</h3>
-								<p>Medicomp is accessible 24/7 from anywhere, so users can compare prices at any time
-									that is convenient for them.</p>
-							</div>
+				</div>
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block text-center">
+						<div class="d-flex justify-content-center">
+							<div class="icon"><span class="flaticon-support"></span></div>
+						</div>
+						<div class="media-body p-2 mt-2">
+							<h3 class="heading mb-3">Accessible 24/7</h3>
+							<p>Medicomp is accessible 24/7 from anywhere, so users can compare prices at any time
+								that is convenient for them.</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
-		<style>
-			.destination {
-				background-color: rgba(255, 255, 255, 0.485);
-			}
-		</style>
-		<section class="ftco-section ftco-destination">
-			<div class="container">
-				<div class="row justify-content-start mb-5 pb-3">
-					<div class="col-md-7 heading-section ftco-animate">
-						<span class="subheading">We Compare Multiple Online Pharmacies At Once</span>
-						<h2 class="mb-4"><strong>Featured</strong> Online Chemists</h2>
-					</div>
+	<style>
+		.destination {
+			background-color: rgba(255, 255, 255, 0.485);
+		}
+	</style>
+	<section class="ftco-section ftco-destination">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-3">
+				<div class="col-md-7 heading-section ftco-animate">
+					<span class="subheading">We Compare Multiple Online Pharmacies At Once</span>
+					<h2 class="mb-4"><strong>Featured</strong> Online Chemists</h2>
 				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="destination-slider owl-carousel ftco-animate">
-							<div class="item">
-								<div class="destination">
-									<a href="#" class="img d-flex justify-content-center align-items-center"
-										style="border:1px solid #e6e6e6;background-image: url(https://image3.mouthshut.com/images/imagesp/925643839s.png);;background-size: contain;">
-										<div class="icon d-flex justify-content-center align-items-center">
-											<span class="icon-search2"></span>
-										</div>
-									</a>
-									<div class="text p-3">
-										<h3><a href="#">Apollo Pharmacy</a></h3>
-										<!-- <span class="listing">15 Listing</span> -->
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="destination-slider owl-carousel ftco-animate">
+						<div class="item">
+							<div class="destination">
+								<a href="#" class="img d-flex justify-content-center align-items-center"
+									style="border:1px solid #e6e6e6;background-image: url(https://image3.mouthshut.com/images/imagesp/925643839s.png);;background-size: contain;">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
 									</div>
+								</a>
+								<div class="text p-3">
+									<h3><a href="#">Apollo Pharmacy</a></h3>
+									<!-- <span class="listing">15 Listing</span> -->
 								</div>
 							</div>
-							<div class="item">
-								<div class="destination">
-									<a href="#" class="img d-flex justify-content-center align-items-center"
-										style="border:1px solid #e6e6e6;background-image: url(https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png);background-size: contain;">
-										<div class="icon d-flex justify-content-center align-items-center">
-											<span class="icon-search2"></span>
-										</div>
-									</a>
-									<div class="text p-3">
-										<h3><a href="#">Netmeds</a></h3>
-										<!-- <span class="listing">20 Listing</span> -->
+						</div>
+						<div class="item">
+							<div class="destination">
+								<a href="#" class="img d-flex justify-content-center align-items-center"
+									style="border:1px solid #e6e6e6;background-image: url(https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png);background-size: contain;">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
 									</div>
+								</a>
+								<div class="text p-3">
+									<h3><a href="#">Netmeds</a></h3>
+									<!-- <span class="listing">20 Listing</span> -->
 								</div>
 							</div>
-							<div class="item">
-								<div class="destination">
-									<a href="#" class="img d-flex justify-content-center align-items-center"
-										style="border:1px solid #e6e6e6;background-image: url(https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg);;background-size: contain;">
-										<div class="icon d-flex justify-content-center align-items-center">
-											<span class="icon-search2"></span>
-										</div>
-									</a>
-									<div class="text p-3">
-										<h3><a href="#">PulsePlus</a></h3>
-										<!-- <span class="listing">10 Listing</span> -->
+						</div>
+						<div class="item">
+							<div class="destination">
+								<a href="#" class="img d-flex justify-content-center align-items-center"
+									style="border:1px solid #e6e6e6;background-image: url(https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg);;background-size: contain;">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
 									</div>
+								</a>
+								<div class="text p-3">
+									<h3><a href="#">PulsePlus</a></h3>
+									<!-- <span class="listing">10 Listing</span> -->
 								</div>
 							</div>
-							<div class="item">
-								<div class="destination">
-									<a href="#" class="img d-flex justify-content-center align-items-center"
-										style="border:1px solid #e6e6e6;background-image: url(https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg);;background-size: contain;">
-										<div class="icon d-flex justify-content-center align-items-center">
-											<span class="icon-search2"></span>
-										</div>
-									</a>
-									<div class="text p-3">
-										<h3><a href="#">Flipkart Health</a></h3>
-										<!-- <span class="listing">3 Listing</span> -->
+						</div>
+						<div class="item">
+							<div class="destination">
+								<a href="#" class="img d-flex justify-content-center align-items-center"
+									style="border:1px solid #e6e6e6;background-image: url(https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg);;background-size: contain;">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
 									</div>
+								</a>
+								<div class="text p-3">
+									<h3><a href="#">Flipkart Health</a></h3>
+									<!-- <span class="listing">3 Listing</span> -->
 								</div>
 							</div>
-							<div class="item">
-								<div class="destination">
-									<a href="#" class="img d-flex justify-content-center align-items-center"
-										style="border:1px solid #e6e6e6;background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3a/PharmEasy_logo.png);;background-size: contain;">
-										<div class="icon d-flex justify-content-center align-items-center">
-											<span class="icon-search2"></span>
-										</div>
-									</a>
-									<div class="text p-3">
-										<h3><a href="#">Pharmeasy</a></h3>
-										<!-- <span class="listing">3 Listing</span> -->
+						</div>
+						<div class="item">
+							<div class="destination">
+								<a href="#" class="img d-flex justify-content-center align-items-center"
+									style="border:1px solid #e6e6e6;background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3a/PharmEasy_logo.png);;background-size: contain;">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
 									</div>
+								</a>
+								<div class="text p-3">
+									<h3><a href="#">Pharmeasy</a></h3>
+									<!-- <span class="listing">3 Listing</span> -->
 								</div>
 							</div>
-							<div class="item">
-								<div class="destination">
-									<a href="#" class="img d-flex justify-content-center align-items-center"
-										style="border:1px solid #e6e6e6;background-image: url(https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H);;background-size: contain;">
-										<div class="icon d-flex justify-content-center align-items-center">
-											<span class="icon-search2"></span>
-										</div>
-									</a>
-									<div class="text p-3">
-										<h3><a href="#">Pasumai Pharmacy</a></h3>
-										<!-- <span class="listing">3 Listing</span> -->
+						</div>
+						<div class="item">
+							<div class="destination">
+								<a href="#" class="img d-flex justify-content-center align-items-center"
+									style="border:1px solid #e6e6e6;background-image: url(https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H);;background-size: contain;">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
 									</div>
+								</a>
+								<div class="text p-3">
+									<h3><a href="#">Pasumai Pharmacy</a></h3>
+									<!-- <span class="listing">3 Listing</span> -->
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
 
 
 
 
-		<section class="ftco-section bg-light">
-			<div class="container">
-				<div class="row justify-content-start mb-5 pb-3">
-					<div class="col-md-7 heading-section ftco-animate">
-						<span class="subheading">Top Deals Of</span>
-						<h2 class="mb-4"><strong>Pain Relief </strong> , <strong>Cough & Cold</strong> </h2>
-					</div>
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-3">
+				<div class="col-md-7 heading-section ftco-animate">
+					<span class="subheading">Top Deals Of</span>
+					<h2 class="mb-4"><strong>Pain Relief </strong> , <strong>Cough & Cold</strong> </h2>
 				</div>
 			</div>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-sm col-md-6 col-lg ftco-animate">
-						<div class="destination">
-							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/v/o/vol0129_7_.jpg);background-size: contain;">
-								<div class="icon d-flex justify-content-center align-items-center">
-									<span class="icon-search2"></span>
-								</div>
-							</a>
-							<div class="text p-3">
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: green;">₹227</span>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="one">
-										<h3><a href="#">Volini Spray</a></h3>
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price">₹300</span>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: red;">₹330</span>
-									</div>
-								</div>
-								<p><b>Uses of Volini Pain Relief Spray </b> <br>
-									Pain Relief</p>
-								<p class="days"><span>In Stock</span></p>
-								<hr>
-								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> 100 gm Spray</span>
-									<span class="ml-auto"><a href="#">Compare</a></span>
-								</p>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="destination">
+						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+							style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/v/o/vol0129_7_.jpg);background-size: contain;">
+							<div class="icon d-flex justify-content-center align-items-center">
+								<span class="icon-search2"></span>
 							</div>
-						</div>
-					</div>
-					<div class="col-sm col-md-6 col-lg ftco-animate">
-						<div class="destination">
-							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(https://onemg.gumlet.io/l_watermark_346,w_480,h_480/a_ignore,w_480,h_480,c_fit,q_auto,f_auto/58d70900d27340f8adbda63d59cdd222.jpg);background-size: contain;">
-								<div class="icon d-flex justify-content-center align-items-center">
-									<span class="icon-search2"></span>
-								</div>
-							</a>
-							<div class="text p-3">
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
+						</a>
+						<div class="text p-3">
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
@@ -605,66 +634,15 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
 										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: green;">₹20</span>
-									</div>
 								</div>
-								<div class="d-flex">
-									<div class="one">
-										<h3><a href="#">Crocin Pain Relief Tablet</a></h3>
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price">₹55</span>
-									</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: green;">₹227</span>
 								</div>
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: red">₹60</span>
-									</div>
-								</div>
-								<p><b>Uses of Crocin Pain Relief Tablet 15's</b> <br> Pain relief</p>
-								<p class="days"><span>In Stock</span></p>
-								<hr>
-								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> 15 tablets in 1 strip</span>
-									<span class="ml-auto"><a href="#">Compare</a></span>
-								</p>
 							</div>
-						</div>
-					</div>
-					<div class="col-sm col-md-6 col-lg ftco-animate">
-						<div class="destination">
-							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/3/_/3_7_3.png);background-size: contain;">
-								<div class="icon d-flex justify-content-center align-items-center">
-									<span class="icon-search2"></span>
-								</div>
-							</a>
-							<div class="text p-3">
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
+							<div class="d-flex">
+								<div class="one">
+									<h3><a href="#">Volini Spray</a></h3>
+									<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
@@ -672,67 +650,15 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
 										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: green;">₹38</span>
-									</div>
 								</div>
-								<div class="d-flex">
-									<div class="one">
-										<h3><a href="#">Saridon Advance Tablet 10's</a></h3>
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price">₹42</span>
-									</div>
+								<div class="two">
+									<span class="price">₹300</span>
 								</div>
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: red">₹45</span>
-									</div>
-								</div>
-								<p><b>Uses of Saridon Advance Tablet 10's</b> <br>
-									Pain relief</p>
-								<!-- <p class="days"><span>2 days 3 nights</span></p> -->
-								<hr>
-								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> 10 Tablet in 1 Strip</span>
-									<span class="ml-auto"><a href="#">Compare</a></span>
-								</p>
 							</div>
-						</div>
-					</div>
-					<div class="col-sm col-md-6 col-lg ftco-animate">
-						<div class="destination">
-							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/c/o/cofsils_ginger_lemon.png);background-size: contain;">
-								<div class="icon d-flex justify-content-center align-items-center">
-									<span class="icon-search2"></span>
-								</div>
-							</a>
-							<div class="text p-3">
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
@@ -740,213 +666,384 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 											<i class="icon-star-o"></i>
 											<span>8 Rating</span>
 										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: green;">₹25</span>
-									</div>
 								</div>
-								<div class="d-flex">
-									<div class="one">
-										<h3><a href="#">Cofsils Lozenges Orange</a></h3>
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price">₹31</span>
-									</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: red;">₹330</span>
 								</div>
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: red">₹33</span>
-									</div>
-								</div>
-								<p><b>Uses Of Cofsils Lozenges Orange</b> <br> Sore throat, cough, and cold</p>
-								<!-- <p class="days"><span>2 days 3 nights</span></p> -->
-								<hr>
-								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i>10 Lozenges in 1 Strip</span>
-									<span class="ml-auto"><a href="#">Compare</a></span>
-								</p>
 							</div>
-						</div>
-					</div>
-					<div class="col-sm col-md-6 col-lg ftco-animate">
-						<div class="destination">
-							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/m/o/moo0020_1_1.jpg);background-size: contain;">
-								<div class="icon d-flex justify-content-center align-items-center">
-									<span class="icon-search2"></span>
-								</div>
-							</a>
-							<div class="text p-3">
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: green;">₹61</span>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="one">
-										<h3><a href="#">Moov Pain Relief Cream</a></h3>
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price">₹70</span>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="one">
-										<!-- <h3><a href="#">Volini Spray</a></h3> -->
-										<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-									</div>
-									<div class="two">
-										<span class="price" style="opacity: 0.4;color: red;">₹75</span>
-									</div>
-								</div>
-								<p> <b>Uses of Moov Pain Relief Cream
-									</b> <br>Pain Relief</p>
-								<!-- <p class="days"><span>2 days 3 nights</span></p> -->
-								<hr>
-								<p class="bottom-area d-flex">
-									<span><i class="icon-map-o"></i> 15 gm Ointment in 1 Tube</span>
-									<span class="ml-auto"><a href="#">Compare</a></span>
-								</p>
-							</div>
+							<p><b>Uses of Volini Pain Relief Spray </b> <br>
+								Pain Relief</p>
+							<p class="days"><span>In Stock</span></p>
+							<hr>
+							<p class="bottom-area d-flex">
+								<span><i class="icon-map-o"></i> 100 gm Spray</span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
+							</p>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-
-		<section class="ftco-section ftco-counter img" id="section-counter"
-			style="background: url(svgbackforextra.png);background-color: #0050ff;background-size: cover;background-repeat: no-repeat;">
-			<div class="container">
-				<div class="row justify-content-center mb-5 pb-3">
-					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<h2 class="mb-4">Some fun facts</h2>
-						<span class="subheading">More than 100,000 websites hosted</span>
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="destination">
+						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+							style="background-image: url(https://onemg.gumlet.io/l_watermark_346,w_480,h_480/a_ignore,w_480,h_480,c_fit,q_auto,f_auto/58d70900d27340f8adbda63d59cdd222.jpg);background-size: contain;">
+							<div class="icon d-flex justify-content-center align-items-center">
+								<span class="icon-search2"></span>
+							</div>
+						</a>
+						<div class="text p-3">
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: green;">₹20</span>
+								</div>
+							</div>
+							<div class="d-flex">
+								<div class="one">
+									<h3><a href="#">Crocin Pain Relief Tablet</a></h3>
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price">₹55</span>
+								</div>
+							</div>
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: red">₹60</span>
+								</div>
+							</div>
+							<p><b>Uses of Crocin Pain Relief Tablet 15's</b> <br> Pain relief</p>
+							<p class="days"><span>In Stock</span></p>
+							<hr>
+							<p class="bottom-area d-flex">
+								<span><i class="icon-map-o"></i> 15 tablets in 1 strip</span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
+							</p>
+						</div>
 					</div>
 				</div>
-				<div class="row justify-content-center">
-					<div class="col-md-10">
-						<div class="row">
-							<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-								<div class="block-18 text-center">
-									<div class="text">
-										<strong class="number" data-number="10000">0</strong><strong
-											style="color: white;">+</strong>
-										<span>Happy Customers</span>
-									</div>
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="destination">
+						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+							style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/3/_/3_7_3.png);background-size: contain;">
+							<div class="icon d-flex justify-content-center align-items-center">
+								<span class="icon-search2"></span>
+							</div>
+						</a>
+						<div class="text p-3">
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: green;">₹38</span>
 								</div>
 							</div>
-							<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-								<div class="block-18 text-center">
-									<div class="text">
-										<strong class="number" data-number="40000">0</strong>
-										<span>Destination Places</span>
-									</div>
+							<div class="d-flex">
+								<div class="one">
+									<h3><a href="#">Saridon Advance Tablet 10's</a></h3>
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price">₹42</span>
 								</div>
 							</div>
-							<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-								<div class="block-18 text-center">
-									<div class="text">
-										<strong class="number" data-number="87000">0</strong>
-										<span>Hotels</span>
-									</div>
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: red">₹45</span>
 								</div>
 							</div>
-							<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-								<div class="block-18 text-center">
-									<div class="text">
-										<strong class="number" data-number="56400">0</strong>
-										<span>Restaurant</span>
-									</div>
+							<p><b>Uses of Saridon Advance Tablet 10's</b> <br>
+								Pain relief</p>
+							<!-- <p class="days"><span>2 days 3 nights</span></p> -->
+							<hr>
+							<p class="bottom-area d-flex">
+								<span><i class="icon-map-o"></i> 10 Tablet in 1 Strip</span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="destination">
+						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+							style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/c/o/cofsils_ginger_lemon.png);background-size: contain;">
+							<div class="icon d-flex justify-content-center align-items-center">
+								<span class="icon-search2"></span>
+							</div>
+						</a>
+						<div class="text p-3">
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: green;">₹25</span>
 								</div>
 							</div>
+							<div class="d-flex">
+								<div class="one">
+									<h3><a href="#">Cofsils Lozenges Orange</a></h3>
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price">₹31</span>
+								</div>
+							</div>
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: red">₹33</span>
+								</div>
+							</div>
+							<p><b>Uses Of Cofsils Lozenges Orange</b> <br> Sore throat, cough, and cold</p>
+							<!-- <p class="days"><span>2 days 3 nights</span></p> -->
+							<hr>
+							<p class="bottom-area d-flex">
+								<span><i class="icon-map-o"></i>10 Lozenges in 1 Strip</span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="destination">
+						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+							style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/m/o/moo0020_1_1.jpg);background-size: contain;">
+							<div class="icon d-flex justify-content-center align-items-center">
+								<span class="icon-search2"></span>
+							</div>
+						</a>
+						<div class="text p-3">
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: green;">₹61</span>
+								</div>
+							</div>
+							<div class="d-flex">
+								<div class="one">
+									<h3><a href="#">Moov Pain Relief Cream</a></h3>
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price">₹70</span>
+								</div>
+							</div>
+							<div class="d-flex">
+								<div class="one">
+									<!-- <h3><a href="#">Volini Spray</a></h3> -->
+									<!-- <p class="rate">
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star-o"></i>
+											<span>8 Rating</span>
+										</p> -->
+								</div>
+								<div class="two">
+									<span class="price" style="opacity: 0.4;color: red;">₹75</span>
+								</div>
+							</div>
+							<p> <b>Uses of Moov Pain Relief Cream
+								</b> <br>Pain Relief</p>
+							<!-- <p class="days"><span>2 days 3 nights</span></p> -->
+							<hr>
+							<p class="bottom-area d-flex">
+								<span><i class="icon-map-o"></i> 15 gm Ointment in 1 Tube</span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
-		<section class="ftco-section">
-			<div class="container">
-				<div class="row justify-content-start mb-5 pb-3"
-					style="display: flex;align-items: center;justify-content: center;">
-					<div class="col-md-7 heading-section ftco-animate">
-						<span class="subheading">Special Feature</span>
-						<h2 class="mb-4"><strong>Nearby</strong> Chemists</h2>
-
-						<div class="block-17 my-4">
-							<form class="d-block d-flex">
-								<div class="fields d-block d-flex" style="background-color: transparent;">
-									<div class="textfield-search one-third">
-										<input type="text" required autocomplete="off" id="chemCity" name="chemCity"
-											class="form-control" placeholder=" City"
-											style="border-bottom: 2px dotted black;">
-										<input type="number" required autocomplete="off" id="chemPin" name="chemPin"
-											class="form-control" placeholder=" Pincode">
-
-									</div>
+	<section class="ftco-section ftco-counter img" id="section-counter"
+		style="background: url(svgbackforextra.png);background-color: #0050ff;background-size: cover;background-repeat: no-repeat;">
+		<div class="container">
+			<div class="row justify-content-center mb-5 pb-3">
+				<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+					<h2 class="mb-4">Some fun facts</h2>
+					<span class="subheading">More than 100,000 websites hosted</span>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<div class="row">
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="10000">0</strong><strong
+										style="color: white;">+</strong>
+									<span>Happy Customers</span>
 								</div>
-								<div id="invisibleBlock" style="display: none;">
-									
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="40000">0</strong>
+									<span>Destination Places</span>
 								</div>
-							</form>
-							<button onclick="getchem()" style="    border-radius: 0px;
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="87000">0</strong>
+									<span>Hotels</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="56400">0</strong>
+									<span>Restaurant</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-3"
+				style="display: flex;align-items: center;justify-content: center;">
+				<div class="col-md-7 heading-section ftco-animate">
+					<span class="subheading">Special Feature</span>
+					<h2 class="mb-4"><strong>Nearby</strong> Chemists</h2>
+
+					<div class="block-17 my-4">
+						<form class="d-block d-flex">
+							<div class="fields d-block d-flex" style="background-color: transparent;">
+								<div class="textfield-search one-third">
+									<input type="text" required autocomplete="off" id="chemCity" name="chemCity"
+										class="form-control" placeholder=" City"
+										style="border-bottom: 2px dotted black;">
+									<input type="number" required autocomplete="off" id="chemPin" name="chemPin"
+										class="form-control" placeholder=" Pincode">
+
+								</div>
+							</div>
+							<div id="invisibleBlock" style="display: none;">
+
+							</div>
+						</form>
+						<button onclick="getchem()" style="    border-radius: 0px;
 							width: 100%;
 							padding: 15px 4px;" class=" btn btn-primary">Search</button>
-						</div>
-						<span id="result"></span>
-						<script>
+					</div>
+					<span id="result"></span>
+					<script>
 							var cnt = 0;
 							async function getchem() {
 								if (document.getElementById('chemCity').value && document.getElementById('chemPin').value) {
-									
-									document.getElementById('firsth3').style.display='block';
+
+									document.getElementById('firsth3').style.display = 'block';
 									document.getElementById('firsth3').classList.add('skeleton');
-									document.getElementById('secondh3').style.display='block';
+									document.getElementById('secondh3').style.display = 'block';
 									document.getElementById('secondh3').classList.add('skeleton');
 									console.log("inside func")
 									await axios({
@@ -958,13 +1055,13 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 											console.log("inside data")
 											console.log(res.data);
 											console.log(res.data.length);
-											document.getElementById('result').innerHTML=res.data[res.data.length-1];
-											for (var i = 1; i < res.data.length -1; i++) {
+											document.getElementById('result').innerHTML = res.data[res.data.length - 1];
+											for (var i = 1; i < res.data.length - 1; i++) {
 												if (cnt == 0) {
 													document.getElementById('skeletonId').style.display = 'none';
 													document.getElementById('rowId').innerHTML = '';
-														cnt++;
-														}
+													cnt++;
+												}
 												document.getElementById('rowId').innerHTML += `
 								<div class="col-md-6 col-lg-3 ">
 						<div class="destination">
@@ -992,120 +1089,126 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 											}
 
 										})
-								}else {
-								alert('Fill the details correctly')
-							   }
+								} else {
+									alert('Fill the details correctly')
+								}
 							}
-						</script>
-					</div>
-				</div>
-
-
-				<style>
-					#skeletonId h3 {
-						animation: h3skeleton 2s infinite;
-					}
-
-					@keyframes h3skeleton {
-						0% {
-							background-color: white;
-						}
-
-						50% {
-							background-color: rgb(155, 155, 155);
-						}
-
-						100% {
-							background-color: white;
-						}
-
-					}
-				</style>
-
-				<div class="row" id="rowId" style="justify-content: center;">
-					<div class="col-md-6 col-lg-3 ftco-animate " id="skeletonId">
-						<div class="destination">
-
-							<div class="text p-3">
-								<h3 id="firsth3" style="display: none;" class="skeleton"><a href="#"></a></h3>
-								<p class="rate skeleton skeleton__block">
-
-								</p>
-								<h3 id="secondh3" style="display: none;" class="skeleton">
-									<p></p>
-								</h3>
-								<hr>
-
-							</div>
-						</div>
-					</div>
-
-
+					</script>
 				</div>
 			</div>
-		</section>
 
 
-		<section class="ftco-section testimony-section bg-light">
-			<div class="container">
-				<div class="row justify-content-start">
-					<div class="col-md-5 heading-section ftco-animate">
-						<span class="subheading">Medicomp India</span>
-						<h2 class="mb-4 pb-3"><strong>Why</strong> Choose Us?</h2>
-						<p>Firstly, Medicomp India provides an easy-to-use platform that allows you to search for the medicine you need, and compare prices from different pharmacies. This means you can quickly find the best deal on your medication without having to visit multiple pharmacies.</p>
-						<p>Secondly, the website is transparent in terms of pricing, discounts, and offers. This transparency allows you to make informed decisions when choosing a pharmacy to purchase your medication from..</p>
-						<p><a href="/about.html" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a></p>
+			<style>
+				#skeletonId h3 {
+					animation: h3skeleton 2s infinite;
+				}
+
+				@keyframes h3skeleton {
+					0% {
+						background-color: white;
+					}
+
+					50% {
+						background-color: rgb(155, 155, 155);
+					}
+
+					100% {
+						background-color: white;
+					}
+
+				}
+			</style>
+
+			<div class="row" id="rowId" style="justify-content: center;">
+				<div class="col-md-6 col-lg-3 ftco-animate " id="skeletonId">
+					<div class="destination">
+
+						<div class="text p-3">
+							<h3 id="firsth3" style="display: none;" class="skeleton"><a href="#"></a></h3>
+							<p class="rate skeleton skeleton__block">
+
+							</p>
+							<h3 id="secondh3" style="display: none;" class="skeleton">
+								<p></p>
+							</h3>
+							<hr>
+
+						</div>
 					</div>
-					<div class="col-md-1"></div>
-					<div class="col-md-6 heading-section ftco-animate">
-						<span class="subheading">Testimony</span>
-						<h2 class="mb-4 pb-3"><strong>Our</strong> Guests Says</h2>
-						<div class="row ftco-animate">
-							<div class="col-md-12">
-								<div class="carousel-testimony owl-carousel">
-									<div class="item">
-										<div class="testimony-wrap d-flex">
-											<div class="user-img mb-5"
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+
+
+	<section class="ftco-section testimony-section bg-light">
+		<div class="container">
+			<div class="row justify-content-start">
+				<div class="col-md-5 heading-section ftco-animate">
+					<span class="subheading">Medicomp India</span>
+					<h2 class="mb-4 pb-3"><strong>Why</strong> Choose Us?</h2>
+					<p>Firstly, Medicomp India provides an easy-to-use platform that allows you to search for the
+						medicine you need, and compare prices from different pharmacies. This means you can quickly
+						find the best deal on your medication without having to visit multiple pharmacies.</p>
+					<p>Secondly, the website is transparent in terms of pricing, discounts, and offers. This
+						transparency allows you to make informed decisions when choosing a pharmacy to purchase your
+						medication from..</p>
+					<p><a href="/about.html" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read
+							more</a></p>
+				</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-6 heading-section ftco-animate">
+					<span class="subheading">Testimony</span>
+					<h2 class="mb-4 pb-3"><strong>Our</strong> Guests Says</h2>
+					<div class="row ftco-animate">
+						<div class="col-md-12">
+							<div class="carousel-testimony owl-carousel">
+								<div class="item">
+									<div class="testimony-wrap d-flex">
+										<div class="user-img mb-5"
 											style="background-image: url(https://randomuser.me/api/portraits/men/4.jpg)">
 											<span class="quote d-flex align-items-center justify-content-center">
-													<i class="icon-quote-left"></i>
-												</span>
-											</div>
-											<div class="text ml-md-4">
-												<p class="mb-5">The SkyScanner / Trivago for medicines . Definitely a very useful app</p>
-												<p class="name">Gaurav Singh </p>
-												<span class="position">User</span>
-											</div>
+												<i class="icon-quote-left"></i>
+											</span>
+										</div>
+										<div class="text ml-md-4">
+											<p class="mb-5">The SkyScanner / Trivago for medicines . Definitely a
+												very useful app</p>
+											<p class="name">Gaurav Singh </p>
+											<span class="position">User</span>
 										</div>
 									</div>
-									<div class="item">
-										<div class="testimony-wrap d-flex">
-											<div class="user-img mb-5"
-												style="background-image: url(https://images.generated.photos/Db3syUk_NwCe-T1FepROHQA-dp1v_BKkyo2CGbZCzE8/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NDkxODg5LmpwZw.jpg)">
-												<span class="quote d-flex align-items-center justify-content-center">
-													<i class="icon-quote-left"></i>
-												</span>
-											</div>
-											<div class="text ml-md-4">
-												<p class="mb-5">Very easy to use, searches medicine quickly and with prices comparing almost every major online seller's prices..</p>
-												<p class="name">Harvey Mosley</p>
-												<span class="position">User</span>
-											</div>
+								</div>
+								<div class="item">
+									<div class="testimony-wrap d-flex">
+										<div class="user-img mb-5"
+											style="background-image: url(https://images.generated.photos/Db3syUk_NwCe-T1FepROHQA-dp1v_BKkyo2CGbZCzE8/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NDkxODg5LmpwZw.jpg)">
+											<span class="quote d-flex align-items-center justify-content-center">
+												<i class="icon-quote-left"></i>
+											</span>
+										</div>
+										<div class="text ml-md-4">
+											<p class="mb-5">Very easy to use, searches medicine quickly and with
+												prices comparing almost every major online seller's prices..</p>
+											<p class="name">Harvey Mosley</p>
+											<span class="position">User</span>
 										</div>
 									</div>
-									<div class="item">
-										<div class="testimony-wrap d-flex">
-											<div class="user-img mb-5"
+								</div>
+								<div class="item">
+									<div class="testimony-wrap d-flex">
+										<div class="user-img mb-5"
 											style="background-image: url(https://www.lovethispic.com/uploaded_images/7626-Beautiful-Mountain-Scenery.jpg?2)">
 											<span class="quote d-flex align-items-center justify-content-center">
-													<i class="icon-quote-left"></i>
-												</span>
-											</div>
-											<div class="text ml-md-4">
-												<p class="mb-5">Superb website and app. Very useful.</p>
-												<p class="name">Ravi Patel</p>
-												<span class="position">Local Guide</span>
-											</div>
+												<i class="icon-quote-left"></i>
+											</span>
+										</div>
+										<div class="text ml-md-4">
+											<p class="mb-5">Superb website and app. Very useful.</p>
+											<p class="name">Ravi Patel</p>
+											<span class="position">Local Guide</span>
 										</div>
 									</div>
 								</div>
@@ -1114,218 +1217,226 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
 
 
-		<section class="ftco-section bg-light">
-			<div class="container">
-				<div class="row justify-content-start mb-5 pb-3">
-					<div class="col-md-7 heading-section ftco-animate">
-						<span class="subheading">Recent Blog</span>
-						<h2><strong>Tips</strong> &amp; Articles</h2>
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-3">
+				<div class="col-md-7 heading-section ftco-animate">
+					<span class="subheading">Recent Blog</span>
+					<h2><strong>Tips</strong> &amp; Articles</h2>
+				</div>
+			</div>
+			<div class="row d-flex">
+				<div class="col-md-3 d-flex ftco-animate">
+					<div class="blog-entry align-self-stretch">
+						<a href="blog1.html" class="block-20"
+							style="background-image: url('https://www.singlecare.com/blog/wp-content/uploads/2020/01/031819_Brand_or_Generic-1884x1060.png');">
+						</a>
+						<div class="text p-4 d-block">
+							<span class="tag">Medicomp India</span>
+							<h3 class="heading mt-3"><a href="blog1.html">Generic vs. Brand Name Medications:
+									Understanding
+									the price differences and how to choose
+									out</a></h3>
+							<div class="meta mb-3">
+								<div><a href="blog1.html">Jan 12, 2023</a></div>
+								<div><a href="blog1.html">Admin</a></div>
+								<div><a href="blog1.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="row d-flex">
-					<div class="col-md-3 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch">
-							<a href="blog1.html" class="block-20"
-								style="background-image: url('https://www.singlecare.com/blog/wp-content/uploads/2020/01/031819_Brand_or_Generic-1884x1060.png');">
-							</a>
-							<div class="text p-4 d-block">
-								<span class="tag">Medicomp India</span>
-								<h3 class="heading mt-3"><a href="blog1.html">Generic vs. Brand Name Medications: Understanding
-										the price differences and how to choose
-										out</a></h3>
-								<div class="meta mb-3">
-									<div><a href="blog1.html">Jan 12, 2023</a></div>
-									<div><a href="blog1.html">Admin</a></div>
-									<div><a href="blog1.html" class="meta-chat"><span class="icon-chat"></span> 0</a></div>
+				<div class="col-md-3 d-flex ftco-animate">
+					<div class="blog-entry align-self-stretch">
+						<a href="blog2.html" class="block-20"
+							style="background-image: url('https://drbest.in/wp-content/uploads/2019/05/Pharmacy.jpg');">
+						</a>
+						<div class="text p-4">
+							<span class="tag">Medicomp India</span>
+							<h3 class="heading mt-3"><a href="blog2.html">The benefits of comparing medicine prices
+									online:
+									How it can save you money and time </a></h3>
+							<div class="meta mb-3">
+								<div><a href="blog2.html">Jan 23, 2023</a></div>
+								<div><a href="blog2.html">Admin</a></div>
+								<div><a href="blog2.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch">
-							<a href="blog2.html" class="block-20"
-								style="background-image: url('https://drbest.in/wp-content/uploads/2019/05/Pharmacy.jpg');">
-							</a>
-							<div class="text p-4">
-								<span class="tag">Medicomp India</span>
-								<h3 class="heading mt-3"><a href="blog2.html">The benefits of comparing medicine prices online:
-										How it can save you money and time </a></h3>
-								<div class="meta mb-3">
-									<div><a href="blog2.html">Jan 23, 2023</a></div>
-									<div><a href="blog2.html">Admin</a></div>
-									<div><a href="blog2.html" class="meta-chat"><span class="icon-chat"></span> 0</a></div>
+				</div>
+				<div class="col-md-3 d-flex ftco-animate">
+					<div class="blog-entry align-self-stretch">
+						<a href="blog3.html" class="block-20"
+							style="background-image: url('https://appcoup.com/assets/img/pharmacyappdev/medicine-delivery-app-development.png');">
+						</a>
+						<div class="text p-4">
+							<span class="tag">Medicomp India</span>
+							<h3 class="heading mt-3"><a href="blog3.html">The Pros and Cons of Buying Medicine
+									Online</a>
+							</h3>
+							<div class="meta mb-3">
+								<div><a href="blog3.html">Feb 06, 2023</a></div>
+								<div><a href="blog3.html">Admin</a></div>
+								<div><a href="blog3.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch">
-							<a href="blog3.html" class="block-20"
-								style="background-image: url('https://appcoup.com/assets/img/pharmacyappdev/medicine-delivery-app-development.png');">
-							</a>
-							<div class="text p-4">
-								<span class="tag">Medicomp India</span>
-								<h3 class="heading mt-3"><a href="blog3.html">The Pros and Cons of Buying Medicine Online</a>
-								</h3>
-								<div class="meta mb-3">
-									<div><a href="blog3.html">Feb 06, 2023</a></div>
-									<div><a href="blog3.html">Admin</a></div>
-									<div><a href="blog3.html" class="meta-chat"><span class="icon-chat"></span> 0</a></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch">
-							<a href="blog4.html" class="block-20"
-								style="background-image: url('https://www.pharmaceutical-technology.com/wp-content/uploads/sites/24/2022/07/shutterstock_559764574-scaled.jpg');">
-							</a>
-							<div class="text p-4">
-								<span class="tag">Medicomp India</span>
-								<h3 class="heading mt-3"><a href="blog4.html">The Risks and Benefits of Buying Generic
-										Medications Online</a></h3>
-								<div class="meta mb-3">
-									<div><a href="blog4.html">Feb 12, 2023</a></div>
-									<div><a href="blog4.html">Admin</a></div>
-									<div><a href="blog4.html" class="meta-chat"><span class="icon-chat"></span> 0</a></div>
+				</div>
+				<div class="col-md-3 d-flex ftco-animate">
+					<div class="blog-entry align-self-stretch">
+						<a href="blog4.html" class="block-20"
+							style="background-image: url('https://www.pharmaceutical-technology.com/wp-content/uploads/sites/24/2022/07/shutterstock_559764574-scaled.jpg');">
+						</a>
+						<div class="text p-4">
+							<span class="tag">Medicomp India</span>
+							<h3 class="heading mt-3"><a href="blog4.html">The Risks and Benefits of Buying Generic
+									Medications Online</a></h3>
+							<div class="meta mb-3">
+								<div><a href="blog4.html">Feb 12, 2023</a></div>
+								<div><a href="blog4.html">Admin</a></div>
+								<div><a href="blog4.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
-		<section class="ftco-section-parallax">
-			<div class="parallax-img d-flex align-items-center"
-				style="background: #6190E8;  /* fallback for old browsers */
+	<section class="ftco-section-parallax">
+		<div class="parallax-img d-flex align-items-center"
+			style="background: #6190E8;  /* fallback for old browsers */
 	  background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
 	  background: linear-gradient(to right, #A7BFE8, #6190E8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
-				<div class="container">
-					<div class="row d-flex justify-content-center">
-						<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-							<h2>Subcribe to our Newsletter</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-								there live the blind texts. Separated they live in</p>
-							<div class="row d-flex justify-content-center mt-5">
-								<div class="col-md-8">
-									<form action="#" class="subscribe-form">
-										<div class="form-group d-flex">
-											<input type="text" class="form-control" placeholder="Enter email address">
-											<input type="submit" value="Subscribe" class="submit px-3">
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<footer class="ftco-footer ftco-bg-dark ftco-section">
 			<div class="container">
-				<div class="row mb-5">
-					<div class="col-md">
-						<div class="ftco-footer-widget mb-4">
-							<h2 class="ftco-heading-2">Medicomp India.</h2>
-							<p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
-								various pharmacies and online retailers in India.</p>
-							<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-								<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-								<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-								<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="ftco-footer-widget mb-4 ml-md-5">
-							<h2 class="ftco-heading-2">Information</h2>
-							<ul class="list-unstyled">
-								<li><a href="#" class="py-2 d-block">About</a></li>
-								<li><a href="#" class="py-2 d-block">Service</a></li>
-								<li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
-								<li><a href="#" class="py-2 d-block">Become a partner</a></li>
-								<li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-								<li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="ftco-footer-widget mb-4">
-							<h2 class="ftco-heading-2">Customer Support</h2>
-							<ul class="list-unstyled">
-								<li><a href="#" class="py-2 d-block">FAQ</a></li>
-								<li><a href="#" class="py-2 d-block">Payment Option</a></li>
-								<li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-								<li><a href="#" class="py-2 d-block">How it works</a></li>
-								<li><a href="#" class="py-2 d-block">Contact Us</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="ftco-footer-widget mb-4">
-							<h2 class="ftco-heading-2">Have a Questions?</h2>
-							<div class="block-23 mb-3">
-								<ul>
-									<li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.
-											Mountain View, San Francisco, California, USA</span></li>
-									<li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
-												210</span></a></li>
-									<li><a href="#"><span class="icon icon-envelope"></span><span
-												class="text">info@yourdomain.com</span></a></li>
-								</ul>
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+						<h2>Subcribe to our Newsletter</h2>
+						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+							there live the blind texts. Separated they live in</p>
+						<div class="row d-flex justify-content-center mt-5">
+							<div class="col-md-8">
+								<form action="#" class="subscribe-form">
+									<div class="form-group d-flex">
+										<input type="text" class="form-control" placeholder="Enter email address">
+										<input type="submit" value="Subscribe" class="submit px-3">
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12 text-center">
+			</div>
+		</div>
+	</section>
 
-						<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;
-							<script>document.write(new Date().getFullYear());</script> All rights reserved | This
-							template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
-								href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</p>
+	<footer class="ftco-footer ftco-bg-dark ftco-section">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Medicomp India.</h2>
+						<p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
+							various pharmacies and online retailers in India.</p>
+						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+							<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4 ml-md-5">
+						<h2 class="ftco-heading-2">Information</h2>
+						<ul class="list-unstyled">
+							<li><a href="#" class="py-2 d-block">About</a></li>
+							<li><a href="#" class="py-2 d-block">Service</a></li>
+							<li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+							<li><a href="#" class="py-2 d-block">Become a partner</a></li>
+							<li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+							<li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Customer Support</h2>
+						<ul class="list-unstyled">
+							<li><a href="#" class="py-2 d-block">FAQ</a></li>
+							<li><a href="#" class="py-2 d-block">Payment Option</a></li>
+							<li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+							<li><a href="#" class="py-2 d-block">How it works</a></li>
+							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.
+										Mountain View, San Francisco, California, USA</span></li>
+								<li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
+											210</span></a></li>
+								<li><a href="#"><span class="icon icon-envelope"></span><span
+											class="text">info@yourdomain.com</span></a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-		</footer>
+			<div class="row">
+				<div class="col-md-12 text-center">
+
+					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+						template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
+							href="https://colorlib.com" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 
 
-		<!-- loader -->
-		<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-				<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-				<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-					stroke="#F96D00" />
-			</svg></div>
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+				stroke="#F96D00" />
+		</svg></div>
 
 
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery-migrate-3.0.1.min.js"></script>
-		<script src="js/popper.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.easing.1.3.js"></script>
-		<script src="js/jquery.waypoints.min.js"></script>
-		<script src="js/jquery.stellar.min.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/jquery.magnific-popup.min.js"></script>
-		<script src="js/aos.js"></script>
-		<script src="js/jquery.animateNumber.min.js"></script>
-		<script src="js/bootstrap-datepicker.js"></script>
-		<script src="js/jquery.timepicker.min.js"></script>
-		<script src="js/scrollax.min.js"></script>
-		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-		<script src="js/google-map.js"></script>
-		<script src="js/main.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/aos.js"></script>
+	<script src="js/jquery.animateNumber.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/jquery.timepicker.min.js"></script>
+	<script src="js/scrollax.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="js/google-map.js"></script>
+	<script src="js/main.js"></script>
 
 </body>
 

@@ -40,6 +40,9 @@ app.post('/', (req, res) => {
 });
 
 
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
+
 app.get('/limitedTimeOffers',async (req, res) => {
 
     const { data } = await axios.get("https://netmeds.com");
@@ -55,6 +58,74 @@ app.get('/limitedTimeOffers',async (req, res) => {
       });
     });
       res.send(final);
+
+});
+
+
+app.post('/getImageData',async (req, res) => {
+
+    const start = performance.now();
+//    console.log((req.body.blah));
+
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+        ]
+
+    })
+    const page = await browser.newPage();
+    await page.goto('https://www8.lunapic.com/editor/?action=moreupload');
+    await page.waitForTimeout(1000);
+    await page.keyboard.press('Escape');
+
+
+
+    console.log('typeing')
+    
+        // await page.waitForSelector('input[name=url]');
+
+        // const inputValue = await page.$eval('input[name=url]', el => el.value);
+        // focus on the input field
+        await page.click('input[name=url]');
+        // for (let i = 0; i < inputValue.length; i++) {
+        //     await page.keyboard.press('Backspace');
+        // }
+        await page.evaluate(val => document.querySelector('input[name=url]').value = val, req.body.blah)
+        await page.keyboard.press('Enter');
+
+        await page.waitForSelector('#actionbox');
+        console.log('done typooig')
+
+        const ef = performance.now() - start;
+        console.log(`Execution time: ${ef}ms`);
+
+        const issueSrcs = await page.evaluate(() => {
+            const srcs = Array.from(
+                document.querySelectorAll("img")
+            ).map((image) => image.getAttribute("src"));
+            return srcs;
+        });
+ 
+    
+        await page.goto(`https://yandex.com/images/search?rpt=imageview&url=${issueSrcs[2]}`);
+        const data = await page.evaluate(() => document.querySelector('*').outerHTML);
+
+        await  browser.close();
+
+        const final=[];
+        const $ = cheerio.load(data, { xmlMode: false });
+          $('.Tags-Wrapper a').map((i, elm) => {
+          final.push($(elm).text());
+    });
+
+
+  
+    const end = performance.now() - start;
+    console.log(`Execution time: ${end}ms`);
+
+    res.render(__dirname + '/imageDetection', { final: final });
 
 });
 
