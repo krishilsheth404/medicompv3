@@ -92,9 +92,9 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="tour.html" class="nav-link">Tour</a></li>
-					<li class="nav-item"><a href="hotel.html" class="nav-link">Hotels</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+					<!-- <li class="nav-item"><a href="tour.html" class="nav-link">Tour</a></li> -->
+					<!-- <li class="nav-item"><a href="hotel.html" class="nav-link">Hotels</a></li> -->
+					<li class="nav-item"><a href="blog.html" class="nav-link">Blogs</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
 				</ul>
@@ -112,17 +112,17 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				<div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 					<h1 class="mb-4" style="margin-top: 100px;"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong style="text-shadow: 1px 1px 4px white;    overflow-wrap: anywhere;
-							">Save money on prescriptions</strong> </h1>
+							">Save money on healthcare expenses</strong> </h1>
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><b
-							style="text-shadow: 1px 1px 4px white;">compare prices now!</b> </p>
+							style="text-shadow: 1px 1px 4px white;">compare prices now with Medicomp India!</b> </p>
 					<div class="block-17 my-4" style="display: flex;
 					align-items: center;
 					justify-content: space-between;">
-						<form action="#" class="d-block d-flex" style="    width: 100%;;">
+						<form action="#" class="d-block d-flex" style="width: 100%;;">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
 									<input type="text" oninput="formVal()" autocomplete="off" id="q" name="q"
-										class="form-control" placeholder=" Medicine, Symptom, Salt ">
+										class="form-control" placeholder=" Medicine, Symptom, SaltName ">
 
 								</div>
 							</div>
@@ -154,8 +154,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							height: 100px;
 						}
 					</style>
-					<button id="uploadBtn" onclick="importData()"> <i
-							class="fas fa-camera-alt fa-4x fa-fw"></i></i></button>
+					<button id="uploadBtn" onclick="importData()">
+				     <!-- <i
+							class="fas fa-camera-alt fa-4x fa-fw"></i> -->
+						</button>
 							<form action="/getImageData" method="post" id="imgForm">
 								<input type="text" name="blah" id="blah" style="
 								width: 0px;
@@ -285,6 +287,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	</style>
 	<script>
 
+function dispload(){
+			document.getElementById('ftco-loader').style.visibility = 'visible';
+								document.getElementById('ftco-loader').style.opacity = 1;
+		  }
 
 							window.onload = async function () {
 								await axios({
@@ -368,6 +374,8 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
   </div>
   `;
 
+  
+          
 
 
 
@@ -404,7 +412,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<div style="position:relative">
 							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
 								<a onclick="this.parentNode.submit()">
-									<div   class="textfield-search one-third" style="background:white;color:black;padding:10px" >
+									<div onclick="loader()"  class="textfield-search one-third" style="background:white;color:black;padding:10px" >
 										<p style="width: 90%;
     color: black;
     height: auto;
@@ -677,7 +685,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 100 gm Spray</span>
-								<span class="ml-auto"><a href="#">Compare</a></span>
+								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Volini+Pain+Relief+Spray%2C+40+gm">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -744,7 +752,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 15 tablets in 1 strip</span>
-								<span class="ml-auto"><a href="#">Compare</a></span>
+								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Crocin+Pain+Relief+Strip+Of+15+Tablets">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -812,7 +820,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 10 Tablet in 1 Strip</span>
-								<span class="ml-auto"><a href="#">Compare</a></span>
+								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Saridon+Advance+Tablet+10%27s">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -879,7 +887,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i>10 Lozenges in 1 Strip</span>
-								<span class="ml-auto"><a href="#">Compare</a></span>
+								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Cofsils+Orange+Lozenges+Strip+Of+10">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -947,7 +955,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 15 gm Ointment in 1 Tube</span>
-								<span class="ml-auto"><a href="#">Compare</a></span>
+								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Moov+Pain+Relief+Cream%2C+15+gm">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -962,7 +970,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			<div class="row justify-content-center mb-5 pb-3">
 				<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
 					<h2 class="mb-4">Some fun facts</h2>
-					<span class="subheading">More than 100,000 websites hosted</span>
+					<!-- <span class="subheading">More than 100,000 websites hosted</span> -->
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -971,33 +979,39 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="10000">0</strong><strong
+									<strong class="number" data-number="10">0</strong>
+									<strong
 										style="color: white;">+</strong>
-									<span>Happy Customers</span>
+									<span>Pharmacies Compared</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="50">0</strong><strong
+									style="color: white;">s+</strong>
+									<span>Engagement Time</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="1000">0</strong><strong
+										style="color: white;">+</strong>
+									<span>Happy Users</span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="40000">0</strong>
-									<span>Destination Places</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-							<div class="block-18 text-center">
-								<div class="text">
-									<strong class="number" data-number="87000">0</strong>
-									<span>Hotels</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-							<div class="block-18 text-center">
-								<div class="text">
-									<strong class="number" data-number="56400">0</strong>
-									<span>Restaurant</span>
+									<strong class="number" data-number="35000">0</strong><strong
+									style="color: white;">+</strong>
+									<span>Medicine Data</span>
 								</div>
 							</div>
 						</div>
@@ -1020,10 +1034,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<div class="fields d-block d-flex" style="background-color: transparent;">
 								<div class="textfield-search one-third">
 									<input type="text" required autocomplete="off" id="chemCity" name="chemCity"
-										class="form-control" placeholder=" City"
+										class="form-control" placeholder="Enter City"
 										style="border-bottom: 2px dotted black;">
 									<input type="number" required autocomplete="off" id="chemPin" name="chemPin"
-										class="form-control" placeholder=" Pincode">
+										class="form-control" placeholder="Enter Pincode">
 
 								</div>
 							</div>
@@ -1233,19 +1247,19 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			<div class="row d-flex">
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog1.html" class="block-20"
+						<a href="GenericVsBrandName.html" class="block-20"
 							style="background-image: url('https://www.singlecare.com/blog/wp-content/uploads/2020/01/031819_Brand_or_Generic-1884x1060.png');">
 						</a>
 						<div class="text p-4 d-block">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog1.html">Generic vs. Brand Name Medications:
+							<h3 class="heading mt-3"><a href="GenericVsBrandName.html">Generic vs. Brand Name Medications:
 									Understanding
 									the price differences and how to choose
 									out</a></h3>
 							<div class="meta mb-3">
-								<div><a href="blog1.html">Jan 12, 2023</a></div>
-								<div><a href="blog1.html">Admin</a></div>
-								<div><a href="blog1.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="GenericVsBrandName.html">Jan 12, 2023</a></div>
+								<div><a href="GenericVsBrandName.html">Admin</a></div>
+								<div><a href="GenericVsBrandName.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1253,18 +1267,18 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog2.html" class="block-20"
+						<a href="TheBenefitsOfComparingMedicinePrices.html" class="block-20"
 							style="background-image: url('https://drbest.in/wp-content/uploads/2019/05/Pharmacy.jpg');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog2.html">The benefits of comparing medicine prices
+							<h3 class="heading mt-3"><a href="TheBenefitsOfComparingMedicinePrices.html">The benefits of comparing medicine prices
 									online:
 									How it can save you money and time </a></h3>
 							<div class="meta mb-3">
-								<div><a href="blog2.html">Jan 23, 2023</a></div>
-								<div><a href="blog2.html">Admin</a></div>
-								<div><a href="blog2.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="TheBenefitsOfComparingMedicinePrices.html">Jan 23, 2023</a></div>
+								<div><a href="TheBenefitsOfComparingMedicinePrices.html">Admin</a></div>
+								<div><a href="TheBenefitsOfComparingMedicinePrices.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1272,18 +1286,18 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog3.html" class="block-20"
+						<a href="TheProsAndConsOfBuyingMedicineOnline.html" class="block-20"
 							style="background-image: url('https://appcoup.com/assets/img/pharmacyappdev/medicine-delivery-app-development.png');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog3.html">The Pros and Cons of Buying Medicine
+							<h3 class="heading mt-3"><a href="TheProsAndConsOfBuyingMedicineOnline.html">The Pros and Cons of Buying Medicine
 									Online</a>
 							</h3>
 							<div class="meta mb-3">
-								<div><a href="blog3.html">Feb 06, 2023</a></div>
-								<div><a href="blog3.html">Admin</a></div>
-								<div><a href="blog3.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html">Feb 06, 2023</a></div>
+								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html">Admin</a></div>
+								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1291,17 +1305,17 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog4.html" class="block-20"
+						<a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html" class="block-20"
 							style="background-image: url('https://www.pharmaceutical-technology.com/wp-content/uploads/sites/24/2022/07/shutterstock_559764574-scaled.jpg');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog4.html">The Risks and Benefits of Buying Generic
+							<h3 class="heading mt-3"><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnlinehtml">The Risks and Benefits of Buying Generic
 									Medications Online</a></h3>
 							<div class="meta mb-3">
-								<div><a href="blog4.html">Feb 12, 2023</a></div>
-								<div><a href="blog4.html">Admin</a></div>
-								<div><a href="blog4.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html">Feb 12, 2023</a></div>
+								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html">Admin</a></div>
+								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1311,7 +1325,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 		</div>
 	</section>
 
-	<section class="ftco-section-parallax">
+	<!-- <section class="ftco-section-parallax">
 		<div class="parallax-img d-flex align-items-center"
 			style="background: #6190E8;  /* fallback for old browsers */
 	  background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
@@ -1336,7 +1350,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
 		<div class="container">
@@ -1347,9 +1361,9 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						<p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
 							various pharmacies and online retailers in India.</p>
 						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+							<li class="ftco-animate"><a href="https://www.linkedin.com/in/krishilsheth/"><span class="icon-linkedin"></span></a></li>
+							<!-- <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li> -->
+							<li class="ftco-animate"><a href="https://www.instagram.com/medicomp.india/"><span class="icon-instagram"></span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -1357,12 +1371,12 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					<div class="ftco-footer-widget mb-4 ml-md-5">
 						<h2 class="ftco-heading-2">Information</h2>
 						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">About</a></li>
-							<li><a href="#" class="py-2 d-block">Service</a></li>
-							<li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
-							<li><a href="#" class="py-2 d-block">Become a partner</a></li>
-							<li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-							<li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+							<li><a href="/about.html" class="py-2 d-block">About</a></li>
+							<li><a href="#" class="py-2 d-block">Med A-Z</a></li>
+							<!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
+							<li><a href="mailto:krishilsheth@gmail.com?subject=We Want To Collaborate With Medicomp India&body=//text here" class="py-2 d-block">Become a partner</a></li>
+							<!-- <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li> -->
+							<li><a href="/privacypolicy.html" class="py-2 d-block">Privacy and Policy</a></li>
 						</ul>
 					</div>
 				</div>
@@ -1370,11 +1384,11 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					<div class="ftco-footer-widget mb-4">
 						<h2 class="ftco-heading-2">Customer Support</h2>
 						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">FAQ</a></li>
-							<li><a href="#" class="py-2 d-block">Payment Option</a></li>
+							<li><a href="/about.html" class="py-2 d-block">FAQ</a></li>
+							<!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li>
 							<li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-							<li><a href="#" class="py-2 d-block">How it works</a></li>
-							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+							<li><a href="#" class="py-2 d-block">How it works</a></li> -->
+							<li><a href="/contact.html" class="py-2 d-block">Contact Us</a></li>
 						</ul>
 					</div>
 				</div>
@@ -1383,12 +1397,12 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						<h2 class="ftco-heading-2">Have a Questions?</h2>
 						<div class="block-23 mb-3">
 							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.
-										Mountain View, San Francisco, California, USA</span></li>
-								<li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
-											210</span></a></li>
-								<li><a href="#"><span class="icon icon-envelope"></span><span
-											class="text">info@yourdomain.com</span></a></li>
+								
+								<!-- <li><a href="tel:9372677245"><span class="icon icon-phone"></span>
+									
+									<span class="text">9372677245</span></a></li> -->
+								<li><a href="mailto:@krishilsheth@gmail.com"><span class="icon icon-envelope"></span><span
+											class="text">krishilsheth@gmail.com</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -1397,12 +1411,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			<div class="row">
 				<div class="col-md-12 text-center">
 
-					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					<p>
 						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | This
-						template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="icon-plus" aria-hidden="true"></i> <a
+							href="https://medicomp.in" target="_blank">Medicomp India</a>
 					</p>
 				</div>
 			</div>

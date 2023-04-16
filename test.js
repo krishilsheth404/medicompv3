@@ -40,8 +40,6 @@ app.post('/', (req, res) => {
 });
 
 
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
 
 app.get('/limitedTimeOffers',async (req, res) => {
 
@@ -65,7 +63,7 @@ app.get('/limitedTimeOffers',async (req, res) => {
 app.post('/getImageData',async (req, res) => {
 
     const start = performance.now();
-    console.log((req.body.blah));
+//    console.log((req.body.blah));
 
     const browser = await puppeteer.launch({
         headless: true,
