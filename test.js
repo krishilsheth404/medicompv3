@@ -67,7 +67,7 @@ app.post('/getImageData', async (req, res) => {
   console.log(req.body);
 
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
