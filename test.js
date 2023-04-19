@@ -4,6 +4,7 @@ const app = express(); // Create an ExpressJS app
 const bodyParser = require('body-parser'); // Middleware 
 const axios = require('axios');
 const path = require('path');
+const { createCanvas } = require("canvas");
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer');
 const request = require('request');
@@ -41,32 +42,33 @@ app.post('/', (req, res) => {
 
 
 
-app.get('/limitedTimeOffers',async (req, res) => {
+app.get('/limitedTimeOffers', async (req, res) => {
 
     const { data } = await axios.get("https://netmeds.com");
     const $ = cheerio.load(data);
 
-    const final=[];
+    const final = [];
     $('.flashsale .swiper-slide').map((i, elm) => {
         final.push({
-        title:($(elm).find('.cat_title').first().text()),
-        imgsrc:($(elm).find('.cat-img img').first().attr('src')),
-        fprice:($(elm).find('#final_price').first().text()),
-        oprice:($(elm).find('.price').first().text()),
-      });
+            title: ($(elm).find('.cat_title').first().text()),
+            imgsrc: ($(elm).find('.cat-img img').first().attr('src')),
+            fprice: ($(elm).find('#final_price').first().text()),
+            oprice: ($(elm).find('.price').first().text()),
+        });
     });
-      res.send(final);
+    res.send(final);
 
 });
 
 
-app.post('/getImageData',async (req, res) => {
+app.post('/getImageData', async (req, res) => {
 
     const start = performance.now();
-//    console.log((req.body.blah));
+
+  console.log(req.body);
 
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -74,52 +76,20 @@ app.post('/getImageData',async (req, res) => {
 
     })
     const page = await browser.newPage();
-    await page.goto('https://www8.lunapic.com/editor/?action=moreupload');
-    await page.waitForTimeout(1000);
-    await page.keyboard.press('Escape');
-
-
-
-    console.log('typeing')
     
-        // await page.waitForSelector('input[name=url]');
+    await page.goto(`https://yandex.com/images/search?rpt=imageview&url=${req.body.blah}`);
+    const data = await page.evaluate(() => document.querySelector('*').outerHTML);
 
-        // const inputValue = await page.$eval('input[name=url]', el => el.value);
-        // focus on the input field
-        await page.click('input[name=url]');
-        // for (let i = 0; i < inputValue.length; i++) {
-        //     await page.keyboard.press('Backspace');
-        // }
-        await page.evaluate(val => document.querySelector('input[name=url]').value = val, req.body.blah)
-        await page.keyboard.press('Enter');
+    await browser.close();
 
-        await page.waitForSelector('#actionbox');
-        console.log('done typooig')
-
-        const ef = performance.now() - start;
-        console.log(`Execution time: ${ef}ms`);
-
-        const issueSrcs = await page.evaluate(() => {
-            const srcs = Array.from(
-                document.querySelectorAll("img")
-            ).map((image) => image.getAttribute("src"));
-            return srcs;
-        });
- 
-    
-        await page.goto(`https://yandex.com/images/search?rpt=imageview&url=${issueSrcs[2]}`);
-        const data = await page.evaluate(() => document.querySelector('*').outerHTML);
-
-        await  browser.close();
-
-        const final=[];
-        const $ = cheerio.load(data, { xmlMode: false });
-          $('.Tags-Wrapper a').map((i, elm) => {
-          final.push($(elm).text());
+    const final = [];
+    const $ = cheerio.load(data, { xmlMode: false });
+    $('.CbirTags a').map((i, elm) => {
+        final.push($(elm).text());
     });
 
 
-  
+
     const end = performance.now() - start;
     console.log(`Execution time: ${end}ms`);
 
@@ -425,15 +395,15 @@ app.get('/getNearbyChemistData', async (req, res) => {
             // Fetching HTML
 
             const browser = await puppeteer.launch({
-                args : [ 
-                   '--no-sandbox',
-                   '--disable-setuid-sandbox',
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
                 ]
             });;
             const page = await browser.newPage();
             await page.goto(url, { waitUntil: 'networkidle2' });
-            const  data  = await page.evaluate(() => document.querySelector('*').outerHTML);
-            await  browser.close();
+            const data = await page.evaluate(() => document.querySelector('*').outerHTML);
+            await browser.close();
 
             // Using cheerio to extract <a> tags
             const $ = cheerio.load(data);
@@ -910,10 +880,10 @@ extractDataOfPharmEasy = async (data, url) => {
             dc = 0;
         }
 
-        try{
-            var imgurl=a['props']['pageProps']['productDetails']['damImages'][0]['url'];
-        }catch(e){
-            imgurl="";
+        try {
+            var imgurl = a['props']['pageProps']['productDetails']['damImages'][0]['url'];
+        } catch (e) {
+            imgurl = "";
         }
         return {
             name: 'PharmEasy',
@@ -1149,7 +1119,7 @@ extractDataOfApollo = async (data, url, final, presReq) => {
         if (!m) {
             m = apolloData.props.pageProps.productDetails.productdp[0].price;
         }
-       console.log("price from apollo-> "+$('.MedicineInfoWeb_medicinePrice__HPf1s').text())
+        console.log("price from apollo-> " + $('.MedicineInfoWeb_medicinePrice__HPf1s').text())
         var dc = '';
 
         if (m < 300) {
@@ -1554,7 +1524,7 @@ extractDataOfOBP = async (data, url) => {
         const $ = cheerio.load(data);
         // console.log($.html());
         var p = $('.price ins bdi').first().text();
-        if(!p){
+        if (!p) {
             p = $('.price').first().text()
         }
         if (p) {
@@ -1568,8 +1538,8 @@ extractDataOfOBP = async (data, url) => {
             if (p.includes('₹')) {
                 p = p.split('₹')[1];
             }
-            if(p.includes(',')){
-                p=p.replace(',','');
+            if (p.includes(',')) {
+                p = p.replace(',', '');
             }
         }
 
@@ -1586,7 +1556,7 @@ extractDataOfOBP = async (data, url) => {
         var dc = '';
 
         console.log(p)
-        console.log(typeof(parseFloat(p)))
+        console.log(typeof (parseFloat(p)))
         if (parseFloat(p) < 500) {
             dc = 68.88;
         } else if (parseFloat(p) >= 500 && parseFloat(p) < 1000) {

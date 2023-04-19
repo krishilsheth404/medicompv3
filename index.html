@@ -4,28 +4,6 @@
 <head>
 	<title>Medicomp India | India's 1st Platform To Compare Medicine Prices</title>
 	<meta charset="utf-8">
-	<meta name="title" content="Medicomp India">
-    <meta name="description"
-        content="India's 1st platform to compare medicine prices.We provide unbiased information on various medicines available in the Indian market.
-        Medicomp india is a company that provides price comparison for medicines and medical equipment. We are India’s first and largest price comparison service for medical products. Our team is driven by the vision of making healthcare affordable for the masses. We have helped thousands of patients save big on their medical treatment.
-We provide unbiased information on various medicines ,offers and prescriptions available in the Indian market. This information is provided through a price comparison engine that helps patients to make an informed purchase decision. ">
-    <meta name="keywords"
-        content="medicine price compare,apollo pharmacy,netmeds.pulse plus,tata 1mg,pharmeasy,
-        medicine prices, online comparison, prescription drugs, generic drugs, brand name drugs, affordable medications, pharmacy prices, drug costs, healthcare, pharmaceuticals,
-        medicine, price comparison, online, healthcare, prescription drugs, generic drugs, brand-name drugs, drug prices, discounts, savings, pharmacies, healthcare costs, health insurance, 
-        drug information, drug reviews, medication costs, drug savings, drug coupons, online pharmacies, drug price comparison, drugstore, pharmaceuticals,
-        medicomp india,price compare online,medication prices, pharmacy prices, online pharmacy, drug prices, prescription prices, generic medication prices, 
-        brand medication prices, drugstore prices, health prices, compare medication prices, cheapest medication prices, best medication prices, medication price comparison, drug price comparison, pharmacy price comparison.
-        3meds,compare medicine prices online,krishil sheth,india's 1st pltform to compare medicine prices,live prices of medicines,medicomp,Medicomp India,India, ">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="1 days">
-    <meta name="author" content="Krishil Rohit Sheth">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="medicomp_logo.png">
-
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -34,9 +12,21 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 	<link rel="stylesheet" href="css/animate.css">
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.js"
+		integrity="sha512-20FZL4lG1jTZXPeMkblgj4b/fsXASK5aW87Tm7Z5QK9QmmYleVGM0NlS9swfb6XT8yrFTAWkq3QfnMe7MKIX8A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"
+		integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://js.upload.io/upload-js/v2"></script>
+
+
 	<script src="
-https://cdn.jsdelivr.net/npm/puppeteer@19.8.0/install.min.js
-"></script>
+https://cdn.jsdelivr.net/npm/puppeteer@19.8.0/install.min.j"></script>
+
+
+
 	<script src="
 https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 "></script>
@@ -114,9 +104,9 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<!-- <li class="nav-item"><a href="tour.html" class="nav-link">Tour</a></li> -->
-					<li class="nav-item"><a href="#nearbychemists" class="nav-link">NearBy Chemists</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blogs</a></li>
+					<li class="nav-item"><a href="tour.html" class="nav-link">Tour</a></li>
+					<li class="nav-item"><a href="hotel.html" class="nav-link">Hotels</a></li>
+					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
 				</ul>
@@ -134,17 +124,17 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				<div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 					<h1 class="mb-4" style="margin-top: 100px;"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong style="text-shadow: 1px 1px 4px white;    overflow-wrap: anywhere;
-							">Save money on healthcare expenses</strong> </h1>
+							">Save money on prescriptions</strong> </h1>
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><b
-							style="text-shadow: 1px 1px 4px white;">compare prices now with Medicomp India!</b> </p>
+							style="text-shadow: 1px 1px 4px white;">compare prices now!</b> </p>
 					<div class="block-17 my-4" style="display: flex;
 					align-items: center;
 					justify-content: space-between;">
-						<form action="#" class="d-block d-flex" style="width: 100%;;">
+						<form action="#" class="d-block d-flex" style="    width: 100%;;">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
 									<input type="text" oninput="formVal()" autocomplete="off" id="q" name="q"
-										class="form-control" placeholder=" Medicine, Symptom, SaltName ">
+										class="form-control" placeholder=" Medicine, Symptom, Salt ">
 
 								</div>
 							</div>
@@ -176,65 +166,62 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							height: 100px;
 						}
 					</style>
-					<button id="uploadBtn" onclick="importData()">
-				     <!-- <i
-							class="fas fa-camera-alt fa-4x fa-fw"></i> -->
-						</button>
-							<form action="/getImageData" method="post" id="imgForm">
-								<input type="text" name="blah" id="blah" style="
+					<button id="uploadBtn" onclick="importData()"> <i
+							class="fas fa-camera-alt fa-4x fa-fw"></i></i></button>
+					<form action="/getImageData" method="post" id="imgForm">
+						<input type="text" name="blah" id="blah" style="
 								width: 0px;
 								height: 0px;
 								visibility: hidden;
 							">
-							   <input type="submit" value="submit" id="sub" style="
+						<input type="submit" value="submit" id="sub" style="
 							   width: 0px;
 							   height: 0px;
 							   visibility: hidden;
 						   ">
-								
-								<!-- <img id="blah" src="http://placehold.it/180" alt="your image"> -->
-							</form>
+
+						<!-- <img id="blah" src="http://placehold.it/180" alt="your image"> -->
+					</form>
 					<script>
 						function importData() {
 							let input = document.createElement('input');
 							input.type = 'file';
 							input.id = 'fileSec'
-							input.onchange = _ => {
+							input.onchange =async  _ => {
 								console.log('in')
 								// you can use this method to get file and perform respective operations
 								let files = Array.from(input.files);
 								console.log(files[0]);
 								var reader = new FileReader();
 								reader.readAsDataURL(input.files[0]);
-								reader.onload = function (e) {
-									var image = new Image();
-									image.src = e.target.result;
-									// console.log(image.src);
-									document.getElementById('blah').value = image.src;
+								const upload = Upload({ apiKey: "free" })
 
-									console.warn('loading...')
-									document.getElementById('ftco-loader').style.visibility = 'visible';
-									document.getElementById('ftco-loader').style.opacity = 1;
-									document.getElementById('sub').click();
+								const [file] = event.target.files;
+										const { fileUrl } = await upload.uploadFile(
+											file,
+											{
+												onBegin: ({ cancel }) => console.log("File upload started!"),
+												onProgress: ({ progress }) => console.log(`File uploading... ${progress}%`)
+											}
+										);
+										console.log(`File uploaded! ${fileUrl}`);
+										document.getElementById('blah').value = fileUrl;
+										console.warn('loading...')
+										document.getElementById('ftco-loader').style.visibility = 'visible';
+										document.getElementById('ftco-loader').style.opacity = 1;
+										document.getElementById('sub').click();
 
-                                   
-								   
 
+							};
 
-
-								}
-
-
-								};
-
-								input.click();
-								
+							input.click();
 
 
 
-								// reader.readAsDataURL(input.files[0]);
 
-							}
+							// reader.readAsDataURL(input.files[0]);
+
+						}
 					</script>
 				</div>
 				<p id="text_change"></p>
@@ -309,21 +296,17 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	</style>
 	<script>
 
-function dispload(){
-			document.getElementById('ftco-loader').style.visibility = 'visible';
-								document.getElementById('ftco-loader').style.opacity = 1;
-		  }
 
-							window.onload = async function () {
-								await axios({
-									method: "GET",
-									url: `/limitedTimeOffers`,
-								})
-									.then((res) => {
-										console.log(res.data[0].imgsrc)
-										for (var i = 0; i < 0; i++) {
+		window.onload = async function () {
+			await axios({
+				method: "GET",
+				url: `/limitedTimeOffers`,
+			})
+				.then((res) => {
+					console.log(res.data[0].imgsrc)
+					for (var i = 0; i < 0; i++) {
 
-											document.getElementById('limitedOffers').innerHTML += `
+						document.getElementById('limitedOffers').innerHTML += `
 				<div class="col-sm col-md-6 col-lg ftco-animate ">
 						<div class="destination">
 							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
@@ -359,82 +342,80 @@ function dispload(){
 													</div>
 													</div>
 													`;
-										}
-									});
+					}
+				});
 
 
-							}
-							const medsearchlist = new Set();
-							console.log(document.getElementById('q').value);
+		}
+		const medsearchlist = new Set();
+		console.log(document.getElementById('q').value);
 
-							function loader() {
-								console.warn('loading...')
-								document.getElementById('ftco-loader').style.visibility = 'visible';
-								document.getElementById('ftco-loader').style.opacity = 1;
-							}
-							function addEle(finalmednames) {
-								medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
-								console.log(medsearchlist)
-								document.getElementById('mlblock').innerHTML = '';
-								document.getElementById('invisibleBlock').innerHTML = '';
-								document.getElementById(`addbtn_${finalmednames}`).innerHTML = '✓';
-								for (const item of medsearchlist.keys()) {
-									document.getElementById('mlblock').innerHTML += `	<span class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
-									document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
-								}
-							}
-							async function formVal() {
+		function loader() {
+			console.warn('loading...')
+			document.getElementById('ftco-loader').style.visibility = 'visible';
+			document.getElementById('ftco-loader').style.opacity = 1;
+		}
+		function addEle(finalmednames) {
+			medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
+			console.log(medsearchlist)
+			document.getElementById('mlblock').innerHTML = '';
+			document.getElementById('invisibleBlock').innerHTML = '';
+			document.getElementById(`addbtn_${finalmednames}`).innerHTML = '✓';
+			for (const item of medsearchlist.keys()) {
+				document.getElementById('mlblock').innerHTML += `	<span class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
+				document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
+			}
+		}
+		async function formVal() {
 
-								if (document.getElementById('q').value.trim().length > 0) {
+			if (document.getElementById('q').value.trim().length > 0) {
 
-									document.getElementById('medlist').innerHTML = '';
-									// document.getElementById('mlblock').style.display='none';
+				document.getElementById('medlist').innerHTML = '';
+				// document.getElementById('mlblock').style.display='none';
 
-									document.getElementById('medlist').innerHTML = `
+				document.getElementById('medlist').innerHTML = `
 				<div class="skeleton">
   <div class="skeleton__block"></div>
   </div>
   `;
 
-  
-          
 
 
 
 
-									await axios({
-										method: "GET",
-										url: `/medname?q=${document.getElementById('q').value + ' '}`,
-									})
-										.then((res) => {
-											console.log(res.data.length);
-											document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
-											console.log(document.getElementById('idcontainer').style.height)
+				await axios({
+					method: "GET",
+					url: `/medname?q=${document.getElementById('q').value + ' '}`,
+				})
+					.then((res) => {
+						console.log(res.data.length);
+						document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
+						console.log(document.getElementById('idcontainer').style.height)
 
-											if (window.innerWidth > 500) {
-												document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300}px`;
-												// document.getElementById('fullheight').style.height = `${(res.data.length * 80) + 300}px`;
-											} else {
-												document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250}px`;
-												// document.getElementById('fullheight').style.height = `${(res.data.length * 100) + 250}px`;
-											}
-											// document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
-											// document.getElementById('idcontainer').style.transition='all 1s';
-											// document.getElementById('fullheight').style.transition='all 1s';
+						if (window.innerWidth > 500) {
+							document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300}px`;
+							// document.getElementById('fullheight').style.height = `${(res.data.length * 80) + 300}px`;
+						} else {
+							document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250}px`;
+							// document.getElementById('fullheight').style.height = `${(res.data.length * 100) + 250}px`;
+						}
+						// document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
+						// document.getElementById('idcontainer').style.transition='all 1s';
+						// document.getElementById('fullheight').style.transition='all 1s';
 
-											document.getElementById('medlist').innerHTML = '';
-											document.getElementById('medlist').style.height = `100vh`;
-											// document.getElementById('medlist').style.overflow='scroll';
-											for (var i = 0; i < res.data.length; i++) {
-												if (res.data[i]['name']) {
+						document.getElementById('medlist').innerHTML = '';
+						document.getElementById('medlist').style.height = `100vh`;
+						// document.getElementById('medlist').style.overflow='scroll';
+						for (var i = 0; i < res.data.length; i++) {
+							if (res.data[i]['name']) {
 
-													console.log(res.data[i]['name']);
+								console.log(res.data[i]['name']);
 
-													document.getElementById('medlist').innerHTML += `
+								document.getElementById('medlist').innerHTML += `
 							<div style="position:relative">
 							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
 								<a onclick="this.parentNode.submit()">
-									<div onclick="loader()"  class="textfield-search one-third" style="background:white;color:black;padding:10px" >
+									<div   class="textfield-search one-third" style="background:white;color:black;padding:10px" >
 										<p style="width: 90%;
     color: black;
     height: auto;
@@ -455,16 +436,16 @@ function dispload(){
     padding-left: 20px;'>+</span>
 									</div>
 									<br>`;
-												}
-
-
-											}
-										})
-										.catch((err) => {
-											throw err;
-										});
-								}
 							}
+
+
+						}
+					})
+					.catch((err) => {
+						throw err;
+					});
+			}
+		}
 
 	</script>
 
@@ -707,7 +688,7 @@ function dispload(){
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 100 gm Spray</span>
-								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Volini+Pain+Relief+Spray%2C+40+gm">Compare</a></span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -774,7 +755,7 @@ function dispload(){
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 15 tablets in 1 strip</span>
-								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Crocin+Pain+Relief+Strip+Of+15+Tablets">Compare</a></span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -842,7 +823,7 @@ function dispload(){
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 10 Tablet in 1 Strip</span>
-								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Saridon+Advance+Tablet+10%27s">Compare</a></span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -909,7 +890,7 @@ function dispload(){
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i>10 Lozenges in 1 Strip</span>
-								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Cofsils+Orange+Lozenges+Strip+Of+10">Compare</a></span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -977,7 +958,7 @@ function dispload(){
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> 15 gm Ointment in 1 Tube</span>
-								<span class="ml-auto"><a href="https://medicomp.in/compare?medname=Moov+Pain+Relief+Cream%2C+15+gm">Compare</a></span>
+								<span class="ml-auto"><a href="#">Compare</a></span>
 							</p>
 						</div>
 					</div>
@@ -992,7 +973,7 @@ function dispload(){
 			<div class="row justify-content-center mb-5 pb-3">
 				<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
 					<h2 class="mb-4">Some fun facts</h2>
-					<!-- <span class="subheading">More than 100,000 websites hosted</span> -->
+					<span class="subheading">More than 100,000 websites hosted</span>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -1001,39 +982,33 @@ function dispload(){
 						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="10">0</strong>
-									<strong
+									<strong class="number" data-number="10000">0</strong><strong
 										style="color: white;">+</strong>
-									<span>Pharmacies Compared</span>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-							<div class="block-18 text-center">
-								<div class="text">
-									<strong class="number" data-number="50">0</strong><strong
-									style="color: white;">s+</strong>
-									<span>Engagement Time</span>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-							<div class="block-18 text-center">
-								<div class="text">
-									<strong class="number" data-number="1000">0</strong><strong
-										style="color: white;">+</strong>
-									<span>Happy Users</span>
+									<span>Happy Customers</span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="35000">0</strong><strong
-									style="color: white;">+</strong>
-									<span>Medicine Data</span>
+									<strong class="number" data-number="40000">0</strong>
+									<span>Destination Places</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="87000">0</strong>
+									<span>Hotels</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="56400">0</strong>
+									<span>Restaurant</span>
 								</div>
 							</div>
 						</div>
@@ -1043,8 +1018,8 @@ function dispload(){
 		</div>
 	</section>
 
-	<section class="ftco-section" id="nearbychemists">
-		<div class="container" >
+	<section class="ftco-section">
+		<div class="container">
 			<div class="row justify-content-start mb-5 pb-3"
 				style="display: flex;align-items: center;justify-content: center;">
 				<div class="col-md-7 heading-section ftco-animate">
@@ -1056,10 +1031,10 @@ function dispload(){
 							<div class="fields d-block d-flex" style="background-color: transparent;">
 								<div class="textfield-search one-third">
 									<input type="text" required autocomplete="off" id="chemCity" name="chemCity"
-										class="form-control" placeholder="Enter City"
+										class="form-control" placeholder=" City"
 										style="border-bottom: 2px dotted black;">
 									<input type="number" required autocomplete="off" id="chemPin" name="chemPin"
-										class="form-control" placeholder="Enter Pincode">
+										class="form-control" placeholder=" Pincode">
 
 								</div>
 							</div>
@@ -1073,32 +1048,32 @@ function dispload(){
 					</div>
 					<span id="result"></span>
 					<script>
-							var cnt = 0;
-							async function getchem() {
-								if (document.getElementById('chemCity').value && document.getElementById('chemPin').value) {
+						var cnt = 0;
+						async function getchem() {
+							if (document.getElementById('chemCity').value && document.getElementById('chemPin').value) {
 
-									document.getElementById('firsth3').style.display = 'block';
-									document.getElementById('firsth3').classList.add('skeleton');
-									document.getElementById('secondh3').style.display = 'block';
-									document.getElementById('secondh3').classList.add('skeleton');
-									console.log("inside func")
-									await axios({
-										method: "GET",
-										url: `/getNearbyChemistData?chemCity=${document.getElementById('chemCity').value}&chemPin=${document.getElementById('chemPin').value}`,
-									})
+								document.getElementById('firsth3').style.display = 'block';
+								document.getElementById('firsth3').classList.add('skeleton');
+								document.getElementById('secondh3').style.display = 'block';
+								document.getElementById('secondh3').classList.add('skeleton');
+								console.log("inside func")
+								await axios({
+									method: "GET",
+									url: `/getNearbyChemistData?chemCity=${document.getElementById('chemCity').value}&chemPin=${document.getElementById('chemPin').value}`,
+								})
 
-										.then((res) => {
-											console.log("inside data")
-											console.log(res.data);
-											console.log(res.data.length);
-											document.getElementById('result').innerHTML = res.data[res.data.length - 1];
-											for (var i = 1; i < res.data.length - 1; i++) {
-												if (cnt == 0) {
-													document.getElementById('skeletonId').style.display = 'none';
-													document.getElementById('rowId').innerHTML = '';
-													cnt++;
-												}
-												document.getElementById('rowId').innerHTML += `
+									.then((res) => {
+										console.log("inside data")
+										console.log(res.data);
+										console.log(res.data.length);
+										document.getElementById('result').innerHTML = res.data[res.data.length - 1];
+										for (var i = 1; i < res.data.length - 1; i++) {
+											if (cnt == 0) {
+												document.getElementById('skeletonId').style.display = 'none';
+												document.getElementById('rowId').innerHTML = '';
+												cnt++;
+											}
+											document.getElementById('rowId').innerHTML += `
 								<div class="col-md-6 col-lg-3 ">
 						<div class="destination">
 						
@@ -1122,13 +1097,13 @@ function dispload(){
 						</div>
 					</div>
 								`;
-											}
+										}
 
-										})
-								} else {
-									alert('Fill the details correctly')
-								}
+									})
+							} else {
+								alert('Fill the details correctly')
 							}
+						}
 					</script>
 				</div>
 			</div>
@@ -1269,19 +1244,19 @@ function dispload(){
 			<div class="row d-flex">
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="GenericVsBrandName.html" class="block-20"
+						<a href="blog1.html" class="block-20"
 							style="background-image: url('https://www.singlecare.com/blog/wp-content/uploads/2020/01/031819_Brand_or_Generic-1884x1060.png');">
 						</a>
 						<div class="text p-4 d-block">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="GenericVsBrandName.html">Generic vs. Brand Name Medications:
+							<h3 class="heading mt-3"><a href="blog1.html">Generic vs. Brand Name Medications:
 									Understanding
 									the price differences and how to choose
 									out</a></h3>
 							<div class="meta mb-3">
-								<div><a href="GenericVsBrandName.html">Jan 12, 2023</a></div>
-								<div><a href="GenericVsBrandName.html">Admin</a></div>
-								<div><a href="GenericVsBrandName.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="blog1.html">Jan 12, 2023</a></div>
+								<div><a href="blog1.html">Admin</a></div>
+								<div><a href="blog1.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1289,18 +1264,18 @@ function dispload(){
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="TheBenefitsOfComparingMedicinePrices.html" class="block-20"
+						<a href="blog2.html" class="block-20"
 							style="background-image: url('https://drbest.in/wp-content/uploads/2019/05/Pharmacy.jpg');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="TheBenefitsOfComparingMedicinePrices.html">The benefits of comparing medicine prices
+							<h3 class="heading mt-3"><a href="blog2.html">The benefits of comparing medicine prices
 									online:
 									How it can save you money and time </a></h3>
 							<div class="meta mb-3">
-								<div><a href="TheBenefitsOfComparingMedicinePrices.html">Jan 23, 2023</a></div>
-								<div><a href="TheBenefitsOfComparingMedicinePrices.html">Admin</a></div>
-								<div><a href="TheBenefitsOfComparingMedicinePrices.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="blog2.html">Jan 23, 2023</a></div>
+								<div><a href="blog2.html">Admin</a></div>
+								<div><a href="blog2.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1308,18 +1283,18 @@ function dispload(){
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="TheProsAndConsOfBuyingMedicineOnline.html" class="block-20"
+						<a href="blog3.html" class="block-20"
 							style="background-image: url('https://appcoup.com/assets/img/pharmacyappdev/medicine-delivery-app-development.png');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="TheProsAndConsOfBuyingMedicineOnline.html">The Pros and Cons of Buying Medicine
+							<h3 class="heading mt-3"><a href="blog3.html">The Pros and Cons of Buying Medicine
 									Online</a>
 							</h3>
 							<div class="meta mb-3">
-								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html">Feb 06, 2023</a></div>
-								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html">Admin</a></div>
-								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="blog3.html">Feb 06, 2023</a></div>
+								<div><a href="blog3.html">Admin</a></div>
+								<div><a href="blog3.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1327,17 +1302,17 @@ function dispload(){
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html" class="block-20"
+						<a href="blog4.html" class="block-20"
 							style="background-image: url('https://www.pharmaceutical-technology.com/wp-content/uploads/sites/24/2022/07/shutterstock_559764574-scaled.jpg');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnlinehtml">The Risks and Benefits of Buying Generic
+							<h3 class="heading mt-3"><a href="blog4.html">The Risks and Benefits of Buying Generic
 									Medications Online</a></h3>
 							<div class="meta mb-3">
-								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html">Feb 12, 2023</a></div>
-								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html">Admin</a></div>
-								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="blog4.html">Feb 12, 2023</a></div>
+								<div><a href="blog4.html">Admin</a></div>
+								<div><a href="blog4.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1347,7 +1322,7 @@ function dispload(){
 		</div>
 	</section>
 
-	<!-- <section class="ftco-section-parallax">
+	<section class="ftco-section-parallax">
 		<div class="parallax-img d-flex align-items-center"
 			style="background: #6190E8;  /* fallback for old browsers */
 	  background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
@@ -1372,7 +1347,7 @@ function dispload(){
 				</div>
 			</div>
 		</div>
-	</section> -->
+	</section>
 
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
 		<div class="container">
@@ -1383,9 +1358,9 @@ function dispload(){
 						<p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
 							various pharmacies and online retailers in India.</p>
 						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="https://www.linkedin.com/in/krishilsheth/"><span class="icon-linkedin"></span></a></li>
-							<!-- <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li> -->
-							<li class="ftco-animate"><a href="https://www.instagram.com/medicomp.india/"><span class="icon-instagram"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -1393,12 +1368,12 @@ function dispload(){
 					<div class="ftco-footer-widget mb-4 ml-md-5">
 						<h2 class="ftco-heading-2">Information</h2>
 						<ul class="list-unstyled">
-							<li><a href="/about.html" class="py-2 d-block">About</a></li>
-							<li><a href="#" class="py-2 d-block">Med A-Z</a></li>
-							<!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
-							<li><a href="mailto:krishilsheth@gmail.com?subject=We Want To Collaborate With Medicomp India&body=//text here" class="py-2 d-block">Become a partner</a></li>
-							<!-- <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li> -->
-							<li><a href="/privacypolicy.html" class="py-2 d-block">Privacy and Policy</a></li>
+							<li><a href="#" class="py-2 d-block">About</a></li>
+							<li><a href="#" class="py-2 d-block">Service</a></li>
+							<li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+							<li><a href="#" class="py-2 d-block">Become a partner</a></li>
+							<li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+							<li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
 						</ul>
 					</div>
 				</div>
@@ -1406,11 +1381,11 @@ function dispload(){
 					<div class="ftco-footer-widget mb-4">
 						<h2 class="ftco-heading-2">Customer Support</h2>
 						<ul class="list-unstyled">
-							<li><a href="/about.html" class="py-2 d-block">FAQ</a></li>
-							<!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+							<li><a href="#" class="py-2 d-block">FAQ</a></li>
+							<li><a href="#" class="py-2 d-block">Payment Option</a></li>
 							<li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-							<li><a href="#" class="py-2 d-block">How it works</a></li> -->
-							<li><a href="/contact.html" class="py-2 d-block">Contact Us</a></li>
+							<li><a href="#" class="py-2 d-block">How it works</a></li>
+							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
 						</ul>
 					</div>
 				</div>
@@ -1419,12 +1394,12 @@ function dispload(){
 						<h2 class="ftco-heading-2">Have a Questions?</h2>
 						<div class="block-23 mb-3">
 							<ul>
-								
-								<!-- <li><a href="tel:9372677245"><span class="icon icon-phone"></span>
-									
-									<span class="text">9372677245</span></a></li> -->
-								<li><a href="mailto:@krishilsheth@gmail.com"><span class="icon icon-envelope"></span><span
-											class="text">krishilsheth@gmail.com</span></a></li>
+								<li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.
+										Mountain View, San Francisco, California, USA</span></li>
+								<li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
+											210</span></a></li>
+								<li><a href="#"><span class="icon icon-envelope"></span><span
+											class="text">info@yourdomain.com</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -1433,10 +1408,12 @@ function dispload(){
 			<div class="row">
 				<div class="col-md-12 text-center">
 
-					<p>
+					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="icon-plus" aria-hidden="true"></i> <a
-							href="https://medicomp.in" target="_blank">Medicomp India</a>
+						<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+						template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
+							href="https://colorlib.com" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</p>
 				</div>
 			</div>
