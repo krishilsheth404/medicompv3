@@ -4,7 +4,6 @@ const app = express(); // Create an ExpressJS app
 const bodyParser = require('body-parser'); // Middleware 
 const axios = require('axios');
 const path = require('path');
-const { createCanvas } = require("canvas");
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer');
 const request = require('request');
