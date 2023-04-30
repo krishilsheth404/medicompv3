@@ -166,7 +166,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							height: 100px;
 						}
 					</style>
-					<!-- <button id="uploadBtn" onclick="importData()"> <i
+					<button id="uploadBtn" onclick="importData()"> <i
 							class="fas fa-camera-alt fa-4x fa-fw"></i></i></button>
 					<form action="/getImageData" method="post" id="imgForm">
 						<input type="text" name="blah" id="blah" style="
@@ -178,7 +178,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							   width: 0px;
 							   height: 0px;
 							   visibility: hidden;
-						   "> -->
+						   ">
 
 						<!-- <img id="blah" src="http://placehold.it/180" alt="your image"> -->
 					</form>
@@ -1050,12 +1050,40 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					<script>
 						var cnt = 0;
 						async function getchem() {
-							if (document.getElementById('chemCity').value && document.getElementById('chemPin').value) {
 
-								document.getElementById('firsth3').style.display = 'block';
-								document.getElementById('firsth3').classList.add('skeleton');
-								document.getElementById('secondh3').style.display = 'block';
-								document.getElementById('secondh3').classList.add('skeleton');
+							if (document.getElementById('chemCity').value && document.getElementById('chemPin').value) {
+								
+								
+								try{
+									
+									document.getElementById('firsth3').style.display = 'block';
+									document.getElementById('skeletonId').style.display='block';
+									document.getElementById('firsth3').classList.add('skeleton');
+									document.getElementById('secondh3').style.display = 'block';
+									document.getElementById('secondh3').classList.add('skeleton');
+									document.getElementById('thirdh3').style.display = 'block';
+									document.getElementById('thirdh3').classList.add('skeleton');
+
+								}catch(e){
+								document.getElementById('rowId').innerHTML = '';
+								document.getElementById('rowId').innerHTML += `
+								<div class="col-md-6 col-lg-3 ">
+						<div class="destination" id="skeletonId">
+						
+							<div class="text p-3">
+								<h3 id='firsth3' style='height:40px' class="skeleton"><a href="#"></a></h3>
+								
+								<p class="rate skeleton skeleton__block">
+									
+									</p>
+									<h3 id='firsth3' style='height:40px' class="skeleton"><a href="#"></a></h3>
+							
+							</div>
+						</div>
+					</div>
+								`
+								
+								};
 								console.log("inside func")
 								await axios({
 									method: "GET",
@@ -1067,10 +1095,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 										console.log(res.data);
 										console.log(res.data.length);
 										document.getElementById('result').innerHTML = res.data[res.data.length - 1];
+										document.getElementById('rowId').innerHTML = '';
 										for (var i = 1; i < res.data.length - 1; i++) {
 											if (cnt == 0) {
-												document.getElementById('skeletonId').style.display = 'none';
-												document.getElementById('rowId').innerHTML = '';
+												// document.getElementById('skeletonId').style.visibility = 'hidden';
 												cnt++;
 											}
 											document.getElementById('rowId').innerHTML += `
@@ -1131,12 +1159,12 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			</style>
 
 			<div class="row" id="rowId" style="justify-content: center;">
-				<div class="col-md-6 col-lg-3 ftco-animate " id="skeletonId">
+				<div class="col-md-6 col-lg-3 ftco-animate " id="skeletonId" style="display: none;">
 					<div class="destination">
 
 						<div class="text p-3">
 							<h3 id="firsth3" style="display: none;" class="skeleton"><a href="#"></a></h3>
-							<p class="rate skeleton skeleton__block">
+							<p class="rate skeleton skeleton__block" id="thirdh3" style="display: none;">
 
 							</p>
 							<h3 id="secondh3" style="display: none;" class="skeleton">
