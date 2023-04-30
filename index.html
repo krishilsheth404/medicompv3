@@ -362,7 +362,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			document.getElementById('invisibleBlock').innerHTML = '';
 			document.getElementById(`addbtn_${finalmednames}`).innerHTML = '✓';
 			for (const item of medsearchlist.keys()) {
-				document.getElementById('mlblock').innerHTML += `	<span class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
+				document.getElementById('mlblock').innerHTML += `	<span   class="d-flex justify-content-md-center align-items-md-center" style="margin:10px"><input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}</span>`;
 				document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
 			}
 		}
@@ -412,7 +412,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 								console.log(res.data[i]['name']);
 
 								document.getElementById('medlist').innerHTML += `
-							<div style="position:relative">
+							<div style="position:relative" onclick="loader()">
 							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
 								<a onclick="this.parentNode.submit()">
 									<div   class="textfield-search one-third" style="background:white;color:black;padding:10px" >
