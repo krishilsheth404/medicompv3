@@ -104,8 +104,6 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="tour.html" class="nav-link">Tour</a></li>
-					<li class="nav-item"><a href="hotel.html" class="nav-link">Hotels</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
@@ -187,7 +185,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							let input = document.createElement('input');
 							input.type = 'file';
 							input.id = 'fileSec'
-							input.onchange =async  _ => {
+							input.onchange = async _ => {
 								console.log('in')
 								// you can use this method to get file and perform respective operations
 								let files = Array.from(input.files);
@@ -195,21 +193,35 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 								var reader = new FileReader();
 								reader.readAsDataURL(input.files[0]);
 								const upload = Upload({ apiKey: "free" })
+								document.getElementById('ftco-loader').style.visibility = 'visible';
+								document.getElementById('ftco-loader').style.opacity = 1;
+
+							
+
+								document.getElementById('loading_val').style.display = 'block';
+								document.getElementById('loading_data').style.display = 'block';
+								document.getElementById('loading_img').style.display = 'block';
 
 								const [file] = event.target.files;
-										const { fileUrl } = await upload.uploadFile(
-											file,
-											{
-												onBegin: ({ cancel }) => console.log("File upload started!"),
-												onProgress: ({ progress }) => console.log(`File uploading... ${progress}%`)
-											}
-										);
-										console.log(`File uploaded! ${fileUrl}`);
-										document.getElementById('blah').value = fileUrl;
-										console.warn('loading...')
-										document.getElementById('ftco-loader').style.visibility = 'visible';
-										document.getElementById('ftco-loader').style.opacity = 1;
-										document.getElementById('sub').click();
+								const { fileUrl } = await upload.uploadFile(
+									file,
+									{
+										onBegin: ({ cancel }) => console.log("File upload started!"),
+										onProgress: ({ progress }) => console.log(`File uploading... ${progress}%`, document.getElementById('loading_val').innerHTML = progress + "%")
+									}
+								);
+								console.log(`File uploaded! ${fileUrl}`);
+								document.getElementById('loading_val').style.display = 'none';
+								document.getElementById('loading_data').style.display = 'none';
+								document.getElementById('loading_img').style.display = 'none';
+								
+								document.getElementById('sec_load').style.visibility = 'visible';
+
+
+								document.getElementById('blah').value = fileUrl;
+
+								console.warn('loading...')
+								document.getElementById('sub').click();
 
 
 							};
@@ -354,6 +366,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			console.warn('loading...')
 			document.getElementById('ftco-loader').style.visibility = 'visible';
 			document.getElementById('ftco-loader').style.opacity = 1;
+
 		}
 		function addEle(finalmednames) {
 			medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
@@ -1052,21 +1065,21 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						async function getchem() {
 
 							if (document.getElementById('chemCity').value && document.getElementById('chemPin').value) {
-								
-								
-								try{
-									
+
+
+								try {
+
 									document.getElementById('firsth3').style.display = 'block';
-									document.getElementById('skeletonId').style.display='block';
+									document.getElementById('skeletonId').style.display = 'block';
 									document.getElementById('firsth3').classList.add('skeleton');
 									document.getElementById('secondh3').style.display = 'block';
 									document.getElementById('secondh3').classList.add('skeleton');
 									document.getElementById('thirdh3').style.display = 'block';
 									document.getElementById('thirdh3').classList.add('skeleton');
 
-								}catch(e){
-								document.getElementById('rowId').innerHTML = '';
-								document.getElementById('rowId').innerHTML += `
+								} catch (e) {
+									document.getElementById('rowId').innerHTML = '';
+									document.getElementById('rowId').innerHTML += `
 								<div class="col-md-6 col-lg-3 ">
 						<div class="destination" id="skeletonId">
 						
@@ -1082,7 +1095,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 					</div>
 								`
-								
+
 								};
 								console.log("inside func")
 								await axios({
@@ -1272,19 +1285,21 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			<div class="row d-flex">
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog1.html" class="block-20"
+						<a href="GenericVsBrandName.html" class="block-20"
 							style="background-image: url('https://www.singlecare.com/blog/wp-content/uploads/2020/01/031819_Brand_or_Generic-1884x1060.png');">
 						</a>
 						<div class="text p-4 d-block">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog1.html">Generic vs. Brand Name Medications:
+							<h3 class="heading mt-3"><a href="GenericVsBrandName.html">Generic vs. Brand Name
+									Medications:
 									Understanding
 									the price differences and how to choose
 									out</a></h3>
 							<div class="meta mb-3">
-								<div><a href="blog1.html">Jan 12, 2023</a></div>
-								<div><a href="blog1.html">Admin</a></div>
-								<div><a href="blog1.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="GenericVsBrandName.html">Jan 12, 2023</a></div>
+								<div><a href="GenericVsBrandName.html">Admin</a></div>
+								<div><a href="GenericVsBrandName.html" class="meta-chat"><span class="icon-chat"></span>
+										0</a>
 								</div>
 							</div>
 						</div>
@@ -1292,18 +1307,20 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog2.html" class="block-20"
+						<a href="TheBenefitsOfComparingMedicinePrices.html" class="block-20"
 							style="background-image: url('https://drbest.in/wp-content/uploads/2019/05/Pharmacy.jpg');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog2.html">The benefits of comparing medicine prices
+							<h3 class="heading mt-3"><a href="TheBenefitsOfComparingMedicinePrices.html">The benefits of
+									comparing medicine prices
 									online:
 									How it can save you money and time </a></h3>
 							<div class="meta mb-3">
-								<div><a href="blog2.html">Jan 23, 2023</a></div>
-								<div><a href="blog2.html">Admin</a></div>
-								<div><a href="blog2.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="TheBenefitsOfComparingMedicinePrices.html">Jan 23, 2023</a></div>
+								<div><a href="TheBenefitsOfComparingMedicinePrices.html">Admin</a></div>
+								<div><a href="TheBenefitsOfComparingMedicinePrices.html" class="meta-chat"><span
+											class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1311,18 +1328,20 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog3.html" class="block-20"
+						<a href="TheProsAndConsOfBuyingMedicineOnline.html" class="block-20"
 							style="background-image: url('https://appcoup.com/assets/img/pharmacyappdev/medicine-delivery-app-development.png');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog3.html">The Pros and Cons of Buying Medicine
+							<h3 class="heading mt-3"><a href="TheProsAndConsOfBuyingMedicineOnline.html">The Pros and
+									Cons of Buying Medicine
 									Online</a>
 							</h3>
 							<div class="meta mb-3">
-								<div><a href="blog3.html">Feb 06, 2023</a></div>
-								<div><a href="blog3.html">Admin</a></div>
-								<div><a href="blog3.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html">Feb 06, 2023</a></div>
+								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html">Admin</a></div>
+								<div><a href="TheProsAndConsOfBuyingMedicineOnline.html" class="meta-chat"><span
+											class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1330,17 +1349,21 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog4.html" class="block-20"
+						<a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html" class="block-20"
 							style="background-image: url('https://www.pharmaceutical-technology.com/wp-content/uploads/sites/24/2022/07/shutterstock_559764574-scaled.jpg');">
 						</a>
 						<div class="text p-4">
 							<span class="tag">Medicomp India</span>
-							<h3 class="heading mt-3"><a href="blog4.html">The Risks and Benefits of Buying Generic
+							<h3 class="heading mt-3"><a
+									href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html">The Risks and
+									Benefits of Buying Generic
 									Medications Online</a></h3>
 							<div class="meta mb-3">
-								<div><a href="blog4.html">Feb 12, 2023</a></div>
-								<div><a href="blog4.html">Admin</a></div>
-								<div><a href="blog4.html" class="meta-chat"><span class="icon-chat"></span> 0</a>
+								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html">Feb 12, 2023</a>
+								</div>
+								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html">Admin</a></div>
+								<div><a href="TheRisksAndBenefitsOfBuyingGenericMedicationsOnline.html"
+										class="meta-chat"><span class="icon-chat"></span> 0</a>
 								</div>
 							</div>
 						</div>
@@ -1350,7 +1373,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 		</div>
 	</section>
 
-	<section class="ftco-section-parallax">
+	<!-- <section class="ftco-section-parallax">
 		<div class="parallax-img d-flex align-items-center"
 			style="background: #6190E8;  /* fallback for old browsers */
 	  background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
@@ -1375,7 +1398,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
 		<div class="container">
@@ -1438,9 +1461,9 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | This
-						template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
+						<script>document.write(new Date().getFullYear());</script> All rights reserved
+						<i class="icon-plus" aria-hidden="true"></i> <a href="https://colorlib.com"
+							target="_blank">Medicomp India</a>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</p>
 				</div>
@@ -1451,11 +1474,26 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 
 	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+	<div id="ftco-loader" class="show fullscreen" style="visibility: hidden;">
+		<img id="loading_img"
+			src="https://cdn.dribbble.com/users/73104/screenshots/2832940/media/73878d06f44b5d35324687fc41c62689.gif"
+			style="height:300px;width:400px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:none"
+			alt="" srcset="">
+		<center id="loading_data"
+			style="position:absolute;top:60%;left:50%;transform:translate(-50%,-50%);display:none">
+			<p>Image Uploading...</p>
+		</center>
+		<span id="loading_val"
+			style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:none">0%</span>
+		
+		<svg class="circular" width="48px" id="sec_load" style="visibility: hidden;"
+			height="48px">
+
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
 				stroke="#F96D00" />
 		</svg></div>
+
 
 
 	<script src="js/jquery.min.js"></script>

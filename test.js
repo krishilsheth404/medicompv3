@@ -83,9 +83,14 @@ app.post('/getImageData', async (req, res) => {
 
     const final = [];
     const $ = cheerio.load(data, { xmlMode: false });
-    $('.CbirTags a').map((i, elm) => {
-        final.push($(elm).text());
-    });
+    $('.CbirSection-Title').map((i, elm) => {
+        if($(elm).text()=="Image appears to contain"){
+         console.log('yes')
+            $(elm).next().find('a').map((i, elm) => {
+                final.push($(elm).text());
+            });
+        }
+     });
 
 
 
