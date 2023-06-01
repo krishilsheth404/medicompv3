@@ -102,6 +102,55 @@ app.post('/getImageData', async (req, res) => {
 });
 
 
+app.post('/redirect', async (req, res) => {
+   console.log(req.body.medlink);
+   console.log(req.body.medName);
+   console.log(req.body.medicineName);
+   const final=[]
+   final.push(req.body.medlink)
+   final.push(req.body.medName)
+   final.push(req.body.medicineName)
+
+   const imageLogos={
+    
+    apollo:'https://image3.mouthshut.com/images/imagesp/925643839s.png',
+    netmeds:'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png',
+    pharmeasy:'https://hindubabynames.info/downloads/wp-content/themes/hbn_download/download/health-and-fitness-companies/pharmeasy-logo.png',
+    healthskool:'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png',
+    pasumai:'https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H',
+    flipkart:'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg',
+    pulseplus:'https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg',
+    tabletshablet:'https://www.tabletshablet.com/wp-content/uploads/2020/09/TBS_logo.jpg',
+    healthmug:'https://static.oxinis.com/healthmug/image/healthmug/healthmuglogo-192.png',
+    myupchar:'https://image.myupchar.com/8910/original/jobs-in-myupchar-delhi-healthcare-healthtech-techjobs-content-doctor-marketing.jpg',
+
+   }
+
+   if(req.body.medlink.includes('apollo')){
+    final.push(imageLogos['apollo']);
+   }else if(req.body.medlink.includes('netmeds')){
+    final.push(imageLogos['netmeds']);
+   }else if(req.body.medlink.includes('pharmeasy')){
+    final.push(imageLogos['pharmeasy']);
+   }else if(req.body.medlink.includes('healthskool')){
+    final.push(imageLogos['healthskool']);
+   }else if(req.body.medlink.includes('pasumai')){
+    final.push(imageLogos['pasumai']);
+   }else if(req.body.medlink.includes('flipkart')){
+    final.push(imageLogos['flipkart']);
+   }else if(req.body.medlink.includes('pulseplus')){
+    final.push(imageLogos['pulseplus']);
+   }else if(req.body.medlink.includes('tabletshablet')){
+    final.push(imageLogos['tabletshablet']);
+   }else if(req.body.medlink.includes('healthmug')){
+    final.push(imageLogos['healthmug']);
+   }else if(req.body.medlink.includes('myupchar')){
+    final.push(imageLogos['myupchar']);
+   }
+    res.render(__dirname + '/mediToSite', { final: final });
+
+});
+
 
 app.get('/medname', async (req, res) => {
     // Insert Login Code Here

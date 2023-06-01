@@ -136,7 +136,20 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 		    						<hr>
 		    						<p class="bottom-area d-flex">
 		    							<span><i class="icon-map-o"></i> <%=final[i].name%></span> 
-		    							<span class="ml-auto"><a href="<%=final[i].link%>">&nbsp;BUY&nbsp;</a></span>
+		    							<span class="ml-auto">
+                        <form action="/redirect" method="post">
+                          <input type="text" name="medlink" id="medlink" value="<%=final[i].link%>" style="visibility:hidden;height: 0px;">
+                          <input type="text" name="medName" id="medName" value="<%=final[i].name%>" style="visibility:hidden;height: 0px;">
+                          <input type="text" name="medicineName" id="medicineName" value="<%=final[i].item%>" style="visibility:hidden;height: 0px;">
+                          <!-- <a href="<%=final[i].link%>">&nbsp;BUY&nbsp;</a> -->
+                          <input id="smbtn" type="submit" value="BUY" style="border: none;background-color: lightgreen;width: 100%;">
+                        </form>
+                      <style>
+                        #smbtn:hover{
+                          cursor: pointer;
+                        }
+                      </style>
+                      </span>
 		    						</p>
 		    					</div>
 		    				</div>

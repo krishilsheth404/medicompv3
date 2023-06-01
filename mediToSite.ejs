@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-IN" dir="ltr">
+
+<head>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Loading...</title>
+    <!-- <meta http-equiv = "refresh" content = "5; url = <%=final[0]%>" /> -->
+</head>
+<style>
+    #mainBlock{
+            display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+        }
+    @media screen and (max-width:500px){
+        #mainBlock{
+            display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+                flex-direction: column;
+        }
+        #redImage{
+            transform: rotate(90deg);
+            margin-top: 50px;
+            margin-bottom:50px;
+        }
+    } 
+</style>
+<body>
+    <div id="__next">
+        <main style="position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);">
+            <section>
+                <div  id="mainBlock" style><img src="medicompLogoNoBackground.png" width="102" height="102" >
+                    <div class="RedirectLoader_wrapper__o1CzM">
+                        <img id="redImage" src="redirectAnimation.gif" alt="" width="70" height="40">
+                    </div><img class="Advertiser_logo__h1dZ9" alt="Hotels.com" title="Hotels.com"
+                        src="<%=final[3]%>" width="auto" style="max-width: 200px;" height="102"
+                        data-testid="advertiser-logo" />
+                </div>
+
+                <h1 class="Message_headline__HCj6Z" data-testid="brand-headline"
+                    style="font-family:Arial, Helvetica, sans-serif;">You found a great deal on
+                    <b><%=final[1]%></b>
+                </h1>
+                <p class="Message_message__kTIRp" data-testid="redirection-message"
+                    style="font-family:Arial, Helvetica, sans-serif;">Taking you to the <b><%=final[0]%></b>
+                    website</p>
+                <div class="Accommodation_accommodation__oFZKc" style="font-family:Arial, Helvetica, sans-serif;">
+                    <strong class="Accommodation_accommodationName__XSJDl" data-testid="accommodation-name"><%=final[2]%></stro ng>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+
+</html>
