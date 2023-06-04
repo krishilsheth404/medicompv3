@@ -6,4 +6,11 @@ const { initializeApp, cert} = require('firebase-admin/app')
         credential : cert (serviceAccount)
     })      
         const db = getFirestore() 
-    module.exports = { db }
+    module.exports = { 
+        saveData : function (req, callback){
+             let medname = req.query['medname'] ; 
+             firebase.database().ref("users/"+username).set({ 
+                 name : req.medname, time : new Date(),
+             })
+            }
+        };

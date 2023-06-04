@@ -6,8 +6,10 @@ const axios = require('axios');
 const path = require('path');
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer');
-const {db}=require('./firebase.js');
-const request = require('request'); 
+const firebase=require('firebase/app');
+const { getDatabase, ref, set } =require("firebase/database");
+
+const request = require('request');
 
 const axiosParallel = require('axios-parallel');
 
@@ -65,7 +67,7 @@ app.post('/getImageData', async (req, res) => {
 
     const start = performance.now();
 
-  console.log(req.body);
+    console.log(req.body);
 
     const browser = await puppeteer.launch({
         headless: true,
@@ -76,7 +78,7 @@ app.post('/getImageData', async (req, res) => {
 
     })
     const page = await browser.newPage();
-    
+
     await page.goto(`https://yandex.com/images/search?rpt=imageview&url=${req.body.blah}`);
     const data = await page.evaluate(() => document.querySelector('*').outerHTML);
 
@@ -85,13 +87,13 @@ app.post('/getImageData', async (req, res) => {
     const final = [];
     const $ = cheerio.load(data, { xmlMode: false });
     $('.CbirSection-Title').map((i, elm) => {
-        if($(elm).text()=="Image appears to contain"){
-         console.log('yes')
+        if ($(elm).text() == "Image appears to contain") {
+            console.log('yes')
             $(elm).next().find('a').map((i, elm) => {
                 final.push($(elm).text());
             });
         }
-     });
+    });
 
 
 
@@ -104,50 +106,50 @@ app.post('/getImageData', async (req, res) => {
 
 
 app.post('/redirect', async (req, res) => {
-   console.log(req.body.medlink);
-   console.log(req.body.medName);
-   console.log(req.body.medicineName);
-   const final=[]
-   final.push(req.body.medlink)
-   final.push(req.body.medName)
-   final.push(req.body.medicineName)
+    console.log(req.body.medlink);
+    console.log(req.body.medName);
+    console.log(req.body.medicineName);
+    const final = []
+    final.push(req.body.medlink)
+    final.push(req.body.medName)
+    final.push(req.body.medicineName)
 
-   const imageLogos={
-    
-    apollo:'https://image3.mouthshut.com/images/imagesp/925643839s.png',
-    netmeds:'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png',
-    pharmeasy:'https://hindubabynames.info/downloads/wp-content/themes/hbn_download/download/health-and-fitness-companies/pharmeasy-logo.png',
-    healthskool:'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png',
-    pasumai:'https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H',
-    flipkart:'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg',
-    pulseplus:'https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg',
-    tabletshablet:'https://www.tabletshablet.com/wp-content/uploads/2020/09/TBS_logo.jpg',
-    healthmug:'https://static.oxinis.com/healthmug/image/healthmug/healthmuglogo-192.png',
-    myupchar:'https://image.myupchar.com/8910/original/jobs-in-myupchar-delhi-healthcare-healthtech-techjobs-content-doctor-marketing.jpg',
+    const imageLogos = {
 
-   }
+        apollo: 'https://image3.mouthshut.com/images/imagesp/925643839s.png',
+        netmeds: 'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png',
+        pharmeasy: 'https://hindubabynames.info/downloads/wp-content/themes/hbn_download/download/health-and-fitness-companies/pharmeasy-logo.png',
+        healthskool: 'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png',
+        pasumai: 'https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H',
+        flipkart: 'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg',
+        pulseplus: 'https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg',
+        tabletshablet: 'https://www.tabletshablet.com/wp-content/uploads/2020/09/TBS_logo.jpg',
+        healthmug: 'https://static.oxinis.com/healthmug/image/healthmug/healthmuglogo-192.png',
+        myupchar: 'https://image.myupchar.com/8910/original/jobs-in-myupchar-delhi-healthcare-healthtech-techjobs-content-doctor-marketing.jpg',
 
-   if(req.body.medlink.includes('apollo')){
-    final.push(imageLogos['apollo']);
-   }else if(req.body.medlink.includes('netmeds')){
-    final.push(imageLogos['netmeds']);
-   }else if(req.body.medlink.includes('pharmeasy')){
-    final.push(imageLogos['pharmeasy']);
-   }else if(req.body.medlink.includes('healthskool')){
-    final.push(imageLogos['healthskool']);
-   }else if(req.body.medlink.includes('pasumai')){
-    final.push(imageLogos['pasumai']);
-   }else if(req.body.medlink.includes('flipkart')){
-    final.push(imageLogos['flipkart']);
-   }else if(req.body.medlink.includes('pulseplus')){
-    final.push(imageLogos['pulseplus']);
-   }else if(req.body.medlink.includes('tabletshablet')){
-    final.push(imageLogos['tabletshablet']);
-   }else if(req.body.medlink.includes('healthmug')){
-    final.push(imageLogos['healthmug']);
-   }else if(req.body.medlink.includes('myupchar')){
-    final.push(imageLogos['myupchar']);
-   }
+    }
+
+    if (req.body.medlink.includes('apollo')) {
+        final.push(imageLogos['apollo']);
+    } else if (req.body.medlink.includes('netmeds')) {
+        final.push(imageLogos['netmeds']);
+    } else if (req.body.medlink.includes('pharmeasy')) {
+        final.push(imageLogos['pharmeasy']);
+    } else if (req.body.medlink.includes('healthskool')) {
+        final.push(imageLogos['healthskool']);
+    } else if (req.body.medlink.includes('pasumai')) {
+        final.push(imageLogos['pasumai']);
+    } else if (req.body.medlink.includes('flipkart')) {
+        final.push(imageLogos['flipkart']);
+    } else if (req.body.medlink.includes('pulseplus')) {
+        final.push(imageLogos['pulseplus']);
+    } else if (req.body.medlink.includes('tabletshablet')) {
+        final.push(imageLogos['tabletshablet']);
+    } else if (req.body.medlink.includes('healthmug')) {
+        final.push(imageLogos['healthmug']);
+    } else if (req.body.medlink.includes('myupchar')) {
+        final.push(imageLogos['myupchar']);
+    }
     res.render(__dirname + '/mediToSite', { final: final });
 
 });
@@ -1717,9 +1719,37 @@ app.get('/compare', async (req, res) => {
     // Insert Login Code Here
     const nameOfMed = req.query['medname'] + '\n';
 
-    const peopleRef = db.collection('time').doc('medname')
-     const res2 = await peopleRef.set({ [new Date()] : nameOfMed })
-  
+    // const peopleRef = db.collection('time').doc('medname')
+    //  const res2 = await peopleRef.set({ time : 'medname' }
+
+
+    //   var ref=db.database().ref("records");
+    //   try {
+    //     ref.push(dataForFb);
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDr7qUPMDUWsSMu5e5vV38q9R6G44-hI5U",
+        authDomain: "medicompindia-c7f4e.firebaseapp.com",
+        databaseURL: "https://medicompindia-c7f4e-default-rtdb.firebaseio.com",
+        projectId: "medicompindia-c7f4e",
+        storageBucket: "medicompindia-c7f4e.appspot.com",
+        messagingSenderId: "966991764770",
+        appId: "1:966991764770:web:e50060de52372c9b07597b",
+        measurementId: "G-KSWBE6PN2J"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const date=new Date();
+
+    const db = getDatabase();
+       set(ref(db, "medDetails-"+`${date}/`),{time : date,medname:nameOfMed})
+     
+
     console.log(req.query['medname']);
     const presReq = ["No"];
 
