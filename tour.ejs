@@ -255,37 +255,6 @@ We provide unbiased information on various medicines ,offers and prescriptions a
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-  <script>
- import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
-
-
-var firebaseConfig = {
-  apiKey: "AIzaSyDr7qUPMDUWsSMu5e5vV38q9R6G44-hI5U",
-  authDomain: "medicompindia-c7f4e.firebaseapp.com",
-  databaseURL: "https://medicompindia-c7f4e-default-rtdb.firebaseio.com",
-  projectId: "medicompindia-c7f4e",
-  storageBucket: "medicompindia-c7f4e.appspot.com",
-  messagingSenderId: "966991764770",
-  appId: "1:966991764770:web:e50060de52372c9b07597b",
-  measurementId: "G-KSWBE6PN2J"
-};
-      var dataForFb={
-        time:"1/1/1",
-        medname:"helloWorld",
-      }
-
-      firebase.initializeApp(firebaseConfig);
-      
-      var ref=firebase.database().ref("records");
-      try {
-        ref.push(dataForFb);
-      } catch (error) {
-        console.log(error)
-      }
-
-
-  </script>
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
