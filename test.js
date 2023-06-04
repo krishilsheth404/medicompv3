@@ -6,7 +6,8 @@ const axios = require('axios');
 const path = require('path');
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer');
-const request = require('request');
+const {db}=require('./firebase.js');
+const request = require('request'); 
 
 const axiosParallel = require('axios-parallel');
 
@@ -1714,9 +1715,11 @@ extractDataOfEgmedi = async (data, url) => {
 
 app.get('/compare', async (req, res) => {
     // Insert Login Code Here
-
-
     const nameOfMed = req.query['medname'] + '\n';
+
+    const peopleRef = db.collection('time').doc('medname')
+     const res2 = await peopleRef.set({ [new Date()] : nameOfMed })
+  
     console.log(req.query['medname']);
     const presReq = ["No"];
 

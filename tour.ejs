@@ -27,6 +27,9 @@ We provide unbiased information on various medicines ,offers and prescriptions a
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
 
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     
@@ -119,7 +122,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 		    							<div class="one" style="height: auto;">
 				    						<h3 style="
                         overflow-wrap: anywhere;
-                    "><a href="#">  <%=final[i].item%></a></h3>
+                    "><a href="#" id="mediname">  <%=final[i].item%></a></h3>
 				    					
 			    						</div>
 			    						<div class="two">
@@ -158,7 +161,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 						<%}%>
 						<%}%>
           	</div>
-          	<div class="row mt-5">
+          	<!-- <div class="row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
@@ -172,7 +175,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 		              </ul>
 		            </div>
 		          </div>
-		        </div>
+		        </div> -->
           </div> <!-- .col-md-8 -->
         </div>
       </div>
@@ -252,6 +255,37 @@ We provide unbiased information on various medicines ,offers and prescriptions a
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+  <script>
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDr7qUPMDUWsSMu5e5vV38q9R6G44-hI5U",
+  authDomain: "medicompindia-c7f4e.firebaseapp.com",
+  databaseURL: "https://medicompindia-c7f4e-default-rtdb.firebaseio.com",
+  projectId: "medicompindia-c7f4e",
+  storageBucket: "medicompindia-c7f4e.appspot.com",
+  messagingSenderId: "966991764770",
+  appId: "1:966991764770:web:e50060de52372c9b07597b",
+  measurementId: "G-KSWBE6PN2J"
+};
+      var dataForFb={
+        time:"1/1/1",
+        med_Searched:"helloWorld",
+      }
+
+      firebase.initializeApp(firebaseConfig);
+      
+      var ref=firebase.database().ref("records");
+      try {
+        ref.push(dataForFb);
+      } catch (error) {
+        console.log(error)
+      }
+
+
+  </script>
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
