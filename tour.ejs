@@ -22,6 +22,10 @@ We provide unbiased information on various medicines ,offers and prescriptions a
     <meta name="revisit-after" content="1 days">
     <meta name="author" content="Krishil Rohit Sheth">
     <meta charset="utf-8">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6943409373544581"
+     crossorigin="anonymous"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -103,6 +107,45 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 
               <!-- <%=final.length%>
               <%=final[0]%> -->
+
+              <!-- <a target="_blank" href="https://www.amazon.in/b?_encoding=UTF8&tag=medicompindia-21&linkCode=ur2&linkId=c43b352fd9ecbf87daa0c72ac14fa698&camp=3638&creative=24630&node=26382244031">Best Deals on Supplements by Sirona</a> -->
+
+              <div class="col-md-4 ftco-animate">
+                <div class="destination">
+                  <% for(var i=0; i < final.length; i++) { %>
+                    <% if(final[i].item&&final[i].price) {itemCount++;%>
+								<% if(final[i].imgLink&&temp==0) {%>
+                  <a href="https://www.amazon.in/b?_encoding=UTF8&tag=medicompindia-21&linkCode=ur2&linkId=c43b352fd9ecbf87daa0c72ac14fa698&camp=3638&creative=24630&node=26382244031" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(<%=final[i].imgLink%>);">
+                   <%temp=1%>
+                    <%}%>
+                    <%}%>
+                  
+                    <%}%>
+                  
+                  <!-- <a target="_blank" href="https://www.amazon.in/b?_encoding=UTF8&tag=medicompindia-21&linkCode=ur2&linkId=c43b352fd9ecbf87daa0c72ac14fa698&camp=3638&creative=24630&node=26382244031">Buy Cheapest Medicines From Here</a> -->
+                      <div class="icon d-flex justify-content-center align-items-center">
+                    <span class="icon-search2"></span>
+                  </div>
+                    </a>
+                    <div class="text p-3">
+                      <div class="d-flex" style="height: auto;">
+                        <div class="one" style="height: auto;">
+                          <h3 style="
+                          overflow-wrap: anywhere;
+                      "><a href="#" id="mediname"> Buy Cheapest Medicines From Here</a></h3>
+                        
+                        </div>
+                        <div class="two">
+  
+                          <span class="price">Ad.</span>
+                        </div>
+                      </div>
+                  
+                    </div>
+                  </div>
+                </div>
+
+
 				<% for(var i=0; i < final.length; i++) { %>
 					<% if(final[i].item&&final[i].price) {itemCount++;%>
 						
@@ -126,6 +169,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 				    					
 			    						</div>
 			    						<div class="two">
+
 			    							<span class="price">₹  <%if(final[i].deliveryCharge!="login"){%>
 												<%=(parseFloat(final[i].price) + parseFloat(final[i].deliveryCharge)).toFixed(2)%>
 												<%}else{%>
