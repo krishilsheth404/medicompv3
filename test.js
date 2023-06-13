@@ -61,13 +61,12 @@ app.get('/limitedTimeOffers', async (req, res) => {
 
 
 app.post('/getImageData', async (req, res) => {
-
-    const start = performance.now();
+        const start = performance.now();
 
   console.log(req.body);
 
     const browser = await puppeteer.launch({
-        headless: true,
+        
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -101,6 +100,28 @@ app.post('/getImageData', async (req, res) => {
 
 });
 
+// app.post('/multiSearch', async (req, res) => {
+//     console.log('started')
+//     const start = performance.now();
+
+//     const LinkDataResponses = await axiosParallel(
+//         ['https://medicomp.in/compare?medname=Dolo-650+Tablet+10%27s',
+// 'https://medicomp.in/compare?medname=Volini+Pain+Relief+Spray%2C+40+gm',
+// 'https://medicomp.in/compare?medname=Moov+Pain+Relief+Cream%2C+15+gm',
+// 'https://medicomp.in/compare?medname=Dolo-650+Tablet+10%27s',
+// 'https://medicomp.in/compare?medname=endoreg%2014s',
+// ]);
+//     console.log(LinkDataResponses[0].data);
+
+//     for(var i=0;i<5;i++){
+//         const $ =cheerio.load(LinkDataResponses[i].data);
+//         console.log($('.bottom-area').html());
+//     }
+
+    
+//     const end = performance.now() - start;
+//     console.log(`Execution time: ${end}ms`);
+// });
 
 app.post('/redirect', async (req, res) => {
    console.log(req.body.medlink);
@@ -375,6 +396,8 @@ app.post('/bookdoc', async (req, res) => {
 
             // Using cheerio to extract <a> tags
             const $ = cheerio.load(data);
+
+            console.log($.html());
             const specialties_img = []//detailed description
             const specialties_link = []//detailed description
             const specialties_category = []//detailed description
