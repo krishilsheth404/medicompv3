@@ -1747,16 +1747,6 @@ app.get('/compare', async (req, res) => {
     // Insert Login Code Here
 
 
-    connection.connect(function(error){
-        if(error)
-        {
-            throw error;
-        }
-        else
-        {
-            console.log('MySQL Database is connected Successfully');
-        }
-    });
 
     const nameOfMed = req.query['medname'] + '\n';
     console.log(req.query['medname']);
@@ -2028,7 +2018,6 @@ app.get('/compare', async (req, res) => {
     })
 
 
-    connection.end();
 
 
     res.render(__dirname + '/tour', { final: final });
