@@ -2028,6 +2028,8 @@ app.get('/compare', async (req, res) => {
     })
 
 
+    connection.end();
+
 
     res.render(__dirname + '/tour', { final: final });
 
