@@ -7,6 +7,14 @@ const path = require('path');
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer');
 const request = require('request');
+const mysql=require('mysql');
+
+const connection = mysql.createConnection({
+    host :'sql12.freesqldatabase.com',
+    user:'sql12627038',
+    password:'nILwiGK3gB',
+    database:'sql12627038',
+})
 
 const axiosParallel = require('axios-parallel');
 
@@ -221,7 +229,7 @@ app.get('/medname', async (req, res) => {
             const { data } = await axios.get(url)
             const $ = cheerio.load(data);
             // console.log(data)
-            console.log(final);
+            // console.log(final);
             $('.Search_medicineLists__hM5Hk').map((i, elm) => {
                 final.push({
                     name: $(elm).find('.ProductCard_medicineName__8Ydfq').text(),
@@ -304,7 +312,7 @@ app.get('/med', async (req, res) => {
             const { data } = await axios.get(url)
             const $ = cheerio.load(data);
             // console.log(data)
-            console.log(final);
+            // console.log(final);
             $('.Search_medicineLists__hM5Hk').map((i, elm) => {
                 final.push({
                     name: $(elm).find('.ProductCard_medicineName__8Ydfq').text(),
@@ -1739,6 +1747,17 @@ app.get('/compare', async (req, res) => {
     // Insert Login Code Here
 
 
+    connection.connect(function(error){
+        if(error)
+        {
+            throw error;
+        }
+        else
+        {
+            console.log('MySQL Database is connected Successfully');
+        }
+    });
+
     const nameOfMed = req.query['medname'] + '\n';
     console.log(req.query['medname']);
     const presReq = ["No"];
@@ -1993,7 +2012,20 @@ app.get('/compare', async (req, res) => {
 
     console.log('Found Everything Sir!..')
 
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+    var dateOfSearch=new Date().getDay();
+    dateOfSearch=days[dateOfSearch];
+
+
+    const MedQuery="INSERT INTO MedicineSearchDetails (SearchTime,MedicineName) VALUES ?";
+    var values=[
+        [`${dateOfSearch}`,`${nameOfMed}`]
+    ]
+    connection.query(MedQuery,[values],function(err,results){
+      if(err) throw err;
+      console.log("Records Inserted for "+nameOfMed);
+    })
 
 
 
@@ -2003,7 +2035,7 @@ app.get('/compare', async (req, res) => {
 
 });
 
-const port = process.env.PORT || 5000 // Port we will listen on
+const port = process.env.PORT || 1000 // Port we will listen on
 
 // Function to listen on the port
 app.listen(port, () => console.log(`This app is listening on port ${port}`));
