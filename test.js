@@ -9,12 +9,12 @@ const puppeteer = require('puppeteer');
 const request = require('request');
 const mysql=require('mysql');
 
-const connection = mysql.createConnection({
-    host :'sql12.freesqldatabase.com',
-    user:'sql12627038',
-    password:'nILwiGK3gB',
-    database:'sql12627038',
-})
+// const connection = mysql.createConnection({
+//     host :'sql12.freesqldatabase.com',
+//     user:'sql12627038',
+//     password:'nILwiGK3gB',
+//     database:'sql12627038',
+// })
 
 const axiosParallel = require('axios-parallel');
 
@@ -2002,20 +2002,20 @@ app.get('/compare', async (req, res) => {
 
     console.log('Found Everything Sir!..')
 
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    // const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    var dateOfSearch=new Date().getDay();
-    dateOfSearch=days[dateOfSearch];
+    // var dateOfSearch=new Date().getDay();
+    // dateOfSearch=days[dateOfSearch];
 
 
-    const MedQuery="INSERT INTO MedicineSearchDetails (SearchTime,MedicineName) VALUES ?";
-    var values=[
-        [`${dateOfSearch}`,`${nameOfMed}`]
-    ]
-    connection.query(MedQuery,[values],function(err,results){
-      if(err) throw err;
-      console.log("Records Inserted for "+nameOfMed);
-    })
+    // const MedQuery="INSERT INTO MedicineSearchDetails (SearchTime,MedicineName) VALUES ?";
+    // var values=[
+    //     [`${dateOfSearch}`,`${nameOfMed}`]
+    // ]
+    // connection.query(MedQuery,[values],function(err,results){
+    //   if(err) throw err;
+    //   console.log("Records Inserted for "+nameOfMed);
+    // })
 
 
 
