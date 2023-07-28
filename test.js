@@ -466,6 +466,11 @@ app.post('/bookdoc', async (req, res) => {
     res.render(__dirname + '/orderDocOnline', { final: final });
 });
 
+app.get('/getOffers', async (req, res) => {
+    // console.log(req.body.chemName)
+    var final= await getOffersOfNetmeds();
+    res.send(final);
+});
 
 app.get('/getNearbyChemistData', async (req, res) => {
     // Insert Login Code Here
@@ -473,7 +478,7 @@ app.get('/getNearbyChemistData', async (req, res) => {
     const final = []
 
 
-    urlForPe = `https://www.bing.com/search?q=chemists in ${req.query['chemCity']}  ${req.query['chemPin']}`;
+    urlForPe = `https://www.bing.com/search?q=chemists in ${req.query['chemCity']}  ${req.query['chemPin']} pin`;
     extractdoe = async (url) => {
         try {
             // Fetching HTML
@@ -518,7 +523,7 @@ app.get('/getNearbyChemistData', async (req, res) => {
             for (var i = 0; i < chemist_name.length; i++) {
                 final.push({
                     chemist_name: chemist_name[i],
-                    chemist_direction: "https://bing.com" + chemist_direction[i],
+                    chemist_direction: `https://www.google.com/maps/dir//${chemist_name[i]} in ${req.query['chemCity']} ${req.query['chemPin']}` ,
                     chemist_status: chemist_status[i],
                     chemist_addr: chemist_addr[i],
                 })
@@ -1962,8 +1967,8 @@ app.get('/compare', async (req, res) => {
     extractLinkFromyahoo(urlFormedplusMart), extractLinkFromyahoo(urlForMyUpChar), extractLinkFromyahoo(urlForHealthmug),
     extractLinkFromyahoo(urlForPP), extractLinkFromyahoo(urlForApollo), extractLinkFromyahoo(urlForFH), extractLinkFromyahoo(urlForHealthsKool)])
 
-    const end = performance.now() - start;
-    console.log(`Execution time: ${end}ms`);
+        const end = performance.now() - start;
+        console.log(`Execution time: ${end}ms`);
 
     const LinkDataResponses = await axiosParallel(item);
 
