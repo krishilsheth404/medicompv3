@@ -478,7 +478,7 @@ app.get('/getNearbyChemistData', async (req, res) => {
     const final = []
 
 
-    urlForPe = `https://www.bing.com/search?q=10 chemists in ${req.query['chemCity']}  ${req.query['chemPin']} pin`;
+    urlForPe = `https://www.bing.com/search?q= chemists in ${req.query['chemCity']}  ${req.query['chemPin']} `;
     extractdoe = async (url) => {
         try {
             // Fetching HTML
@@ -543,7 +543,7 @@ app.post('/shops', async (req, res) => {
     const final = []
     console.log(req.body.foodArea)
     console.log(req.body.foodItem)
-    urlForPe = `https://www.bing.com/search?q=chemist shops%20in%20%20mumbai%20400007`;
+    urlForPe = `https://www.bing.com/search?q=10 chemist shops%20in%20%20mumbai%20400007`;
     extractdoe = async (url) => {
         try {
             // Fetching HTML
