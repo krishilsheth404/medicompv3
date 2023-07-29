@@ -7,7 +7,7 @@ const path = require('path');
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer');
 const request = require('request');
-const mysql=require('mysql');
+const mysql = require('mysql');
 
 // const connection = mysql.createConnection({
 //     host :'sql12.freesqldatabase.com',
@@ -69,12 +69,12 @@ app.get('/limitedTimeOffers', async (req, res) => {
 
 
 app.post('/getImageData', async (req, res) => {
-        const start = performance.now();
+    const start = performance.now();
 
-  console.log(req.body);
+    console.log(req.body);
 
     const browser = await puppeteer.launch({
-        
+
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -82,7 +82,7 @@ app.post('/getImageData', async (req, res) => {
 
     })
     const page = await browser.newPage();
-    
+
     await page.goto(`https://yandex.com/images/search?rpt=imageview&url=${req.body.blah}`);
     const data = await page.evaluate(() => document.querySelector('*').outerHTML);
 
@@ -91,13 +91,13 @@ app.post('/getImageData', async (req, res) => {
     const final = [];
     const $ = cheerio.load(data, { xmlMode: false });
     $('.CbirSection-Title').map((i, elm) => {
-        if($(elm).text()=="Image appears to contain"){
-         console.log('yes')
+        if ($(elm).text() == "Image appears to contain") {
+            console.log('yes')
             $(elm).next().find('a').map((i, elm) => {
                 final.push($(elm).text());
             });
         }
-     });
+    });
 
 
 
@@ -126,56 +126,56 @@ app.post('/getImageData', async (req, res) => {
 //         console.log($('.bottom-area').html());
 //     }
 
-    
+
 //     const end = performance.now() - start;
 //     console.log(`Execution time: ${end}ms`);
 // });
 
 app.post('/redirect', async (req, res) => {
-   console.log(req.body.medlink);
-   console.log(req.body.medName);
-   console.log(req.body.medicineName);
-   const final=[]
-   final.push(req.body.medlink)
-   final.push(req.body.medName)
-   final.push(req.body.medicineName)
+    console.log(req.body.medlink);
+    console.log(req.body.medName);
+    console.log(req.body.medicineName);
+    const final = []
+    final.push(req.body.medlink)
+    final.push(req.body.medName)
+    final.push(req.body.medicineName)
 
-   const imageLogos={
-    
-    apollo:'https://image3.mouthshut.com/images/imagesp/925643839s.png',
-    netmeds:'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png',
-    pharmeasy:'https://hindubabynames.info/downloads/wp-content/themes/hbn_download/download/health-and-fitness-companies/pharmeasy-logo.png',
-    healthskool:'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png',
-    pasumai:'https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H',
-    flipkart:'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg',
-    pulseplus:'https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg',
-    tabletshablet:'https://www.tabletshablet.com/wp-content/uploads/2020/09/TBS_logo.jpg',
-    healthmug:'https://static.oxinis.com/healthmug/image/healthmug/healthmuglogo-192.png',
-    myupchar:'https://image.myupchar.com/8910/original/jobs-in-myupchar-delhi-healthcare-healthtech-techjobs-content-doctor-marketing.jpg',
+    const imageLogos = {
 
-   }
+        apollo: 'https://image3.mouthshut.com/images/imagesp/925643839s.png',
+        netmeds: 'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png',
+        pharmeasy: 'https://hindubabynames.info/downloads/wp-content/themes/hbn_download/download/health-and-fitness-companies/pharmeasy-logo.png',
+        healthskool: 'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png',
+        pasumai: 'https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H',
+        flipkart: 'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg',
+        pulseplus: 'https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg',
+        tabletshablet: 'https://www.tabletshablet.com/wp-content/uploads/2020/09/TBS_logo.jpg',
+        healthmug: 'https://static.oxinis.com/healthmug/image/healthmug/healthmuglogo-192.png',
+        myupchar: 'https://image.myupchar.com/8910/original/jobs-in-myupchar-delhi-healthcare-healthtech-techjobs-content-doctor-marketing.jpg',
 
-   if(req.body.medlink.includes('apollo')){
-    final.push(imageLogos['apollo']);
-   }else if(req.body.medlink.includes('netmeds')){
-    final.push(imageLogos['netmeds']);
-   }else if(req.body.medlink.includes('pharmeasy')){
-    final.push(imageLogos['pharmeasy']);
-   }else if(req.body.medlink.includes('healthskool')){
-    final.push(imageLogos['healthskool']);
-   }else if(req.body.medlink.includes('pasumai')){
-    final.push(imageLogos['pasumai']);
-   }else if(req.body.medlink.includes('flipkart')){
-    final.push(imageLogos['flipkart']);
-   }else if(req.body.medlink.includes('pulseplus')){
-    final.push(imageLogos['pulseplus']);
-   }else if(req.body.medlink.includes('tabletshablet')){
-    final.push(imageLogos['tabletshablet']);
-   }else if(req.body.medlink.includes('healthmug')){
-    final.push(imageLogos['healthmug']);
-   }else if(req.body.medlink.includes('myupchar')){
-    final.push(imageLogos['myupchar']);
-   }
+    }
+
+    if (req.body.medlink.includes('apollo')) {
+        final.push(imageLogos['apollo']);
+    } else if (req.body.medlink.includes('netmeds')) {
+        final.push(imageLogos['netmeds']);
+    } else if (req.body.medlink.includes('pharmeasy')) {
+        final.push(imageLogos['pharmeasy']);
+    } else if (req.body.medlink.includes('healthskool')) {
+        final.push(imageLogos['healthskool']);
+    } else if (req.body.medlink.includes('pasumai')) {
+        final.push(imageLogos['pasumai']);
+    } else if (req.body.medlink.includes('flipkart')) {
+        final.push(imageLogos['flipkart']);
+    } else if (req.body.medlink.includes('pulseplus')) {
+        final.push(imageLogos['pulseplus']);
+    } else if (req.body.medlink.includes('tabletshablet')) {
+        final.push(imageLogos['tabletshablet']);
+    } else if (req.body.medlink.includes('healthmug')) {
+        final.push(imageLogos['healthmug']);
+    } else if (req.body.medlink.includes('myupchar')) {
+        final.push(imageLogos['myupchar']);
+    }
     res.render(__dirname + '/mediToSite', { final: final });
 
 });
@@ -468,7 +468,7 @@ app.post('/bookdoc', async (req, res) => {
 
 app.get('/getOffers', async (req, res) => {
     // console.log(req.body.chemName)
-    var final= await getOffersOfNetmeds();
+    var final = await getOffersOfNetmeds();
     res.send(final);
 });
 
@@ -478,7 +478,7 @@ app.get('/getNearbyChemistData', async (req, res) => {
     const final = []
 
 
-    urlForPe = `https://www.bing.com/search?q=chemists in ${req.query['chemCity']}  ${req.query['chemPin']} pin`;
+    urlForPe = `https://www.bing.com/search?q=10 chemists in ${req.query['chemCity']}  ${req.query['chemPin']} pin`;
     extractdoe = async (url) => {
         try {
             // Fetching HTML
@@ -523,7 +523,7 @@ app.get('/getNearbyChemistData', async (req, res) => {
             for (var i = 0; i < chemist_name.length; i++) {
                 final.push({
                     chemist_name: chemist_name[i],
-                    chemist_direction: `https://www.google.com/maps/dir//${chemist_name[i]} in ${req.query['chemCity']} ${req.query['chemPin']}` ,
+                    chemist_direction: `https://www.google.com/maps/dir//${chemist_name[i]} in ${req.query['chemCity']} ${req.query['chemPin']}`,
                     chemist_status: chemist_status[i],
                     chemist_addr: chemist_addr[i],
                 })
@@ -1967,10 +1967,13 @@ app.get('/compare', async (req, res) => {
     extractLinkFromyahoo(urlFormedplusMart), extractLinkFromyahoo(urlForMyUpChar), extractLinkFromyahoo(urlForHealthmug),
     extractLinkFromyahoo(urlForPP), extractLinkFromyahoo(urlForApollo), extractLinkFromyahoo(urlForFH), extractLinkFromyahoo(urlForHealthsKool)])
 
-        const end = performance.now() - start;
-        console.log(`Execution time: ${end}ms`);
+    const end = performance.now() - start;
+    console.log(`Execution time for yahoo: ${end}ms`);
 
+    const start1 = performance.now();
     const LinkDataResponses = await axiosParallel(item);
+    const end1 = performance.now() - start1;
+    console.log(`Execution time for pharmas: ${end1}ms`);
 
     const responses = await Promise.all([extractDataOfNetMeds(LinkDataResponses[0].data, item[0]), extractDataOfPharmEasy(LinkDataResponses[1].data, item[1], presReq),
     extractDataOfOBP(LinkDataResponses[2].data, item[2]),
@@ -1978,7 +1981,6 @@ app.get('/compare', async (req, res) => {
     extractDataOfHealthmug(LinkDataResponses[5].data, item[5]),
     extractDataOfPP(LinkDataResponses[6].data, item[6]), extractDataOfApollo(LinkDataResponses[7].data, item[7], final, presReq),
     extractDataOfFlipkart(LinkDataResponses[8].data, item[8]), extractDataOfHealthskoolpharmacy(LinkDataResponses[9].data, item[9])]);
-
     // const responses = await Promise.all(FinalDataFunc);
 
     for (var i = 0; i < 10; i++) {
