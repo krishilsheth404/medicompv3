@@ -404,24 +404,42 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                           <% for(var k=0;k < 9; k++) {%>
                             <div class="col-md-4 ftco-animate">
                               <div class="destination">
-                                <% if(final[0][0][k].name){%>
+                                <% for(var i=0; i < final.length; i++) {%>
+                                  <%if(imageLogos[final[i][0][k].name]){%>
+                                    <%imgurl=imageLogos[final[i][0][k].name]%>
+                                  <%}else{%>
+                                 <%
+                                    if (k==0) {
+                                      imgurl=imageLogos["Apollo"]
+                                  } else if (k==1) {
+                                    console.log("in netmeds")
+                                    imgurl=imageLogos["NetMeds"]
+                                  } else if (k==2) {
+                                   imgurl=imageLogos["PharmEasy"]
+                                  } else if (k==3) {
+                                    imgurl=imageLogos["Pasumai Pharmacy"]
+                                  } else if (k==4) {
+                                     imgurl=imageLogos["PulsePlus"]
+                                  } else if (k==5) {
+                                  imgurl=imageLogos["Tablet Shablet"]
+                                  } else if (k==6) {
+                                     imgurl=imageLogos["healthmug"]
+                                  } else if (k==7) {
+                                     imgurl=imageLogos["myupchar"]
+                                  } else if (k==8) {
+                                     imgurl=imageLogos["MedPlusMart"]
+                                  }
+                                  %>
+                                    <%}%>
+                                  <%if(final[i][0][k].item){%>
+                                    <%numberOfMeds=numberOfMeds+1%>
+                                    <%}%>
+                                  <%}%>
+
                                   <a href="#" id="imagesection"
                                     class="img img-2 d-flex justify-content-center align-items-center"
-                                    style="background-size: contain;background-image: url(<%=imageLogos[final[0][0][k].name]%>);">
-                                    <%}else if(final[1][0][k].name){%>
-                                      <a href="#" id="imagesection"
-                                        class="img img-2 d-flex justify-content-center align-items-center"
-                                        style="background-size: contain;background-image: url(<%=imageLogos[final[1][0][k].name]%>);">
-                                        <% }else if(final[2][0][k].name){%>
-                                          <a href="#" id="imagesection"
-                                            class="img img-2 d-flex justify-content-center align-items-center"
-                                            style="background-size: contain;background-image: url(<%=imageLogos[final[2][0][k].name]%>);">
-                                            <%}else if(final[3][0][k].name){%>
-                                              <a href="#" id="imagesection"
-                                                class="img img-2 d-flex justify-content-center align-items-center"
-                                                style="background-size: contain;background-image: url(<%=imageLogos[final[3][0][k].name]%>);">
-                                                <%}else{%>
-                                                  <%}%>
+                                    style="background-size: contain;background-image: url(<%=imgurl%>);">
+                                 
 
                                                     <div class="icon d-flex justify-content-center align-items-center">
                                                       <span class="icon-search2"></span>
