@@ -967,20 +967,11 @@ extractDataOfPharmEasy = async ( url) => {
 
         var a = JSON.parse($('script[type=application/json]').text());
 
-        console.log($('.DescriptionTable_seoTable__wKp77').find('tr').next('tr').next('tr').find('.DescriptionTable_value__0GUMC').first().text())
 
         var dc = '';
 
 
-        if (a['props']['pageProps']['productDetails']['salePrice'] < 250) {
-            dc = 149;
-        } else if (a['props']['pageProps']['productDetails']['salePrice'] >= 250 && a['props']['pageProps']['productDetails']['salePrice'] < 500) {
-            dc = 99;
-        } else if (a['props']['pageProps']['productDetails']['salePrice'] >= 500 && a['props']['pageProps']['productDetails']['salePrice'] < 699) {
-            dc = 25;
-        } else if (a['props']['pageProps']['productDetails']['salePrice'] >= 699) {
-            dc = 0;
-        }
+     
 
         try {
             var imgurl = a['props']['pageProps']['productDetails']['damImages'][0]['url'];
@@ -992,10 +983,10 @@ extractDataOfPharmEasy = async ( url) => {
             item: a['props']['pageProps']['productDetails']['name'].substring(0,30),
             link: url,
             imgLink: imgurl,
-            price: a['props']['pageProps']['productDetails']['salePrice'],
+            price: a['props']['pageProps']['productDetails']['costPrice'],
             offer: '',
             deliveryCharge: dc,
-            finalCharge: parseFloat(a['props']['pageProps']['productDetails']['salePrice']) + parseFloat(dc),
+            finalCharge: parseFloat(a['props']['pageProps']['productDetails']['costPrice']),
         };
 
 
@@ -2139,6 +2130,8 @@ app.post('/multiSearch',async(req,res)=>{
     }
     // console.log(finalMultiPriceData)
     const pharmaFinaldata = await axiosParallel(finalMultiPriceData);
+    console.log(pharmaFinaldata[0].data);
+
     
     
     //     responses[i]['data']=[].concat(responses[i]['data'][0],responses[i]['data'][1],responses[i]['data'][2]);
@@ -2152,14 +2145,13 @@ app.post('/multiSearch',async(req,res)=>{
     
     
     const end1 = performance.now() - start1;
-    console.log(`Execution time for final price scraping: ${end1}ms`);
     // const responses = await Promise.all(FinalDataFunc);
-
+    
     const final=[];
     for (var i = 0; i < pharmaFinaldata.length; i++) {
         final.push(pharmaFinaldata[i]['data']);
     }
-    console.log(final)
+    console.log(`Execution time for final price scraping: ${end1}ms`);
     res.render(__dirname + '/temptour', { final: final });
     
     

@@ -61,30 +61,29 @@ We provide unbiased information on various medicines ,offers and prescriptions a
         getDeliveryChargeForApollo=function(totalMedPrice)
         { 
           var dc=0; 
-          if(parseFloat(totalMedPrice)< 300) { 
+          if(parseInt(totalMedPrice)< 300) { 
             dc=99; 
           } 
-          else if (parseFloat(totalMedPrice)>= 300 && parseFloat(totalMedPrice) < 500) { 
+          else if (parseInt(totalMedPrice)>= 300 && parseInt(totalMedPrice) < 500) { 
             dc=69; 
-          } else if(parseFloat(totalMedPrice)>= 500 && parseFloat(totalMedPrice) < 800) {
+          } else if(parseInt(totalMedPrice)>= 499 && parseInt(totalMedPrice) < 800) {
              dc=25; 
-            }else if(parseFloat(totalMedPrice)>= 800) {
+            }else if(parseInt(totalMedPrice)>= 800) {
             dc = 0;
             }
-            console.log(dc);
-
+          
             return dc;
             }
 
         function getDeliveryChargeForPharmeasy(totalMedPrice){
           var dc=0; 
-          if (parseFloat(totalMedPrice) < 250) {
+          if (parseInt(totalMedPrice) < 250) {
                   dc = 149;
-              } else if (parseFloat(totalMedPrice) >= 250 && parseFloat(totalMedPrice) < 500) {
+              } else if (parseInt(totalMedPrice) >= 250 && parseInt(totalMedPrice) < 500) {
                   dc = 99;
-              } else if (parseFloat(totalMedPrice) >= 500 && parseFloat(totalMedPrice) < 699) {
+              } else if (parseInt(totalMedPrice) >= 500 && parseInt(totalMedPrice) < 699) {
                   dc = 25;
-              } else if (parseFloat(totalMedPrice) >= 699) {
+              } else if (parseInt(totalMedPrice) >= 699) {
                   dc = 0;
               }
               return dc;
@@ -92,11 +91,11 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 
       function getDeliveryChargeForNetmeds(totalMedPrice){
         var dc=0;
-          if (parseFloat(totalMedPrice) < 250) {
+          if (parseInt(totalMedPrice) < 250) {
               dc = 99;
-          } else if (parseFloat(totalMedPrice) >= 250 && parseFloat(totalMedPrice)< 1000) {
+          } else if (parseInt(totalMedPrice) >= 250 && parseInt(totalMedPrice)< 1000) {
               dc = 29;
-          } else if (parseFloat(totalMedPrice) > 1000) {
+          } else if (parseInt(totalMedPrice) > 1000) {
               dc = 0;
           }
           return dc;
@@ -105,9 +104,9 @@ We provide unbiased information on various medicines ,offers and prescriptions a
       function getDeliveryChargeForHealthskool(totalMedPrice){
         var dc=0;
         
-        if (parseFloat(totalMedPrice) <= 999) {
+        if (parseInt(totalMedPrice) <= 999) {
             dc = 40;
-        } else if (parseFloat(totalMedPrice) > 999) {
+        } else if (parseInt(totalMedPrice) > 999) {
             dc = 0;
         }
         return dc;
@@ -117,9 +116,9 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 
     function getDeliveryChargeForPulsePlus(totalMedPrice){
       var dc=0;
-      if (parseFloat(totalMedPrice) < 999) {
+      if (parseInt(totalMedPrice) < 999) {
           dc = 50;
-      } else if (parseFloat(totalMedPrice) >= 1000) {
+      } else if (parseInt(totalMedPrice) >= 1000) {
           dc = 15;
       }
   
@@ -138,9 +137,9 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 
   function getDeliveryChargeFormyupchar(totalMedPrice){
     var dc=0;
-    if (parseFloat(totalMedPrice) < 499) {
+    if (parseInt(totalMedPrice) < 499) {
         dc = 49;
-    } else if (parseFloat(totalMedPrice) > 500) {
+    } else if (parseInt(totalMedPrice) > 500) {
         dc = 0;
     }
 
@@ -149,11 +148,11 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 function getDeliveryChargeForTabletShablet(totalMedPrice){
   var dc=0;
 
-  if (parseFloat(totalMedPrice) < 500) {
+  if (parseInt(totalMedPrice) < 500) {
       dc = 68.88;
-  } else if (parseFloat(totalMedPrice) >= 500 && parseFloat(totalMedPrice) < 1000) {
+  } else if (parseInt(totalMedPrice) >= 500 && parseInt(totalMedPrice) < 1000) {
       dc = 50.40;
-  } else if (parseFloat(totalMedPrice) >= 1000) {
+  } else if (parseInt(totalMedPrice) >= 1000) {
       console.log('hie')
       dc = 0;
   }
