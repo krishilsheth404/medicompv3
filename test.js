@@ -2107,42 +2107,39 @@ app.post('/multiSearch',async(req,res)=>{
 
     const linkdata=[];
     const start1 = performance.now();
-
+    var nameOfMed=req.body.multiItems.split(',');
+    if(nameOfMed.length==1){
+        linkdata.push(`http://medicomp.in/fastComp?medname=${nameOfMed[0]}`)
+    }else if(req.body.multiItems.length>1&&req.body.multiItems.length<6){
     for(mednames in req.body.multiItems){
-        // console.log(req.body.multiItems[mednames]);
-        linkdata.push(`http://localhost:2000/fastComp?medname=${req.body.multiItems[mednames]}`)
-        // const { data } = await axios.get(`http://localhost:2000/fastComp?medname=${req.body.multiItems[mednames]}`)
-        // // console.log(data)
-
-        // // Using cheerio to extract <a> tags
-        // const $ = cheerio.load(data);
-        // console.log($.html());
+        linkdata.push(`http://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
+      }
     }
     const responses = await axiosParallel(linkdata);
-
+    
     
     
     console.log(responses.length);
-
-
-
-   
+    
+    
+    
+    
     const finalMultiPriceData=[];
     for(var i=0;i<responses.length;i++){
-        finalMultiPriceData.push(`http://localhost:2000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`)
+        finalMultiPriceData.push(`http://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`)
     }
     // console.log(finalMultiPriceData)
     const pharmaFinaldata = await axiosParallel(finalMultiPriceData);
-
-
+    
+    
     //     responses[i]['data']=[].concat(responses[i]['data'][0],responses[i]['data'][1],responses[i]['data'][2]);
     //     console.log(responses[i]['data'])
-        
+    
     //     finalMultiPriceData.push( await Promise.all([extractDataOfApollo(responses[i]['data'][0]), extractDataOfNetMeds( responses[i]['data'][1]),extractDataOfPharmEasy( responses[i]['data'][2]),
     //     extractDataOfHealthskoolpharmacy( responses[i]['data'][3]), extractDataOfOBP( responses[i]['data'][4]),extractDataOfmedplusMart( responses[i]['data'][5]),
     //     extractDataOfMyUpChar( responses[i]['data'][6]), extractDataOfHealthmug( responses[i]['data'][7], final, presReq), extractDataOfPP( responses[i]['data'][8])]))
-
-
+    
+    
     
     
     const end1 = performance.now() - start1;
@@ -2155,8 +2152,9 @@ app.post('/multiSearch',async(req,res)=>{
     }
     console.log(final)
     res.render(__dirname + '/temptour', { final: final });
-
-
+    
+    
+        
 });
 
 
