@@ -77,6 +77,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 
         function getDeliveryChargeForPharmeasy(totalMedPrice){
           var dc=0; 
+          console.log("pharmeay->"+parseInt(totalMedPrice))
           if (parseInt(totalMedPrice) < 250) {
                   dc = 149;
               } else if (parseInt(totalMedPrice) >= 250 && parseInt(totalMedPrice) < 500) {
@@ -246,34 +247,7 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                        <%}%>
 
                                        
-                                       <%
-                                       if (k==0) {
-                                         deliveryCharge=getDeliveryChargeForApollo(count);
-                                     } else if (k==1) {
-                                       deliveryCharge=getDeliveryChargeForNetmeds(count)
-                                     } else if (k==2) {
-                                       deliveryCharge=getDeliveryChargeForPharmeasy(count)
-                                     } else if (k==3) {
-                                       deliveryCharge=getDeliveryChargeForHealthskool(count)
-                                     } else if (k==4) {
-                                       deliveryCharge=getDeliveryChargeForTabletShablet(count)
-                                     } else if (k==5) {
-                                       deliveryCharge=getDeliveryChargeForPulsePlus(count)
-                                     } else if (k==6) {
-                                       deliveryCharge=getDeliveryChargeFormyupchar(count)
-                                     } else if (k==7) {
-                                       deliveryCharge=getDeliveryChargeForPasumai(count)
-                                     } else if (k==8) {
-                                       deliveryCharge=getDeliveryChargeForMedPlusMart(count)
-                                     }
-                                     %>
-                                  
-
-
-
-
-                              
-
+                                    
                                                 <div class="card" style="width: 95%;
                                                 display: block;
                                                 margin: auto;margin-bottom: 20px;">
@@ -352,11 +326,32 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                                             <%if(i==final.length-1){%>
 
 
+                                                              <%
+                                                              if (k==0) {
+                                                                deliveryCharge=getDeliveryChargeForApollo(count);
+                                                            } else if (k==1) {
+                                                              deliveryCharge=getDeliveryChargeForNetmeds(count)
+                                                            } else if (k==2) {
+                                                             console.log("in pharmeasy")
+                                                              deliveryCharge=getDeliveryChargeForPharmeasy(count)
+                                                            } else if (k==3) {
+                                                              deliveryCharge=getDeliveryChargeForHealthskool(count)
+                                                            } else if (k==4) {
+                                                              deliveryCharge=getDeliveryChargeForTabletShablet(count)
+                                                            } else if (k==5) {
+                                                              deliveryCharge=getDeliveryChargeForPulsePlus(count)
+                                                            } else if (k==6) {
+                                                              deliveryCharge=getDeliveryChargeFormyupchar(count)
+                                                            } else if (k==7) {
+                                                              deliveryCharge=getDeliveryChargeForPasumai(count)
+                                                            } else if (k==8) {
+                                                              deliveryCharge=getDeliveryChargeForMedPlusMart(count)
+                                                            }
+                                                            %>
 
                                                               <span style="float: right;">Medicine Total > <%=count.toFixed(2)%>
                                                               </span> <br>
-                                                              <spa style="float: right;">Delivery Price  > <%=
-                                                                  deliveryCharge %>
+                                                              <spa style="float: right;">Delivery Price  > <%=deliveryCharge %>
                                                               </spa> <br>
 
                                                               <%}%>
@@ -476,12 +471,37 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
 
                                                         <%count=count+parseFloat(final[i][0][k].price)%>
 
+
+
                                                           <%}else{%>
                                                             <%count=count+0%>
                                                               <%}%>
                                                                 <%}%>
+   <%
+                                                              if (k==0) {
+                                                                deliveryCharge=getDeliveryChargeForApollo(count);
+                                                            } else if (k==1) {
+                                                              deliveryCharge=getDeliveryChargeForNetmeds(count)
+                                                            } else if (k==2) {
+                                                             console.log("in pharmeasy")
+                                                              deliveryCharge=getDeliveryChargeForPharmeasy(count)
+                                                            } else if (k==3) {
+                                                              deliveryCharge=getDeliveryChargeForHealthskool(count)
+                                                            } else if (k==4) {
+                                                              deliveryCharge=getDeliveryChargeForTabletShablet(count)
+                                                            } else if (k==5) {
+                                                              deliveryCharge=getDeliveryChargeForPulsePlus(count)
+                                                            } else if (k==6) {
+                                                              deliveryCharge=getDeliveryChargeFormyupchar(count)
+                                                            } else if (k==7) {
+                                                              deliveryCharge=getDeliveryChargeForPasumai(count)
+                                                            } else if (k==8) {
+                                                              deliveryCharge=getDeliveryChargeForMedPlusMart(count)
+                                                            }
+                                                            %>
 
-                                                                  <%deliveryCharge=getDeliveryChargeForApollo(count)%>
+                                                            
+                                                                  
                                                                     <span style="float: right;">Medicine Total > ₹<%=count.toFixed(2)%>
                                                                     </span> <br>
                                                                     <span style="float: right;">Delivery Price > ₹<%= deliveryCharge %></span>
