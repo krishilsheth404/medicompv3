@@ -16,8 +16,8 @@
 	<meta name="author" content="Medicomp India">
 
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6943409373544581"
-	crossorigin="anonymous"></script>
-	
+		crossorigin="anonymous"></script>
+
 	<link rel="icon" type="image/png" href="medicomp_favicon.png">
 
 
@@ -110,7 +110,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	}
 </style>
 
-<body style="background-color: #eff4ff;" onload="loader()">
+<body style="background-color: #eff4ff;">
 
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
@@ -176,6 +176,8 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 								<!-- <input type="submit" class="search-submit btn btn-primary" value="Search"> -->
 						</form>
 					</div>
+
+
 					<style>
 						#uploadBtn {
 							background-color: #00000000;
@@ -215,6 +217,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 						<!-- <img id="blah" src="http://placehold.it/180" alt="your image"> -->
 					</form>
+
 					<script>
 						function importData() {
 							let input = document.createElement('input');
@@ -271,7 +274,27 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						}
 					</script>
 				</div>
-				<p id="text_change"></p>
+				
+				<form id="mainMedListBox"  action="/multiSearch" method="POST" style="display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;">
+
+						
+				</form>	
+						<div id="MultiSearchButton" style="display: none;">
+							<a onclick="document.getElementById('mainMedListBox').submit()" style="width: 100%;
+							height: 40px;
+							cursor: pointer;
+							background-color: white;
+							color: black;
+							/* display: block; */
+							display: flex;
+							align-items: center;
+							justify-content: center;transition: all 1s;">Multi-Search</a>	
+					</div>
+			
+				<p id="text_change" style="color: black;"></p>
 				<p class="browse d-md-flex" style="display: flex;
 					align-items: center;
 					justify-content: start;
@@ -340,69 +363,119 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			grid-row: 1 / -1;
 			aspect-ratio: 1;
 		}
+		#medlists{
+			width:33%;
+			margin: 0px;
+		}
+		@media screen and (max-width:500px) {
+			#medlists{
+				width:100%;
+				margin: 0px;
+			}
+			
+		}
 	</style>
+	<script>
+		function addMedToSearchList(idNameForMultiSearch){
+
+			console.warn(document.getElementById(`idcontainer`).offsetHeight);
+			console.warn(document.getElementById(`mainMedListBox`).offsetHeight);
+			document.getElementById(`idcontainer`).style.height=parseInt(document.getElementById(`idcontainer`).style.height)+parseInt(document.getElementById('mainMedListBox').offsetHeight);
+
+			var medicine=document.getElementById(`mediname${idNameForMultiSearch}`).innerHTML;
+			
+			document.getElementById(`manblck${idNameForMultiSearch}`).remove();
+			document.getElementById('MultiSearchButton').style.display='block';
+              document.getElementById('mainMedListBox').innerHTML+=`
+			     <span style="background: white;
+    color: black;
+    height: auto;
+	padding-top:10px;
+	padding-bottom:10px;
+	font-weight:bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;margin:10px">
+					<span><b>+</b>${medicine}</span>
+			  		<input id='medlists' type="text" value="${medicine}" id="multiItems" name="multiItems" style="visibility:hidden;height:0px;width:0px;overflow:hidden">
+					</span>
+					`;
+		}
+	</script>
 	<script>
 
 
-		window.onload = async function () {
-			await axios({
-				method: "GET",
-				url: `/limitedTimeOffers`,
-			})
-				.then((res) => {
-					console.log(res.data[0].imgsrc)
-					for (var i = 0; i < 0; i++) {
+		window.addEventListener("DOMContentLoaded", function () {
+			console.log('loading over');
+			document.body.style.display='block';
 
-						document.getElementById('limitedOffers').innerHTML += `
-				<div class="col-sm col-md-6 col-lg ftco-animate ">
-						<div class="destination">
-							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-								style='background-image: url(${res.data[i].imgsrc});background-size:contain;'>
-								<div class="icon d-flex justify-content-center align-items-center">
-									<span class="icon-search2"></span>
-								</div>
-								</a>
-							<div class="text p-3">
-								<div class="d-flex">
-									<div class="one">
-										<h3><a href="#">Hotel, Italy</a></h3>
-										<p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-											</p>
-											</div>
-											<div class="two">
-												<span class="price per-price">$40<br><small>/night</small></span>
-												</div>
-												</div>
-												<p>Far far away, behind the word mountains, far from the countries</p>
-												<hr>
-												<p class="bottom-area d-flex">
-													<span><i class="icon-map-o"></i> Miami, Fl</span>
-													<span class="ml-auto"><a href="#">Book Now</a></span>
-													</p>
-													</div>
-													</div>
-													</div>
-													`;
-					}
-				});
+			document.getElementById('ftco-loader').style.visibility = 'none';
+			document.getElementById('ftco-loader').style.opacity = 0;
+
+			document.getElementById('ftco-loader-loading').style.display = 'none';
+		});
+
+		loader();
+		// window.onload = async function () {
+		// 	await axios({
+		// 		method: "GET",
+		// 		url: `/limitedTimeOffers`,
+		// 	})
+		// 		.then((res) => {
+		// 			console.log(res.data[0].imgsrc)
+		// 			for (var i = 0; i < 0; i++) {
+
+		// 				document.getElementById('limitedOffers').innerHTML += `
+		// 		<div class="col-sm col-md-6 col-lg ftco-animate ">
+		// 				<div class="destination">
+		// 					<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+		// 						style='background-image: url(${res.data[i].imgsrc});background-size:contain;'>
+		// 						<div class="icon d-flex justify-content-center align-items-center">
+		// 							<span class="icon-search2"></span>
+		// 						</div>
+		// 						</a>
+		// 					<div class="text p-3">
+		// 						<div class="d-flex">
+		// 							<div class="one">
+		// 								<h3><a href="#">Hotel, Italy</a></h3>
+		// 								<p class="rate">
+		// 									<i class="icon-star"></i>
+		// 									<i class="icon-star"></i>
+		// 									<i class="icon-star"></i>
+		// 									<i class="icon-star"></i>
+		// 									<i class="icon-star-o"></i>
+		// 									<span>8 Rating</span>
+		// 									</p>
+		// 									</div>
+		// 									<div class="two">
+		// 										<span class="price per-price">$40<br><small>/night</small></span>
+		// 										</div>
+		// 										</div>
+		// 										<p>Far far away, behind the word mountains, far from the countries</p>
+		// 										<hr>
+		// 										<p class="bottom-area d-flex">
+		// 											<span><i class="icon-map-o"></i> Miami, Fl</span>
+		// 											<span class="ml-auto"><a href="#">Book Now</a></span>
+		// 											</p>
+		// 											</div>
+		// 											</div>
+		// 											</div>
+		// 											`;
+		// 			}
+		// 		});
 
 
-		}
+		// }
 		const medsearchlist = new Set();
 		console.log(document.getElementById('q').value);
 
 		function loader() {
 			console.warn('loading...')
+			document.body.style.display='none';
 			document.getElementById('ftco-loader').style.visibility = 'visible';
 			document.getElementById('ftco-loader').style.opacity = 1;
 
-			document.getElementById('ftco-loader-loading').style.display='block';
+			document.getElementById('ftco-loader-loading').style.display = 'block';
 
 		}
 		function addEle(finalmednames) {
@@ -443,10 +516,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						console.log(document.getElementById('idcontainer').style.height)
 
 						if (window.innerWidth > 500) {
-							document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300}px`;
+							document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300 + document.getElementById(`mainMedListBox`).offsetHeight+100}px `;
 							// document.getElementById('fullheight').style.height = `${(res.data.length * 80) + 300}px`;
 						} else {
-							document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250}px`;
+							document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250 + document.getElementById(`mainMedListBox`).offsetHeight+100}px`;
 							// document.getElementById('fullheight').style.height = `${(res.data.length * 100) + 250}px`;
 						}
 						// document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
@@ -462,21 +535,26 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 								console.log(res.data[i]['name']);
 
 								document.getElementById('medlist').innerHTML += `
-							<div style="position:relative" onclick="loader()">
+								<div style="position:relative" id="manblck${i+1}">
+							<div style="position:relative" onMouseOver="this.style.cursor='pointer'" onclick="loader()">
 							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
 								<a onclick="this.parentNode.submit()">
 									<div   class="textfield-search one-third" style="background:white;color:black;padding:10px" >
 										<p style="width: 90%;
     color: black;
     height: auto;
-    display: inline-block;margin:2px">
+    display: inline-block;margin:2px" id="mediname${i+1}">
 											${res.data[i]['name']}
 											</p>
 									<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['name']}">
 									</div>
 									</a>
-									</form>
-									<span id="addbtn_${i + 1}" style='position: absolute;
+							</form>
+									</div>
+									<span id="addbtn_${i + 1}" onclick="addMedToSearchList('${i+1}')"  
+									onMouseOver="this.style.background='black';this.style.color='white';this.style.cursor='pointer'"
+									onMouseOut="this.style.background='transparent';this.style.color='black'"
+									style='position: absolute;height:100%;
     right: 0px;
     top: 50%;
     color: black;
@@ -484,7 +562,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
     transform: translate(0%, -50%);
     padding-right: 10px;
     padding-left: 20px;'>+</span>
-									</div>
+											</div>
 									<br>`;
 							}
 
@@ -1047,7 +1125,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<div class="block-18 text-center">
 								<div class="text">
 									<strong class="number" data-number="10">0<span>+ </span></strong><strong
-									style="color: white;">+</strong>
+										style="color: white;">+</strong>
 									<span>Pharmacies Listed</span>
 								</div>
 							</div>
@@ -1056,7 +1134,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							<div class="block-18 text-center">
 								<div class="text">
 									<strong class="number" data-number="87000">0<span>+ </span></strong><strong
-									style="color: white;">+</strong>
+										style="color: white;">+</strong>
 									<span>Medicines Data To Compare</span>
 								</div>
 							</div>
@@ -1523,7 +1601,9 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen" style="visibility: hidden;">
 
-		<img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading" style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: none;" alt="">
+		<img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
+			style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: none;"
+			alt="">
 
 		<img id="loading_img"
 			src="https://cdn.dribbble.com/users/73104/screenshots/2832940/media/73878d06f44b5d35324687fc41c62689.gif"

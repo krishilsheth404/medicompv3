@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Medicomp India | Multiple Results</title>
+
+    <meta name="title" content="Medicomp India Results">
+    <meta name="description"
+        content="India's 1st platform to compare medicine prices.We provide unbiased information on various medicines available in the Indian market.
+        Medicomp india is a company that provides price comparison for medicines and medical equipment. We are India’s first and largest price comparison service for medical products. Our team is driven by the vision of making healthcare affordable for the masses. We have helped thousands of patients save big on their medical treatment.
+We provide unbiased information on various medicines ,offers and prescriptions available in the Indian market. This information is provided through a price comparison engine that helps patients to make an informed purchase decision. ">
+    <meta name="keywords"
+        content="medicine price compare,apollo pharmacy,netmeds.pulse plus,tata 1mg,pharmeasy,
+        medicine prices, online comparison, prescription drugs, generic drugs, brand name drugs, affordable medications, pharmacy prices, drug costs, healthcare, pharmaceuticals,
+        medicine, price comparison, online, healthcare, prescription drugs, generic drugs, brand-name drugs, drug prices, discounts, savings, pharmacies, healthcare costs, health insurance, 
+        drug information, drug reviews, medication costs, drug savings, drug coupons, online pharmacies, drug price comparison, drugstore, pharmaceuticals,
+        medicomp india,price compare online,medication prices, pharmacy prices, online pharmacy, drug prices, prescription prices, generic medication prices, 
+        brand medication prices, drugstore prices, health prices, compare medication prices, cheapest medication prices, best medication prices, medication price comparison, drug price comparison, pharmacy price comparison.
+        3meds,compare medicine prices online,krishil sheth,india's 1st pltform to compare medicine prices,live prices of medicines,medicomp,Medicomp India,India, ">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="1 days">
+    <meta name="author" content="Krishil Rohit Sheth">
+    <meta charset="utf-8">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6943409373544581"
+     crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+
+<body id="bdy">
+
+  <% 
+        getDeliveryChargeForApollo=function(totalMedPrice)
+        { 
+          var dc=0; 
+          if(parseFloat(totalMedPrice)< 300) { 
+            dc=99; 
+          } 
+          else if (parseFloat(totalMedPrice)>= 300 && parseFloat(totalMedPrice) < 500) { 
+            dc=69; 
+          } else if(parseFloat(totalMedPrice)>= 500 && parseFloat(totalMedPrice) < 800) {
+             dc=25; 
+            }else if(parseFloat(totalMedPrice)>= 800) {
+            dc = 0;
+            }
+            console.log(dc);
+
+            return dc;
+            }
+
+        function getDeliveryChargeForPharmeasy(totalMedPrice){
+          var dc=0; 
+          if (parseFloat(totalMedPrice) < 250) {
+                  dc = 149;
+              } else if (parseFloat(totalMedPrice) >= 250 && parseFloat(totalMedPrice) < 500) {
+                  dc = 99;
+              } else if (parseFloat(totalMedPrice) >= 500 && parseFloat(totalMedPrice) < 699) {
+                  dc = 25;
+              } else if (parseFloat(totalMedPrice) >= 699) {
+                  dc = 0;
+              }
+              return dc;
+      }
+
+      function getDeliveryChargeForNetmeds(totalMedPrice){
+        var dc=0;
+          if (parseFloat(totalMedPrice) < 250) {
+              dc = 99;
+          } else if (parseFloat(totalMedPrice) >= 250 && parseFloat(totalMedPrice)< 1000) {
+              dc = 29;
+          } else if (parseFloat(totalMedPrice) > 1000) {
+              dc = 0;
+          }
+          return dc;
+      }
+
+      function getDeliveryChargeForHealthskool(totalMedPrice){
+        var dc=0;
+        
+        if (parseFloat(totalMedPrice) <= 999) {
+            dc = 40;
+        } else if (parseFloat(totalMedPrice) > 999) {
+            dc = 0;
+        }
+        return dc;
+    }
+
+   
+
+    function getDeliveryChargeForPulsePlus(totalMedPrice){
+      var dc=0;
+      if (parseFloat(totalMedPrice) < 999) {
+          dc = 50;
+      } else if (parseFloat(totalMedPrice) >= 1000) {
+          dc = 15;
+      }
+  
+      return dc;
+  }  
+
+  function getDeliveryChargeForPasumai(totalMedPrice){
+    var dc=0;
+    if (totalMedPrice < 1000) {
+      dc = 50;
+  } else if (totalMedPrice >= 1000) {
+      dc = 0;
+  }
+    return dc;
+}  
+
+  function getDeliveryChargeFormyupchar(totalMedPrice){
+    var dc=0;
+    if (parseFloat(totalMedPrice) < 499) {
+        dc = 49;
+    } else if (parseFloat(totalMedPrice) > 500) {
+        dc = 0;
+    }
+
+    return dc;
+}
+function getDeliveryChargeForTabletShablet(totalMedPrice){
+  var dc=0;
+
+  if (parseFloat(totalMedPrice) < 500) {
+      dc = 68.88;
+  } else if (parseFloat(totalMedPrice) >= 500 && parseFloat(totalMedPrice) < 1000) {
+      dc = 50.40;
+  } else if (parseFloat(totalMedPrice) >= 1000) {
+      console.log('hie')
+      dc = 0;
+  }
+  return dc;
+}
+
+function getDeliveryChargeForMedPlusMart(totalMedPrice){
+  var dc=0;
+  return dc;
+}
+
+        %>
+    
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+          <div class="container">
+            <a class="navbar-brand" href="index.html">Medicomp India.</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+              aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="oi oi-menu"></span> Menu
+            </button>
+      
+            <div class="collapse navbar-collapse" id="ftco-nav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <!-- <li class="nav-item"><a href="tour.html" class="nav-link">Tour</a></li> -->
+                <li class="nav-item"><a href="https://medicomp.in/#nearby" class="nav-link">NearBy Chemists</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Blogs</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- END nav -->
+        
+        <div class="hero-wrap js-fullheight" id="fullheight"
+        style="background: url(wave3F.png);background-repeat: no-repeat;background-color: #eff4ff;background-size:cover;">
+        <!-- <span><img src="doctoon-removebg-preview.png" style="position: absolute;bottom:0px;right: 0px;height: 50vh;width: auto;" alt=""></span> -->
+        <div class="overlay"></div>
+        <div class="container" id="idcontainer">
+          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+            <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Results</span></p>
+              <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Results</h1>
+            </div>
+          </div>
+          </div>
+          </div>
+    
+
+        <%var count=0%>
+          <%var deliveryCharge=0%>
+            <%var finalPrice=0%>
+            <% var imgurl=''%>
+            <% var numberOfMeds=0%>
+            
+
+              <section class="ftco-section ftco-degree-bg">
+                <div class="container">
+                  <div class="row">
+
+                    <% const imageLogos={
+                       "Apollo" : 'https://image3.mouthshut.com/images/imagesp/925643839s.png'
+                      , "NetMeds" : 'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png'
+                      , "PharmEasy" : 'https://hindubabynames.info/downloads/wp-content/themes/hbn_download/download/health-and-fitness-companies/pharmeasy-logo.png'
+                      , "HealthsKool Pharmacy" : 'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png'
+                      , "Pasumai Pharmacy" : 'https://content.jdmagicbox.com/comp/tirupur/m8/9999px421.x421.120614111802.r2m8/catalogue/pasumai-pharmacies-india-pvt-ltd-tirupur-ho-tirupur-chemists-kb992ui.jpg'
+                      , "flipkart" : 'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg'
+                      , "PulsePlus" : 'https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg'
+                      , "Tablet Shablet" : 'https://www.tabletshablet.com/wp-content/uploads/2020/09/TBS_logo.jpg'
+                      , "healthmug" : 'https://static.oxinis.com/healthmug/image/healthmug/healthmuglogo-192.png'
+                      , "myupchar" : 'https://image.myupchar.com/8910/original/jobs-in-myupchar-delhi-healthcare-healthtech-techjobs-content-doctor-marketing.jpg'
+                      , "MedPlusMart" :"https://upload.wikimedia.org/wikipedia/commons/3/3c/Medplus_logo.jpg", } %>
+
+                      <div class="row" id="phoneDisp">
+                        <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
+                          <div id="accordion">
+                            <div class="row">
+                              <div class="col-md-6" style="display: block;margin: auto;">
+
+                                <% for(var k=0;k < 9; k++) {%>
+
+                                        <% for(var i=0; i < final.length; i++) {%>
+                                        <%if(final[i][0][k].price){%>
+
+                                        <%count=count+parseFloat(final[i][0][k].price)%>
+                                        <%}else{%>
+                                          <%count=count+0%>
+                                          <%}%>
+                                       <%}%>
+
+                                       
+                                       <%
+                                       if (k==0) {
+                                         deliveryCharge=getDeliveryChargeForApollo(count);
+                                     } else if (k==1) {
+                                       deliveryCharge=getDeliveryChargeForNetmeds(count)
+                                     } else if (k==2) {
+                                       deliveryCharge=getDeliveryChargeForPharmeasy(count)
+                                     } else if (k==3) {
+                                       deliveryCharge=getDeliveryChargeForHealthskool(count)
+                                     } else if (k==4) {
+                                       deliveryCharge=getDeliveryChargeForTabletShablet(count)
+                                     } else if (k==5) {
+                                       deliveryCharge=getDeliveryChargeForPulsePlus(count)
+                                     } else if (k==6) {
+                                       deliveryCharge=getDeliveryChargeFormyupchar(count)
+                                     } else if (k==7) {
+                                       deliveryCharge=getDeliveryChargeForPasumai(count)
+                                     } else if (k==8) {
+                                       deliveryCharge=getDeliveryChargeForMedPlusMart(count)
+                                     }
+                                     %>
+                                  
+
+
+
+
+                              
+
+                                                <div class="card" style="width: 95%;
+                                                display: block;
+                                                margin: auto;margin-bottom: 20px;">
+                                                  <div class="card-header">
+                                                    <a class="card-link" data-toggle="collapse" href="#menu<%=k%>"
+                                                      aria-expanded="false" aria-controls="menu<%=k%>" style="height: 160px;">
+                                                      <% for(var i=0; i < final.length; i++) {%>
+                                                        <%if(imageLogos[final[i][0][k].name]){%>
+                                                          <%imgurl=imageLogos[final[i][0][k].name]%>
+                                                        <%}%>
+                                                        <%if(final[i][0][k].item){%>
+                                                          <%numberOfMeds=numberOfMeds+1%>
+                                                          <%}%>
+                                                        <%}%>
+                                                        <img
+                                                            src="<%=imgurl%>" style="width: 30%;margin: 0;
+                                                            position: relative;
+                                                            top: 50%;
+                                                            -ms-transform: translateY(-50%);
+                                                            transform: translateY(-50%);"
+                                                            alt="">
+                                                      <span class="collapsed"><i class="icon-plus-circle"></i></span>
+                                                      <span style="position: absolute;
+                              bottom: 0px;
+                              right: 5px;">
+                              <span style="font-size: medium;float: none;"> Cart Total : </span>
+                              <span style="font-weight: bold;">₹ <%= (count+ deliveryCharge).toFixed(2)%></span>
+                            </span>
+                              <span style="
+                              position: absolute;
+                              top: 17px;
+                              right: 50px;
+                              font-size: small;
+                              color: gray;
+                              font-style: italic;
+                              "><%=numberOfMeds%> of <%=final.length%> medicines found</span>
+                                                      <span class="expanded"><i
+                                                          class="icon-minus-circle"></i></span></a>
+                                                  </div>
+                                                  <div id="menu<%=k%>" class="collapse">
+                                                    <div class="card-body">
+                                                      <div class="destination">
+
+                                                        <div class="text p-3" style="border-top: none;border: 1px solid #e6e6e6;">
+                                                          <% for(var i=0; i < final.length; i++) {%>
+                                                            <div class="d-flex" style="height: auto;">
+                                                              <div class="one" style="height: auto;">
+                                                                <h3 style="
+                                    overflow-wrap: anywhere;
+                                "><a href="<%=final[i][0][k].link%>" id="mediname">
+                                                                    <span style="color: gray;">
+                                                                      <%if(final[i][0][k].item){%>
+                                                                        <%=final[i][0][k].item%><span>...</span>
+                                                                        <%}else{%>
+                                                                         <i> <span>NA</span> </i>
+                                                                          <%}%>
+                                                                    </span>
+                                                                  </a></h3>
+
+                                                              </div>
+                                                              <div class="two">
+                                                                <span style="font-size: medium;float: right;">&nbsp;
+                                                                  <%=final[i][0][k].price%>
+                                                                </span>
+
+                                                                <!-- <span class="price">₹  <%if(final[i][0][k].deliveryCharge!="login"){%>
+                                    <%=(parseFloat(final[i][0][k].price) + parseFloat(final[i][0][k].deliveryCharge)).toFixed(2)%>
+                                    <%}else{%>
+                                      <%=parseFloat(final[i][0][k].price)%>
+                                      <%}%></span> -->
+                                                              </div>
+                                                            </div>
+                                                            <!-- <p class="days"><span>2 days 3 nights</span></p> -->
+                                                            <hr>
+
+                                                            <%if(i==final.length-1){%>
+
+
+
+                                                              <span style="float: right;">Medicine Total > <%=count.toFixed(2)%>
+                                                              </span> <br>
+                                                              <spa style="float: right;">Delivery Price  > <%=
+                                                                  deliveryCharge %>
+                                                              </spa> <br>
+
+                                                              <%}%>
+                                                                <%}%>
+                                                                  <%count=0%>
+                                                                    <%deliveryCharge=0%>
+                                                                        <%numberOfMeds=0%>
+
+                                                                      <p class="bottom-area d-flex">
+                                                                        <span class="ml-auto">
+                                                                          <input type="text" name="medlink" id="medlink"
+                                                                            value="#"
+                                                                            style="visibility:hidden;height: 0px;width: 0px;">
+                                                                          <input type="text" name="medName" id="medName"
+                                                                            value="#"
+                                                                            style="visibility:hidden;height: 0px;width: 0px;">
+
+                                                                          <a id="smbtn" type="submit" value="BUY"
+                                                                            href="#"
+                                                                            style="border: none;background-color: lightgreen;width: 100%;text-align: center;">&nbsp;BUY&nbsp;</a>
+                                                                          </form>
+                                                                          <style>
+                                                                            #smbtn:hover {
+                                                                              cursor: pointer;
+                                                                            }
+                                                                          </style>
+                                                                        </span>
+                                                                      </p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                              <%}%>
+
+
+                              </div>
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-9" id="lapDisp" style="
+          margin: auto;">
+                        <div class="row">
+
+                          <% for(var k=0;k < 9; k++) {%>
+                            <div class="col-md-4 ftco-animate">
+                              <div class="destination">
+                                <% if(final[0][0][k].name){%>
+                                  <a href="#" id="imagesection"
+                                    class="img img-2 d-flex justify-content-center align-items-center"
+                                    style="background-size: contain;background-image: url(<%=imageLogos[final[0][0][k].name]%>);">
+                                    <%}else if(final[1][0][k].name){%>
+                                      <a href="#" id="imagesection"
+                                        class="img img-2 d-flex justify-content-center align-items-center"
+                                        style="background-size: contain;background-image: url(<%=imageLogos[final[1][0][k].name]%>);">
+                                        <% }else if(final[2][0][k].name){%>
+                                          <a href="#" id="imagesection"
+                                            class="img img-2 d-flex justify-content-center align-items-center"
+                                            style="background-size: contain;background-image: url(<%=imageLogos[final[2][0][k].name]%>);">
+                                            <%}else if(final[3][0][k].name){%>
+                                              <a href="#" id="imagesection"
+                                                class="img img-2 d-flex justify-content-center align-items-center"
+                                                style="background-size: contain;background-image: url(<%=imageLogos[final[3][0][k].name]%>);">
+                                                <%}else{%>
+                                                  <%}%>
+
+                                                    <div class="icon d-flex justify-content-center align-items-center">
+                                                      <span class="icon-search2"></span>
+                                                    </div>
+                                              </a>
+
+                                              <div class="text p-3">
+                                                <% for(var i=0; i < final.length; i++) {%>
+                                                  <div class="d-flex" style="height: auto;">
+                                                    <div class="one" style="height: auto;">
+                                                      <h3 style="
+                        overflow-wrap: anywhere;
+                    "><a href="<%=final[i][0][k].link%>" id="mediname">
+                                                          
+                                                            <%if(final[i][0][k].item){%>
+                                                              <span style="color: gray;">
+                                                              <%=final[i][0][k].item%>...
+                                                            </span>
+                                                            <%}else{%>
+                                                              <span style="color: gray;font-style: italic;">
+                                                                NA
+                                                              </span>
+                                                              <%}%>
+                                                        
+                                                        </a></h3>
+
+                                                    </div>
+                                                    <div class="two">
+                                                      <span style="font-size: medium;color: black;font-weight: bold;">&nbsp;
+                                                        <%=final[i][0][k].price%>
+                                                      </span>
+                                                      <!-- <span class="price">₹  <%if(final[i][0][k].deliveryCharge!="login"){%>
+												<%=(parseFloat(final[i][0][k].price) + parseFloat(final[i][0][k].deliveryCharge)).toFixed(2)%>
+												<%}else{%>
+													<%=parseFloat(final[i][0][k].price)%>
+													<%}%></span> -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- <p class="days"><span>2 days 3 nights</span></p> -->
+                                                  <hr>
+
+                                                  <%if(i==final.length-1){%>
+                                                   
+
+                                                    <% for(var i=0; i < final.length; i++) {%>
+                                                      <%if(final[i][0][k].price){%>
+
+                                                        <%count=count+parseFloat(final[i][0][k].price)%>
+
+                                                          <%}else{%>
+                                                            <%count=count+0%>
+                                                              <%}%>
+                                                                <%}%>
+
+                                                                  <%deliveryCharge=getDeliveryChargeForApollo(count)%>
+                                                                    <span style="float: right;">Medicine Total > ₹<%=count.toFixed(2)%>
+                                                                    </span> <br>
+                                                                    <span style="float: right;">Delivery Price > ₹<%= deliveryCharge %></span>
+                                                                    <br>
+                                                                    <p style="font-size: large;float: right;"><b>Cart Total :
+                                                                      <span style="font-weight: bold;color: black;"> ₹
+                                                                        <%=
+                                                                        (count + deliveryCharge).toFixed(2) %>
+                                                                      </span>
+                                                                    </b>
+                                                                         </p> <br>
+
+                                                                    <%}%>
+                                                                      <%}%>
+                                                                        <%count=0%>
+
+                                                                          <p class="bottom-area d-flex">
+                                                                            <span class="ml-auto">
+                                                                              <input type="text" name="medlink"
+                                                                                id="medlink" value="#"
+                                                                                style="visibility:hidden;height: 0px;width: 0px;">
+                                                                              <input type="text" name="medName"
+                                                                                id="medName" value="#"
+                                                                                style="visibility:hidden;height: 0px;width: 0px;">
+
+                                                                              <a id="smbtn" type="submit" value="BUY"
+                                                                                href="#"
+                                                                                style="border: none;background-color: lightgreen;width: 100%;text-align: center;">&nbsp;BUY&nbsp;</a>
+                                                                              </form>
+                                                                              <style>
+                                                                                #smbtn:hover {
+                                                                                  cursor: pointer;
+                                                                                }
+                                                                              </style>
+                                                                            </span>
+                                                                          </p>
+                                              </div>
+                              </div>
+                            </div>
+                            <%}%>
+
+
+
+
+                        </div>
+
+         
+                      </div> <!-- .col-md-8 -->
+
+                  </div>
+                </div>
+              </section> <!-- .section -->
+
+         
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Medicomp India.</h2>
+              <p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
+                various pharmacies and online retailers in India.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="https://www.linkedin.com/in/krishilsheth/"><span class="icon-linkedin"></span></a></li>
+                <!-- <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li> -->
+                <li class="ftco-animate"><a href="https://www.instagram.com/medicomp.india/"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Information</h2>
+              <ul class="list-unstyled">
+                <li><a href="/about.html" class="py-2 d-block">About</a></li>
+                <li><a href="#" class="py-2 d-block">Med A-Z</a></li>
+                <!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
+                <li><a href="mailto:krishilsheth@gmail.com?subject=We Want To Collaborate With Medicomp India&body=//text here" class="py-2 d-block">Become a partner</a></li>
+                <!-- <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li> -->
+                <li><a href="/privacypolicy.html" class="py-2 d-block">Privacy and Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Customer Support</h2>
+              <ul class="list-unstyled">
+                <li><a href="/about.html" class="py-2 d-block">FAQ</a></li>
+                <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+                <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+                <li><a href="#" class="py-2 d-block">How it works</a></li> -->
+                <li><a href="/contact.html" class="py-2 d-block">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  
+                  <!-- <li><a href="tel:9372677245"><span class="icon icon-phone"></span>
+                    
+                    <span class="text">9372677245</span></a></li> -->
+                  <li><a href="mailto:@krishilsheth@gmail.com"><span class="icon icon-envelope"></span><span
+                        class="text">krishilsheth@gmail.com</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+  
+            <p>
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="icon-plus" aria-hidden="true"></i> <a
+                href="https://medicomp.in" target="_blank">Medicomp India</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen">
+    <!-- <svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg> -->
+    <img src="medicomp-loading-unscreen.gif" style="width: 50px;height: 50px;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);" alt="">
+
+  </div>
+
+
+              <script src="js/jquery.min.js"></script>
+              <script src="js/jquery-migrate-3.0.1.min.js"></script>
+              <script src="js/popper.min.js"></script>
+              <script src="js/bootstrap.min.js"></script>
+              <script src="js/jquery.easing.1.3.js"></script>
+              <script src="js/jquery.waypoints.min.js"></script>
+              <script src="js/jquery.stellar.min.js"></script>
+              <script src="js/owl.carousel.min.js"></script>
+              <script src="js/jquery.magnific-popup.min.js"></script>
+              <script src="js/aos.js"></script>
+              <script src="js/jquery.animateNumber.min.js"></script>
+              <script src="js/bootstrap-datepicker.js"></script>
+              <script src="js/jquery.timepicker.min.js"></script>
+              <script src="js/scrollax.min.js"></script>
+              <script src="js/range.js"></script>
+              <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+              <script src="js/google-map.js"></script>
+              <script src="js/main.js"></script>
+
+              <script>
+
+                console.log(document.getElementById('phoneDisp'))
+                if(document.getElementById('bdy').offsetWidth<1000){
+                  document.getElementById('phoneDisp').style.display='block';
+                  document.getElementById('lapDisp').style.display='none';
+                }else{
+                  document.getElementById('phoneDisp').style.display='none';
+                  document.getElementById('lapDisp').style.display='block';
+                }
+              </script>
+
+</body>
+
+</html>
