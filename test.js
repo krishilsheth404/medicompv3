@@ -2107,14 +2107,23 @@ app.post('/multiSearch',async(req,res)=>{
 
     const linkdata=[];
     const start1 = performance.now();
-    var nameOfMed=req.body.multiItems.split(',');
-    if(nameOfMed.length==1){
-        linkdata.push(`http://medicomp.in/fastComp?medname=${nameOfMed[0]}`)
-    }else if(req.body.multiItems.length>1&&req.body.multiItems.length<6){
-    for(mednames in req.body.multiItems){
-        linkdata.push(`http://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
+    console.log(typeof(req.body.multiItems));
+    if(typeof(req.body.multiItems)=="string"){
+        var nameOfMed=req.body.multiItems.split(',');
+        if(nameOfMed.length==1){
+            linkdata.push(`http://medicomp.in/fastComp?medname=${nameOfMed[0]}`)
+        }
+    } else{
+        if(req.body.multiItems.length>1&&req.body.multiItems.length<6){
+        for(mednames in req.body.multiItems){
+            linkdata.push(`http://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
+          }
+      }else{
+        for(var mednames=0;mednames<5;mednames++){
+            linkdata.push(`http://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
+          }
       }
-    }
+   }
     const responses = await axiosParallel(linkdata);
     
     
