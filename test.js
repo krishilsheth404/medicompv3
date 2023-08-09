@@ -477,7 +477,7 @@ app.get('/getNearbyChemistData', async (req, res) => {
     const final = []
 
 
-    urlForPe = `https://www.bing.com/search?q= chemists in ${req.query['chemCity']}  ${req.query['chemPin']} `;
+    urlForPe = `https://www.bing.com/search?q= chemists in ${req.query['chemCity']}  pincode-${req.query['chemPin']} `;
     extractdoe = async (url) => {
         try {
             // Fetching HTML
