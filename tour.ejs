@@ -172,10 +172,10 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 			    						</div>
 			    						<div class="two">
 
-			    							<span class="price">₹  <%if(final[i].deliveryCharge!="login"){%>
-												<%=(parseFloat(final[i].price) + parseFloat(final[i].deliveryCharge)).toFixed(2)%>
+			    							<span class="price"><%if(final[i].deliveryCharge!="login"){%>
+												₹<%=(parseFloat(final[i].price) + parseFloat(final[i].deliveryCharge)).toFixed(2)%>
 												<%}else{%>
-													<%=parseFloat(final[i].price)%>
+													₹<%=parseFloat(final[i].price)%>
 													<%}%></span>
 		    							</div>
 		    						</div>

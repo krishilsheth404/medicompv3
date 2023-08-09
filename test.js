@@ -983,9 +983,9 @@ extractDataOfPharmEasy = async ( url) => {
             item: a['props']['pageProps']['productDetails']['name'].substring(0,30),
             link: url,
             imgLink: imgurl,
-            price: a['props']['pageProps']['productDetails']['costPrice'],
+            price: parseInt(a['props']['pageProps']['productDetails']['costPrice']),
             offer: '',
-            deliveryCharge: dc,
+            deliveryCharge:dc ? dc : 0,
             finalCharge: parseFloat(a['props']['pageProps']['productDetails']['costPrice']),
         };
 
@@ -2235,19 +2235,19 @@ app.get('/compare', async (req, res) => {
     // const urlForPP = `https://in.search.yahoo.com/search;_ylt=?p=site:pasumaipharmacy.com+${nameOfMed} medicine`;
     // const urlForFH = `https://in.search.yahoo.com/search;_ylt=?p=site:healthplus.flipkart.com+${nameOfMed} medicine`;
 
-    const urlForPharmEasy = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=pharmeasy.in`;  //*//
-    const urlForNetMeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=netmeds.com`;
-    const urlForApollo = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=apollopharmacy.in`;
-    const urlForHealthsKool = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=healthskoolpharmacy.com`;
+    const urlForPharmEasy = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pharmeasy.in) &vs=pharmeasy.in`;  //*//
+    const urlForNetMeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+netmeds.com) &vs=netmeds.com`;
+    const urlForApollo = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+apollopharmacy.in) &vs=apollopharmacy.in`;
+    const urlForHealthsKool = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthskoolpharmacy.com) &vs=healthskoolpharmacy.com`;
     // const urlForHealthmug = `https://www.healthmug.com/search?keywords=${nameOfMed}`;
-    const urlForTata = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=1mg.com`;
-    const urlForOBP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=tabletshablet.com`;
-    const urlFormedplusMart = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=pulseplus.in`;
-    const urlForMyUpChar = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=myupchar.com`;
+    const urlForTata = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=1mg.com`;
+    const urlForOBP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+tabletshablet.com) &vs=tabletshablet.com`;
+    const urlFormedplusMart = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pulseplus.in) &vs=pulseplus.in`;
+    const urlForMyUpChar = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+myupchar.com) &vs=myupchar.com`;
     // const urlFor3Meds = `https://in.in.search.yahoo.com/search=?p=3meds.com+${nameOfMed}`
-    const urlForHealthmug = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=healthmug.com`;
-    const urlForPP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=pasumaipharmacy.com`;
-    const urlForFH = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}) medicine&vs=healthplus.flipkart.com`;
+    const urlForHealthmug = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthmug.com) &vs=healthmug.com`;
+    const urlForPP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pasumaipharmacy.com) &vs=pasumaipharmacy.com`;
+    const urlForFH = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthplus.flipkart.com) &vs=healthplus.flipkart.com`;
     const
         final = [];
     // getLinks = async() => {
