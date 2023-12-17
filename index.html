@@ -656,10 +656,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					<h2 class="mb-4"><strong>Featured</strong> Online Chemists</h2>
 				</div>
 			</div>
-			<div class="row" style="
-			z-index: -1;
-			position: relative;
-		">
+			<div class="row" id="zRow">
 				<div class="col-md-12">
 					<div class="destination-slider owl-carousel ftco-animate">
 						<div class="item">
@@ -756,6 +753,8 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 		var z=document.querySelectorAll('.pharmasList');
 		console.log(z);
 		if(window.innerWidth<800){
+			document.getElementById('zRow').style.zIndex="-1"
+			document.getElementById('zRow').style.position="relative"
 			for(i in z){
 				console.log("called")
 				z[i].style.height="200px";
