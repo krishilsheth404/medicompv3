@@ -646,6 +646,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 		.destination {
 			background-color: rgba(255, 255, 255, 0.485);
 		}
+		
 	</style>
 	<section class="ftco-section ftco-destination">
 		<div class="container">
@@ -660,7 +661,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					<div class="destination-slider owl-carousel ftco-animate">
 						<div class="item">
 							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
+								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://image3.mouthshut.com/images/imagesp/925643839s.png);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -674,7 +675,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
+								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png);background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -688,7 +689,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
+								<a href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -702,7 +703,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
+								<a href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -716,7 +717,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
+								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3a/PharmEasy_logo.png);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -730,7 +731,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
+								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -748,6 +749,16 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 		</div>
 	</section>
 
+	<script>
+		var z=document.querySelectorAll('.pharmasList');
+		console.log(z);
+		if(window.innerWidth<800){
+			for(i in z){
+				console.log("called")
+				z[i].style.height="200px";
+			}
+		}
+	</script>
 
 
 
