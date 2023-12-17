@@ -415,17 +415,16 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	<script>
 
 
-		window.addEventListener("DOMContentLoaded", function () {
+		window.addEventListener("popstate", function () {
 			console.log('loading over');
 			document.body.style.display='block';
 
 			document.getElementById('ftco-loader').style.visibility = 'none';
 			document.getElementById('ftco-loader').style.opacity = 0;
 
-			document.getElementById('ftco-loader-loading').style.display = 'none';
+			document.getElementById('ftco-loader-loading').style.display = 'block';
 		});
 
-		loader();
 		// window.onload = async function () {
 		// 	await axios({
 		// 		method: "GET",
@@ -481,13 +480,14 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 		function loader() {
 			console.warn('loading...')
-			document.body.style.display='none';
-			document.getElementById('ftco-loader').style.visibility = 'visible';
+			// document.body.style.display='none';
 			document.getElementById('ftco-loader').style.opacity = 1;
+			document.getElementById('ftco-loader').style.visibility = 'visible';
 
 			document.getElementById('ftco-loader-loading').style.display = 'block';
 
 		}
+		loader();
 		function addEle(finalmednames) {
 			medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
 			console.log(medsearchlist)
@@ -546,10 +546,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 								document.getElementById('medlist').innerHTML += `
 								<div style="position:relative" id="manblck${i+1}">
-							<div style="position:relative" onMouseOver="this.style.cursor='pointer'" onclick="loader()">
+							<div style="position:relative" onMouseOver="this.style.cursor='pointer'">
 							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
 								<a onclick="this.parentNode.submit()">
-									<div   class="textfield-search one-third" style="background:white;color:black;padding:10px" >
+									<div   onclick="loader()" class="textfield-search one-third" style="background:white;color:black;padding:10px" >
 										<p style="width: 90%;
     color: black;
     height: auto;
@@ -1622,10 +1622,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 
 	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen" style="visibility: hidden;">
+	<div id="ftco-loader" class="show fullscreen" >
 
 		<img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
-			style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: none;"
+			style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: block;"
 			alt="">
 
 		<img id="loading_img"
