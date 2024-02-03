@@ -1905,7 +1905,37 @@ extractDataOfOgMPM = async (url) => {
         // console.log(error);
         return {};
     }
+};  
+
+
+extractDataOfTorus = async (url) => {
+    try {
+        // Fetching HTML
+        const { data } = await axios.get(url)
+
+        // Using cheerio to extract <a> tags
+        const $ = cheerio.load(data);
+
+
+        console.log($('.productdetail_title h3').text());
+        return {
+            name: 'Torus',
+            item: $('.productdetail_title h3').text(),
+            link: url,
+            imgLink:$('.imgBox img').attr('src'),
+            price: parseFloat($('.productdit_pricebox h3').text().split('Rs')[1]),
+            deliveryCharge: 0,
+            offer: '',
+        };
+
+    } catch (error) {
+        // res.sendFile(__dirname + '/try.html');
+        // res.sendFile(__dirname + '/error.html');
+        // console.log(error);
+        return {};
+    }
 };
+
 
 
 extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
@@ -2704,6 +2734,8 @@ app.get('/compare', async (req, res) => {
   const urlForHealthmug = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthmug.com) &vs=healthmug.com`;
   const urlForPP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pasumaipharmacy.com) &vs=pasumaipharmacy.com`;
   const urlForFH = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthplus.flipkart.com) &vs=healthplus.flipkart.com`;
+
+  const urlForTorus=`https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+health.torusdigital.in) &vs=health.torusdigital.in`;
   const
       final = [];
   // getLinks = async() => {
@@ -2846,7 +2878,7 @@ app.get('/compare', async (req, res) => {
   };
 
   const start = performance.now();
-  const item = await Promise.all([extractLinkFromyahoo(urlForNetMeds), extractLinkFromyahoo(urlForPharmEasy), extractLinkFromyahoo(urlForOBP),
+  const item = await Promise.all([extractLinkFromyahoo(urlForTorus),extractLinkFromyahoo(urlForNetMeds), extractLinkFromyahoo(urlForPharmEasy), extractLinkFromyahoo(urlForOBP),
   extractLinkFromyahoo(urlFormedplusMart), extractLinkFromyahoo(urlForMyUpChar), extractLinkFromyahoo(urlForHealthmug),
   extractLinkFromyahoo(urlForPP), extractLinkFromyahoo(urlForApollo), extractLinkFromyahoo(urlForFH), extractLinkFromyahoo(urlForHealthsKool)])
 
@@ -2856,19 +2888,20 @@ app.get('/compare', async (req, res) => {
   const start1 = performance.now();
   // const LinkDataResponses = await axiosParallel(item);
 
-  const responses = await Promise.all([extractDataOfNetMeds(item[0]), extractDataOfPharmEasy(item[1], presReq),
-  extractDataOfOBP(item[2]),
-  extractDataOfmedplusMart(item[3]), extractDataOfMyUpChar(item[4]),
-  extractDataOfPP(item[6]), FastextractDataOfApollo(item[7]),
+  const responses = await Promise.all([extractDataOfTorus(item[0]),extractDataOfNetMeds(item[1]), extractDataOfPharmEasy(item[2], presReq),
+  extractDataOfOBP(item[3]),
+  extractDataOfmedplusMart(item[4]), extractDataOfMyUpChar(item[5]),
+  extractDataOfPP(item[7]), FastextractDataOfApollo(item[8]),
    ]);
 
   const end1 = performance.now() - start1;
   console.log(`Execution time for pharmas: ${end1}ms`);
   // const responses = await Promise.all(FinalDataFunc);
 
-  for (var i = 0; i < 7; i++) {
+  for (var i = 0; i < 8; i++) {
       final.push(responses[i]);
-  }
+    }
+    console.log(final)
   // final.push(responses[0])
   // final.push(responses[1])
   // final.push(responses[2])
