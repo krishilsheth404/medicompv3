@@ -1687,7 +1687,7 @@ extractDataOfMyUpChar = async (url) => {
         return {
             name: 'myupchar',
             item: a.substring(0, 30),
-            link: url,
+            link: url+"?ref=3r8pkdtj",
             imgLink: $('.image_slide').attr('src'),
             price: b,
             offer: '',
