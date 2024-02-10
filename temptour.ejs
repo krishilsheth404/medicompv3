@@ -322,10 +322,10 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                             <div class="row">
                               <div class="col-md-6" style="display: block;margin: auto;">
 
-                                <% for(var k=0;k < 8; k++) {%>
+                                <% for(var k=1;k < 8; k++) {%>
 
-                                        <% for(var i=0; i < final.length-1; i++) {%>
-                                        <%if(final[i][0][k].price){%>
+                                        <% for(var i=1; i < final.length-1; i++) {%>
+                                        <%if(final[i][0][k].name){%>
                                           <%count=parseFloat(count)+parseFloat((final[i][0][k].price.toString()).replace(/,/g, ""))%>
                                           <%}else{%>
                                           <%count=count+0%>
@@ -720,10 +720,10 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
 
                         <div class="row">
 
-                          <% for(var k=0;k < 8; k++) {%>
+                          <% for(var k=1;k < 8; k++) {%>
                             <div class="col-md-4 ftco-animate" id="blockToCopyForAlgo">
                               <div class="destination">
-                                <% for(var i=0; i < final.length-1; i++) {%>
+                                <% for(var i=1; i < final.length-1; i++) {%>
                                   <%if(imageLogos[final[i][0][k].name]){%>
                                     <%imgurl=imageLogos[final[i][0][k].name]%>
                                   <%}else{%>

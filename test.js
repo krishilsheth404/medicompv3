@@ -1238,7 +1238,7 @@ FastextractDataOfApollo = async (url) => {
         const $ = cheerio.load(data, { xmlMode: false });
         // const apolloData = JSON.parse($('#__NEXT_DATA__').text());
         const apolloData =await JSON.parse($('script[class="structured-data-list"]').html());
-        console.log("apollo data "+$.html())
+        // console.log("apollo data "+$.html())
 
         var m=apolloData.offers.price;
 
@@ -2641,6 +2641,7 @@ console.log(final)
 
 
 
+
 });
 
 
@@ -2916,7 +2917,7 @@ app.get('/compare', async (req, res) => {
 
 });
 
-const port = process.env.PORT || 1000 // Port we will listen on
+const port = process.env.PORT || 3000 // Port we will listen on
 
 // Function to listen on the port
 app.listen(port, () => console.log(`This app is listening on port ${port}`));
