@@ -1687,7 +1687,7 @@ extractDataOfMyUpChar = async (url) => {
         return {
             name: 'myupchar',
             item: a.substring(0, 30),
-            link: url+"?ref=3r8pkdtj",
+            link: url,
             imgLink: $('.image_slide').attr('src'),
             price: b,
             offer: '',
@@ -2346,12 +2346,12 @@ app.post('/multiSearch', async (req, res) => {
     if (req.body.multiItems.length == 1) {
         var nameOfMed = req.body.multiItems.split(',');
         console.log(nameOfMed);
-        linkdata.push(`http://localhost:3000/fastComp?medname=${nameOfMed[0]}`);
+        linkdata.push(`https://medicomp.in/fastComp?medname=${nameOfMed[0]}`);
         mnames.push(nameOfMed[0])
     }else if(req.body.multiItems.length > 1) {
         console.log(req.body.multiItems);
         for (mednames in req.body.multiItems) {
-            linkdata.push(`http://localhost:3000/fastComp?medname=${req.body.multiItems[mednames]}`)
+            linkdata.push(`https://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
             mnames.push(req.body.multiItems[mednames])
             }
         }
@@ -2373,7 +2373,7 @@ app.post('/multiSearch', async (req, res) => {
 
     const finalMultiPriceData = [];
     for (var i = 0; i < responses.length; i++) {
-        finalMultiPriceData.push(`http://localhost:3000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`)
+        finalMultiPriceData.push(`https://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`)
     }
     // console.log(finalMultiPriceData)
    
@@ -2558,7 +2558,7 @@ app.post('/multiSearch', async (req, res) => {
                 } else if (k == 7 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
                 }
-            }
+            }//delivery charges are added
 
             console.log(tempca);
             console.log("Smallest Value --> " + tempca[findSmallest(tempca)]);
@@ -2578,7 +2578,7 @@ app.post('/multiSearch', async (req, res) => {
     }
 
 
-    console.log(smallesTotalCombValues)
+    console.log(smallesTotalCombValues)//here the main logic has to be applied
     tempcombiChart.pop();
     tempcombiChart = [].concat(...tempcombiChart);
 
@@ -2800,7 +2800,7 @@ app.get('/compare', async (req, res) => {
   // }
   // await getLinks();
   // console.log(final);
-  extractSubsfApollo = async (data, final) => {
+  extractSubsfApollo = async (url, final) => {
       try {
           // Fetching HTML
           // url = url.split('?')[0];
@@ -2811,11 +2811,11 @@ app.get('/compare', async (req, res) => {
           const PriceOfSubs = [];
           const ImgLinkOfSubs = [];
           // Using cheerio to extract <a> tags
+          const { data } = await axios.get(url)
           const $ = cheerio.load(data);
-          // console.log($.html());
 
           var a = JSON.parse($('#__NEXT_DATA__').text());
-          var fa = a['props']['pageProps']['productDetails']['similar_products'];
+          var fa = a.props.pageProps.productDetails.productSubstitutes.products;
 
 
           if (fa.length > 0) {
@@ -2824,55 +2824,17 @@ app.get('/compare', async (req, res) => {
                       subsname: fa[i]['name'],
                       subsprice: fa[i]['price'],
                       subsImgLink: fa[i]['image'],
-                  })
-              }
-
-          } else {
-              fa = a['props']['pageProps']['productDetails']['productSubstitutes']['products'];
-              for (var i = 0; i < fa.length; i++) {
-                  final.push({
-                      subsname: (fa[i]['name']),
-                      subsprice: (fa[i]['price']),
-                      subsImgLink: ("https://newassets.apollo247.com/pub/media" + fa[i]['image']),
-                  })
-              }
-          }
-
-          const subs = [];
-
-          var a = JSON.parse($('#__NEXT_DATA__').text());
-          var fa = a['props']['pageProps']['productDetails']['similar_products'];
-
-
-          if (fa.length > 0) {
-              for (var i = 0; i < fa.length; i++) {
-                  final.push({
-                      subsname: fa[i]['name'],
-                      subsprice: fa[i]['price'],
-                      subsImgLink: fa[i]['image'],
-                  })
-              }
-
-          } else {
-              fa = a['props']['pageProps']['productDetails']['productSubstitutes']['products'];
-              for (var i = 0; i < fa.length; i++) {
-                  final.push({
-                      subsname: (fa[i]['name']),
-                      subsprice: (fa[i]['price']),
-                      subsImgLink: ("https://newassets.apollo247.com/pub/media" + fa[i]['image']),
-                  })
-              }
-          }
-
-
-          final.push(url)
-
-
+                      subsProdLink: "https://www.apollopharmacy.in"+fa[i]['redirect_url'],
+                      price:0,
+                    })
+                }
+                
+            } 
 
       } catch (error) {
           // res.sendFile(__dirname + '/try.html');
           // res.sendFile(__dirname + '/error.html');
-          // console.log(error);
+          console.log(error);
           return error;
       }
   };
@@ -2891,7 +2853,7 @@ app.get('/compare', async (req, res) => {
   const responses = await Promise.all([extractDataOfTorus(item[0]),extractDataOfNetMeds(item[1]), extractDataOfPharmEasy(item[2], presReq),
   extractDataOfOBP(item[3]),
   extractDataOfmedplusMart(item[4]), extractDataOfMyUpChar(item[5]),
-  extractDataOfPP(item[7]), FastextractDataOfApollo(item[8]),
+  extractDataOfPP(item[7]), FastextractDataOfApollo(item[8]),extractSubsfApollo(item[8],final),
    ]);
 
   const end1 = performance.now() - start1;
@@ -2901,6 +2863,7 @@ app.get('/compare', async (req, res) => {
   for (var i = 0; i < 8; i++) {
       final.push(responses[i]);
     }
+
     console.log(final)
   // final.push(responses[0])
   // final.push(responses[1])
@@ -2943,7 +2906,8 @@ app.get('/compare', async (req, res) => {
 
 
 
-  res.render(__dirname + '/tour', { final: final });
+  res.render(__dirname + '/tour.ejs', { final: final });
+//   res.render(__dirname + '/temptour.ejs', { final: final });
 
 
 
