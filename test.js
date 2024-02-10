@@ -1238,6 +1238,7 @@ FastextractDataOfApollo = async (url) => {
         const $ = cheerio.load(data, { xmlMode: false });
         // const apolloData = JSON.parse($('#__NEXT_DATA__').text());
         const apolloData =await JSON.parse($('script[class="structured-data-list"]').html());
+        console.log("apollo data "+$.html())
 
         var m=apolloData.offers.price;
 
@@ -2854,7 +2855,8 @@ app.get('/compare', async (req, res) => {
   const responses = await Promise.all([extractDataOfTorus(item[0]),extractDataOfNetMeds(item[1]), extractDataOfPharmEasy(item[2], presReq),
   extractDataOfOBP(item[3]),
   extractDataOfmedplusMart(item[4]), extractDataOfMyUpChar(item[5]),
-  extractDataOfPP(item[7]), FastextractDataOfApollo(item[8]),extractSubsfApollo(item[8],final),
+  extractDataOfPP(item[7]), FastextractDataOfApollo(item[8]),
+//   extractSubsfApollo(item[8],final),
    ]);
 
   const end1 = performance.now() - start1;
