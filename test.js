@@ -1237,7 +1237,7 @@ FastextractDataOfApollo = async (url) => {
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data, { xmlMode: false });
         // const apolloData = JSON.parse($('#__NEXT_DATA__').text());
-        const apolloData =JSON.parse($('script[class="structured-data-list"]').html());
+        const apolloData =await JSON.parse($('script[class="structured-data-list"]').html());
 
         var m=apolloData.offers.price;
 
@@ -1421,9 +1421,6 @@ extractDataOfHealthskoolpharmacy = async (url) => {
         return {};
     }
 };
-
-
-
 
 
 extractDataOf3Meds = async (url) => {
@@ -2189,7 +2186,7 @@ app.get('/FastGetPharmaDataFromLinks', async (req, res) => {
         , extractDataOfNetMeds(pharmaLinkArray[1]), extractDataOfPharmEasy(pharmaLinkArray[2]),
     extractDataOfOBP(pharmaLinkArray[3]), extractDataOfmedplusMart(pharmaLinkArray[4]),
     extractDataOfMyUpChar(pharmaLinkArray[5]), extractDataOfPP(pharmaLinkArray[6]), extractDataOfOgMPM(pharmaLinkArray[7])]));
-    console.log(pharmaData);
+    console.log(pharmaData.data);
     // res.send(pharmaData);
 
     res.send(pharmaData);
@@ -2383,6 +2380,8 @@ app.post('/multiSearch', async (req, res) => {
 
     // console.log(finalMultiPriceData)
     const pharmaFinaldata = await axiosParallel(finalMultiPriceData);
+
+    console.log(pharmaFinaldata[0])
 
 
 
@@ -2915,7 +2914,7 @@ app.get('/compare', async (req, res) => {
 
 });
 
-const port = process.env.PORT || 3000 // Port we will listen on
+const port = process.env.PORT || 1000 // Port we will listen on
 
 // Function to listen on the port
 app.listen(port, () => console.log(`This app is listening on port ${port}`));
