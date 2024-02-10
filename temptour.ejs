@@ -53,6 +53,9 @@ We provide unbiased information on various medicines ,offers and prescriptions a
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+<!-- or -->
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 </head>
 
 <body id="bdy">
@@ -173,6 +176,75 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
 
         %>
     
+        <style>
+          *,
+          *::before,
+          *::after {
+            box-sizing: border-box;
+          }
+      
+          :root {
+            --background: rgba(255, 255, 255, 0);
+            --surface: rgba(0, 0, 0, 0);
+            --block: rgb(255, 255, 255);
+            --loader: rgb(170, 170, 170);
+            --space: 1rem;
+          }
+      
+          @media (prefers-color-scheme: dark) {
+            :root {
+              --background: #ffffff;
+              --surface: #1d283a;
+              --block: #344256;
+              --loader: white;
+            }
+          }
+      
+          .skeleton {
+            /* width: clamp(200px, 50vmin, 20rem); */
+            height: 10px;
+            overflow: hidden;
+            padding: var(--space);
+            border: 1px solid #ffffff;
+            border-radius: calc(var(--space) * 0.5);
+            width: 100%;
+            background-color: var(--surface);
+          }
+      
+          .skeleton__block {
+            background: linear-gradient(-75deg, transparent 40%, var(--loader), transparent 60%) 0 0 / 200% 100%, var(--block);
+            border-radius: calc(var(--space) * 0.5);
+            animation: load 2s infinite linear;
+            background-attachment: fixed;
+          }
+      
+          @keyframes load {
+            to {
+              background-position: 200% 0;
+            }
+          }
+      
+          .skeleton__block:first-of-type {
+            grid-row: 1 / -1;
+            aspect-ratio: 1;
+          }
+          #medlists{
+            width:33%;
+            margin: 0px;
+          }
+          @media screen and (max-width:500px) {
+            #medlists{
+              width:100%;
+              margin: 0px;
+            }
+            
+          }
+        </style>
+
+<div id="combdatablock" style="font-size: 0px;height: 0px;"><%=final[final.length-1].combiString.bestPossSol%></div>
+<div id="combdatablockwithmednames" style="font-size: 0px;height: 0px;"><%=final[final.length-1].combiString.medNames%></div>
+
+
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
           <div class="container">
             <a class="navbar-brand" href="index.html">Medicomp India.</a>
@@ -218,14 +290,21 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
             <% var numberOfMeds=0%>
             
 
-              <section class="ftco-section ftco-degree-bg">
+        
+
+              
+              <section class="ftco-section ftco-degree-bg" id="algoStart" style="padding-top: 10em;">
                 <div class="container">
+
+                  
+
                   <div class="row">
 
+                  
                     <% const imageLogos={
                        "Apollo" : 'https://image3.mouthshut.com/images/imagesp/925643839s.png'
                       , "NetMeds" : 'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png'
-                      , "PharmEasy" : 'https://hindubabynames.info/downloads/wp-content/themes/hbn_download/download/health-and-fitness-companies/pharmeasy-logo.png'
+                      , "PharmEasy" : 'https://etimg.etb2bimg.com/photo/92979760.cms'
                       , "HealthsKool Pharmacy" : 'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png'
                       , "Pasumai Pharmacy" : 'https://content.jdmagicbox.com/comp/tirupur/m8/9999px421.x421.120614111802.r2m8/catalogue/pasumai-pharmacies-india-pvt-ltd-tirupur-ho-tirupur-chemists-kb992ui.jpg'
                       , "flipkart" : 'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg'
@@ -236,18 +315,19 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                       , "MedPlusMart" :"https://upload.wikimedia.org/wikipedia/commons/3/3c/Medplus_logo.jpg", } %>
 
                       <div class="row" id="phoneDisp">
+
+                        
                         <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
                           <div id="accordion">
                             <div class="row">
                               <div class="col-md-6" style="display: block;margin: auto;">
 
-                                <% for(var k=0;k < 9; k++) {%>
+                                <% for(var k=0;k < 8; k++) {%>
 
-                                        <% for(var i=0; i < final.length; i++) {%>
+                                        <% for(var i=0; i < final.length-1; i++) {%>
                                         <%if(final[i][0][k].price){%>
-
-                                        <%count=count+parseFloat(final[i][0][k].price)%>
-                                        <%}else{%>
+                                          <%count=parseFloat(count)+parseFloat((final[i][0][k].price.toString()).replace(/,/g, ""))%>
+                                          <%}else{%>
                                           <%count=count+0%>
                                           <%}%>
                                        <%}%>
@@ -260,7 +340,7 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                                   <div class="card-header">
                                                     <a class="card-link" data-toggle="collapse" href="#menu<%=k%>"
                                                       aria-expanded="false" aria-controls="menu<%=k%>" style="height: 160px;">
-                                                      <% for(var i=0; i < final.length; i++) {%>
+                                                      <% for(var i=0; i < final.length-1; i++) {%>
                                                         <%if(imageLogos[final[i][0][k].name]){%>
                                                           <%imgurl=imageLogos[final[i][0][k].name]%>
                                                         <%}%>
@@ -280,7 +360,7 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                               bottom: 0px;
                               right: 5px;">
                               <span style="font-size: medium;float: none;"> Cart Total : </span>
-                              <span style="font-weight: bold;">₹ <%= (count+ deliveryCharge).toFixed(2)%></span>
+                              <span style="font-weight: bold;">₹ <%= (parseFloat(count)+ parseFloat(deliveryCharge)).toFixed(2)%></span>
                             </span>
                               <span style="
                               position: absolute;
@@ -298,7 +378,7 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                                       <div class="destination">
 
                                                         <div class="text p-3" style="border-top: none;border: 1px solid #e6e6e6;">
-                                                          <% for(var i=0; i < final.length; i++) {%>
+                                                          <% for(var i=0; i < final.length-1; i++) {%>
                                                             <div class="d-flex" style="height: auto;">
                                                               <div class="one" style="height: auto;">
                                                                 <h3 style="
@@ -340,17 +420,17 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                                             } else if (k==2) {
                                                              console.log("in pharmeasy")
                                                               deliveryCharge=getDeliveryChargeForPharmeasy(count)
-                                                            } else if (k==3) {
-                                                              deliveryCharge=getDeliveryChargeForHealthskool(count)
-                                                            } else if (k==4) {
+                                                            } 
+                                                          
+                                                             else if (k==3) {
                                                               deliveryCharge=getDeliveryChargeForTabletShablet(count)
-                                                            } else if (k==5) {
+                                                            } else if (k==4) {
                                                               deliveryCharge=getDeliveryChargeForPulsePlus(count)
-                                                            } else if (k==6) {
+                                                            } else if (k==5) {
                                                               deliveryCharge=getDeliveryChargeFormyupchar(count)
-                                                            } else if (k==7) {
+                                                            } else if (k==6) {
                                                               deliveryCharge=getDeliveryChargeForPasumai(count)
-                                                            } else if (k==8) {
+                                                            } else if (k==7) {
                                                               deliveryCharge=getDeliveryChargeForMedPlusMart(count)
                                                             }
                                                             %>
@@ -405,12 +485,245 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
 
                       <div class="col-lg-9" id="lapDisp" style="
           margin: auto;">
+
+<style>
+  *{
+    scroll-behavior: smooth;
+  }
+  #algoSuggest {
+      margin: 50px;
+      border: 1px dotted black;
+      padding: 5px;
+      box-shadow: 1px 1px 0.5px black;
+      background: #a4c1f9;
+      color: white;
+      border-radius: 5px;
+      margin-left: 0px;
+  }
+
+  #algoSuggest img {
+      height: 30px;
+      width: 30px;
+      filter: invert(1);
+  }
+
+  #algoSuggest:hover {
+     
+      margin: 50px;
+      border: 1px dotted black;
+      padding: 5px;
+      box-shadow: 0px 0px 0px black;
+      background: #87abec;
+      color: white;
+      border-radius: 5px;
+      margin-left: 0px;
+  }
+  .skel {
+					animation: h3skeleton 2s infinite;
+				}
+
+				@keyframes h3skeleton {
+					0% {
+						background-color: white;
+					}
+
+					50% {
+						background-color: rgb(231 231 231);
+					}
+
+					100% {
+						background-color: white;
+					}
+
+				}
+</style>
+
+
+<div id="algoComparisonBlock"  style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 100%;
+    display: none;
+">
+
+  <div id="blockLeft"style="
+  max-width: 78%;
+  flex: 0 0 45%;
+">
+
+  </div>  
+
+  <div class="col-md-4 ftco-animate fadeInUp ftco-animated" style="
+    max-width: 78%;
+    flex: 0 0 50%;
+">
+    <div class="destination">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <a href="#" id="imagesection" class="img img-2 d-flex justify-content-center align-items-center skel"
+        style="background-size: contain;background-image: url(#);">
+
+
+        <div class="icon d-flex justify-content-center align-items-center">
+          <span class="icon-search2"></span>
+        </div>
+      </a>
+
+      <div class="text p-3" id="algoBlockWheredataisadded">
+
+        <div class="d-flex" style="height: auto;">
+          <div class="one" style="height: auto;">
+            <h3 style="
+                        overflow-wrap: anywhere;
+                    "><a href="https://www.apollopharmacy.in/medicine/endoreg-2mg-tablet-14-s" id="mediname">
+
+
+                <span style="color: transparent;" class="skel" id="firstCombiMedName">
+                  Endoreg Tablet 14's...
+                </span>
+
+
+              </a></h3>
+
+          </div>
+          <div class="two">
+            <span style="font-size: medium;color: transparent;font-weight: bold;" class="skel" id="firstCombiMedSource">&nbsp;
+              677
+            </span>
+            <!-- <span class="price">₹  
+												702.00
+												</span> -->
+          </div>
+        </div>
+        <!-- <p class="days"><span>2 days 3 nights</span></p> -->
+        <hr>
+
+
+
+        <div class="d-flex" style="height: auto;">
+          <div class="one" style="height: auto;">
+            <h3 style="
+                        overflow-wrap: anywhere;
+                    "><a href="https://perfmedicine.apollopharmacy.in/otc/crocin-pain-relief-tablet" id="mediname">
+
+
+                <span style="color: transparent;" class="skel" id="secondCombiMedName">
+                  Crocin Pain Relief Tablet 15's...
+                </span>
+
+
+              </a></h3>
+
+          </div>
+          <div class="two">
+            <span style="font-size: medium;color: transparent;font-weight: bold;" class="skel" id="secondCombiMedSource">&nbsp;
+              61.2
+            </span>
+            <!-- <span class="price">₹  
+												160.20
+												</span> -->
+          </div>
+        </div>
+        <!-- <p class="days"><span>2 days 3 nights</span></p> -->
+        <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <span style="float: right;">Medicine Total &gt; ₹738.20 -->
+        <!-- </span> <br> -->
+        <!-- <span style="float: right;">Delivery Price &gt; ₹25</span> -->
+        <br>
+        <p style="font-size: large;float: right;"><b>Cart Total :
+            <span style="font-weight: bold;color: transparent;" class="skel" id="CombiCartTotal"> ₹
+              763.20
+            </span>
+          </b>
+        </p> <br>
+
+
+
+
+
+        <p class="bottom-area d-flex">
+          <span class="ml-auto">
+            <input type="text" name="medlink" id="medlink" value="#" style="visibility:hidden;height: 0px;width: 0px;">
+            <input type="text" name="medName" id="medName" value="#" style="visibility:hidden;height: 0px;width: 0px;">
+
+            <a id="smbtn" type="submit" value="BUY" href="#"
+              style="border: none;background-color: lightgreen;width: 100%;text-align: center;">&nbsp;BUY&nbsp;</a>
+
+            <style>
+              #smbtn:hover {
+                cursor: pointer;
+              }
+            </style>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- 
+<a href="#algoStart">
+  <button id="algoSuggest" onclick="showAlgoComparisonBox()"><img src="sparkler.png" alt="" srcset=""> Algo
+  Suggest</button>
+</a>
+ -->
+
+
+
+
+
+
+
                         <div class="row">
 
-                          <% for(var k=0;k < 9; k++) {%>
-                            <div class="col-md-4 ftco-animate">
+                          <% for(var k=0;k < 8; k++) {%>
+                            <div class="col-md-4 ftco-animate" id="blockToCopyForAlgo">
                               <div class="destination">
-                                <% for(var i=0; i < final.length; i++) {%>
+                                <% for(var i=0; i < final.length-1; i++) {%>
                                   <%if(imageLogos[final[i][0][k].name]){%>
                                     <%imgurl=imageLogos[final[i][0][k].name]%>
                                   <%}else{%>
@@ -422,17 +735,17 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                     imgurl=imageLogos["NetMeds"]
                                   } else if (k==2) {
                                    imgurl=imageLogos["PharmEasy"]
-                                  } else if (k==3) {
-                                    imgurl=imageLogos["Pasumai Pharmacy"]
+                                  } 
+                                   
+                                  else if (k==3) {
+                                    imgurl=imageLogos["Tablet Shablet"]
                                   } else if (k==4) {
-                                     imgurl=imageLogos["PulsePlus"]
+                                    imgurl=imageLogos["PulsePlus"]
                                   } else if (k==5) {
-                                  imgurl=imageLogos["Tablet Shablet"]
+                                    imgurl=imageLogos["myupchar"]
                                   } else if (k==6) {
-                                     imgurl=imageLogos["healthmug"]
+                                    imgurl=imageLogos["Pasumai Pharmacy"]
                                   } else if (k==7) {
-                                     imgurl=imageLogos["myupchar"]
-                                  } else if (k==8) {
                                      imgurl=imageLogos["MedPlusMart"]
                                   }
                                   %>
@@ -453,7 +766,7 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                               </a>
 
                                               <div class="text p-3">
-                                                <% for(var i=0; i < final.length; i++) {%>
+                                                <% for(var i=0; i < final.length-1; i++) {%>
                                                   <div class="d-flex" style="height: auto;">
                                                     <div class="one" style="height: auto;">
                                                       <h3 style="
@@ -487,18 +800,18 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                                   <!-- <p class="days"><span>2 days 3 nights</span></p> -->
                                                   <hr>
 
-                                                  <%if(i==final.length-1){%>
+                                                  <%if(i==final.length-2){%>
                                                    
 
-                                                    <% for(var i=0; i < final.length; i++) {%>
+                                                    <% for(var i=0; i < final.length-1; i++) {%>
                                                       <%if(final[i][0][k].price){%>
 
-                                                        <%count=count+parseFloat(final[i][0][k].price)%>
+                                                        <%count=parseFloat(count)+parseFloat((final[i][0][k].price.toString()).replace(/,/g, ""))%>
 
 
 
                                                           <%}else{%>
-                                                            <%count=count+0%>
+                                                            <%count=parseFloat(count)+0%>
                                                               <%}%>
                                                                 <%}%>
    <%
@@ -510,16 +823,14 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                                              console.log("in pharmeasy")
                                                               deliveryCharge=getDeliveryChargeForPharmeasy(count)
                                                             } else if (k==3) {
-                                                              deliveryCharge=getDeliveryChargeForHealthskool(count)
-                                                            } else if (k==4) {
                                                               deliveryCharge=getDeliveryChargeForTabletShablet(count)
-                                                            } else if (k==5) {
+                                                            } else if (k==4) {
                                                               deliveryCharge=getDeliveryChargeForPulsePlus(count)
-                                                            } else if (k==6) {
+                                                            } else if (k==5) {
                                                               deliveryCharge=getDeliveryChargeFormyupchar(count)
-                                                            } else if (k==7) {
+                                                            } else if (k==6) {
                                                               deliveryCharge=getDeliveryChargeForPasumai(count)
-                                                            } else if (k==8) {
+                                                            } else if (k==7) {
                                                               deliveryCharge=getDeliveryChargeForMedPlusMart(count)
                                                             }
                                                             %>
@@ -531,9 +842,9 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                                                                     <span style="float: right;">Delivery Price > ₹<%= deliveryCharge %></span>
                                                                     <br>
                                                                     <p style="font-size: large;float: right;"><b>Cart Total :
-                                                                      <span style="font-weight: bold;color: black;"> ₹
+                                                                      <span style="font-weight: bold;color: black;" id="totalPrices"> ₹
                                                                         <%=
-                                                                        (count + deliveryCharge).toFixed(2) %>
+                                                                        (parseFloat(count) + parseFloat(deliveryCharge)).toFixed(2) %>
                                                                       </span>
                                                                     </b>
                                                                          </p> <br>
@@ -690,6 +1001,153 @@ function getDeliveryChargeForMedPlusMart(totalMedPrice){
                   document.getElementById('lapDisp').style.display='block';
                 }
               </script>
+
+<script>
+  function showAlgoComparisonBox(){
+    document.getElementById('algoComparisonBlock').style.display='flex';
+  }
+</script>
+
+
+<script>
+  var arr=document.getElementById('combdatablock').innerHTML;
+  var medNames=document.getElementById('combdatablockwithmednames').innerHTML.split(',');
+  // console.log(arr);
+
+  var mainAmt=arr.split('=')[1]
+  var f=  (arr.split('=')[0]).split('&')[0].trim()
+  var s=  (arr.split('=')[0]).split('&amp;')[1].trim()
+  console.log(f)
+  console.log(s)
+
+   var fstring;
+  var tf=f;
+  tf=f.split('from')[0];
+  tf=tf.split('');
+  var fa="";
+
+  for(var i=0;i<tf.length;i++){
+
+                    if (parseInt(f.split('from')[1]) == 0) {
+                      fa+=medNames[tf[i]-1] + " From Apollo"+'\n'
+          } else if (parseInt(f.split('from')[1]) == 1) {
+            fa+=medNames[tf[i]-1] + " From Netmeds"+'\n'
+          } else if (parseInt(f.split('from')[1]) == 2) {
+            fa+=medNames[tf[i]-1] + " From Pharmeasy"+'\n'
+          }
+          //  else if (parseInt(f.split('from')[1]) == 3) {
+          //   fa+=medNames[tf[i]-1] + " From Healthskool"+'\n'
+          // }
+           else if (parseInt(f.split('from')[1]) == 3) {
+            fa+=medNames[tf[i]-1] + " From TabletShablet"+'\n'
+          } else if (parseInt(f.split('from')[1]) == 4) {
+            fa+=medNames[tf[i]-1] + " From PulsePlus"+'\n'
+          } else if (parseInt(f.split('from')[1]) == 5) {
+            fa+=medNames[tf[i]-1] + " From MyUpChar"+'\n'
+          } else if (parseInt(f.split('from')[1]) == 6) {
+            fa+=medNames[tf[i]-1] + " From Pasumai"+'\n'
+          } else if (parseInt(f.split('from')[1]) == 7) {
+            fa+=medNames[tf[i]-1] + " From MedPlusMart"+'\n'
+          }
+
+
+
+          console.log('jehfrgedi')
+          document.getElementById('firstCombiMedName').innerText=fa;
+          document.getElementById('firstCombiMedName').classList.remove('skel');
+          document.getElementById('firstCombiMedName').style.color='black';
+          // document.getElementById('firstCombiMedName').innerHTML=fa;
+      }
+
+
+      var sstring;
+  var ts=s;
+  ts=s.split('from')[0];
+  ts=ts.split('');
+  console.log(ts[0]);
+  var sa="";
+
+  for(var i=0;i<ts.length;i++){
+
+                    if (parseInt(s.split('from')[1]) == 0) {
+                      sa+=medNames[ts[i]-1] + " From Apollo"+'\n';
+          } else if (parseInt(s.split('from')[1]) == 1) {
+            sa+=medNames[ts[i]-1] + " From Netmeds"+'\n';
+          } else if (parseInt(s.split('from')[1]) == 2) {
+            sa+=medNames[ts[i]-1] + " From Pharmeasy"+'\n';
+          } 
+          // else if (parseInt(s.split('from')[1]) == 3) {
+          //   sa+=medNames[ts[i]-1] + " From Healthskool"+'\n';
+          // } 
+          else if (parseInt(s.split('from')[1]) == 3) {
+            sa+=medNames[ts[i]-1] + " From TabletShablet"+'\n';
+          } else if (parseInt(s.split('from')[1]) == 4) {
+            sa+=medNames[ts[i]-1] + " From PulsePlus"+'\n';
+          } else if (parseInt(s.split('from')[1]) == 5) {
+            sa+=medNames[ts[i]-1] + " From MyUpChar"+'\n';
+          } else if (parseInt(s.split('from')[1]) == 6) {
+            sa+=medNames[ts[i]-1] + " From Pasumai"+'\n';
+          } else if (parseInt(s.split('from')[1]) == 7) {
+            sa+=medNames[ts[i]-1] + " From MedPlusMart"+'\n';
+          }
+
+
+
+          console.log('jehfrgedi')
+          document.getElementById('secondCombiMedName').innerText=sa;
+          document.getElementById('secondCombiMedName').classList.remove('skel')
+          document.getElementById('secondCombiMedName').style.color='black';
+
+
+
+
+
+
+
+          document.getElementById('CombiCartTotal').innerText=mainAmt;
+          document.getElementById('CombiCartTotal').classList.remove('skel')
+          document.getElementById('CombiCartTotal').style.color='black';
+          // document.getElementById('firstCombiMedName').innerHTML=fa;
+
+
+
+      }
+
+
+
+
+        </script>
+
+
+<script>
+
+
+    var a=document.querySelectorAll('#totalPrices');
+    var lowestPrice=parseFloat(a[0].innerHTML.split('₹')[1]);
+    var lowestIndex=0;
+    console.log("6546788=> "+lowestPrice)
+    for(var i=0;i<a.length;i++){
+      var temp=a[i].innerHTML;
+      console.log(temp)
+    
+      if(temp){
+        temp=parseFloat(temp.split('₹')[1]);
+        if(temp<=lowestPrice){
+          lowestPrice=temp;
+          console.log("yes")
+          lowestIndex=i;
+        }
+      }
+    }
+    console.log("final--> "+lowestPrice)
+    console.log(lowestIndex)
+
+    var f=document.querySelectorAll('#blockToCopyForAlgo');
+    document.getElementById('blockLeft').innerHTML=f[lowestIndex].innerHTML;
+
+</script>
+
+
 
 </body>
 

@@ -1236,16 +1236,18 @@ FastextractDataOfApollo = async (url) => {
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data, { xmlMode: false });
-        const apolloData = JSON.parse($('#__NEXT_DATA__').text());
-        var m='';
+        // const apolloData = JSON.parse($('#__NEXT_DATA__').text());
+        const apolloData =JSON.parse($('script[class="structured-data-list"]').html());
 
-        try {
-            m = apolloData.props.pageProps.productDetails.productdp.special_price; 
-            console.log(m)  
-        } catch (error) {
-            m = apolloData.props.pageProps.productDetails.productdp.price;
-            console.log(m)  
-        }
+        var m=apolloData.offers.price;
+
+        // try {
+        //     m = apolloData.props.pageProps.productDetails.productdp.special_price; 
+        //     console.log(m)  
+        // } catch (error) {
+        //     m = apolloData.props.pageProps.productDetails.productdp.price;
+        //     console.log(m)  
+        // }
 
         // console.log("Generic Option For" + apolloData.props.pageProps.productDetails.productdp[0].name + " ->  " + $('.PdpWeb_subTxt__Soj3p').text());
        
@@ -1287,9 +1289,9 @@ FastextractDataOfApollo = async (url) => {
 
         return {
             name: 'Apollo',
-            item: apolloData.props.pageProps.productDetails.productdp.name,
+            item: apolloData.name,
             link: url,
-            imgLink: 'https://newassets.apollo247.com/pub/media' + apolloData.props.pageProps.productDetails.productdp.image[0],
+            imgLink: '',//image code yet to be found !!!
             price: m,
             offer: '',
             deliveryCharge: dc,
@@ -2634,7 +2636,7 @@ console.log(final)
     console.log(`Execution time for final price scraping: ${end1}ms`);
     // res.render(__dirname + '/temptour', { final: final });
 
-    res.render(__dirname + '/temptour', { final: final });
+    res.render(__dirname + '/temptour.ejs', { final: final });
 
 
 

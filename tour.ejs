@@ -22,6 +22,27 @@ We provide unbiased information on various medicines ,offers and prescriptions a
     <meta name="revisit-after" content="1 days">
     <meta name="author" content="Krishil Rohit Sheth">
     <meta charset="utf-8">
+
+    
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.js"
+		integrity="sha512-20FZL4lG1jTZXPeMkblgj4b/fsXASK5aW87Tm7Z5QK9QmmYleVGM0NlS9swfb6XT8yrFTAWkq3QfnMe7MKIX8A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"
+		integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://js.upload.io/upload-js/v2"></script>
+
+
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6943409373544581"
      crossorigin="anonymous"></script>
@@ -48,12 +69,23 @@ We provide unbiased information on various medicines ,offers and prescriptions a
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-    
+  
+  
+  
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+  
     
   </head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-KSWBE6PN2J');
+  </script>
+    
   <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -106,50 +138,12 @@ We provide unbiased information on various medicines ,offers and prescriptions a
           <div class="col-lg-9">
           	<div class="row">
 
-              <!-- <%=final.length%>
-              <%=final[0]%> -->
-
-              <!-- <a target="_blank" href="https://www.amazon.in/b?_encoding=UTF8&tag=medicompindia-21&linkCode=ur2&linkId=c43b352fd9ecbf87daa0c72ac14fa698&camp=3638&creative=24630&node=26382244031">Best Deals on Supplements by Sirona</a> -->
-
-              <!--amazon affiliate sec <div class="col-md-4 ftco-animate">
-                <div class="destination">
-                  <% for(var i=0; i < final.length; i++) { %>
-                    <% if(final[i].item&&final[i].price) {itemCount++;%>
-								<% if(final[i].imgLink&&temp==0) {%>
-                  <a href="https://www.amazon.in/b?_encoding=UTF8&tag=medicompindia-21&linkCode=ur2&linkId=c43b352fd9ecbf87daa0c72ac14fa698&camp=3638&creative=24630&node=26382244031" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(<%=final[i].imgLink%>);">
-                   <%temp=1%>
-                    <%}%>
-                    <%}%>
-                  
-                    <%}%>
-                  
-                  <a target="_blank" href="https://www.amazon.in/b?_encoding=UTF8&tag=medicompindia-21&linkCode=ur2&linkId=c43b352fd9ecbf87daa0c72ac14fa698&camp=3638&creative=24630&node=26382244031">Buy Cheapest Medicines From Here</a> 
-                      <div class="icon d-flex justify-content-center align-items-center">
-                    <span class="icon-search2"></span>
-                  </div>
-                    </a>
-                    <div class="text p-3">
-                      <div class="d-flex" style="height: auto;">
-                        <div class="one" style="height: auto;">
-                          <h3 style="
-                          overflow-wrap: anywhere;
-                      "><a href="#" id="mediname"> Buy Cheapest Medicines From Here</a></h3>
-                        
-                        </div>
-                        <div class="two">
-  
-                          <span class="price">Ad.</span>
-                        </div>
-                      </div>
-                  
-                    </div>
-                  </div>
-                </div> -->
-
+             
                 
 
 				<% for(var i=0; i < final.length; i++) { %>
-					<% if(final[i].item&&final[i].price) {itemCount++;%>
+					
+					<% if(final[i].price) {itemCount++;%>
 						
 						<div class="col-md-4 ftco-animate">
 							<div class="destination">
@@ -175,7 +169,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 			    							<span class="price"><%if(final[i].deliveryCharge!="login"){%>
 												₹<%=(parseFloat(final[i].price) + parseFloat(final[i].deliveryCharge)).toFixed(2)%>
 												<%}else{%>
-													₹<%=parseFloat(final[i].price)%>
+													₹<%parseFloat((final[i][0][k].price.toString()).replace(/,/g, ""))%>
 													<%}%></span>
 		    							</div>
 		    						</div>
@@ -228,7 +222,58 @@ We provide unbiased information on various medicines ,offers and prescriptions a
           </div> <!-- .col-md-8 -->
         </div>
       </div>
-    </section> <!-- .section -->
+      <section class="ftco-section ftco-destination">
+        <div class="container">
+          <div class="row justify-content-start mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate">
+              <span class="subheading"></span>
+              <!-- <h2 class="mb-4"><strong>Substitutes</strong></h2> -->
+            </div>
+          </div>
+          <div class="row" id="zRow">
+            <div class="col-md-12">
+              <div class="destination-slider owl-carousel ftco-animate">
+                
+                <% for(var i=0; i < final.length; i++) { %>
+                  <% if(final[i].subsname) {%>
+                <div class="item">
+                  <div class="destination">
+                    <a  href="http://localhost:3000/compare?medname=<%=final[i].subsname%>" class="img d-flex justify-content-center align-items-center pharmasList"
+                      style="border:1px solid #e6e6e6;background-image: url(https://images.apollo247.in/pub/media<%=final[i].subsImgLink%>);background-size: contain;">
+                      <div class="icon d-flex justify-content-center align-items-center">
+                        <span class="icon-search2"></span>
+                      </div>
+                    </a>
+                    <div class="text p-3">
+                      <h3><a href="#"><%=final[i].subsname%></a></h3>
+                      <span class="listing"><%=final[i].subsprice%></span>
+                    </div>
+                  </div>
+                </div>
+                <%}%>
+              <%}%>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+ 
+ 
+    
+      <script>
+        var z=document.querySelectorAll('.pharmasList');
+        console.log(z);
+        if(window.innerWidth<800){
+          for(i in z){
+            console.log("called")
+            z[i].style.height="200px";
+          }
+        }
+      </script> 
+
+      
+    </section> 
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
