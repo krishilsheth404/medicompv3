@@ -21,12 +21,13 @@
     <meta name="author" content="Krishil Rohit Sheth">
     <meta charset="utf-8">
     
-    <meta property="og:image" content="medicompLogo.png">
     <% for(var i=0; i < final.length-1; i++) { %>
       <% if(final[i].imgLink) {%>
         <meta property="og:image" content="<%=final[i].imgLink%>">
-        <%}%>
-      <%}%>
+        <%}else{%>
+          <meta property="og:image" content="medicompLogo.png">
+          <%}%>
+    <%}%>
 
 
     
