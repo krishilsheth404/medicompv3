@@ -20,7 +20,14 @@
     <meta name="revisit-after" content="1 days">
     <meta name="author" content="Krishil Rohit Sheth">
     <meta charset="utf-8">
-    <meta property="og:image" content="<%=final[0].imgLink%>">
+
+    <% for(var i=0; i < final.length-1; i++) { %>
+      <% if(final[i].imgLink) {%>
+        <meta property="og:image" content="<%=final[i].imgLink%>">
+        <%}else{%>
+          <meta property="og:image" content="medicompLogo.png">
+            <%}%>
+      <%}%>
 
 
     
