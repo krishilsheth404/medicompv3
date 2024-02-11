@@ -5,9 +5,7 @@
 
     <meta name="title" content="Medicomp India Results">
     <meta name="description"
-        content="India's 1st platform to compare medicine prices.We provide unbiased information on various medicines available in the Indian market.
-        Medicomp india is a company that provides price comparison for medicines and medical equipment. We are India’s first and largest price comparison service for medical products. Our team is driven by the vision of making healthcare affordable for the masses. We have helped thousands of patients save big on their medical treatment.
-We provide unbiased information on various medicines ,offers and prescriptions available in the Indian market. This information is provided through a price comparison engine that helps patients to make an informed purchase decision. ">
+        content="Prices For <%=final[final.length-1]%> Ranges From <%=final[0].finalCharge%> - <%=final[final.length-2].finalCharge%> , To View More Details , Open The Website">
     <meta name="keywords"
         content="medicine price compare,apollo pharmacy,netmeds.pulse plus,tata 1mg,pharmeasy,
         medicine prices, online comparison, prescription drugs, generic drugs, brand name drugs, affordable medications, pharmacy prices, drug costs, healthcare, pharmaceuticals,
@@ -141,7 +139,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
              
                 
 
-				<% for(var i=0; i < final.length; i++) { %>
+				<% for(var i=0; i < final.length-1; i++) { %>
 					
 					<% if(final[i].price) {itemCount++;%>
 						
@@ -234,7 +232,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
             <div class="col-md-12">
               <div class="destination-slider owl-carousel ftco-animate">
                 
-                <% for(var i=0; i < final.length; i++) { %>
+                <% for(var i=0; i < final.length-1; i++) { %>
                   <% if(final[i].subsname) {%>
                 <div class="item">
                   <div class="destination">

@@ -1926,13 +1926,23 @@ extractDataOfTorus = async (url) => {
             price: parseFloat($('.productdit_pricebox h3').text().split('Rs')[1]),
             deliveryCharge: 0,
             offer: '',
+            finalCharge:parseInt(parseFloat($('.productdit_pricebox h3').text().split('Rs')[1]) + 0),
         };
 
     } catch (error) {
         // res.sendFile(__dirname + '/try.html');
         // res.sendFile(__dirname + '/error.html');
-        // console.log(error);
-        return {};
+        console.log(error);
+        return {
+            name: 'Torus',
+            item: 'NA',
+            link: url,
+            imgLink:'',
+            price: '',
+            deliveryCharge: 0,
+            offer: '',
+            finalCharge:'',
+        };
     }
 };
 
@@ -2865,12 +2875,13 @@ app.get('/compare', async (req, res) => {
   // const responses = await Promise.all(FinalDataFunc);
 
   for (var i = 0; i < 8; i++) {
-      final.push(responses[i]);
+      if(responses[i].name!="NA"&&responses[i].price){
+          final.push(responses[i]);
+      }
     }
 
-    console.log(final)
-  // final.push(responses[0])
-  // final.push(responses[1])
+    // final.push(responses[0])
+    // final.push(responses[1])
   // final.push(responses[2])
   // final.push(responses[3])
   // final.push(responses[4])
@@ -2881,7 +2892,9 @@ app.get('/compare', async (req, res) => {
   // final.push(responses[9])
 
 
-//   final.sort((a, b) => a.finalCharge - b.finalCharge); // b - a for reverse sort
+  final.sort((a, b) => a.finalCharge - b.finalCharge); // b - a for reverse sort
+  final.push(nameOfMed)
+console.log(final)
 
 //   if (presReq[0] == "Yes") {
 //       final.push(presReq);
