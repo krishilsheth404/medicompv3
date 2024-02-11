@@ -20,6 +20,8 @@
     <meta name="revisit-after" content="1 days">
     <meta name="author" content="Krishil Rohit Sheth">
     <meta charset="utf-8">
+    <meta property="og:image" content="<%=final[i].imgLink%>">
+
 
     
 
@@ -147,7 +149,6 @@
 							<div class="destination">
 								<% if(final[i].imgLink) {%>
 									<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(<%=final[i].imgLink%>);">
-                    <meta property="og:image" content="<%=final[i].imgLink%>">
 										<%}else{%>
 											<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(noimage.jpg);">
 											<%}%>
