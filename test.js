@@ -1365,9 +1365,9 @@ extractDataOfTruemeds = async (url) => {
         // console.log($('.image-gallery-image img').attr('src'));
         var dc = '';
 
-        if ($('.medSelling').first().text() < 499) {
+        if (parseInt($('.medSelling').first().text().split('₹')[1]) < 499) {
             dc = 50;
-        } else if ($('.medSelling').first().text() >= 500) {
+        } else if (parseInt($('.medSelling').first().text().split('₹')[1]) >= 500) {
             dc = 0;
         }
 
@@ -2011,7 +2011,7 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
         console.log("fetchedDataFromYahoo");
         var keywords = medname.split(' ');
 
-        var resultsA = [], resultsB = [], resultsC = [], resultsD = [], resultsE = [], resultsF = [], resultsG = [], resultsH = [];
+        var resultsA = [], resultsB = [], resultsC = [], resultsD = [], resultsE = [], resultsF = [], resultsG = [], resultsH = [],resultsI = [],resultsJ = [];
 
         console.log("-----------");
         console.log(pharmaNames);
@@ -2086,7 +2086,24 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
                     }
                 }
                 resultsH.push({ plink: str, point: count });
+            } else if (str.includes(pharmaNames[8]) && !str.includes("yahoo.com") && pharmaNames[7] != 0) {
+                var count = 1;
+                for (var i = 0; i < keywords.length; i++) {
+                    if ((new RegExp("\\b" + keywords[i] + "\\b", "i").test(str))) {
+                        count++;
+                    }
+                }
+                resultsI.push({ plink: str, point: count });
+            } else if (str.includes(pharmaNames[9]) && !str.includes("yahoo.com") && pharmaNames[7] != 0) {
+                var count = 1;
+                for (var i = 0; i < keywords.length; i++) {
+                    if ((new RegExp("\\b" + keywords[i] + "\\b", "i").test(str))) {
+                        count++;
+                    }
+                }
+                resultsJ.push({ plink: str, point: count });
             }
+            
         })
 
         resultsA.sort((a, b) => {
@@ -2111,6 +2128,12 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
             return b.point - a.point;
         });
         resultsH.sort((a, b) => {
+            return b.point - a.point;
+        });
+        resultsI.sort((a, b) => {
+            return b.point - a.point;
+        });
+        resultsJ.sort((a, b) => {
             return b.point - a.point;
         });
 
@@ -2186,6 +2209,22 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
         } catch (error) {
             // final.push(0)
         }
+        
+        try {
+            final.push(resultsI[0]['plink'])
+            console.log(resultsI[0]['plink'])
+            pharmaNames[8] = 0;
+        } catch (error) {
+            // final.push(0)
+        }
+        
+        try {
+            final.push(resultsJ[0]['plink'])
+            console.log(resultsJ[0]['plink'])
+            pharmaNames[9] = 0;
+        } catch (error) {
+            // final.push(0)
+        }
 
 
 
@@ -2246,10 +2285,11 @@ app.get('/FastGetPharmaDataFromLinks', async (req, res) => {
 
 
     pharmaData.push(await Promise.all([
-        FastextractDataOfApollo(pharmaLinkArray[0])
-        , extractDataOfNetMeds(pharmaLinkArray[1]), extractDataOfPharmEasy(pharmaLinkArray[2]),
-        extractDataOfOBP(pharmaLinkArray[3]), extractDataOfmedplusMart(pharmaLinkArray[4]),
-        extractDataOfMyUpChar(pharmaLinkArray[5]), extractDataOfPP(pharmaLinkArray[6]), extractDataOfOgMPM(pharmaLinkArray[7])]));
+            FastextractDataOfApollo(pharmaLinkArray[0]),extractDataOfNetMeds(pharmaLinkArray[1]), extractDataOfPharmEasy(pharmaLinkArray[2]),
+    extractDataOfOBP(pharmaLinkArray[3]),extractDataOfmedplusMart(pharmaLinkArray[4]), extractDataOfMyUpChar(pharmaLinkArray[5]),
+    extractDataOfPP(pharmaLinkArray[6])
+    ,extractDataOfOgMPM(pharmaLinkArray[7]),extractDataOfTruemeds(pharmaLinkArray[8]),extractDataOfTata(pharmaLinkArray[9]),
+            ]));
     console.log(pharmaData.data);
     // res.send(pharmaData);
 
@@ -2289,31 +2329,32 @@ app.get('/fastComp', async (req, res) => {
     // } for delivery price change as per location
 
 
-    const nameOfMed = req.query['medname'] + '\n';
+    var nameOfMed = req.query['medname'] + '\n';
+    nameOfMed=nameOfMed.trim();
     console.log(nameOfMed);
     const presReq = ["No"];
 
 
     var tempFinal = [];
 
-    var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=apollopharmacy.in+%2C+pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com`;
+    var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=apollopharmacy.in+%2C+pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
 
 
     var arr = [
 
         'apollopharmacy.in', 'netmeds.com', 'pharmeasy.in',
         'pasumaipharmacy.com', 'pulseplus.in',
-        'tabletshablet.com', 'medplusmart.com', 'myupchar.com'
-
+        'tabletshablet.com', 'medplusmart.com', 'myupchar.com',
+        'truemeds.in','1mg.com',
     ]
 
 
     var cont = checkforzero(arr);
     // console.log(arr)
     var tempf = [];
-    var t = [0, 0, 0, 0, 0, 0, 0, 0];
+    var t = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var tries = 0;
-    while (cont != 8) {
+    while (cont != 10) {
 
 
         tries++;
@@ -2323,7 +2364,7 @@ app.get('/fastComp', async (req, res) => {
                 mixUrl += arr[i] + "+%2C+";
             }
         }
-        // console.log("New Url => " + mixUrl)
+        console.log("New Url => " + mixUrl)
         // console.log(arr)
 
 
@@ -2358,6 +2399,10 @@ app.get('/fastComp', async (req, res) => {
             t[6] = tempf[k];
         } else if (tempf[k].includes("medplusmart")) {
             t[7] = tempf[k];
+        } else if (tempf[k].includes("truemeds")) {
+            t[8] = tempf[k];
+        } else if (tempf[k].includes("1mg")) {
+            t[9] = tempf[k];
         }
     }
     console.log(t);
@@ -2409,12 +2454,12 @@ app.post('/multiSearch', async (req, res) => {
     if (req.body.multiItems.length == 1) {
         var nameOfMed = req.body.multiItems.split(',');
         console.log(nameOfMed);
-        linkdata.push(`https://medicomp.in/fastComp?medname=${nameOfMed[0]}`);
+        linkdata.push(`http://localhost:3000/fastComp?medname=${nameOfMed[0]}`);
         mnames.push(nameOfMed[0])
     } else if (req.body.multiItems.length > 1) {
         console.log(req.body.multiItems);
         for (mednames in req.body.multiItems) {
-            linkdata.push(`https://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
+            linkdata.push(`http://localhost:3000/fastComp?medname=${req.body.multiItems[mednames]}`)
             mnames.push(req.body.multiItems[mednames])
         }
     }
@@ -2436,7 +2481,7 @@ app.post('/multiSearch', async (req, res) => {
 
     const finalMultiPriceData = [];
     for (var i = 0; i < responses.length; i++) {
-        finalMultiPriceData.push(`https://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`)
+        finalMultiPriceData.push(`http://localhost:3000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`)
     }
     // console.log(finalMultiPriceData)
 
@@ -2601,7 +2646,7 @@ app.post('/multiSearch', async (req, res) => {
 
 
 
-            for (var k = 0; k < 8; k++) {
+            for (var k = 0; k < 10; k++) {
                 if (k == 0 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForApollo(tempca[k]));
                 } else if (k == 1 && tempca[k]) {
@@ -2621,6 +2666,10 @@ app.post('/multiSearch', async (req, res) => {
                 } else if (k == 6 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPasumai(tempca[k]))
                 } else if (k == 7 && tempca[k]) {
+                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
+                }else if (k == 8 && tempca[k]) {
+                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k])) // need to change the delivery name
+                }else if (k == 9 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
                 }
             }//delivery charges are added
