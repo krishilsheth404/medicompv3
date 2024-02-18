@@ -262,7 +262,6 @@ function getDeliveryChargeFor1mg(totalMedPrice){
           }
         </style>
 
-<div id="combdatablock" style="font-size: 0px;height: 0px;"><%=final[final.length-1].combiString.bestPossSol%></div>
 <div id="combdatablockwithmednames" style="font-size: 0px;height: 0px;"><%=final[final.length-1].combiString.medNames%></div>
 
 
@@ -351,7 +350,11 @@ function getDeliveryChargeFor1mg(totalMedPrice){
 
                                         <% for(var i=0; i < final.length-1; i++) {%>
                                         <%if(final[i][0][k].name){%>
-                                          <%count=parseFloat(count)+parseFloat((final[i][0][k].price.toString()).replace(/,/g, ""))%>
+                                                <%if(final[i][0][k].price){%>
+                                                <%count=parseFloat(count)+parseFloat((final[i][0][k].price.toString()).replace(/,/g, ""))%>
+                                                <%}else{%>
+                                                 <%count=parseFloat(count)+parseFloat((final[i][0][k].price))%>
+                                                <%}%>
                                           <%}else{%>
                                           <%count=count+0%>
                                           <%}%>

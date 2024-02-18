@@ -1498,6 +1498,7 @@ extractDataOf3Meds = async (url) => {
 extractDataOfTata = async (url) => {
     try {
         // Fetching HTML
+        console.log(url);
         const { data } = await axios.get(url);
 
         // Using cheerio to extract <a> tags
@@ -2325,7 +2326,7 @@ app.get('/fastComp', async (req, res) => {
 
     var tempFinal = [];
 
-    var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
+    var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=medicine intitle:(${nameOfMed})&vs=pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
 
 
     var arr = [
@@ -2456,10 +2457,6 @@ app.post('/multiSearch', async (req, res) => {
     const responses = await axiosParallel(linkdata);
 
 
-
-
-
-
     console.log(responses);
 
 
@@ -2557,10 +2554,10 @@ app.post('/multiSearch', async (req, res) => {
     }
 
     console.log(priceFinal)
-    const temppriceFinalData = priceFinal;
+    // const temppriceFinalData = priceFinal;
 
-    var combChart = {};
-    var tempcombiChart = [];
+    // var combChart = {};
+    // var tempcombiChart = [];
 
 
     var finalPriceComboChart = {};
@@ -2607,10 +2604,10 @@ app.post('/multiSearch', async (req, res) => {
     }
 
 
-    for (var i = 1; i <= pharmaFinaldata.length; i++) {
-        combChart[i] = (permute(pharmaFinaldata.length, i));
-        tempcombiChart.push(permute(pharmaFinaldata.length, i));
-    }
+    // for (var i = 1; i <= pharmaFinaldata.length; i++) {
+    //     combChart[i] = (permute(pharmaFinaldata.length, i));
+    //     tempcombiChart.push(permute(pharmaFinaldata.length, i));
+    // }
 
 
 
@@ -2618,96 +2615,96 @@ app.post('/multiSearch', async (req, res) => {
     var tempca = [];
     var smallesTotalCombValues = {};
 
-    for (let key in combChart) {
-        console.log(`Key: ${key}`);
-        for (let inkey in combChart[key]) {
-            var temp = combChart[key][inkey].split('');
-            console.log("Combination-> " + temp);
-            for (var i = 0; i < temp.length; i++) {
-                cq.push(priceFinal[parseInt(temp[i]) - 1])
-            }
+    // for (let key in combChart) {
+    //     console.log(`Key: ${key}`);
+    //     for (let inkey in combChart[key]) {
+    //         var temp = combChart[key][inkey].split('');
+    //         console.log("Combination-> " + temp);
+    //         for (var i = 0; i < temp.length; i++) {
+    //             cq.push(priceFinal[parseInt(temp[i]) - 1])
+    //         }
 
-            tempca = [].concat(mergeArrays(cq));
-
-
-
-
-            for (var k = 0; k < 9; k++) {
-                if (k == 0 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForNetmeds(tempca[k]))
-                } else if (k == 1 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPharmeasy(tempca[k]))
-                }
-                //  else if (k == 3 && tempca[k]) {
-                //     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForHealthskool(tempca[k]))
-                // } 
-                else if (k == 2 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForTabletShablet(tempca[k]))
-                } else if (k == 3 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPulsePlus(tempca[k]))
-                } else if (k == 4 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMyUpChar(tempca[k]))
-                } else if (k == 5 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPasumai(tempca[k]))
-                } else if (k == 6 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
-                }else if (k == 7 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k])) // need to change the delivery name
-                }else if (k == 8 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
-                }
-            }//delivery charges are added
-
-            console.log(tempca);
-            console.log("Smallest Value --> " + tempca[findSmallest(tempca)]);
-            smallesTotalCombValues[combChart[key][inkey]] = tempca[findSmallest(tempca)];
-            smallesTotalCombValues[combChart[key][inkey] + "from"] = findSmallest(tempca);
-            // smallesTotalCombValues.push(findSmallest(tempca)+1);
-            // console.log("You Should Buy Medicine No--> "+temp+" from Pharmacy Number ->"+findSmallest(tempca));
-
-            tempca = [];
-            cq = [];
-
-            console.log('\n');
-
-
-            // finalPriceComboChart[combChart[key][inkey]]
-        }
-    }
-
-
-    console.log(smallesTotalCombValues)//here the main logic has to be applied
-    tempcombiChart.pop();
-    tempcombiChart = [].concat(...tempcombiChart);
+    //         tempca = [].concat(mergeArrays(cq));
 
 
 
 
-    var tempSum = [];
-    var i = 0;
-    var j = tempcombiChart.length - 1;
+    //         for (var k = 0; k < 9; k++) {
+    //             if (k == 0 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForNetmeds(tempca[k]))
+    //             } else if (k == 1 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPharmeasy(tempca[k]))
+    //             }
+    //             //  else if (k == 3 && tempca[k]) {
+    //             //     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForHealthskool(tempca[k]))
+    //             // } 
+    //             else if (k == 2 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForTabletShablet(tempca[k]))
+    //             } else if (k == 3 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPulsePlus(tempca[k]))
+    //             } else if (k == 4 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMyUpChar(tempca[k]))
+    //             } else if (k == 5 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPasumai(tempca[k]))
+    //             } else if (k == 6 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
+    //             }else if (k == 7 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k])) // need to change the delivery name
+    //             }else if (k == 8 && tempca[k]) {
+    //                 tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
+    //             }
+    //         }//delivery charges are added
 
-    while (i < j) {
-        // console.log(arr[i], arr[j]);
-        tempSum.push(parseFloat(smallesTotalCombValues[tempcombiChart[i]]) + parseFloat(smallesTotalCombValues[tempcombiChart[j]]))
-        i++;
-        j--;
-    }
+    //         console.log(tempca);
+    //         console.log("Smallest Value --> " + tempca[findSmallest(tempca)]);
+    //         smallesTotalCombValues[combChart[key][inkey]] = tempca[findSmallest(tempca)];
+    //         smallesTotalCombValues[combChart[key][inkey] + "from"] = findSmallest(tempca);
+    //         // smallesTotalCombValues.push(findSmallest(tempca)+1);
+    //         // console.log("You Should Buy Medicine No--> "+temp+" from Pharmacy Number ->"+findSmallest(tempca));
 
-    if (i === j) {
-        console.log(tempcombiChart[i]);
-    }
+    //         tempca = [];
+    //         cq = [];
 
-    var a = tempcombiChart[findSmallest(tempSum)];
-    var b = tempcombiChart[tempcombiChart.length - findSmallest(tempSum) - 1];
+    //         console.log('\n');
 
-    a = a + "from";
-    b = b + "from";
+
+    //         // finalPriceComboChart[combChart[key][inkey]]
+    //     }
+    // }
+
+
+    // console.log(smallesTotalCombValues)//here the main logic has to be applied
+    // tempcombiChart.pop();
+    // tempcombiChart = [].concat(...tempcombiChart);
+
+
+
+
+    // var tempSum = [];
+    // var i = 0;
+    // var j = tempcombiChart.length - 1;
+
+    // while (i < j) {
+    //     // console.log(arr[i], arr[j]);
+    //     tempSum.push(parseFloat(smallesTotalCombValues[tempcombiChart[i]]) + parseFloat(smallesTotalCombValues[tempcombiChart[j]]))
+    //     i++;
+    //     j--;
+    // }
+
+    // if (i === j) {
+    //     console.log(tempcombiChart[i]);
+    // }
+
+    // var a = tempcombiChart[findSmallest(tempSum)];
+    // var b = tempcombiChart[tempcombiChart.length - findSmallest(tempSum) - 1];
+
+    // a = a + "from";
+    // b = b + "from";
     final.push({
         combiString: {
-            bestPossSol:
-                a + " " + (parseFloat(smallesTotalCombValues[a])) + " & " + b + " " + (parseFloat(smallesTotalCombValues[b]))
-                + " = " + (parseFloat(smallesTotalCombValues[tempcombiChart[findSmallest(tempSum)]]) + parseFloat(smallesTotalCombValues[tempcombiChart[tempcombiChart.length - findSmallest(tempSum) - 1]])),
+            // bestPossSol:
+            //     a + " " + (parseFloat(smallesTotalCombValues[a])) + " & " + b + " " + (parseFloat(smallesTotalCombValues[b]))
+            //     + " = " + (parseFloat(smallesTotalCombValues[tempcombiChart[findSmallest(tempSum)]]) + parseFloat(smallesTotalCombValues[tempcombiChart[tempcombiChart.length - findSmallest(tempSum) - 1]])),
             medNames: mnames,
         }
     });
