@@ -114,11 +114,11 @@ app.get('/multiSearchOld', async (req, res) => {
     const start = performance.now();
 
     const LinkDataResponses = await axiosParallel(
-        ['https://localhost:3000/compare?medname=Dolo-650+Tablet+10%27s',
-            'https://localhost:3000/compare?medname=Volini+Pain+Relief+Spray%2C+40+gm',
-            'https://localhost:3000/compare?medname=Moov+Pain+Relief+Cream%2C+15+gm',
-            'https://localhost:3000/compare?medname=Dolo-650+Tablet+10%27s',
-            'https://localhost:3000/compare?medname=endoreg%2014s',
+        ['https://localhost:1000/compare?medname=Dolo-650+Tablet+10%27s',
+            'https://localhost:1000/compare?medname=Volini+Pain+Relief+Spray%2C+40+gm',
+            'https://localhost:1000/compare?medname=Moov+Pain+Relief+Cream%2C+15+gm',
+            'https://localhost:1000/compare?medname=Dolo-650+Tablet+10%27s',
+            'https://localhost:1000/compare?medname=endoreg%2014s',
         ]);
     // console.log(LinkDataResponses[0].data);
 
@@ -2011,7 +2011,7 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
         console.log("fetchedDataFromYahoo");
         var keywords = medname.split(' ');
 
-        var resultsA = [], resultsB = [], resultsC = [], resultsD = [], resultsE = [], resultsF = [], resultsG = [], resultsH = [],resultsI = [],resultsJ = [];
+        var resultsA = [], resultsB = [], resultsC = [], resultsD = [], resultsE = [], resultsF = [], resultsG = [], resultsH = [],resultsI = [];
 
         console.log("-----------");
         console.log(pharmaNames);
@@ -2094,15 +2094,7 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
                     }
                 }
                 resultsI.push({ plink: str, point: count });
-            } else if (str.includes(pharmaNames[9]) && !str.includes("yahoo.com") && pharmaNames[7] != 0) {
-                var count = 1;
-                for (var i = 0; i < keywords.length; i++) {
-                    if ((new RegExp("\\b" + keywords[i] + "\\b", "i").test(str))) {
-                        count++;
-                    }
-                }
-                resultsJ.push({ plink: str, point: count });
-            }
+            } 
             
         })
 
@@ -2133,9 +2125,7 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
         resultsI.sort((a, b) => {
             return b.point - a.point;
         });
-        resultsJ.sort((a, b) => {
-            return b.point - a.point;
-        });
+    
 
 
 
@@ -2218,14 +2208,7 @@ extractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
             // final.push(0)
         }
         
-        try {
-            final.push(resultsJ[0]['plink'])
-            console.log(resultsJ[0]['plink'])
-            pharmaNames[9] = 0;
-        } catch (error) {
-            // final.push(0)
-        }
-
+      
 
 
 
@@ -2285,10 +2268,15 @@ app.get('/FastGetPharmaDataFromLinks', async (req, res) => {
 
 
     pharmaData.push(await Promise.all([
-            FastextractDataOfApollo(pharmaLinkArray[0]),extractDataOfNetMeds(pharmaLinkArray[1]), extractDataOfPharmEasy(pharmaLinkArray[2]),
-    extractDataOfOBP(pharmaLinkArray[3]),extractDataOfmedplusMart(pharmaLinkArray[4]), extractDataOfMyUpChar(pharmaLinkArray[5]),
-    extractDataOfPP(pharmaLinkArray[6])
-    ,extractDataOfOgMPM(pharmaLinkArray[7]),extractDataOfTruemeds(pharmaLinkArray[8]),extractDataOfTata(pharmaLinkArray[9]),
+            extractDataOfNetMeds(pharmaLinkArray[0]), 
+            extractDataOfPharmEasy(pharmaLinkArray[1]),
+            extractDataOfOBP(pharmaLinkArray[2]),
+            extractDataOfmedplusMart(pharmaLinkArray[3]),
+            extractDataOfMyUpChar(pharmaLinkArray[4]),
+            extractDataOfPP(pharmaLinkArray[5]),
+            extractDataOfOgMPM(pharmaLinkArray[6]),
+            extractDataOfTruemeds(pharmaLinkArray[7]),
+            extractDataOfTata(pharmaLinkArray[8]),
             ]));
     console.log(pharmaData.data);
     // res.send(pharmaData);
@@ -2337,12 +2325,12 @@ app.get('/fastComp', async (req, res) => {
 
     var tempFinal = [];
 
-    var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=apollopharmacy.in+%2C+pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
+    var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
 
 
     var arr = [
 
-        'apollopharmacy.in', 'netmeds.com', 'pharmeasy.in',
+        'netmeds.com', 'pharmeasy.in',
         'pasumaipharmacy.com', 'pulseplus.in',
         'tabletshablet.com', 'medplusmart.com', 'myupchar.com',
         'truemeds.in','1mg.com',
@@ -2352,9 +2340,9 @@ app.get('/fastComp', async (req, res) => {
     var cont = checkforzero(arr);
     // console.log(arr)
     var tempf = [];
-    var t = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var t = [ 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var tries = 0;
-    while (cont != 10) {
+    while (cont != 9) {
 
 
         tries++;
@@ -2379,30 +2367,28 @@ app.get('/fastComp', async (req, res) => {
 
 
     for (var k = 0; k < tempf.length; k++) {
-        if (tempf[k].includes("apollo")) {
+        if (tempf[k].includes("netmeds")) {
             t[0] = tempf[k];
-        } else if (tempf[k].includes("netmeds")) {
-            t[1] = tempf[k];
         } else if (tempf[k].includes("pharmeasy")) {
-            t[2] = tempf[k];
+            t[1] = tempf[k];
         }
         // else if (tempf[k].includes("healthskool")) {
         // t[3]=tempf[k];
         // } 
         else if (tempf[k].includes("tabletshablet")) {
-            t[3] = tempf[k];
+            t[2] = tempf[k];
         } else if (tempf[k].includes("pulseplus")) {
-            t[4] = tempf[k];
+            t[3] = tempf[k];
         } else if (tempf[k].includes("myupchar")) {
-            t[5] = tempf[k];
+            t[4] = tempf[k];
         } else if (tempf[k].includes("pasumai")) {
-            t[6] = tempf[k];
+            t[5] = tempf[k];
         } else if (tempf[k].includes("medplusmart")) {
-            t[7] = tempf[k];
+            t[6] = tempf[k];
         } else if (tempf[k].includes("truemeds")) {
-            t[8] = tempf[k];
+            t[7] = tempf[k];
         } else if (tempf[k].includes("1mg")) {
-            t[9] = tempf[k];
+            t[8] = tempf[k];
         }
     }
     console.log(t);
@@ -2646,30 +2632,28 @@ app.post('/multiSearch', async (req, res) => {
 
 
 
-            for (var k = 0; k < 10; k++) {
+            for (var k = 0; k < 9; k++) {
                 if (k == 0 && tempca[k]) {
-                    tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForApollo(tempca[k]));
-                } else if (k == 1 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForNetmeds(tempca[k]))
-                } else if (k == 2 && tempca[k]) {
+                } else if (k == 1 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPharmeasy(tempca[k]))
                 }
                 //  else if (k == 3 && tempca[k]) {
                 //     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForHealthskool(tempca[k]))
                 // } 
-                else if (k == 3 && tempca[k]) {
+                else if (k == 2 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForTabletShablet(tempca[k]))
-                } else if (k == 4 && tempca[k]) {
+                } else if (k == 3 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPulsePlus(tempca[k]))
-                } else if (k == 5 && tempca[k]) {
+                } else if (k == 4 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMyUpChar(tempca[k]))
-                } else if (k == 6 && tempca[k]) {
+                } else if (k == 5 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForPasumai(tempca[k]))
-                } else if (k == 7 && tempca[k]) {
+                } else if (k == 6 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
-                }else if (k == 8 && tempca[k]) {
+                }else if (k == 7 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k])) // need to change the delivery name
-                }else if (k == 9 && tempca[k]) {
+                }else if (k == 8 && tempca[k]) {
                     tempca[k] = tempca[k] + parseFloat(getDeliveryChargeForMedPlusMart(tempca[k]))
                 }
             }//delivery charges are added
@@ -3037,7 +3021,7 @@ app.get('/compare', async (req, res) => {
 
 });
 
-const port = process.env.PORT || 3000 // Port we will listen on
+const port = process.env.PORT || 1000 // Port we will listen on
 
 // Function to listen on the port
 app.listen(port, () => console.log(`This app is listening on port ${port}`));
