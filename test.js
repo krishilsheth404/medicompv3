@@ -2952,7 +2952,7 @@ app.get('/compare', async (req, res) => {
     const responses = await Promise.all([extractDataOfTorus(item[0]), extractDataOfNetMeds(item[1]), extractDataOfPharmEasy(item[2], presReq),
     extractDataOfOBP(item[3]),
     extractDataOfmedplusMart(item[4]), extractDataOfMyUpChar(item[5]),
-    extractDataOfPP(item[7]), FastextractDataOfApollo(item[8]),
+    extractDataOfPP(item[7]),
         //   extractSubsfApollo(item[8],final),
         extractDataOfTruemeds(item[10]),extractDataOfOgMPM(item[11]),extractDataOfTata(item[12]),
     ]);
@@ -2962,7 +2962,7 @@ app.get('/compare', async (req, res) => {
     // const responses = await Promise.all(FinalDataFunc);
 
     console.log(responses)
-    for (var i = 0; i < 11; i++) {
+    for (var i = 0; i < 10; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
         }
