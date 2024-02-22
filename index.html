@@ -42,276 +42,276 @@
 	<style>
 		@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 		@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-	
+
 		body {
-		  font-family: "Open Sans", sans-serif;
-		  background: #ffffff;
-		  height: 100vh;
-		  width: 100%;
-		  margin: 0px;
+			font-family: "Open Sans", sans-serif;
+			background: #ffffff;
+			height: 100vh;
+			width: 100%;
+			margin: 0px;
 		}
-	
+
 		.container {
-		  margin: 0 auto;
-		  width: 100%;
+			margin: 0 auto;
+			width: 100%;
 		}
-	
+
 		header {
-		  display: flex;
-		  align-items: center;
-		  font-size: 1em;
-		  font-weight: 600;
-		  color: #ffffff;
-		  padding: 20px;
-		  box-sizing: border-box;
-		  user-select: none;
-		  text-align: center;
+			display: flex;
+			align-items: center;
+			font-size: 1em;
+			font-weight: 600;
+			color: #ffffff;
+			padding: 20px;
+			box-sizing: border-box;
+			user-select: none;
+			text-align: center;
 		}
-	
+
 		header .button-col {
-		  width: 240px;
-		  text-align: left;
+			width: 240px;
+			text-align: left;
 		}
-	
+
 		header .status-col {
-		  width: 145px;
+			width: 145px;
 		}
-	
+
 		header .progress-col {
-		  width: 190px;
+			width: 190px;
 		}
-	
+
 		header .dates-col {
-		  width: 150px;
+			width: 150px;
 		}
-	
+
 		header .priority-col {
-		  width: 170px;
+			width: 170px;
 		}
-	
+
 		header .icon-col {
-		  width: 30px;
-		  text-align: right;
+			width: 30px;
+			text-align: right;
 		}
-	
+
 		header button {
-		  color: #bdbdbd;
-		  outline: none;
-		  border: none;
-		  background: #d5d5d5;
-		  padding: 10px 20px;
-		  border-radius: 2.5px;
-		  margin-right: 20px;
-		  font-size: 1em;
-		  font-weight: 600;
+			color: #bdbdbd;
+			outline: none;
+			border: none;
+			background: #d5d5d5;
+			padding: 10px 20px;
+			border-radius: 2.5px;
+			margin-right: 20px;
+			font-size: 1em;
+			font-weight: 600;
 		}
-	
+
 		header button:hover {
-		  cursor: pointer;
-		  background: #3d3d44;
+			cursor: pointer;
+			background: #3d3d44;
 		}
-	
+
 		header label {
-		  display: inline-block;
-		  margin: 0 20px;
-		  text-align: center;
+			display: inline-block;
+			margin: 0 20px;
+			text-align: center;
 		}
-	
+
 		header .icon-col {
-		  padding-right: 20px;
+			padding-right: 20px;
 		}
-	
+
 		.task-items {
-		  width: 95%;
-		  display: block;
-		  margin: auto;
+			width: 95%;
+			display: block;
+			margin: auto;
 		}
-	
+
 		div.task-items li.item {
-		  display: flex;
-		  align-items: center;
-		  margin: 20px 0;
-		  padding: 20px;
-		  background: #fff;
-		  border-radius: 5px;
-		  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+			display: flex;
+			align-items: center;
+			margin: 20px 0;
+			padding: 20px;
+			background: #fff;
+			border-radius: 5px;
+			box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
 		}
-	
+
 		.type1 {
-		  animation: loadName 5s linear;
+			animation: loadName 5s linear;
 		}
-	
+
 		@keyframes loadName {
-		  0% {
-			position: absolute;
-			top: 90%;
-			width: 90%;
-			margin: 0px;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			opacity: 0.6;
-			display: block;
-			height: auto;
-			font-size: 18px;
-		  }
-		  
-		  20% {
-			position: absolute;
-			top: 50%;
-			width: 90%;
-			margin: 0px;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			opacity: 1;
-			display: block;
-			height: auto;
-			font-size: 18px;
-		  }
-		  
-		  100% {
-			position: absolute;
-			top: 10%;
-			width: 90%;
-			margin: 0px;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			opacity: 0;
-			display: block;
-			height: auto;
-			font-size: 18px;
-		  }
-		  
-	
+			0% {
+				position: absolute;
+				top: 90%;
+				width: 90%;
+				margin: 0px;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				opacity: 0.6;
+				display: block;
+				height: auto;
+				font-size: 18px;
+			}
+
+			20% {
+				position: absolute;
+				top: 50%;
+				width: 90%;
+				margin: 0px;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				opacity: 1;
+				display: block;
+				height: auto;
+				font-size: 18px;
+			}
+
+			100% {
+				position: absolute;
+				top: 10%;
+				width: 90%;
+				margin: 0px;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				opacity: 0;
+				display: block;
+				height: auto;
+				font-size: 18px;
+			}
+
+
 		}
-	
+
 		div.task-items li.item.type1 .task .icon {
-		  background: #9575cd;
+			background: #9575cd;
 		}
-	
+
 		div.task-items li.item.type2 .task .icon {
-		  background: #f48fb1;
+			background: #f48fb1;
 		}
-	
+
 		div.task-items li.item.type3 .task .icon {
-		  background: #9575cd;
+			background: #9575cd;
 		}
-	
+
 		div.task-items li.item.type4 .task .icon {
-		  background: #4fc3f7;
+			background: #4fc3f7;
 		}
-	
+
 		div.task-items li.item .task {
-		  display: flex;
-		  align-items: center;
-		  width: 240px;
+			display: flex;
+			align-items: center;
+			width: 240px;
 		}
-	
+
 		div.task-items li.item .task .icon {
-		  background: #bdbdbd;
-		  width: 50px;
-		  height: 50px;
-		  border-radius: 5px;
+			background: #bdbdbd;
+			width: 50px;
+			height: 50px;
+			border-radius: 5px;
 		}
-	
+
 		div.task-items li.item .task .name {
-		  background: #eee;
-		  margin-left: 20px;
-		  width: 180px;
-		  height: 25px;
-		  border-radius: 15px;
+			background: #eee;
+			margin-left: 20px;
+			width: 180px;
+			height: 25px;
+			border-radius: 15px;
 		}
-	
+
 		div.task-items li.item .status {
-		  display: flex;
-		  align-items: center;
-		  font-size: 1em;
-		  color: #2e7d32;
-		  width: 145px;
-		  margin-left: 30px;
+			display: flex;
+			align-items: center;
+			font-size: 1em;
+			color: #2e7d32;
+			width: 145px;
+			margin-left: 30px;
 		}
-	
+
 		div.task-items li.item .status .icon {
-		  background: #2e7d32;
-		  margin-right: 10px;
-		  width: 14px;
-		  height: 14px;
-		  border-radius: 50%;
+			background: #2e7d32;
+			margin-right: 10px;
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
 		}
-	
+
 		div.task-items li.item .status .icon.risk {
-		  background: red;
+			background: red;
 		}
-	
+
 		div.task-items li.item .status .icon.warning {
-		  background: #ffa000;
+			background: #ffa000;
 		}
-	
+
 		div.task-items li.item .status .icon.off {
-		  background: #bf360c;
+			background: #bf360c;
 		}
-	
+
 		div.task-items li.item .progress {
-		  width: 190px;
+			width: 190px;
 		}
-	
+
 		div.task-items li.item .progress progress {
-		  display: block;
-		  margin-left: 0;
-		  -webkit-appearance: none;
-		  height: 12.5px;
-		  width: 142.5px;
+			display: block;
+			margin-left: 0;
+			-webkit-appearance: none;
+			height: 12.5px;
+			width: 142.5px;
 		}
-	
+
 		div.task-items li.item .progress progress::-webkit-progress-bar {
-		  background-color: #eee;
-		  border-radius: 5px;
+			background-color: #eee;
+			border-radius: 5px;
 		}
-	
+
 		div.task-items li.item .progress ::-webkit-progress-value {
-		  background-color: #4dd0e1;
-		  border-radius: 5px;
+			background-color: #4dd0e1;
+			border-radius: 5px;
 		}
-	
+
 		div.task-items li.item .dates {
-		  width: 150px;
+			width: 150px;
 		}
-	
+
 		div.task-items li.item .dates .bar,
 		div.task-items li.item .priority .bar {
-		  background: #eee;
-		  width: 100px;
-		  height: 25px;
-		  border-radius: 15px;
+			background: #eee;
+			width: 100px;
+			height: 25px;
+			border-radius: 15px;
 		}
-	
+
 		div.task-items li.item .priority {
-		  width: 144.5px;
+			width: 144.5px;
 		}
-	
+
 		div.task-items li.item .priority .bar {
-		  background: #ffcdd2;
+			background: #ffcdd2;
 		}
-	
+
 		div.task-items li.item .user {
-		  width: 30px;
+			width: 30px;
 		}
-	
+
 		div.task-items li.item .user img {
-		  border-radius: 50%;
+			border-radius: 50%;
 		}
-	  </style>
+	</style>
 
 
 	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KSWBE6PN2J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-KSWBE6PN2J"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-  gtag('config', 'G-KSWBE6PN2J');
-</script>
-	
+		gtag('config', 'G-KSWBE6PN2J');
+	</script>
+
 	<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
 
 	<script src="
@@ -546,16 +546,16 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						}
 					</script>
 				</div>
-				
-				<form id="mainMedListBox"  action="/multiSearch" method="POST" style="display: flex;
+
+				<form id="mainMedListBox" action="/multiSearch" method="POST" style="display: flex;
 				align-items: center;
 				justify-content: center;
 				flex-wrap: wrap;">
 
-						
-				</form>	
-						<div id="MultiSearchButton" style="display: none;">
-							<a onclick="document.getElementById('mainMedListBox').submit(),multiLoader()" style="width: 100%;
+
+				</form>
+				<div id="MultiSearchButton" style="display: none;">
+					<a onclick="document.getElementById('mainMedListBox').submit(),multiLoader()" style="width: 100%;
 							height: 40px;
 							cursor: pointer;
 							background-color: white;
@@ -563,9 +563,9 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							/* display: block; */
 							display: flex;
 							align-items: center;
-							justify-content: center;transition: all 1s;">Multi-Search</a>	
-					</div>
-			
+							justify-content: center;transition: all 1s;">Multi-Search</a>
+				</div>
+
 				<p id="text_change" style="color: black;"></p>
 				<p class="browse d-md-flex" style="display: flex;
 					align-items: center;
@@ -635,30 +635,32 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			grid-row: 1 / -1;
 			aspect-ratio: 1;
 		}
-		#medlists{
-			width:33%;
+
+		#medlists {
+			width: 33%;
 			margin: 0px;
 		}
+
 		@media screen and (max-width:500px) {
-			#medlists{
-				width:100%;
+			#medlists {
+				width: 100%;
 				margin: 0px;
 			}
-			
+
 		}
 	</style>
 	<script>
-		function addMedToSearchList(idNameForMultiSearch){
+		function addMedToSearchList(idNameForMultiSearch) {
 
 			console.warn(document.getElementById(`idcontainer`).offsetHeight);
 			console.warn(document.getElementById(`mainMedListBox`).offsetHeight);
-			document.getElementById(`idcontainer`).style.height=parseInt(document.getElementById(`idcontainer`).style.height)+parseInt(document.getElementById('mainMedListBox').offsetHeight);
+			document.getElementById(`idcontainer`).style.height = parseInt(document.getElementById(`idcontainer`).style.height) + parseInt(document.getElementById('mainMedListBox').offsetHeight);
 
-			var medicine=document.getElementById(`mediname${idNameForMultiSearch}`).innerHTML;
-			
+			var medicine = document.getElementById(`mediname${idNameForMultiSearch}`).innerHTML;
+
 			document.getElementById(`manblck${idNameForMultiSearch}`).remove();
-			document.getElementById('MultiSearchButton').style.display='block';
-              document.getElementById('mainMedListBox').innerHTML+=`
+			document.getElementById('MultiSearchButton').style.display = 'block';
+			document.getElementById('mainMedListBox').innerHTML += `
 			     <span style="background: white;
     color: black;
     height: auto;
@@ -679,7 +681,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 		window.addEventListener("popstate", function () {
 			console.log('loading over');
-			document.body.style.display='block';
+			document.body.style.display = 'block';
 
 			document.getElementById('ftco-loader').style.visibility = 'none';
 			document.getElementById('ftco-loader').style.opacity = 0;
@@ -745,75 +747,82 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			// document.body.style.display='none';
 			document.getElementById('ftco-loader').style.opacity = 1;
 			document.getElementById('ftco-loader').style.visibility = 'visible';
-			
+
 			document.getElementById('ftco-loader-loading').style.display = 'block';
-			
+
 		}
 		loader();
-		
-		function multiLoader(){
+
+		var cnt = -1;
+		function multiLoader() {
 			document.getElementById('ftco-loader').style.opacity = 1;
 			document.getElementById('ftco-loader').style.visibility = 'visible';
-			
-			
+
+
 			function addele(mediname) {
-        // Select the taskcon element
-        const taskcon = document.querySelector('#taskcon');
-
-        // Create a new li element
-        const newItem = document.createElement('li');
-        newItem.className = 'item';
-
-        // Create the user div
-        const userDiv = document.createElement('div');
-        userDiv.className = 'user';
-        const userImg = document.createElement('img');
-        userImg.src = 'https://source.unsplash.com/40x40/?indian';
-        userImg.alt = 'Image 001';
-        userImg.className = 'owner-img';
-        userDiv.appendChild(userImg);
-
-        // Create the status div
-        const statusDiv = document.createElement('div');
-        statusDiv.className = 'status';
-        const statusIcon = document.createElement('div');
-        statusIcon.className = 'icon off';
-        const statusText = document.createElement('div');
-        statusText.className = 'text';
-        statusText.textContent = mediname;
-        statusDiv.appendChild(statusIcon);
-        statusDiv.appendChild(statusText);
-
-        // Append user and status divs to the li element
-        newItem.appendChild(userDiv);
-        newItem.appendChild(statusDiv);
-        newItem.className+= ' type1'
-
-        // Append the new li element to the taskcon element
-        taskcon.appendChild(newItem);
-
-        setTimeout(() => {
-          taskcon.removeChild(newItem);
-        },5000);
+				cnt++;
 
 
-      }
-	  var len=0;
+				const mainMedListBox = document.getElementById('mainMedListBox');
 
-      setInterval(async () => {
-		  await axios({
-					  method: "GET",
-					  url: `/getUpdatesOfMultiMeds`,
-				  })
-					  .then((res) => {
-						if(res.data.length>len){
+				// Get all <span> elements that are direct children of mainMedListBox
+				const spanElements = mainMedListBox.querySelectorAll('span');
+				// Select the taskcon element
+				const taskcon = document.querySelector('#taskcon');
+
+
+
+				// Create a new li element
+				const newItem = document.createElement('li');
+				newItem.className = 'item';
+
+				// Create the user div
+				const userDiv = document.createElement('div');
+				userDiv.className = 'user';
+				
+				// Create the status div
+				const statusDiv = document.createElement('div');
+				statusDiv.className = 'status';
+				const statusIcon = document.createElement('div');
+				statusIcon.className = 'icon off';
+				const statusText = document.createElement('div');
+				statusText.className = 'text';
+				statusText.textContent = spanElements[cnt].innerText;
+				statusDiv.appendChild(statusIcon);
+				statusDiv.appendChild(statusText);
+
+				// Append user and status divs to the li element
+				newItem.appendChild(userDiv);
+				newItem.appendChild(statusDiv);
+				newItem.className += ' type1'
+
+				// Append the new li element to the taskcon element
+				taskcon.appendChild(newItem);
+
+				setTimeout(() => {
+					taskcon.removeChild(newItem);
+				}, 5000);
+
+
+			}
+			var len = 0;
+
+			setInterval(async () => {
+				await axios({
+					method: "GET",
+					url: `/getUpdatesOfMultiMeds`,
+				})
+					.then((res) => {
+						if (res.data.length > len) {
 							addele();
-						}
-						  console.log(res.data)
+							len=res.data.length;
 
-					  })
-		}, 2000);
-	}
+						}
+						console.log(res.data)
+
+					})
+			}, 1000);
+		}
 		function addEle(finalmednames) {
 			medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
 			console.log(medsearchlist)
@@ -852,10 +861,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						console.log(document.getElementById('idcontainer').style.height)
 
 						if (window.innerWidth > 500) {
-							document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300 + document.getElementById(`mainMedListBox`).offsetHeight+100}px `;
+							document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 300 + document.getElementById(`mainMedListBox`).offsetHeight + 100}px `;
 							// document.getElementById('fullheight').style.height = `${(res.data.length * 80) + 300}px`;
 						} else {
-							document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250 + document.getElementById(`mainMedListBox`).offsetHeight+100}px`;
+							document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 250 + document.getElementById(`mainMedListBox`).offsetHeight + 100}px`;
 							// document.getElementById('fullheight').style.height = `${(res.data.length * 100) + 250}px`;
 						}
 						// document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
@@ -871,7 +880,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 								console.log(res.data[i]['name']);
 
 								document.getElementById('medlist').innerHTML += `
-								<div style="position:relative" id="manblck${i+1}">
+								<div style="position:relative" id="manblck${i + 1}">
 							<div style="position:relative" onMouseOver="this.style.cursor='pointer'">
 							<form id="msform${i + 1}"  action="/compare" method="get" class="ss searchString${i + 1}">
 								<a onclick="this.parentNode.submit()">
@@ -879,7 +888,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 										<p style="width: 90%;
     color: black;
     height: auto;
-    display: inline-block;margin:2px" id="mediname${i+1}">
+    display: inline-block;margin:2px" id="mediname${i + 1}">
 											${res.data[i]['name']}
 											</p>
 									<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['name']}">
@@ -887,7 +896,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 									</a>
 							</form>
 									</div>
-									<span id="addbtn_${i + 1}"   onclick="addMedToSearchList('${i+1}')"
+									<span id="addbtn_${i + 1}"   onclick="addMedToSearchList('${i + 1}')"
 									onMouseOver="this.style.background='black';this.style.color='white';this.style.cursor='pointer'"
 									onMouseOut="this.style.background='transparent';this.style.color='black'"
 									style='position: absolute;height:100%;
@@ -972,7 +981,6 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 		.destination {
 			background-color: rgba(255, 255, 255, 0.485);
 		}
-		
 	</style>
 	<section class="ftco-section ftco-destination">
 		<div class="container">
@@ -987,7 +995,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					<div class="destination-slider owl-carousel ftco-animate">
 						<div class="item">
 							<div class="destination">
-								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
+								<a href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://image3.mouthshut.com/images/imagesp/925643839s.png);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -1001,7 +1009,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
+								<a href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png);background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -1043,7 +1051,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
+								<a href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3a/PharmEasy_logo.png);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -1057,7 +1065,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						</div>
 						<div class="item">
 							<div class="destination">
-								<a  href="#" class="img d-flex justify-content-center align-items-center pharmasList"
+								<a href="#" class="img d-flex justify-content-center align-items-center pharmasList"
 									style="border:1px solid #e6e6e6;background-image: url(https://play-lh.googleusercontent.com/_TgqQftpsZ7MrQEU8pJXJZ_3lFommPqzUj_0dovrHmVhp5NVTud6sbVEHxkVFRJzxn6H);;background-size: contain;">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -1076,14 +1084,14 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	</section>
 
 	<script>
-		var z=document.querySelectorAll('.pharmasList');
+		var z = document.querySelectorAll('.pharmasList');
 		console.log(z);
-		if(window.innerWidth<800){
-			document.getElementById('zRow').style.zIndex="-1"
-			document.getElementById('zRow').style.position="relative"
-			for(i in z){
+		if (window.innerWidth < 800) {
+			document.getElementById('zRow').style.zIndex = "-1"
+			document.getElementById('zRow').style.position = "relative"
+			for (i in z) {
 				console.log("called")
-				z[i].style.height="200px";
+				z[i].style.height = "200px";
 			}
 		}
 	</script>
@@ -1948,11 +1956,11 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 
 
 	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen" >
+	<div id="ftco-loader" class="show fullscreen">
 
 		<div class="task-items" id="taskcon">
 		</div>
-		
+
 		<img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
 			style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: block;"
 			alt="">
