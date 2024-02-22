@@ -2287,6 +2287,7 @@ app.get('/FastGetPharmaDataFromLinks', async (req, res) => {
             ]));
     console.log(pharmaData.data);
     // res.send(pharmaData);
+    tempfzz.push(1);
 
    
 
@@ -2374,7 +2375,6 @@ app.get('/fastComp', async (req, res) => {
     }
     tempf = tempf.flat();
 
-    tempfzz.push(1);
 
 
 
