@@ -15,6 +15,7 @@
 	<meta name="revisit-after" content="1 days">
 	<meta name="author" content="Medicomp India">
 
+
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6943409373544581"
 		crossorigin="anonymous"></script>
 
@@ -38,6 +39,267 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://js.upload.io/upload-js/v2"></script>
 
+	<style>
+		@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+		@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+	
+		body {
+		  font-family: "Open Sans", sans-serif;
+		  background: #ffffff;
+		  height: 100vh;
+		  width: 100%;
+		  margin: 0px;
+		}
+	
+		.container {
+		  margin: 0 auto;
+		  width: 100%;
+		}
+	
+		header {
+		  display: flex;
+		  align-items: center;
+		  font-size: 1em;
+		  font-weight: 600;
+		  color: #ffffff;
+		  padding: 20px;
+		  box-sizing: border-box;
+		  user-select: none;
+		  text-align: center;
+		}
+	
+		header .button-col {
+		  width: 240px;
+		  text-align: left;
+		}
+	
+		header .status-col {
+		  width: 145px;
+		}
+	
+		header .progress-col {
+		  width: 190px;
+		}
+	
+		header .dates-col {
+		  width: 150px;
+		}
+	
+		header .priority-col {
+		  width: 170px;
+		}
+	
+		header .icon-col {
+		  width: 30px;
+		  text-align: right;
+		}
+	
+		header button {
+		  color: #bdbdbd;
+		  outline: none;
+		  border: none;
+		  background: #d5d5d5;
+		  padding: 10px 20px;
+		  border-radius: 2.5px;
+		  margin-right: 20px;
+		  font-size: 1em;
+		  font-weight: 600;
+		}
+	
+		header button:hover {
+		  cursor: pointer;
+		  background: #3d3d44;
+		}
+	
+		header label {
+		  display: inline-block;
+		  margin: 0 20px;
+		  text-align: center;
+		}
+	
+		header .icon-col {
+		  padding-right: 20px;
+		}
+	
+		.task-items {
+		  width: 95%;
+		  display: block;
+		  margin: auto;
+		}
+	
+		div.task-items li.item {
+		  display: flex;
+		  align-items: center;
+		  margin: 20px 0;
+		  padding: 20px;
+		  background: #fff;
+		  border-radius: 5px;
+		  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+		}
+	
+		.type1 {
+		  animation: loadName 5s linear;
+		}
+	
+		@keyframes loadName {
+		  0% {
+			position: absolute;
+			top: 90%;
+			width: 90%;
+			margin: 0px;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 0.6;
+			display: block;
+			height: auto;
+			font-size: 18px;
+		  }
+		  
+		  20% {
+			position: absolute;
+			top: 50%;
+			width: 90%;
+			margin: 0px;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 1;
+			display: block;
+			height: auto;
+			font-size: 18px;
+		  }
+		  
+		  100% {
+			position: absolute;
+			top: 10%;
+			width: 90%;
+			margin: 0px;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 0;
+			display: block;
+			height: auto;
+			font-size: 18px;
+		  }
+		  
+	
+		}
+	
+		div.task-items li.item.type1 .task .icon {
+		  background: #9575cd;
+		}
+	
+		div.task-items li.item.type2 .task .icon {
+		  background: #f48fb1;
+		}
+	
+		div.task-items li.item.type3 .task .icon {
+		  background: #9575cd;
+		}
+	
+		div.task-items li.item.type4 .task .icon {
+		  background: #4fc3f7;
+		}
+	
+		div.task-items li.item .task {
+		  display: flex;
+		  align-items: center;
+		  width: 240px;
+		}
+	
+		div.task-items li.item .task .icon {
+		  background: #bdbdbd;
+		  width: 50px;
+		  height: 50px;
+		  border-radius: 5px;
+		}
+	
+		div.task-items li.item .task .name {
+		  background: #eee;
+		  margin-left: 20px;
+		  width: 180px;
+		  height: 25px;
+		  border-radius: 15px;
+		}
+	
+		div.task-items li.item .status {
+		  display: flex;
+		  align-items: center;
+		  font-size: 1em;
+		  color: #2e7d32;
+		  width: 145px;
+		  margin-left: 30px;
+		}
+	
+		div.task-items li.item .status .icon {
+		  background: #2e7d32;
+		  margin-right: 10px;
+		  width: 14px;
+		  height: 14px;
+		  border-radius: 50%;
+		}
+	
+		div.task-items li.item .status .icon.risk {
+		  background: red;
+		}
+	
+		div.task-items li.item .status .icon.warning {
+		  background: #ffa000;
+		}
+	
+		div.task-items li.item .status .icon.off {
+		  background: #bf360c;
+		}
+	
+		div.task-items li.item .progress {
+		  width: 190px;
+		}
+	
+		div.task-items li.item .progress progress {
+		  display: block;
+		  margin-left: 0;
+		  -webkit-appearance: none;
+		  height: 12.5px;
+		  width: 142.5px;
+		}
+	
+		div.task-items li.item .progress progress::-webkit-progress-bar {
+		  background-color: #eee;
+		  border-radius: 5px;
+		}
+	
+		div.task-items li.item .progress ::-webkit-progress-value {
+		  background-color: #4dd0e1;
+		  border-radius: 5px;
+		}
+	
+		div.task-items li.item .dates {
+		  width: 150px;
+		}
+	
+		div.task-items li.item .dates .bar,
+		div.task-items li.item .priority .bar {
+		  background: #eee;
+		  width: 100px;
+		  height: 25px;
+		  border-radius: 15px;
+		}
+	
+		div.task-items li.item .priority {
+		  width: 144.5px;
+		}
+	
+		div.task-items li.item .priority .bar {
+		  background: #ffcdd2;
+		}
+	
+		div.task-items li.item .user {
+		  width: 30px;
+		}
+	
+		div.task-items li.item .user img {
+		  border-radius: 50%;
+		}
+	  </style>
 
 
 	<!-- Google tag (gtag.js) -->
@@ -293,7 +555,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 						
 				</form>	
 						<div id="MultiSearchButton" style="display: none;">
-							<a onclick="document.getElementById('mainMedListBox').submit()" style="width: 100%;
+							<a onclick="document.getElementById('mainMedListBox').submit(),multiLoader()" style="width: 100%;
 							height: 40px;
 							cursor: pointer;
 							background-color: white;
@@ -422,7 +684,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			document.getElementById('ftco-loader').style.visibility = 'none';
 			document.getElementById('ftco-loader').style.opacity = 0;
 
-			document.getElementById('ftco-loader-loading').style.display = 'block';
+			document.getElementById('ftco-loader-loading').style.display = 'none';
 		});
 
 		// window.onload = async function () {
@@ -483,11 +745,75 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			// document.body.style.display='none';
 			document.getElementById('ftco-loader').style.opacity = 1;
 			document.getElementById('ftco-loader').style.visibility = 'visible';
-
+			
 			document.getElementById('ftco-loader-loading').style.display = 'block';
-
+			
 		}
 		loader();
+		
+		function multiLoader(){
+			document.getElementById('ftco-loader').style.opacity = 1;
+			document.getElementById('ftco-loader').style.visibility = 'visible';
+			
+			
+			function addele(mediname) {
+        // Select the taskcon element
+        const taskcon = document.querySelector('#taskcon');
+
+        // Create a new li element
+        const newItem = document.createElement('li');
+        newItem.className = 'item';
+
+        // Create the user div
+        const userDiv = document.createElement('div');
+        userDiv.className = 'user';
+        const userImg = document.createElement('img');
+        userImg.src = 'https://source.unsplash.com/40x40/?indian';
+        userImg.alt = 'Image 001';
+        userImg.className = 'owner-img';
+        userDiv.appendChild(userImg);
+
+        // Create the status div
+        const statusDiv = document.createElement('div');
+        statusDiv.className = 'status';
+        const statusIcon = document.createElement('div');
+        statusIcon.className = 'icon off';
+        const statusText = document.createElement('div');
+        statusText.className = 'text';
+        statusText.textContent = mediname;
+        statusDiv.appendChild(statusIcon);
+        statusDiv.appendChild(statusText);
+
+        // Append user and status divs to the li element
+        newItem.appendChild(userDiv);
+        newItem.appendChild(statusDiv);
+        newItem.className+= ' type1'
+
+        // Append the new li element to the taskcon element
+        taskcon.appendChild(newItem);
+
+        setTimeout(() => {
+          taskcon.removeChild(newItem);
+        },5000);
+
+
+      }
+	  var len=0;
+
+      setInterval(async () => {
+		  await axios({
+					  method: "GET",
+					  url: `/getUpdatesOfMultiMeds`,
+				  })
+					  .then((res) => {
+						if(res.data.length>len){
+							addele();
+						}
+						  console.log(res.data)
+
+					  })
+		}, 2000);
+	}
 		function addEle(finalmednames) {
 			medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
 			console.log(medsearchlist)
@@ -1624,6 +1950,9 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen" >
 
+		<div class="task-items" id="taskcon">
+		</div>
+		
 		<img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
 			style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: block;"
 			alt="">

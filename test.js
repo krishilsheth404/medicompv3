@@ -2259,10 +2259,16 @@ function checkforzero(arr) {
         }
     }
     return count;
-}
+}  
+
+const tempfzz=[];
+
+app.get('/getUpdatesOfMultiMeds', async (req, res) => {
+
+    res.send(tempfzz);
+});
 
 app.get('/FastGetPharmaDataFromLinks', async (req, res) => {
-
     const pharmaLinkArray = req.query['pharmalinks'].split(",");
     // console.log(typeof(req.query['pharmalinks']));
     const pharmaData = []
@@ -2282,11 +2288,14 @@ app.get('/FastGetPharmaDataFromLinks', async (req, res) => {
     console.log(pharmaData.data);
     // res.send(pharmaData);
 
+   
+
     res.send(pharmaData);
 
-
-
 });
+
+
+
 app.get('/findCombination', async (req, res) => {
     console.log(res.query['q'])
 });
@@ -2365,6 +2374,8 @@ app.get('/fastComp', async (req, res) => {
     }
     tempf = tempf.flat();
 
+    tempfzz.push(1);
+
 
 
     for (var k = 0; k < tempf.length; k++) {
@@ -2432,6 +2443,10 @@ app.get('/fastComp', async (req, res) => {
 
 
 });
+
+
+
+
 app.post('/multiSearch', async (req, res) => {
 
     const linkdata = [];
@@ -2441,16 +2456,15 @@ app.post('/multiSearch', async (req, res) => {
     if (req.body.multiItems.length == 1) {
         var nameOfMed = req.body.multiItems.split(',');
         console.log(nameOfMed);
-        linkdata.push(`https://medicomp.in/fastComp?medname=${nameOfMed[0]}`);
+        linkdata.push(`http://localhost:1000/fastComp?medname=${nameOfMed[0]}`);
         mnames.push(nameOfMed[0])
     } else if (req.body.multiItems.length > 1) {
         console.log(req.body.multiItems);
         for (mednames in req.body.multiItems) {
-            linkdata.push(`https://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
+            linkdata.push(`http://localhost:1000/fastComp?medname=${req.body.multiItems[mednames]}`)
             mnames.push(req.body.multiItems[mednames])
         }
     }
-
 
 
 
@@ -2464,7 +2478,7 @@ app.post('/multiSearch', async (req, res) => {
 
     const finalMultiPriceData = [];
     for (var i = 0; i < responses.length; i++) {
-        finalMultiPriceData.push(`https://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`)
+        finalMultiPriceData.push(`http://localhost:1000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`);
     }
     // console.log(finalMultiPriceData)
 
@@ -2498,6 +2512,7 @@ app.post('/multiSearch', async (req, res) => {
         final.push(pharmaFinaldata[i]['data']);
     }
 
+    
     const priceFinal = [];
     var temp = [];
 
