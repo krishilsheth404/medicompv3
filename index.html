@@ -39,6 +39,12 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://js.upload.io/upload-js/v2"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+		integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+		integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<style>
 		@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 		@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
@@ -138,7 +144,7 @@
 		}
 
 		.type1 {
-			animation: loadName 5s linear;
+			animation: loadName 3s linear;
 		}
 
 		@keyframes loadName {
@@ -155,7 +161,7 @@
 				font-size: 18px;
 			}
 
-			20% {
+			15% {
 				position: absolute;
 				top: 50%;
 				width: 90%;
@@ -379,6 +385,135 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	#foodItem,
 	#addbtn:hover {
 		cursor: pointer;
+	}
+</style>
+
+<style>
+	.contain {
+		max-width: 600px;
+		margin: 20px auto;
+		border-radius: 5px;
+		border: 1px solid #ffffff;
+		padding: 32px;
+
+		position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+	}
+
+	.contain>.button,
+	.button:visited,
+	.button:active,
+	.button:focus {
+		display: inline-block;
+		background-color: transparent;
+		border: 1px solid #ccc;
+		line-height: 2em;
+		padding: 0 30px;
+		color: #ccc;
+		text-decoration: none;
+	}
+
+	.contain>.button:hover {
+		background-color: #ccc;
+		border-color: #ccc;
+		color: #000;
+	}
+
+	.contain>#list {
+		overflow-x: hidden;
+		overflow-y: hidden;
+		height: auto;
+		width: 100%;
+	}
+
+	.contain>#list,
+	#list>li {
+		display: block;
+		padding: 0;
+		margin: 0;
+
+	}
+
+	.contain>.listContent {
+		padding: 0 32px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+	}
+
+	.contain>#list>li {
+		line-height: 48px;
+		margin-bottom: 20px;
+		color: #ccc;
+		width: 100%;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.contain>#list>li .close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 18px;
+		line-height: 18px;
+		text-align: center;
+		border-radius: 100%;
+		font-weight: 500;
+		font-size: 11px;
+		border: 1px solid #ccc;
+		color: #ccc;
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	.animEnter {
+		animation: enter 500ms ease-in-out forwards;
+	}
+
+	.animExit {
+		animation: exit 1000ms ease-in-out forwards;
+		animation-iteration-count: 1;
+	}
+
+	@keyframes enter {
+		0% {
+			line-height: 0px;
+			margin-left: 100%;
+
+		}
+
+		30% {
+			line-height: 48px;
+			margin-left: 100%;
+
+		}
+
+		40% {
+			line-height: 48px;
+			margin-left: 100%;
+
+		}
+
+		100% {
+			margin-left: 0;
+		}
+	}
+
+	@keyframes exit {
+		0% {
+			margin-left: 0;
+			line-height: 48px;
+			text-decoration:none;
+		}
+	
+		
+		100% {
+			margin-left: 0;
+			line-height: 48px;
+			text-decoration:line-through;
+		}
 	}
 </style>
 
@@ -670,7 +805,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
     display: flex;
     align-items: center;
     justify-content: center;margin:10px">
-					<span><b>+</b>${medicine}</span>
+					<span class='multimedinames'><b>+</b>${medicine}</span>
 			  		<input id='medlists' type="text" value="${medicine}" id="multiItems" name="multiItems" style="visibility:hidden;height:0px;width:0px;overflow:hidden">
 					</span>
 					`;
@@ -758,52 +893,31 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 			document.getElementById('ftco-loader').style.opacity = 1;
 			document.getElementById('ftco-loader').style.visibility = 'visible';
 
+			const spanElements = document.querySelectorAll('.multimedinames');
+			console.log("length is  " + spanElements.length )
+			var spanlen = spanElements.length;
+			var cnt1 = 0;
+			let intervalId = setInterval(() => {
+				if (cnt1 < spanlen) {
+					$("#list").append(`<li class="animEnter"><div id='listid' class="listContent">${spanElements[cnt1].innerText}</div></li>`);
+					cnt1++;
+				} else {
+					clearInterval(intervalId);
+				}
+			}, 1000);
 
-			function addele(mediname) {
+
+			function removeele() {
 				cnt++;
-
-
-				const mainMedListBox = document.getElementById('mainMedListBox');
-
-				// Get all <span> elements that are direct children of mainMedListBox
-				const spanElements = mainMedListBox.querySelectorAll('span');
-				// Select the taskcon element
-				const taskcon = document.querySelector('#taskcon');
-
-
-
-				// Create a new li element
-				const newItem = document.createElement('li');
-				newItem.className = 'item';
-
-				// Create the user div
-				const userDiv = document.createElement('div');
-				userDiv.className = 'user';
+				var timer;
 				
-				// Create the status div
-				const statusDiv = document.createElement('div');
-				statusDiv.className = 'status';
-				const statusIcon = document.createElement('div');
-				statusIcon.className = 'icon off';
-				const statusText = document.createElement('div');
-				statusText.className = 'text';
-				statusText.textContent = spanElements[cnt].innerText;
-				statusDiv.appendChild(statusIcon);
-				statusDiv.appendChild(statusText);
-
-				// Append user and status divs to the li element
-				newItem.appendChild(userDiv);
-				newItem.appendChild(statusDiv);
-				newItem.className += ' type1'
-
-				// Append the new li element to the taskcon element
-				taskcon.appendChild(newItem);
-
+				var spans=document.querySelectorAll('.animEnter');
+				// $(document).on('click', "#list > li > .close", function () {
+				// });
 				setTimeout(() => {
-					taskcon.removeChild(newItem);
-				}, 5000);
-
-
+					$(spans[0]).removeClass("animEnter").addClass("animExit");
+					// $(spans[0]).remove();
+				}, 500);
 			}
 			var len = 0;
 
@@ -814,14 +928,13 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 				})
 					.then((res) => {
 						if (res.data.length > len) {
-							addele();
-							len=res.data.length;
-
+							removeele();
+							len = res.data.length;
 						}
 						console.log(res.data)
 
 					})
-			}, 2000);
+			}, 1000);
 		}
 		function addEle(finalmednames) {
 			medsearchlist.add(document.getElementsByClassName(`foodItem_${finalmednames}`)[0].value);
@@ -1958,7 +2071,11 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
 
-		<div class="task-items" id="taskcon">
+		<div class="contain">
+			<ul id="list">
+
+			</ul>
+			<!-- <a href="#" class="button" id="add">Add</a> -->
 		</div>
 
 		<img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
