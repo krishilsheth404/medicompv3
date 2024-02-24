@@ -52,6 +52,8 @@ We provide unbiased information on various medicines ,offers and prescriptions a
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+   
     
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 <!-- or -->
@@ -59,6 +61,7 @@ We provide unbiased information on various medicines ,offers and prescriptions a
 </head>
 
 <body id="bdy">
+ 
 
   <% 
         getDeliveryChargeForApollo=function(totalMedPrice)
@@ -1003,6 +1006,17 @@ function getDeliveryChargeFor1mg(totalMedPrice){
 
   </div>
 
+  <script>
+
+    console.log(document.getElementById('phoneDisp'))
+    if(document.getElementById('bdy').offsetWidth<1000){
+      document.getElementById('phoneDisp').style.display='block';
+      document.getElementById('lapDisp').style.display='none';
+    }else{
+      document.getElementById('phoneDisp').style.display='none';
+      document.getElementById('lapDisp').style.display='block';
+    }
+  </script>
 
               <script src="js/jquery.min.js"></script>
               <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -1024,18 +1038,7 @@ function getDeliveryChargeFor1mg(totalMedPrice){
               <script src="js/google-map.js"></script>
               <script src="js/main.js"></script>
 
-              <script>
-
-                console.log(document.getElementById('phoneDisp'))
-                if(document.getElementById('bdy').offsetWidth<1000){
-                  document.getElementById('phoneDisp').style.display='block';
-                  document.getElementById('lapDisp').style.display='none';
-                }else{
-                  document.getElementById('phoneDisp').style.display='none';
-                  document.getElementById('lapDisp').style.display='block';
-                }
-              </script>
-
+             
 <script>
   function showAlgoComparisonBox(){
     document.getElementById('algoComparisonBlock').style.display='flex';
