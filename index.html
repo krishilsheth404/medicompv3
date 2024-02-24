@@ -1049,11 +1049,14 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 					// $(loaders[countforcheck]).remove();
 					$(spans[0]).removeClass("animEnter").addClass("animExit");
 					// $(spans[0]).remove();
-					if(spans.length==countforcheck){
-						document.getElementById('ftco-loader-loading').style.display = 'block';
-
-					}
 					countforcheck++;
+
+					if(spans.length==countforcheck){
+						setTimeout(() => {
+								document.getElementById('ftco-loader-loading').style.display = 'block';
+							}, 2000);
+					}
+					
 				}, 500);
 			}
 			var len = 0;
@@ -1068,6 +1071,7 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
 							removeele();
 							len = res.data.length;
 						}
+						
 						console.log(res.data)
 
 					})
