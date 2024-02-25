@@ -2457,14 +2457,14 @@ app.post('/multiSearch', async (req, res) => {
      if (typeof(req.body.multiItems)=='object') {
         
         for (mednames in req.body.multiItems) {
-            linkdata.push(`http://localhost:1000/fastComp?medname=${req.body.multiItems[mednames]}`)
+            linkdata.push(`https://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
             mnames.push(req.body.multiItems[mednames])
         }
     }else{
             console.log(typeof(req.body.multiItems))
             var nameOfMed = req.body.multiItems.trim();
             console.log(nameOfMed);
-            linkdata.push(`http://localhost:1000/fastComp?medname=${nameOfMed}`);
+            linkdata.push(`https://medicomp.in/fastComp?medname=${nameOfMed}`);
             mnames.push(nameOfMed)
     }
 
@@ -2480,7 +2480,7 @@ app.post('/multiSearch', async (req, res) => {
 
     const finalMultiPriceData = [];
     for (var i = 0; i < responses.length; i++) {
-        finalMultiPriceData.push(`http://localhost:1000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`);
+        finalMultiPriceData.push(`https://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`);
     }
     // console.log(finalMultiPriceData)
 
