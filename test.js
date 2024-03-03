@@ -970,7 +970,16 @@ extractDataOfPharmEasy = async (url) => {
 
 
         var dc = '';
-
+        var dc = 0;
+        if (parseInt(a['props']['pageProps']['productDetails']['costPrice']) < 250) {
+            dc = 149;
+        } else if (parseInt(a['props']['pageProps']['productDetails']['costPrice']) >= 250 && parseInt(a['props']['pageProps']['productDetails']['costPrice']) < 500) {
+            dc = 99;
+        } else if (parseInt(a['props']['pageProps']['productDetails']['costPrice']) >= 500 && parseInt(a['props']['pageProps']['productDetails']['costPrice']) < 699) {
+            dc = 25;
+        } else if (parseInt(a['props']['pageProps']['productDetails']['costPrice']) >= 699) {
+            dc = 0;
+        }
 
 
 
