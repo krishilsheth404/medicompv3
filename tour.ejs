@@ -191,7 +191,7 @@
                                         </span> <br>
                                       </div>
                                     </div>
-                                    <select name="qty" id="qty_<%=i%>" style="font-size: 19px;
+                                    <!-- <select name="qty" id="qty_<%=i%>" style="font-size: 19px;
                                           position: absolute;
                                           right: 40px;
                                           margin-top: 10px;" onchange="multiplyPriceByCount(this.id)">
@@ -205,7 +205,7 @@
                                       <option value="8">8</option>
                                       <option value="9">9</option>
                                       <option value="10">10</option>
-                                    </select>
+                                    </select> -->
 
                                     <span>Medicine Price : <span id="price_<%=i%>">
                                         <%=final[i].price%>
@@ -218,8 +218,10 @@
                                     <!-- <p class="days"><span>2 days 3 nights</span></p> -->
                                     <hr>
                                     <p class="bottom-area d-flex">
-                                      <span ><i class="icon-map-o"></i>
-                                       <span id="company_<%=i%>"> <%=final[i].name%> </span>
+                                      <span><i class="icon-map-o"></i>
+                                        <span id="company_<%=i%>">
+                                          <%=final[i].name%>
+                                        </span>
                                       </span>
                                     <p></p>
                                     <span class="ml-auto">
@@ -264,7 +266,7 @@
                     }
 
                     function getDeliveryChargeForPharmeasy(totalMedPrice) {
-                      console.log("price"+totalMedPrice)
+                      console.log("price" + totalMedPrice)
 
                       var dc = 0;
                       console.log("pharmeay->" + parseInt(totalMedPrice))
@@ -319,7 +321,7 @@
 
                       return dc;
                     }
-     
+
                     function getDeliveryChargeForTabletShablet(totalMedPrice) {
                       var dc = 0;
 
@@ -360,75 +362,114 @@
                       return dc;
                     }
 
-                    
-                    async function multiplyPriceByCount(i) {
-                      var num = parseInt(i.split('_')[1]);
-                      var count = parseInt(document.getElementById(i).value);
-                      console.log("count->"+count);
-                      var companyname = document.getElementById(`company_${num}`).innerHTML.toLowerCase();
-                      console.log(companyname);
-                      var finalcost = parseFloat(document.getElementById(`finalprice_${num}`.innerHTML));
-                      var myVariable;
-                      var deliveryCharge;
 
-                      if (num == 0) {
-                        myVariable = parseFloat(`<%- final[0].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 1) {
-                        myVariable = parseFloat(`<%- final[1].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 2) {
-                        myVariable = parseFloat(`<%- final[2].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 3) {
-                        myVariable = parseFloat(`<%- final[3].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 4) {
-                        myVariable = parseFloat(`<%- final[4].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 5) {
-                        myVariable = parseFloat(`<%- final[5].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 6) {
-                        myVariable = parseFloat(`<%- final[6].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 7) {
-                        myVariable =parseFloat(`<%- final[7].price %>`);
-                        console.log(myVariable);
-                      } else if (num == 8) {
-                        myVariable =parseFloat(`<%- final[8].price %>`);
-                        console.log(myVariable);
-                      }
+                    // async function multiplyPriceByCount(i) {
+                    //   var num = parseInt(i.split('_')[1]);
+
+                    //   var count = parseInt(document.getElementById(i).value);
+                    //   console.log("count->" + count);
+
+                    //   var companyname = document.getElementById(`company_${num}`).innerHTML.toLowerCase();
+                    //   console.log(companyname);
+                    //   var finalcost = parseFloat(document.getElementById(`finalprice_${num}`.innerHTML));
+                    //   var myVariable;
+                    //   var deliveryCharge;
+
+                    //   var items = `<%-JSON.stringify(final[0])%>`;
+
+                    //   // items=items.split(`},"`)[0]+"}";
+                    //   // items=items.split(`[`)[1];
+
+                    //   console.log((items))
+                    //   // for (let i = 0; i < items.length; i++) {
+                    //   //   console.log(items[i]); // Example usage within the loop
+                    //   // }
+
+                    //   if (num == 0) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[0].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     }
+                    //   } else if (num == 1) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[1].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     };
+                    //   } else if (num == 2) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[2].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     };
+                    //   } else if (num == 3) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[3].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     };
+                    //   } else if (num == 4) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[4].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     };
+                    //   } else if (num == 5) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[5].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     };
+                    //   } else if (num == 6) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[6].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     };
+                    //   } else if (num == 7) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[7].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     }
+                    //   } else if (num == 8) {
+                    //     try {
+                    //       myVariable = parseFloat(`<%- final[8].price %>`);
+                    //       console.log(myVariable);
+                    //     } catch (error) {
+                    //     }
+                    //   }
 
 
-                      console.log("Value->>"+typeof(myVariable)+"Cout_>>"+typeof(count))
-                      if (companyname.includes('netmeds')) {
-                        deliveryCharge =await getDeliveryChargeForNetmeds((myVariable) * (count))
-                      } else if (companyname.includes('pharmeasy')) {
-                        deliveryCharge =await getDeliveryChargeForPharmeasy((myVariable) * (count))
-                      } else if (companyname.includes('tablet')) {
-                        deliveryCharge =await getDeliveryChargeForTabletShablet((myVariable) * (count))
-                      } else if (companyname.includes('pulseplus')) {
-                        deliveryCharge =await getDeliveryChargeForPulsePlus((myVariable) * (count))
-                      } else if (companyname.includes('upchar')) {
-                        deliveryCharge =await getDeliveryChargeFormyupchar((myVariable) * (count))
-                      } else if (companyname.includes('pasumai')) {
-                        deliveryCharge =await getDeliveryChargeForPasumai((myVariable) * (count))
-                      } else if (companyname.includes('medplus')) {
-                        deliveryCharge =await getDeliveryChargeForMedPlusMart((myVariable) * (count))
-                      } else if (companyname.includes('truemeds')) {
-                        deliveryCharge =await getDeliveryChargeForTruemeds((myVariable) * (count))
-                      } else if (companyname.includes('tata')) {
-                        deliveryCharge =await getDeliveryChargeFor1mg((myVariable) * (count))
-                      }
+                    //   if (companyname.includes('netmeds')) {
+                    //     deliveryCharge = await getDeliveryChargeForNetmeds((myVariable) * (count))
+                    //   } else if (companyname.includes('pharmeasy')) {
+                    //     deliveryCharge = await getDeliveryChargeForPharmeasy((myVariable) * (count))
+                    //   } else if (companyname.includes('tablet')) {
+                    //     deliveryCharge = await getDeliveryChargeForTabletShablet((myVariable) * (count))
+                    //   } else if (companyname.includes('pulseplus')) {
+                    //     deliveryCharge = await getDeliveryChargeForPulsePlus((myVariable) * (count))
+                    //   } else if (companyname.includes('upchar')) {
+                    //     deliveryCharge = await getDeliveryChargeFormyupchar((myVariable) * (count))
+                    //   } else if (companyname.includes('pasumai')) {
+                    //     deliveryCharge = await getDeliveryChargeForPasumai((myVariable) * (count))
+                    //   } else if (companyname.includes('medplus')) {
+                    //     deliveryCharge = await getDeliveryChargeForMedPlusMart((myVariable) * (count))
+                    //   } else if (companyname.includes('truemeds')) {
+                    //     deliveryCharge = await getDeliveryChargeForTruemeds((myVariable) * (count))
+                    //   } else if (companyname.includes('tata')) {
+                    //     deliveryCharge = await getDeliveryChargeFor1mg((myVariable) * (count))
+                    //   }
 
 
-                      console.log(deliveryCharge)
-                      document.getElementById(`delivery_${num}`).innerHTML = parseFloat(deliveryCharge);
-                      // console.log(document.getElementById(`price_${num}`).innerHTML);
-                      document.getElementById(`price_${num}`).innerHTML = parseFloat(myVariable) * (count);
-                      document.getElementById(`finalprice_${num}`).innerHTML = "₹" +  (parseFloat(deliveryCharge) + (parseFloat(myVariable) * (count)));
-                    }
+                    //   console.log(deliveryCharge)
+                    //   document.getElementById(`delivery_${num}`).innerHTML = parseFloat(deliveryCharge).toFixed(2);
+                    //   // console.log(document.getElementById(`price_${num}`).innerHTML);
+                    //   document.getElementById(`price_${num}`).innerHTML = (parseFloat(myVariable) * (count)).toFixed(2);
+                    //   document.getElementById(`finalprice_${num}`).innerHTML = "₹" + (parseFloat(deliveryCharge) + (parseFloat(myVariable) * (count))).toFixed(2);
+                    // }
+
                   </script>
 
 
