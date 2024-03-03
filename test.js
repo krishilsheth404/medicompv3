@@ -996,7 +996,7 @@ extractDataOfPharmEasy = async (url) => {
             price: parseInt(a['props']['pageProps']['productDetails']['costPrice']),
             offer: '',
             deliveryCharge: dc ? dc : 0,
-            finalCharge: parseFloat(a['props']['pageProps']['productDetails']['costPrice']),
+            finalCharge: parseFloat(a['props']['pageProps']['productDetails']['costPrice'])+ dc,
         };
 
 
@@ -1581,6 +1581,12 @@ extractDataOfTata = async (url) => {
             m = "Not Available";
         }
 
+        var dc = 0;
+                      if (parseInt(m) < 200) { dc = 40; } else if
+                        (parseInt(m) >= 200) {
+                        dc = 20;
+                      }
+
         return {
             name: 'Tata 1mg',
             item: t,
@@ -1590,7 +1596,7 @@ extractDataOfTata = async (url) => {
             // price: $('.DrugPriceBox__price___dj2lv').text(),
             // price: $('span[property=priceCurrency]').text()
             offer: '',
-            deliveryCharge: 0,
+            deliveryCharge: dc,
             finalCharge: parseFloat(m) + 0,
         };
 
@@ -2466,14 +2472,14 @@ app.post('/multiSearch', async (req, res) => {
      if (typeof(req.body.multiItems)=='object') {
         
         for (mednames in req.body.multiItems) {
-            linkdata.push(`http://localhost:1000/fastComp?medname=${req.body.multiItems[mednames]}`)
+            linkdata.push(`https://medicomp.in/fastComp?medname=${req.body.multiItems[mednames]}`)
             mnames.push(req.body.multiItems[mednames])
         }
     }else{
             console.log(typeof(req.body.multiItems))
             var nameOfMed = req.body.multiItems.trim();
             console.log(nameOfMed);
-            linkdata.push(`http://localhost:1000/fastComp?medname=${nameOfMed}`);
+            linkdata.push(`https://medicomp.in/fastComp?medname=${nameOfMed}`);
             mnames.push(nameOfMed)
     }
 
@@ -2489,7 +2495,7 @@ app.post('/multiSearch', async (req, res) => {
 
     const finalMultiPriceData = [];
     for (var i = 0; i < responses.length; i++) {
-        finalMultiPriceData.push(`http://localhost:1000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`);
+        finalMultiPriceData.push(`https://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}`);
     }
     // console.log(finalMultiPriceData)
 
