@@ -119,139 +119,218 @@
   </nav>
   <!-- END nav -->
 
-  <div class="hero-wrap js-fullheight" id="fullheight"
-    style="background: url(wave3F.png);background-repeat: no-repeat;background-color: #eff4ff;background-size:cover;">
-    <!-- <span><img src="doctoon-removebg-preview.png" style="position: absolute;bottom:0px;right: 0px;height: 50vh;width: auto;" alt=""></span> -->
-    <div class="overlay"></div>
-    <div class="container" id="idcontainer">
-      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
-        data-scrollax-parent="true">
-        <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
-                href="index.html">Home</a></span> <span>Results</span></p>
-          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Results</h1>
+  <% 
+  function calculatePercentageDifference(originalPrice, discountedPrice) 
+  { 
+    priceDifference=parseFloat(originalPrice) - parseFloat(discountedPrice); 
+    const savingPercentage=(priceDifference /originalPrice) * 100; 
+    return savingPercentage.toFixed(2); // Round to two decimal places 
+  }
+     %>
+
+     <div style="height: 0px;width: 0px;font-size: 0px;">
+
+     <% try { %>
+      <% if (final[0].price) { %>
+        <span id='fc0'><%=final[0].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+     
+  <% try { %>
+      <% if (final[1].price) { %>
+        <span id='fc1'><%=final[1].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+  
+  <% try { %>
+      <% if (final[2].price) { %>
+        <span id='fc2'><%=final[2].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+  
+  <% try { %>
+      <% if (final[3].price) { %>
+        <span id='fc3'><%=final[3].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+  
+  <% try { %>
+      <% if (final[4].price) { %>
+        <span id='fc4'><%=final[4].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+  
+  <% try { %>
+      <% if (final[5].price) { %>
+        <span id='fc5'><%=final[5].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+  
+  <% try { %>
+      <% if (final[6].price) { %>
+        <span id='fc6'><%=final[6].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+  
+  <% try { %>
+      <% if (final[7].price) { %>
+        <span id='fc7'><%=final[7].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+  
+  <% try { %>
+      <% if (final[8].price) { %>
+        <span id='fc8'><%=final[8].price%></span>
+      <% } %>
+  <% } catch (error) { %>
+  <% } %>
+</div>
+  
+    <div class="hero-wrap js-fullheight" id="fullheight"
+      style="background: url(wave3F.png);background-repeat: no-repeat;background-color: #eff4ff;background-size:cover;">
+      <!-- <span><img src="doctoon-removebg-preview.png" style="position: absolute;bottom:0px;right: 0px;height: 50vh;width: auto;" alt=""></span> -->
+      <div class="overlay"></div>
+      <div class="container" id="idcontainer">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+          data-scrollax-parent="true">
+          <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span style="font-size: 18px;
+            color: white;
+            opacity: 1;
+            font-weight: bolder;">Medicomp Saved You</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+              <%=calculatePercentageDifference(parseFloat(final[final.length-2].finalCharge),parseFloat(final[0].finalCharge));%>
+                %</h1>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
-  <section class="ftco-section ftco-degree-bg">
-    <div class="container">
-      <div class="row" style="display: flex;align-items: center;justify-content:center;">
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row" style="display: flex;align-items: center;justify-content:center;">
 
 
-        <%var itemCount=0%>
-          <%var ApolloLink=0%>
-            <%var temp=0%>
-              <%var globalUrlForImg=0%>
-                <div class="col-lg-9">
-                  <div class="row">
+          <%var itemCount=0%>
+            <%var ApolloLink=0%>
+              <%var temp=0%>
+                <%var globalUrlForImg=0%>
+                  <div class="col-lg-9">
+                    <div class="row">
 
 
 
 
-                    <% for(var i=0; i < final.length-1; i++) { %>
+                      <% for(var i=0; i < final.length-1; i++) { %>
 
-                      <% if(final[i].price) {itemCount++;%>
+                        <% if(final[i].price) {itemCount++;%>
 
-                        <div class="col-md-4 ftco-animate">
-                          <div class="destination">
-                            <% if(final[i].imgLink) {%>
-                              <a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-                                style="background-image: url(<%=final[i].imgLink%>);background-size: contain;">
-                                <%}else{%>
-                                  <a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-                                    style="background-image: url(noimage.jpg);background-size: contain;">
-                                    <%}%>
-                                      <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                      </div>
-                                  </a>
-                                  <div class="text p-3">
-                                    <div class="d-flex" style="height: auto;">
-                                      <div class="one" style="height: auto; ">
-                                        <h3 style="
+                          <div class="col-md-4 ftco-animate">
+                            <div class="destination">
+                              <% if(final[i].imgLink) {%>
+                                <a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+                                  style="background-image: url(<%=final[i].imgLink%>);background-size: contain;">
+                                  <%}else{%>
+                                    <a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+                                      style="background-image: url(noimage.jpg);background-size: contain;">
+                                      <%}%>
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                          <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                      <div class="d-flex" style="height: auto;">
+                                        <div class="one" style="height: auto; ">
+                                          <h3 style="
                         overflow-wrap: anywhere;
                     "><a href="#" id="mediname">
-                                            <%=final[i].item%>
-                                          </a></h3>
+                                              <%=final[i].item%>
+                                            </a></h3>
 
 
+                                        </div>
+                                        <div class="two">
+
+                                          <span class="price" id="finalprice_<%=i%>">
+                                            <%if(final[i].deliveryCharge!="login"){%>
+                                              ₹<%=(parseFloat(final[i].price) +
+                                                parseFloat(final[i].deliveryCharge)).toFixed(2)%>
+                                                <%}else{%>
+                                                  ₹<%parseFloat((final[i][0][k].price.toString()).replace( /,/g, "" ))%>
+                                                    <%}%>
+                                          </span> <br>
+                                        </div>
                                       </div>
-                                      <div class="two">
-
-                                        <span class="price" id="finalprice_<%=i%>">
-                                          <%if(final[i].deliveryCharge!="login"){%>
-                                            ₹<%=(parseFloat(final[i].price) +
-                                              parseFloat(final[i].deliveryCharge)).toFixed(2)%>
-                                              <%}else{%>
-                                                ₹<%parseFloat((final[i][0][k].price.toString()).replace( /,/g, "" ))%>
-                                                  <%}%>
-                                        </span> <br>
-                                      </div>
-                                    </div>
-                                    <!-- <select name="qty" id="qty_<%=i%>" style="font-size: 19px;
+                                      <select name="qty" id="qty_<%=i%>" style="font-size: 19px;
                                           position: absolute;
                                           right: 40px;
                                           margin-top: 10px;" onchange="multiplyPriceByCount(this.id)">
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
-                                      <option value="6">6</option>
-                                      <option value="7">7</option>
-                                      <option value="8">8</option>
-                                      <option value="9">9</option>
-                                      <option value="10">10</option>
-                                    </select> -->
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                      </select>
 
-                                    <span>Medicine Price : <span id="price_<%=i%>">
-                                        <%=final[i].price%>
-                                      </span> </span> <br>
+                                      <span>Medicine Price : <span id="price_<%=i%>">
+                                          <%=final[i].price%>
+                                        </span> </span> <br>
 
-                                    <span>Delivery Price : <span id="delivery_<%=i%>">
-                                        <%=final[i].deliveryCharge%>
-                                      </span>
-                                    </span> <br>
-                                    <!-- <p class="days"><span>2 days 3 nights</span></p> -->
-                                    <hr>
-                                    <p class="bottom-area d-flex">
-                                      <span><i class="icon-map-o"></i>
-                                        <span id="company_<%=i%>">
-                                          <%=final[i].name%>
+                                      <span>Delivery Price : <span id="delivery_<%=i%>">
+                                          <%=final[i].deliveryCharge%>
                                         </span>
+                                      </span> <br>
+                                      <!-- <p class="days"><span>2 days 3 nights</span></p> -->
+                                      <hr>
+                                      <p class="bottom-area d-flex">
+                                        <span><i class="icon-map-o"></i>
+                                          <span id="company_<%=i%>">
+                                            <%=final[i].name%>
+                                          </span>
+                                        </span>
+                                      <p></p>
+                                      <span class="ml-auto">
+                                        <!-- <form action="/redirect" method="post"> -->
+                                        <input type="text" name="medlink" id="medlink" value="<%=final[i].link%>"
+                                          style="visibility:hidden;height: 0px;width: 0px;">
+                                        <input type="text" name="medName" id="medName" value="<%=final[i].name%>"
+                                          style="visibility:hidden;height: 0px;width: 0px;">
+                                        <!-- <input type="text" name="medicineName" id="medicineName" value="<%=final[i].item%>" style="visibility:hidden;height: 0px;"> -->
+                                        <!-- <a href="<%=final[i].link%>">&nbsp;BUY&nbsp;</a> -->
+                                        <a id="smbtn" type="submit" value="BUY" href="<%=final[i].link%>"
+                                          style="border: none;background-color: lightgreen;width: 100%;text-align: center;">&nbsp;BUY&nbsp;</a>
+                                        </form>
+                                        <style>
+                                          #smbtn:hover {
+                                            cursor: pointer;
+                                          }
+                                        </style>
                                       </span>
-                                    <p></p>
-                                    <span class="ml-auto">
-                                      <!-- <form action="/redirect" method="post"> -->
-                                      <input type="text" name="medlink" id="medlink" value="<%=final[i].link%>"
-                                        style="visibility:hidden;height: 0px;width: 0px;">
-                                      <input type="text" name="medName" id="medName" value="<%=final[i].name%>"
-                                        style="visibility:hidden;height: 0px;width: 0px;">
-                                      <!-- <input type="text" name="medicineName" id="medicineName" value="<%=final[i].item%>" style="visibility:hidden;height: 0px;"> -->
-                                      <!-- <a href="<%=final[i].link%>">&nbsp;BUY&nbsp;</a> -->
-                                      <a id="smbtn" type="submit" value="BUY" href="<%=final[i].link%>"
-                                        style="border: none;background-color: lightgreen;width: 100%;text-align: center;">&nbsp;BUY&nbsp;</a>
-                                      </form>
-                                      <style>
-                                        #smbtn:hover {
-                                          cursor: pointer;
-                                        }
-                                      </style>
-                                    </span>
-                                    </p>
-                                  </div>
+                                      </p>
+                                    </div>
+                            </div>
                           </div>
-                        </div>
 
-                        <%}%>
                           <%}%>
-                  </div>
+                            <%}%>
+                    </div>
 
-                  <script>
-
+                    <script>
+                      
                     getDeliveryChargeForApollo = function (totalMedPrice) {
                       console.log(totalMedPrice)
                       var dc = 0; if (parseInt(totalMedPrice) < 300) {
@@ -266,7 +345,7 @@
                     }
 
                     function getDeliveryChargeForPharmeasy(totalMedPrice) {
-                      console.log("price" + totalMedPrice)
+                      console.log("price"+totalMedPrice)
 
                       var dc = 0;
                       console.log("pharmeay->" + parseInt(totalMedPrice))
@@ -321,7 +400,7 @@
 
                       return dc;
                     }
-
+     
                     function getDeliveryChargeForTabletShablet(totalMedPrice) {
                       var dc = 0;
 
@@ -363,12 +442,164 @@
                     }
 
 
-             
 
-                  </script>
+                      async function multiplyPriceByCount(i) {
+                        var num = parseInt(i.split('_')[1]);
+                        var count = parseInt(document.getElementById(i).value);
+                        console.log("count->" + count);
+                        var companyname = document.getElementById(`company_${num}`).innerHTML.toLowerCase();
+                        console.log(companyname);
+                        var finalcost = parseFloat(document.getElementById(`finalprice_${num}`.innerHTML));
+                        console.log("I --> "+i)
+                        var myVariable=parseFloat(document.getElementById(`fc${num}`).innerText);
+                        console.log(myVariable)
+                        var deliveryCharge;
+                        
+                      
+                        console.log("Value->>"+typeof(myVariable)+"Cout_>>"+typeof(count))
+                      if (companyname.includes('netmeds')) {
+                        deliveryCharge =await getDeliveryChargeForNetmeds((myVariable) * (count))
+                      } else if (companyname.includes('pharmeasy')) {
+                        deliveryCharge =await getDeliveryChargeForPharmeasy((myVariable) * (count))
+                      } else if (companyname.includes('tablet')) {
+                        deliveryCharge =await getDeliveryChargeForTabletShablet((myVariable) * (count))
+                      } else if (companyname.includes('pulseplus')) {
+                        deliveryCharge =await getDeliveryChargeForPulsePlus((myVariable) * (count))
+                      } else if (companyname.includes('upchar')) {
+                        deliveryCharge =await getDeliveryChargeFormyupchar((myVariable) * (count))
+                      } else if (companyname.includes('pasumai')) {
+                        deliveryCharge =await getDeliveryChargeForPasumai((myVariable) * (count))
+                      } else if (companyname.includes('medplus')) {
+                        deliveryCharge =await getDeliveryChargeForMedPlusMart((myVariable) * (count))
+                      } else if (companyname.includes('truemeds')) {
+                        deliveryCharge =await getDeliveryChargeForTruemeds((myVariable) * (count))
+                      } else if (companyname.includes('tata')) {
+                        deliveryCharge =await getDeliveryChargeFor1mg((myVariable) * (count))
+                      }
+                        
+                      document.getElementById(`delivery_${num}`).innerHTML = parseFloat(deliveryCharge);
+                      // console.log(document.getElementById(`price_${num}`).innerHTML);
+                      document.getElementById(`price_${num}`).innerHTML = (parseFloat(myVariable) * (count)).toFixed(2);
+                      document.getElementById(`finalprice_${num}`).innerHTML = "₹" +  (parseFloat(deliveryCharge) + (parseFloat(myVariable) * (count))).toFixed(2);
+                      }
+
+                      getDeliveryChargeForApollo = function (totalMedPrice) {
+                        console.log(totalMedPrice)
+                        var dc = 0; if (parseInt(totalMedPrice) < 300) {
+                          dc = 99;
+                        } else if (parseInt(totalMedPrice) >= 300 && parseInt(totalMedPrice) < 500) { dc = 69; } else
+                          if (parseInt(totalMedPrice) >= 499 && parseInt(totalMedPrice) < 800) { dc = 25; } else
+                            if (parseInt(totalMedPrice) >= 800) {
+                              dc = 0;
+                            }
+
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForPharmeasy(totalMedPrice) {
+                        console.log("price" + totalMedPrice)
+
+                        var dc = 0;
+                        console.log("pharmeay->" + parseInt(totalMedPrice))
+                        if (parseInt(totalMedPrice) < 250) { dc = 149; } else if (parseInt(totalMedPrice) >= 250 &&
+                          parseInt(totalMedPrice) < 500) { dc = 99; } else if (parseInt(totalMedPrice) >= 500 &&
+                            parseInt(totalMedPrice) < 699) { dc = 25; } else if (parseInt(totalMedPrice) >= 699) {
+                              dc = 0;
+                            }
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForNetmeds(totalMedPrice) {
+                        var dc = 0;
+                        if (parseInt(totalMedPrice) < 250) { dc = 99; } else if (parseInt(totalMedPrice) >= 250 &&
+                          parseInt(totalMedPrice) < 1000) { dc = 29; } else if (parseInt(totalMedPrice) >= 1000) {
+                            dc = 0;
+                          }
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForHealthskool(totalMedPrice) {
+                        var dc = 0;
+
+                        if (parseInt(totalMedPrice) <= 999) { dc = 40; } else if (parseInt(totalMedPrice) > 999) {
+                          dc = 0;
+                        }
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForPulsePlus(totalMedPrice) {
+                        var dc = 0;
+                        if (parseInt(totalMedPrice) < 1000) { dc = 50; } else if (parseInt(totalMedPrice) >= 1000) {
+                          dc = 15;
+                        }
+
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForPasumai(totalMedPrice) {
+                        var dc = 0;
+                        if (totalMedPrice < 1000) { dc = 50; } else if (totalMedPrice >= 1000) {
+                          dc = 0;
+                        }
+                        return dc;
+                      }
+
+                      function getDeliveryChargeFormyupchar(totalMedPrice) {
+                        var dc = 0;
+                        if (parseInt(totalMedPrice) < 499) { dc = 49; } else if (parseInt(totalMedPrice) > 500) {
+                          dc = 0;
+                        }
+
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForTabletShablet(totalMedPrice) {
+                        var dc = 0;
+
+                        if (parseInt(totalMedPrice) < 500) { dc = 68.88; } else if (parseInt(totalMedPrice) >=
+                          500 && parseInt(totalMedPrice) < 1000) { dc = 50.40; } else if
+                          (parseInt(totalMedPrice) >= 1000) {
+                          console.log('hie')
+                          dc = 0;
+                        }
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForMedPlusMart(totalMedPrice) {
+                        var dc = 0;
+                        if (parseInt(totalMedPrice) < 200) { dc = 40; } else if (parseInt(totalMedPrice) >=
+                          200) {
+                          dc = 20;
+                        }
+
+                        return dc;
+                      }
+
+                      function getDeliveryChargeForTruemeds(totalMedPrice) {
+                        var dc = 0;
+                        if (parseInt(totalMedPrice) < 200) { dc = 40; } else if
+                          (parseInt(totalMedPrice) >= 200) {
+                          dc = 20;
+                        }
+
+                        return dc;
+                      }
+                      function getDeliveryChargeFor1mg(totalMedPrice) {
+                        var dc = 0;
+                        if (parseInt(totalMedPrice) < 200) { dc = 40; } else if
+                          (parseInt(totalMedPrice) >= 200) {
+                          dc = 20;
+                        }
+                        return dc;
+                      }
 
 
-                  <!-- <div class="row mt-5">
+
+
+                    </script>
+
+
+                    <!-- <div class="row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
@@ -383,168 +614,168 @@
 		            </div>
 		          </div>
 		        </div> -->
-                </div> <!-- .col-md-8 -->
-      </div>
-    </div>
-    <section class="ftco-section ftco-destination">
-      <div class="container">
-        <div class="row justify-content-start mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate">
-            <span class="subheading"></span>
-            <!-- <h2 class="mb-4"><strong>Substitutes</strong></h2> -->
-          </div>
+                  </div> <!-- .col-md-8 -->
         </div>
-        <div class="row" id="zRow">
-          <div class="col-md-12">
-            <div class="destination-slider owl-carousel ftco-animate">
+      </div>
+      <section class="ftco-section ftco-destination">
+        <div class="container">
+          <div class="row justify-content-start mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate">
+              <span class="subheading"></span>
+              <!-- <h2 class="mb-4"><strong>Substitutes</strong></h2> -->
+            </div>
+          </div>
+          <div class="row" id="zRow">
+            <div class="col-md-12">
+              <div class="destination-slider owl-carousel ftco-animate">
 
-              <% for(var i=0; i < final.length-1; i++) { %>
-                <% if(final[i].subsname) {%>
-                  <div class="item">
-                    <div class="destination">
-                      <a href="http://localhost:3000/compare?medname=<%=final[i].subsname%>"
-                        class="img d-flex justify-content-center align-items-center pharmasList"
-                        style="border:1px solid #e6e6e6;background-image: url(https://images.apollo247.in/pub/media<%=final[i].subsImgLink%>);background-size: contain;">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                          <span class="icon-search2"></span>
+                <% for(var i=0; i < final.length-1; i++) { %>
+                  <% if(final[i].subsname) {%>
+                    <div class="item">
+                      <div class="destination">
+                        <a href="http://localhost:3000/compare?medname=<%=final[i].subsname%>"
+                          class="img d-flex justify-content-center align-items-center pharmasList"
+                          style="border:1px solid #e6e6e6;background-image: url(https://images.apollo247.in/pub/media<%=final[i].subsImgLink%>);background-size: contain;">
+                          <div class="icon d-flex justify-content-center align-items-center">
+                            <span class="icon-search2"></span>
+                          </div>
+                        </a>
+                        <div class="text p-3">
+                          <h3><a href="#">
+                              <%=final[i].subsname%>
+                            </a></h3>
+                          <span class="listing">
+                            <%=final[i].subsprice%>
+                          </span>
                         </div>
-                      </a>
-                      <div class="text p-3">
-                        <h3><a href="#">
-                            <%=final[i].subsname%>
-                          </a></h3>
-                        <span class="listing">
-                          <%=final[i].subsprice%>
-                        </span>
                       </div>
                     </div>
-                  </div>
-                  <%}%>
                     <%}%>
+                      <%}%>
 
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+
+
+      <script>
+        var z = document.querySelectorAll('.pharmasList');
+        console.log(z);
+        if (window.innerWidth < 800) {
+          for (i in z) {
+            console.log("called")
+            z[i].style.height = "200px";
+          }
+        }
+      </script>
+
+
     </section>
 
-
-
-    <script>
-      var z = document.querySelectorAll('.pharmasList');
-      console.log(z);
-      if (window.innerWidth < 800) {
-        for (i in z) {
-          console.log("called")
-          z[i].style.height = "200px";
-        }
-      }
-    </script>
-
-
-  </section>
-
-  <footer class="ftco-footer ftco-bg-dark ftco-section">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Medicomp India.</h2>
-            <p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
-              various pharmacies and online retailers in India.</p>
-            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-              <li class="ftco-animate"><a href="https://www.linkedin.com/in/krishilsheth/"><span
-                    class="icon-linkedin"></span></a></li>
-              <!-- <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li> -->
-              <li class="ftco-animate"><a href="https://www.instagram.com/medicomp.india/"><span
-                    class="icon-instagram"></span></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="ftco-footer-widget mb-4 ml-md-5">
-            <h2 class="ftco-heading-2">Information</h2>
-            <ul class="list-unstyled">
-              <li><a href="/about.html" class="py-2 d-block">About</a></li>
-              <li><a href="#" class="py-2 d-block">Med A-Z</a></li>
-              <!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
-              <li><a
-                  href="mailto:krishilsheth@gmail.com?subject=We Want To Collaborate With Medicomp India&body=//text here"
-                  class="py-2 d-block">Become a partner</a></li>
-              <!-- <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li> -->
-              <li><a href="/privacypolicy.html" class="py-2 d-block">Privacy and Policy</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Customer Support</h2>
-            <ul class="list-unstyled">
-              <li><a href="/about.html" class="py-2 d-block">FAQ</a></li>
-              <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-                <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-                <li><a href="#" class="py-2 d-block">How it works</a></li> -->
-              <li><a href="/contact.html" class="py-2 d-block">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Have a Questions?</h2>
-            <div class="block-23 mb-3">
-              <ul>
-
-                <!-- <li><a href="tel:9372677245"><span class="icon icon-phone"></span>
-                    
-                    <span class="text">9372677245</span></a></li> -->
-                <li><a href="mailto:@krishilsheth@gmail.com"><span class="icon icon-envelope"></span><span
-                      class="text">krishilsheth@gmail.com</span></a></li>
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Medicomp India.</h2>
+              <p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
+                various pharmacies and online retailers in India.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="https://www.linkedin.com/in/krishilsheth/"><span
+                      class="icon-linkedin"></span></a></li>
+                <!-- <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li> -->
+                <li class="ftco-animate"><a href="https://www.instagram.com/medicomp.india/"><span
+                      class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 text-center">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Information</h2>
+              <ul class="list-unstyled">
+                <li><a href="/about.html" class="py-2 d-block">About</a></li>
+                <li><a href="#" class="py-2 d-block">Med A-Z</a></li>
+                <!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
+                <li><a
+                    href="mailto:krishilsheth@gmail.com?subject=We Want To Collaborate With Medicomp India&body=//text here"
+                    class="py-2 d-block">Become a partner</a></li>
+                <!-- <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li> -->
+                <li><a href="/privacypolicy.html" class="py-2 d-block">Privacy and Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Customer Support</h2>
+              <ul class="list-unstyled">
+                <li><a href="/about.html" class="py-2 d-block">FAQ</a></li>
+                <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+                <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+                <li><a href="#" class="py-2 d-block">How it works</a></li> -->
+                <li><a href="/contact.html" class="py-2 d-block">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <div class="block-23 mb-3">
+                <ul>
 
-          <p>
-            Copyright &copy;
-            <script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="icon-plus"
-              aria-hidden="true"></i> <a href="https://medicomp.in" target="_blank">Medicomp India</a>
-          </p>
+                  <!-- <li><a href="tel:9372677245"><span class="icon icon-phone"></span>
+                    
+                    <span class="text">9372677245</span></a></li> -->
+                  <li><a href="mailto:@krishilsheth@gmail.com"><span class="icon icon-envelope"></span><span
+                        class="text">krishilsheth@gmail.com</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p>
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="icon-plus"
+                aria-hidden="true"></i> <a href="https://medicomp.in" target="_blank">Medicomp India</a>
+            </p>
+          </div>
         </div>
       </div>
+    </footer>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+      <!-- <svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg> -->
+      <img src="medicomp-loading-unscreen.gif"
+        style="width: 50px;height: 50px;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);"
+        alt="">
+
     </div>
-  </footer>
 
 
-
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen">
-    <!-- <svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg> -->
-    <img src="medicomp-loading-unscreen.gif"
-      style="width: 50px;height: 50px;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);"
-      alt="">
-
-  </div>
-
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/jquery.timepicker.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  <script src="js/range.js"></script>
-  <script src="js/main.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/range.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 

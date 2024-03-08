@@ -661,7 +661,7 @@ app.post('/doclist', async (req, res) => {
             return {};
         }
     };
-    await extractdoe(docUrl);
+    await extractdoe(docUrl);z``
 });
 
 app.post('/description', async (req, res) => {
@@ -1597,7 +1597,7 @@ extractDataOfTata = async (url) => {
             // price: $('span[property=priceCurrency]').text()
             offer: '',
             deliveryCharge: dc,
-            finalCharge: parseFloat(m) + 0,
+            finalCharge: parseFloat(m) + dc,
         };
 
     } catch (error) {
