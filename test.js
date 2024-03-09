@@ -1116,14 +1116,14 @@ extractDataOfNetMeds = async (url,nameOfMed) => {
 
         return {
             name: 'NetMeds',
-            item: $('.product-detail').text().substring(0, 30),
+            item: $('.product-detail .prodName h1').first().text(),
             link: url,
             imgLink: $('.largeimage img').attr('src'),
             price: $('#last_price').attr('value'),
             offer: '',
             deliveryCharge: dc,
             finalCharge: parseFloat($('#last_price').attr('value')) + parseFloat(dc),
-            similarityIndex:calculateSimilarity($('.product-detail').text().toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex:calculateSimilarity($('.product-detail .prodName h1').first().text().toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName:$('span[class=drug-manu] > a').first().text(),
 
         };
