@@ -31,6 +31,14 @@
           <%}%>
 
 
+          
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js" integrity="sha512-E/yP5UiPXb6VelX+dFLuUD+1IZw/Kz7tMncFTYbtoNSCdRZPFoGN3jZ2p27VUxHEkhbPiLuZhZpVEXxk9wAHCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -83,6 +91,8 @@
             <link rel="stylesheet" href="css/flaticon.css">
             <link rel="stylesheet" href="css/icomoon.css">
             <link rel="stylesheet" href="css/style.css">
+
+
 
 
 </head>
@@ -193,7 +203,8 @@
   <% } catch (error) { %>
   <% } %>
 </div>
-  
+
+
     <div class="hero-wrap js-fullheight" id="fullheight"
       style="background: url(wave3F.png);background-repeat: no-repeat;background-color: #eff4ff;background-size:cover;">
       <!-- <span><img src="doctoon-removebg-preview.png" style="position: absolute;bottom:0px;right: 0px;height: 50vh;width: auto;" alt=""></span> -->
@@ -214,10 +225,40 @@
       </div>
     </div>
 
+    <style>
+      .sort-buttons {
+  display: flex; /* Arrange buttons horizontally */
+  margin: 10px 0; /* Add some margin for spacing */
+}
 
-    <section class="ftco-section ftco-degree-bg">
-      <div class="container">
-        <div class="row" style="display: flex;align-items: center;justify-content:center;">
+.sort-buttons button {
+  background-color: #f0f0f0; /* Light gray background */
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 8px 16px; /* Padding for content */
+  cursor: pointer; /* Indicate clickable behavior */
+  margin-right: 5px; /* Add some spacing between buttons */
+}
+
+.sort-buttons button.selected {
+  background-color: #b6ccf6; /* Change background color for selected button */
+}
+
+.sort-buttons button:hover {
+  background-color: #b6ccf6;
+  transition: all 0.4s;
+   /* Change background color on hover */
+}
+
+    </style>
+
+<section class="ftco-section ftco-degree-bg">
+  <div class="container">
+    <div class="sort-buttons">
+      <button id="btn1ForPriceSort" class="selected" data-sort-value="pt" onclick="btnSortPriceClick()">Sort by Price</button>
+      <button id="btn1ForAccuraySort"  data-sort-value="ut" onclick="btnSortClick()">Sort by Accuracy</button>
+    </div>
+    <div class="row" style="display: flex;align-items: center;justify-content:center;margin-top: 40px;">
 
 
           <%var itemCount=0%>
@@ -225,8 +266,9 @@
               <%var temp=0%>
                 <%var globalUrlForImg=0%>
                   <div class="col-lg-9">
-                    <div class="row">
+                    <div class="row" id="isotope-container">
 
+                      
 
 
 
@@ -234,7 +276,21 @@
 
                         <% if(final[i].price) {itemCount++;%>
 
-                          <div class="col-md-4 ftco-animate">
+
+                          <%var finalP%>
+                                         
+                          <%
+                          if(final[i].deliveryCharge!="login"){
+                            finalP= (parseFloat(final[i].price) + parseFloat(final[i].deliveryCharge)).toFixed(2)
+                              }else{
+                                finalP=parseFloat((final[i][0][k].price.toString()).replace( /,/g, "" ))
+                                  }
+                          %>
+                          
+                        
+
+                          <div class="col-md-4 ftco-animate itemForSorting" data-ut="<%=final[i].similarityIndex%>" data-pt="<%=finalP%>">
+                            AR:<%=final[i].similarityIndex%>%
                             <div class="destination">
                               <% if(final[i].imgLink) {%>
                                 <a href="#" class="img img-2 d-flex justify-content-center align-items-center"
@@ -259,15 +315,14 @@
 
                                         </div>
                                         <div class="two">
-
+                                        
+                                        
                                           <span class="price" id="finalprice_<%=i%>">
-                                            <%if(final[i].deliveryCharge!="login"){%>
-                                              ₹<%=(parseFloat(final[i].price) +
-                                                parseFloat(final[i].deliveryCharge)).toFixed(2)%>
-                                                <%}else{%>
-                                                  ₹<%parseFloat((final[i][0][k].price.toString()).replace( /,/g, "" ))%>
-                                                    <%}%>
-                                          </span> <br>
+                                           ₹<%=finalP%>
+                                          </span> 
+                                          
+
+                                          <br>
                                         </div>
                                       </div>
                                       <select name="qty" id="qty_<%=i%>" style="font-size: 19px;
@@ -328,7 +383,58 @@
                           <%}%>
                             <%}%>
                     </div>
+                    <script>
+                          var container = document.getElementById("isotope-container");
+                          var items = Array.from(container.querySelectorAll(".itemForSorting")); // Assuming your item class is `.item`
 
+                          // Function to sort items based on a comparator function
+                          function sortItems(comparator) {
+                            items.sort(comparator);
+                            for (var i = 0; i < items.length; i++) {
+                              container.appendChild(items[i]); // Re-order items in DOM
+                            }
+                          }
+
+                          // Function to compare items based on a specific property (replace with your sort criteria)
+                          function compareItemsByUT(item1, item2) {
+                            var ut1 = parseInt(item1.dataset.ut); // Assuming data-ut attribute for sorting
+                            var ut2 = parseInt(item2.dataset.ut);
+                            return ut2 - ut1; // Ascending sort
+                          }
+                          
+                          function compareItemsByPT(item1, item2) {
+                            var ut1 = parseInt(item1.dataset.pt); // Assuming data-ut attribute for sorting
+                            var ut2 = parseInt(item2.dataset.pt);
+                            return ut1 - ut2; // Ascending sort
+                          }
+
+                          // Example sorting by data-ut attribute (replace with your sorting logic)
+                          function sortByUT() {
+                            console.log("called");
+                            sortItems(compareItemsByUT);
+                          }
+                          
+                          function sortByPT() {
+                            console.log("called");
+                            sortItems(compareItemsByPT);
+                          }
+
+                          // Call the sorting function when needed (e.g., a button click)
+                        
+                        function btnSortClick(){
+                          document.getElementById('btn1ForPriceSort').classList.remove("selected") 
+                          document.getElementById('btn1ForAccuraySort').classList.add("selected") 
+                          sortByUT();
+                        }
+                        
+                        function btnSortPriceClick(){
+                          document.getElementById('btn1ForPriceSort').classList.add("selected") 
+                          document.getElementById('btn1ForAccuraySort').classList.remove("selected") 
+                          sortByPT();
+                        }
+                      
+                    </script>
+                    
                     <script>
                       
                     getDeliveryChargeForApollo = function (totalMedPrice) {
