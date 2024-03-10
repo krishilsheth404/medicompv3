@@ -254,9 +254,9 @@
 
 <section class="ftco-section ftco-degree-bg">
   <div class="container">
-    <div class="sort-buttons">
-      <button id="btn1ForPriceSort" class="selected" data-sort-value="pt" onclick="btnSortPriceClick()">Sort by Price</button>
-      <button id="btn1ForAccuraySort"  data-sort-value="ut" onclick="btnSortClick()">Sort by Accuracy</button>
+    <div class="sort-buttons" style="flex-wrap: wrap;">
+      <button id="btn1ForPriceSort" style="margin: 5px;" class="selected" data-sort-value="pt" onclick="btnSortPriceClick()">Sort by Price</button>
+      <button id="btn1ForAccuraySort" style="margin: 5px;"  data-sort-value="ut" onclick="btnSortClick()">Sort by Accuracy</button>
     </div>
     <div class="row" style="display: flex;align-items: center;justify-content:center;margin-top: 40px;">
 
@@ -289,7 +289,7 @@
                           
                         
 
-                          <div class="col-md-4 ftco-animate itemForSorting" data-ut="<%=final[i].similarityIndex%>" data-pt="<%=finalP%>">
+                          <div class="col-md-4 itemForSorting" data-ut="<%=final[i].similarityIndex%>" data-pt="<%=finalP%>">
                             AR:<%=final[i].similarityIndex%>%
                             <div class="destination">
                               <% if(final[i].imgLink) {%>
