@@ -2866,6 +2866,111 @@ app.get('/fastCompMorePharmas', async (req, res) => {
 
 });
 
+app.get('/fastCompMorePharmasUsingAxiosParallel', async (req, res) => {
+    // Insert Login Code Here
+
+    // {
+    //     // apollo - x
+    //     // netmeds -ok
+    //     // pharmeasy -x
+    //     // healthslool - ok
+    //     // tabletshablet - ok
+    //     // pulseplus - ok
+    //     // medplusmart - ok
+    //     // pasumai - ok
+    // } for med price change as per location
+
+    // {
+    //     // apollo -  x
+    //     // netmeds - ok final
+    //     // pharmeasy - x 
+    //     // healthslool - ok final
+    //     // tabletshablet - ok final
+    //     // pulseplus - ok  work on it 
+    //     // medplusmart - ok final
+    //     // pasumai - ok ~ 
+    // } for delivery price change as per location
+
+
+    var nameOfMed = req.query['medname'] + '\n';
+    nameOfMed = nameOfMed.trim();
+    console.log(nameOfMed);
+    const presReq = ["No"];
+
+
+    var tempFinal = [];
+
+    var mixUrl ;
+    // var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=medicine intitle:(${nameOfMed})&vs=pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
+
+
+    var arr = [
+
+        'netmeds.com', 'pharmeasy.in',
+        'pasumaipharmacy.com', 'pulseplus.in',
+        'tabletshablet.com', 'medplusmart.com', 'myupchar.com',
+        'truemeds.in', '1mg.com', 'onebharatpharmacy.com',
+        'kauverymeds.com','indimedo.com','wellnessforever.com',
+        'secondmedic.com','chemistsworld.com','callhealth.com',
+    ]
+
+
+    var cont = checkforzero(arr);
+    // console.log(arr)
+    var tempf = [];
+    var t = [0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0];
+    var tries = 0;
+   
+    const urlForNetMeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+netmeds.com) &vs=netmeds.com`;
+    const urlForPharmEasy = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pharmeasy.in) &vs=pharmeasy.in`;  //*//
+    const urlForPP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pasumaipharmacy.com) &vs=pasumaipharmacy.com`;
+    const urlForPulsePlus = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pulseplus.in) &vs=pulseplus.in`;
+    const urlForOBP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+tabletshablet.com) &vs=tabletshablet.com`;
+    const urlForMedPlusMart = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+medplusmart.com) &vs=medplusmart.com`;
+    const urlForMyUpChar = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+myupchar.com) &vs=myupchar.com`;
+    const urlForTruemeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+truemeds.in) &vs=truemeds.in`;
+    const urlForTata = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=1mg.com`;
+    
+    const urlForOneBharat = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=onebharatpharmacy.com`;
+    const urlForKauverymeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=kauverymeds.com`;
+    const urlForIndimedo = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=indimedo.com`;
+    const urlForWellnessforever = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=wellnessforever.com`;
+    const urlForSecondmedic = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=secondmedic.com`;
+    const urlForChemistsworld = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=chemistsworld.com`;
+    const urlForCallhealth = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=callhealth.com`;
+   
+
+    t = await Promise.all([
+        extractLinkFromyahoo(urlForNetMeds), extractLinkFromyahoo(urlForPharmEasy), extractLinkFromyahoo(urlForPP),
+        extractLinkFromyahoo(urlForPulsePlus), extractLinkFromyahoo(urlForOBP), extractLinkFromyahoo(urlForMedPlusMart),
+        extractLinkFromyahoo(urlForMyUpChar), extractLinkFromyahoo(urlForTruemeds), extractLinkFromyahoo(urlForTata), extractLinkFromyahoo(urlForOneBharat),
+        extractLinkFromyahoo(urlForKauverymeds), extractLinkFromyahoo(urlForIndimedo),
+        extractLinkFromyahoo(urlForWellnessforever), extractLinkFromyahoo(urlForSecondmedic),
+        extractLinkFromyahoo(urlForChemistsworld), extractLinkFromyahoo(urlForCallhealth)
+    ])
+
+    res.send(t);
+
+    // await axios.all([extractLinkFromOptimizedyahoo(urlForApolloNetmedsPharmEasy,nameOfMed, 'apollo', 'netmeds', 'pharmeasy'),
+    // extractLinkFromOptimizedyahoo(urlForHealthskoolTabletshabletPulsePlus,nameOfMed, 'healthskool', 'tabletshablet', 'pulseplus')
+    //     , extractLinkFromOptimizedyahoo(urlForMyupcharHealthmugPasumai,nameOfMed, 'myupchar', 'healthmug', 'pasumai')])
+    //     .then(await axios.spread(async (...responses) => {
+    //         // console.log(...responses);
+    //         const end = performance.now() - start;
+    //         console.log(`Execution time: ${end}ms`);
+
+    //         // item.push(responses[0])
+
+    //         console.log(responses[0]);
+    //         console.log(responses[1]);
+    //         console.log(responses[2]);
+
+    //         // getData(item);
+    //     }))
+
+
+});
+
 
 app.post('/multiSearch', async (req, res) => {
 
