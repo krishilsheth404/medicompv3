@@ -383,6 +383,7 @@
                           <%}%>
                             <%}%>
                     </div>
+                    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
                     <script>
                           var container = document.getElementById("isotope-container");
                           var items = Array.from(container.querySelectorAll(".itemForSorting")); // Assuming your item class is `.item`
@@ -436,119 +437,7 @@
                     </script>
                     
                     <script>
-                      
-                    getDeliveryChargeForApollo = function (totalMedPrice) {
-                      console.log(totalMedPrice)
-                      var dc = 0; if (parseInt(totalMedPrice) < 300) {
-                        dc = 99;
-                      } else if (parseInt(totalMedPrice) >= 300 && parseInt(totalMedPrice) < 500) { dc = 69; } else
-                        if (parseInt(totalMedPrice) >= 499 && parseInt(totalMedPrice) < 800) { dc = 25; } else
-                          if (parseInt(totalMedPrice) >= 800) {
-                            dc = 0;
-                          }
-
-                      return dc;
-                    }
-
-                    function getDeliveryChargeForPharmeasy(totalMedPrice) {
-                      console.log("price"+totalMedPrice)
-
-                      var dc = 0;
-                      console.log("pharmeay->" + parseInt(totalMedPrice))
-                      if (parseInt(totalMedPrice) < 250) { dc = 149; } else if (parseInt(totalMedPrice) >= 250 &&
-                        parseInt(totalMedPrice) < 500) { dc = 99; } else if (parseInt(totalMedPrice) >= 500 &&
-                          parseInt(totalMedPrice) < 699) { dc = 25; } else if (parseInt(totalMedPrice) >= 699) {
-                            dc = 0;
-                          }
-                      return dc;
-                    }
-
-                    function getDeliveryChargeForNetmeds(totalMedPrice) {
-                      var dc = 0;
-                      if (parseInt(totalMedPrice) < 250) { dc = 99; } else if (parseInt(totalMedPrice) >= 250 &&
-                        parseInt(totalMedPrice) < 1000) { dc = 29; } else if (parseInt(totalMedPrice) >= 1000) {
-                          dc = 0;
-                        }
-                      return dc;
-                    }
-
-                    function getDeliveryChargeForHealthskool(totalMedPrice) {
-                      var dc = 0;
-
-                      if (parseInt(totalMedPrice) <= 999) { dc = 40; } else if (parseInt(totalMedPrice) > 999) {
-                        dc = 0;
-                      }
-                      return dc;
-                    }
-
-                    function getDeliveryChargeForPulsePlus(totalMedPrice) {
-                      var dc = 0;
-                      if (parseInt(totalMedPrice) < 1000) { dc = 50; } else if (parseInt(totalMedPrice) >= 1000) {
-                        dc = 15;
-                      }
-
-                      return dc;
-                    }
-
-                    function getDeliveryChargeForPasumai(totalMedPrice) {
-                      var dc = 0;
-                      if (totalMedPrice < 1000) { dc = 50; } else if (totalMedPrice >= 1000) {
-                        dc = 0;
-                      }
-                      return dc;
-                    }
-
-                    function getDeliveryChargeFormyupchar(totalMedPrice) {
-                      var dc = 0;
-                      if (parseInt(totalMedPrice) < 499) { dc = 49; } else if (parseInt(totalMedPrice) > 500) {
-                        dc = 0;
-                      }
-
-                      return dc;
-                    }
-     
-                    function getDeliveryChargeForTabletShablet(totalMedPrice) {
-                      var dc = 0;
-
-                      if (parseInt(totalMedPrice) < 500) { dc = 68.88; } else if (parseInt(totalMedPrice) >=
-                        500 && parseInt(totalMedPrice) < 1000) { dc = 50.40; } else if
-                        (parseInt(totalMedPrice) >= 1000) {
-                        console.log('hie')
-                        dc = 0;
-                      }
-                      return dc;
-                    }
-
-                    function getDeliveryChargeForMedPlusMart(totalMedPrice) {
-                      var dc = 0;
-                      if (parseInt(totalMedPrice) < 200) { dc = 40; } else if (parseInt(totalMedPrice) >=
-                        200) {
-                        dc = 20;
-                      }
-
-                      return dc;
-                    }
-
-                    function getDeliveryChargeForTruemeds(totalMedPrice) {
-                      var dc = 0;
-                      if (parseInt(totalMedPrice) < 200) { dc = 40; } else if
-                        (parseInt(totalMedPrice) >= 200) {
-                        dc = 20;
-                      }
-
-                      return dc;
-                    }
-                    function getDeliveryChargeFor1mg(totalMedPrice) {
-                      var dc = 0;
-                      if (parseInt(totalMedPrice) < 200) { dc = 40; } else if
-                        (parseInt(totalMedPrice) >= 200) {
-                        dc = 20;
-                      }
-                      return dc;
-                    }
-
-
-
+                  
                       async function multiplyPriceByCount(i) {
                         var num = parseInt(i.split('_')[1]);
                         var count = parseInt(document.getElementById(i).value);
@@ -564,23 +453,23 @@
                       
                         console.log("Value->>"+typeof(myVariable)+"Cout_>>"+typeof(count))
                       if (companyname.includes('netmeds')) {
-                        deliveryCharge =await getDeliveryChargeForNetmeds((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfNetmeds?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('pharmeasy')) {
-                        deliveryCharge =await getDeliveryChargeForPharmeasy((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfPharmeasy?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('tablet')) {
-                        deliveryCharge =await getDeliveryChargeForTabletShablet((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfTabletShablet?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('pulseplus')) {
-                        deliveryCharge =await getDeliveryChargeForPulsePlus((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfPulsePlus?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('upchar')) {
-                        deliveryCharge =await getDeliveryChargeFormyupchar((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfMyUpChar?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('pasumai')) {
-                        deliveryCharge =await getDeliveryChargeForPasumai((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfPasumaiPharmacy?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('medplus')) {
-                        deliveryCharge =await getDeliveryChargeForMedPlusMart((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfMedPlusMart?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('truemeds')) {
-                        deliveryCharge =await getDeliveryChargeForTruemeds((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfTruemeds?val=${myVariable * count}`)).data;
                       } else if (companyname.includes('tata')) {
-                        deliveryCharge =await getDeliveryChargeFor1mg((myVariable) * (count))
+                        deliveryCharge =(await axios.get(`/getDeliveryPriceOfTata1mg?val=${myVariable * count}`)).data;
                       }
                         
                       document.getElementById(`delivery_${num}`).innerHTML = parseFloat(deliveryCharge);
@@ -588,120 +477,7 @@
                       document.getElementById(`price_${num}`).innerHTML = (parseFloat(myVariable) * (count)).toFixed(2);
                       document.getElementById(`finalprice_${num}`).innerHTML = "₹" +  (parseFloat(deliveryCharge) + (parseFloat(myVariable) * (count))).toFixed(2);
                       }
-
-                      getDeliveryChargeForApollo = function (totalMedPrice) {
-                        console.log(totalMedPrice)
-                        var dc = 0; if (parseInt(totalMedPrice) < 300) {
-                          dc = 99;
-                        } else if (parseInt(totalMedPrice) >= 300 && parseInt(totalMedPrice) < 500) { dc = 69; } else
-                          if (parseInt(totalMedPrice) >= 499 && parseInt(totalMedPrice) < 800) { dc = 25; } else
-                            if (parseInt(totalMedPrice) >= 800) {
-                              dc = 0;
-                            }
-
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForPharmeasy(totalMedPrice) {
-                        console.log("price" + totalMedPrice)
-
-                        var dc = 0;
-                        console.log("pharmeay->" + parseInt(totalMedPrice))
-                        if (parseInt(totalMedPrice) < 250) { dc = 149; } else if (parseInt(totalMedPrice) >= 250 &&
-                          parseInt(totalMedPrice) < 500) { dc = 99; } else if (parseInt(totalMedPrice) >= 500 &&
-                            parseInt(totalMedPrice) < 699) { dc = 25; } else if (parseInt(totalMedPrice) >= 699) {
-                              dc = 0;
-                            }
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForNetmeds(totalMedPrice) {
-                        var dc = 0;
-                        if (parseInt(totalMedPrice) < 250) { dc = 99; } else if (parseInt(totalMedPrice) >= 250 &&
-                          parseInt(totalMedPrice) < 1000) { dc = 29; } else if (parseInt(totalMedPrice) >= 1000) {
-                            dc = 0;
-                          }
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForHealthskool(totalMedPrice) {
-                        var dc = 0;
-
-                        if (parseInt(totalMedPrice) <= 999) { dc = 40; } else if (parseInt(totalMedPrice) > 999) {
-                          dc = 0;
-                        }
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForPulsePlus(totalMedPrice) {
-                        var dc = 0;
-                        if (parseInt(totalMedPrice) < 1000) { dc = 50; } else if (parseInt(totalMedPrice) >= 1000) {
-                          dc = 15;
-                        }
-
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForPasumai(totalMedPrice) {
-                        var dc = 0;
-                        if (totalMedPrice < 1000) { dc = 50; } else if (totalMedPrice >= 1000) {
-                          dc = 0;
-                        }
-                        return dc;
-                      }
-
-                      function getDeliveryChargeFormyupchar(totalMedPrice) {
-                        var dc = 0;
-                        if (parseInt(totalMedPrice) < 499) { dc = 49; } else if (parseInt(totalMedPrice) > 500) {
-                          dc = 0;
-                        }
-
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForTabletShablet(totalMedPrice) {
-                        var dc = 0;
-
-                        if (parseInt(totalMedPrice) < 500) { dc = 68.88; } else if (parseInt(totalMedPrice) >=
-                          500 && parseInt(totalMedPrice) < 1000) { dc = 50.40; } else if
-                          (parseInt(totalMedPrice) >= 1000) {
-                          console.log('hie')
-                          dc = 0;
-                        }
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForMedPlusMart(totalMedPrice) {
-                        var dc = 0;
-                        if (parseInt(totalMedPrice) < 200) { dc = 40; } else if (parseInt(totalMedPrice) >=
-                          200) {
-                          dc = 20;
-                        }
-
-                        return dc;
-                      }
-
-                      function getDeliveryChargeForTruemeds(totalMedPrice) {
-                        var dc = 0;
-                        if (parseInt(totalMedPrice) < 200) { dc = 40; } else if
-                          (parseInt(totalMedPrice) >= 200) {
-                          dc = 20;
-                        }
-
-                        return dc;
-                      }
-                      function getDeliveryChargeFor1mg(totalMedPrice) {
-                        var dc = 0;
-                        if (parseInt(totalMedPrice) < 200) { dc = 40; } else if
-                          (parseInt(totalMedPrice) >= 200) {
-                          dc = 20;
-                        }
-                        return dc;
-                      }
-
-
-
-
+                      
                     </script>
 
 
