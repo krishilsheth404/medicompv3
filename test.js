@@ -3659,7 +3659,7 @@ app.get('/compare', async (req, res) => {
     const start1 = performance.now();
     // const LinkDataResponses = await axiosParallel(item);
 
-    const responses = await Promise.all([extractDataOfTorus(item[0], nameOfMed), extractDataOfNetMeds(item[1], nameOfMed), extractDataOfPharmEasy(item[2], presReq, nameOfMed),
+    const responses = await Promise.all([extractDataOfTorus(item[0], nameOfMed), extractDataOfNetMeds(item[1], nameOfMed), extractDataOfPharmEasy(item[2], nameOfMed),
     extractDataOfOBP(item[3], nameOfMed),
     extractDataOfmedplusMart(item[4], nameOfMed), extractDataOfMyUpChar(item[5], nameOfMed),
     extractDataOfPP(item[7], nameOfMed),
