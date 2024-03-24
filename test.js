@@ -2081,7 +2081,7 @@ extractDataOfOgMPM = async (url, nameOfMed) => {
             name: 'MedplusMart',
             item: a.name,
             link: url,
-            imgLink: '',
+            imgLink: a.image,
             price: parseInt(a.offers.mrp ? a.offers.mrp : 0),
             deliveryCharge: dc,
             offer: '',
@@ -2615,10 +2615,14 @@ fasterIgextractLinkFromOptimizedyahoo = async (url, pharmaNames, medname) => {
             });
         });
 
+        const final=[];
+        
+        for(var i=0;i<results.length;i++){
+            results[i].sort((a, b) => b.point - a.point);
+        }
         console.log(results)
-        results.sort((a, b) => b.point - a.point);
+
         results.forEach((result, index) => {
-            console.log(results)
             try {
                 final.push(result[0]['plink']);
                 console.log(result[0]['plink']);
@@ -2878,7 +2882,7 @@ app.get('/fastCompMorePharmas', async (req, res) => {
 
 
 
-        tempf = [...tempf, await extractLinkFromOptimizedyahoo(mixUrl, arr, nameOfMed)];
+        tempf = [...tempf, await fasterIgextractLinkFromOptimizedyahoo(mixUrl, arr, nameOfMed)];
 
         cont = checkforzero(arr);
         console.log(cont)
@@ -3053,7 +3057,166 @@ app.get('/fastCompMorePharmasUsingAxiosParallel', async (req, res) => {
 });
 
 
+app.get('/fastCompMorePharmasFasterOp', async (req, res) => {
+    // Insert Login Code Here
 
+    // {
+    //     // apollo - x
+    //     // netmeds -ok
+    //     // pharmeasy -x
+    //     // healthslool - ok
+    //     // tabletshablet - ok
+    //     // pulseplus - ok
+    //     // medplusmart - ok
+    //     // pasumai - ok
+    // } for med price change as per location
+
+    // {
+    //     // apollo -  x
+    //     // netmeds - ok final
+    //     // pharmeasy - x 
+    //     // healthslool - ok final
+    //     // tabletshablet - ok final
+    //     // pulseplus - ok  work on it 
+    //     // medplusmart - ok final
+    //     // pasumai - ok ~ 
+    // } for delivery price change as per location
+
+
+    var nameOfMed = req.query['medname'] + '\n';
+    nameOfMed = nameOfMed.trim();
+    console.log(nameOfMed);
+    const presReq = ["No"];
+
+
+    var tempFinal = [];
+
+    var mixUrl;
+    // var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=medicine intitle:(${nameOfMed})&vs=pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
+
+
+    var arr = [
+
+        'netmeds.com', 'pharmeasy.in',
+        'pasumaipharmacy.com', 'pulseplus.in',
+        'tabletshablet.com', 'medplusmart.com', 'myupchar.com',
+        'truemeds.in', '1mg.com', 'onebharatpharmacy.com',
+        'kauverymeds.com', 'indimedo.com', 'wellnessforever.com',
+        'secondmedic.com', 'chemistsworld.com', 'callhealth.com',
+    ]
+
+
+    var cont = checkforzero(arr);
+    // console.log(arr)
+    var tempf = [];
+    var t = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var tries = 0;
+    while (cont != 16) {
+
+
+        tries++;
+        mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=`;
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                mixUrl += arr[i] + "+%2C+";
+            }
+        }
+        console.log("New Url => " + mixUrl)
+        // console.log(arr)
+
+
+
+        tempf = [...tempf, await fasterIgextractLinkFromOptimizedyahoo(mixUrl, arr, nameOfMed)];
+
+        cont = checkforzero(arr);
+        console.log(cont)
+        console.log("Try -> " + tries);
+    }
+    tempf = tempf.flat();
+
+    tempfzz.push(1);
+
+
+
+    for (var k = 0; k < tempf.length; k++) {
+        if (tempf[k].includes("netmeds")) {
+            t[0] = tempf[k];
+        } else if (tempf[k].includes("pharmeasy")) {
+            t[1] = tempf[k];
+        }
+        // else if (tempf[k].includes("healthskool")) {
+        // t[3]=tempf[k];
+        // } 
+        else if (tempf[k].includes("tabletshablet")) {
+            t[2] = tempf[k];
+        } else if (tempf[k].includes("pulseplus")) {
+            t[3] = tempf[k];
+        } else if (tempf[k].includes("myupchar")) {
+            t[4] = tempf[k];
+        } else if (tempf[k].includes("pasumai")) {
+            t[5] = tempf[k];
+        } else if (tempf[k].includes("medplusmart")) {
+            t[6] = tempf[k];
+        } else if (tempf[k].includes("truemeds")) {
+            t[7] = tempf[k];
+        } else if (tempf[k].includes("1mg")) {
+            t[8] = tempf[k];
+        } else if (tempf[k].includes("onebharatpharmacy")) {
+            t[9] = tempf[k];
+        } else if (tempf[k].includes("kauverymeds")) {
+            t[10] = tempf[k];
+        } else if (tempf[k].includes("indimedo")) {
+            t[11] = tempf[k];
+        } else if (tempf[k].includes("wellnessforever")) {
+            t[12] = tempf[k];
+        } else if (tempf[k].includes("secondmedic")) {
+            t[13] = tempf[k];
+        } else if (tempf[k].includes("chemistsworld")) {
+            t[14] = tempf[k];
+        } else if (tempf[k].includes("callhealth")) {
+            t[15] = tempf[k];
+        }
+    }
+    console.log(t);
+
+    // const urlForApolloNetmedsPharmEasy = `https://search.yahoo.com/search?&vl=lang_en&p=inurl:(${nameOfMed}+apollopharmacy.in+netmeds.com+pharmeasy.in)+
+    // -1mg.com%2Chealthmug.com%2Cpasumaipharmacy.com%2Cmyupchar.in%2Chealthskoolpharmacy.com%2Ctabletshablet.com%2Cpulseplus.in
+    // &vs=apollopharmacy.in+%2C+netmeds.com+%2Cpharmeasy.in&ad=dirN&o=0`;
+
+    // const urlForHealthskoolTabletshabletPulsePlus = `https://search.yahoo.com/search?&vl=lang_en&p=inurl:(${nameOfMed}+healthskoolpharmacy+tabletshablet+pulseplus)+
+    // &vs=healthskoolpharmacy.com+%2C+tabletshablet.com%2Cpulseplus.in&ad=dirN&o=0`;
+
+    // const urlForMyupcharMedplusMartPasumai = `https://search.yahoo.com/search?&vl=lang_en&p=inurl:(${nameOfMed}+pasumaipharmacy+medplusmart+myupchar)+
+    // &vs=medplusmart.com%2Cmyupchar.com+%2Cpasumaipharmacy.com&ad=dirN&o=0`;
+
+    // const Finallinks = await axios.all([extractLinkFromOptimizedyahoo(urlForApolloNetmedsPharmEasy, nameOfMed, 'apollo', 'netmeds', 'pharmeasy'),
+    // extractLinkFromOptimizedyahoo(urlForHealthskoolTabletshabletPulsePlus, nameOfMed, 'healthskool', 'tabletshablet', 'pulseplus')
+    //     , extractLinkFromOptimizedyahoo(urlForMyupcharMedplusMartPasumai, nameOfMed, 'myupchar', 'pasumai', 'medplusmart')])
+
+
+
+
+    res.send(t);
+
+    // await axios.all([extractLinkFromOptimizedyahoo(urlForApolloNetmedsPharmEasy,nameOfMed, 'apollo', 'netmeds', 'pharmeasy'),
+    // extractLinkFromOptimizedyahoo(urlForHealthskoolTabletshabletPulsePlus,nameOfMed, 'healthskool', 'tabletshablet', 'pulseplus')
+    //     , extractLinkFromOptimizedyahoo(urlForMyupcharHealthmugPasumai,nameOfMed, 'myupchar', 'healthmug', 'pasumai')])
+    //     .then(await axios.spread(async (...responses) => {
+    //         // console.log(...responses);
+    //         const end = performance.now() - start;
+    //         console.log(`Execution time: ${end}ms`);
+
+    //         // item.push(responses[0])
+
+    //         console.log(responses[0]);
+    //         console.log(responses[1]);
+    //         console.log(responses[2]);
+
+    //         // getData(item);
+    //     }))
+
+
+});
 
 app.get('/getDeliveryPriceOfPharmeasy', async (req, res) => {
     var price = parseFloat(req.query['val']) 
