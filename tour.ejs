@@ -366,8 +366,15 @@
                                           style="visibility:hidden;height: 0px;width: 0px;">
                                         <!-- <input type="text" name="medicineName" id="medicineName" value="<%=final[i].item%>" style="visibility:hidden;height: 0px;"> -->
                                         <!-- <a href="<%=final[i].link%>">&nbsp;BUY&nbsp;</a> -->
-                                        <a id="smbtn" type="submit" value="BUY" href="<%=final[i].link%>"
-                                          style="border: none;background-color: lightgreen;width: 100%;text-align: center;">&nbsp;BUY&nbsp;</a>
+                                         <%if(final[i].medicineAvailability){%>
+                                                <a id="smbtn" type="submit" value="BUY" href="<%=final[i].link%>"
+                                                  style="border: none;background-color: lightgreen;width: 100%;text-align: center;">&nbsp;BUY&nbsp;</a>
+                                                <%}else{%>
+                                                  <a id="smbtn" type="submit" disable="true" value="Out Of Stock"
+                                                    href="<%=final[i].link%>"
+                                                    style="border: none;background-color: rgb(255, 114, 114);width: 100%;text-align: center;">&nbsp;Out Of Stock&nbsp;</a>
+                                                  <%}%>
+
                                         </form>
                                         <style>
                                           #smbtn:hover {
