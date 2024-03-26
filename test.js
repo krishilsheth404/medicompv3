@@ -2982,29 +2982,7 @@ app.get('/fastCompMorePharmasUsingAxiosParallel', async (req, res) => {
     console.log(nameOfMed);
     const presReq = ["No"];
 
-
-    var tempFinal = [];
-
-    var mixUrl;
-    // var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=medicine intitle:(${nameOfMed})&vs=pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
-
-
-    var arr = [
-
-        'netmeds.com', 'pharmeasy.in',
-        'pasumaipharmacy.com', 'pulseplus.in',
-        'tabletshablet.com', 'medplusmart.com', 'myupchar.com',
-        'truemeds.in', '1mg.com', 'onebharatpharmacy.com',
-        'kauverymeds.com', 'indimedo.com', 'wellnessforever.com',
-        'secondmedic.com', 'chemistsworld.com', 'callhealth.com',
-    ]
-
-
-    var cont = checkforzero(arr);
-    // console.log(arr)
-    var tempf = [];
     var t = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    var tries = 0;
 
     const urlForNetMeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+netmeds.com) &vs=netmeds.com`;
     const urlForPharmEasy = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pharmeasy.in) &vs=pharmeasy.in`;  //*//
@@ -3035,23 +3013,6 @@ app.get('/fastCompMorePharmasUsingAxiosParallel', async (req, res) => {
     ])
 
     res.send(t);
-
-    // await axios.all([extractLinkFromOptimizedyahoo(urlForApolloNetmedsPharmEasy,nameOfMed, 'apollo', 'netmeds', 'pharmeasy'),
-    // extractLinkFromOptimizedyahoo(urlForHealthskoolTabletshabletPulsePlus,nameOfMed, 'healthskool', 'tabletshablet', 'pulseplus')
-    //     , extractLinkFromOptimizedyahoo(urlForMyupcharHealthmugPasumai,nameOfMed, 'myupchar', 'healthmug', 'pasumai')])
-    //     .then(await axios.spread(async (...responses) => {
-    //         // console.log(...responses);
-    //         const end = performance.now() - start;
-    //         console.log(`Execution time: ${end}ms`);
-
-    //         // item.push(responses[0])
-
-    //         console.log(responses[0]);
-    //         console.log(responses[1]);
-    //         console.log(responses[2]);
-
-    //         // getData(item);
-    //     }))
 
 
 });
