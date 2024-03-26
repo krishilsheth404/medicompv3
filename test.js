@@ -10,8 +10,6 @@ const request = require('request');
 const mysql = require('mysql');
 
 const stringSimilarity = require('string-similarity');
-
-
 // const connection = mysql.createConnection({
 //     host :'sql12.freesqldatabase.com',
 //     user:'sql12627038',
