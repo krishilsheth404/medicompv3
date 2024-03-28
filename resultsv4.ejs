@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./results.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=TradeGothic LT Extended:wght@700&display=swap"
+    />
+  </head>
+
+  <meta property="og:image" content="medicompLogo.png">
+
+	
+	<link rel="icon" type="image/png" href="medicomp_favicon.png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js" integrity="sha512-E/yP5UiPXb6VelX+dFLuUD+1IZw/Kz7tMncFTYbtoNSCdRZPFoGN3jZ2p27VUxHEkhbPiLuZhZpVEXxk9wAHCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.js"
+      integrity="sha512-20FZL4lG1jTZXPeMkblgj4b/fsXASK5aW87Tm7Z5QK9QmmYleVGM0NlS9swfb6XT8yrFTAWkq3QfnMe7MKIX8A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"
+      integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://js.upload.io/upload-js/v2"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+
+    <style>
+                
+      #app,#app1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        flex-direction: column;
+      }
+    
+    .range-value{
+        position: absolute;
+        top: 1rem;
+      }
+      .range-value.min{
+        left: 0;
+      }
+    
+      .range-value.max{
+        right: 0;
+      }
+      .track-container{
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+        height: 0.5rem;
+      }
+    
+      .track,.trackd,
+      .track-highlight,.track-highlightd {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 0.5rem;
+      }
+    
+      .track,.trackd{
+        background-color: #ddd;
+      }
+    
+      .track-highlight,.track-highlightd{
+        background-color: #98c4ff;
+        z-index: 2;
+      }
+    
+      .track-btn{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        cursor: pointer;
+        display: block;
+        position: absolute;
+        z-index: 2;
+        width: 1.5rem;
+        height: 1.5rem;
+        top: calc(-50% - 0.25rem);
+        margin-left: -1rem;
+        border: none;
+        background-color: black;
+        -ms-touch-action: pan-x;
+        touch-action: pan-x;
+        transition: box-shadow .3s ease-out,background-color .3s ease,-webkit-transform .3s ease-out;
+        transition: transform .3s ease-out,box-shadow .3s ease-out,background-color .3s ease;
+        transition: transform .3s ease-out,box-shadow .3s ease-out,background-color .3s ease,-webkit-transform .3s ease-out;
+      }
+                      </style>
+
+    <script async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6943409373544581"
+      crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+
+  <body>
+    <% 
+    function calculatePercentageDifference(originalPrice, discountedPrice) 
+    { 
+      priceDifference=parseFloat(originalPrice) - parseFloat(discountedPrice); 
+      const savingPercentage=(priceDifference /originalPrice) * 100; 
+      return savingPercentage.toFixed(2); // Round to two decimal places 
+    }
+       %>
+  
+       <div style="height: 0px;width: 0px;font-size: 0px;">
+  
+       <% try { %>
+        <% if (final[0].price) { %>
+          <span id='fc0'><%=final[0].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+       
+    <% try { %>
+        <% if (final[1].price) { %>
+          <span id='fc1'><%=final[1].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+    
+    <% try { %>
+        <% if (final[2].price) { %>
+          <span id='fc2'><%=final[2].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+    
+    <% try { %>
+        <% if (final[3].price) { %>
+          <span id='fc3'><%=final[3].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+    
+    <% try { %>
+        <% if (final[4].price) { %>
+          <span id='fc4'><%=final[4].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+    
+    <% try { %>
+        <% if (final[5].price) { %>
+          <span id='fc5'><%=final[5].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+    
+    <% try { %>
+        <% if (final[6].price) { %>
+          <span id='fc6'><%=final[6].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+    
+    <% try { %>
+        <% if (final[7].price) { %>
+          <span id='fc7'><%=final[7].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+    
+    <% try { %>
+        <% if (final[8].price) { %>
+          <span id='fc8'><%=final[8].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+  </div>
+
+  
+
+  
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" 
+  style="position: relative;margin: 0px;padding-top: 20px;padding-bottom: 20px;position: static;background-color: #222831 !important;">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">Medicomp India.</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="#nearby" class="nav-link">NearbyChem</a></li>
+					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+					<li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
+					<!-- <li>
+						<form id="msform" action="/bookdoc" method="post" class="ss searchString">
+							<a onclick="this.parentNode.submit()">
+								<div class="textfield-search one-third"
+									style="background:white;color:black;padding:10px">
+									<p>bookdoc</p>
+									<input type="text" autocomplete="off" id="medname"
+										style='word-wrap: break-word;display:none' contenteditable='false'
+										name="medname" class="form-control foodItem"
+										>
+								</div>
+							</a>
+						</form>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+    <div class="flight-listing">
+
+      <section class="data-indexer" style="margin-top: 30px;">
+        <div class="data-compressor">
+      
+          <div class="frame-parent">
+            <div class="filters-parent">
+              <h3 class="filters">Filters</h3>
+              <div class="frame-group">
+                <div class="price-parent">
+                  <div class="price">Price</div>
+                 
+                </div>
+                <div class="input-splitter">
+                    <div id="app" >
+                      <div class="track-container">
+                        <span class="range-value min">{{ minValue}} </span> <span class="range-value max">{{ maxValue }}</span>
+                        <div class="track" ref="_vpcTrack" onvolumechange="filterPrice()"></div>
+                        <div class="track-highlight" onchange="filterPrice()" ref="trackHighlight"></div>
+                        <button class="track-btn track1" ref="track1" style="border-radius: 20px;background-color:#529dff;"></button>
+                        <button class="track-btn track2" ref="track2" style="border-radius: 20px;background-color:#529dff;"></button>
+                      </div>
+                    </div>
+  
+
+                 
+                </div>
+              </div>
+              <div class="frame-child"></div>
+              <div class="frame-group">
+                <div class="price-parent">
+                  <div class="delivery" style="font-weight: bold ;">Delivery Price</div>
+                 
+                </div>
+                <div class="input-splitter">
+                    <div id="app1" >
+                      <div class="track-container">
+                        <span class="range-value min" id="delmin">{{ minValue}} </span> <span class="range-value max" id="delmax">{{ maxValue }}</span>
+                        <div class="trackd" ref="_vpcTrackd" style="width: 100%;" onvolumechange="filterDelivery()"></div>
+                        <div class="track-highlightd"  ref="trackHighlightd" onchange="filterDelivery()"></div>
+                        <button class="track-btn track1d" id="td1" ref="track1d" style="border-radius: 20px;background-color:#529dff;"></button>
+                        <button class="track-btn track2d" id="td2" ref="track2d" style="border-radius: 20px;background-color:#529dff;"></button>
+                      </div>
+                    </div>
+
+  
+
+                 
+                </div>
+              </div>
+              <div class="frame-inner"></div>
+              <div class="frame-parent1">
+                <div class="airlines-parent">
+                  <div class="airlines">Availability</div>
+                  <img class="chevron-down-icon4" alt="" src="./public/chevron-down-1.svg">
+                </div>
+                <div class="multi-level-merge-parent">
+                  <div class="multi-level-merge">
+                    <input class="checkbox" disabled="true" onchange="filterForAllMedicinesInAndOutOfStock()" type="checkbox">
+                    <div class="emirated">All</div>
+                  </div>
+                  <div class="multi-level-merge1" style="padding: 0px;">
+                    <input class="checkbox1" onchange="filterForAllMedicinesInStock()" type="checkbox">
+
+                    <div class="fly-dubai">In Stock</div>
+                  </div>
+                  <div class="multi-level-merge2" style="padding: 0px;">
+                    <input class="checkbox2" onchange="filterForAllMedicinesOutOfStock()" type="checkbox">
+
+                    <div class="qatar">Out Of Stock</div>
+                  </div>
+              
+                </div>
+              </div>
+              <script>
+                var checkbox = document.querySelectorAll(".checkbox")[0];
+                var checkbox1 = document.querySelectorAll(".checkbox1")[0];
+                var checkbox2 = document.querySelectorAll(".checkbox2")[0];
+                checkbox.checked = true;
+                checkbox1.checked = true;
+                checkbox2.checked = true;
+              </script>
+              <script>  
+                function filterForAllMedicinesInAndOutOfStock(){
+                  if (document.querySelectorAll('.checkbox')[0].checked) {
+                    console.log('selected')
+                    var items = Array.from(container.querySelectorAll('.column-collector ')); // Assuming items have class 'item'
+                    items.forEach(function(item) {
+                
+                      item.closest('.column-collector').style.display = 'flex'; // Show items within price range
+                      
+                    });
+                  } else {
+                    var items = Array.from(container.querySelectorAll('.column-collector ')); // Assuming items have class 'item'
+                    items.forEach(function(item) {
+                
+                      item.closest('.column-collector').style.display = 'none'; // Show items within price range
+                      
+                    });
+                  }
+
+                }
+                function filterForAllMedicinesInStock(){
+
+                  if(document.querySelectorAll('.checkbox1')[0].checked){
+                    var items = Array.from(container.querySelectorAll('.instock')); // Assuming items have class 'item'
+                    items.forEach(function(item) {
+                
+                      item.closest('.column-collector').style.display = 'flex'; // Show items within price range
+                      
+                    });
+                  }else{
+                    var items = Array.from(container.querySelectorAll('.instock')); // Assuming items have class 'item'
+                    items.forEach(function(item) {
+                
+                      item.closest('.column-collector').style.display = 'none'; // Show items within price range
+                      
+                    });
+                }
+              }
+                function filterForAllMedicinesOutOfStock(){
+
+                  if(document.querySelectorAll('.checkbox2')[0].checked){
+                    var items = Array.from(container.querySelectorAll('.outofstock')); // Assuming items have class 'item'
+                    items.forEach(function(item) {
+                
+                      item.closest('.column-collector').style.display = 'flex'; // Show items within price range
+                      
+                    });
+                  }else{
+                  var items = Array.from(container.querySelectorAll('.outofstock')); // Assuming items have class 'item'
+                  items.forEach(function(item) {
+              
+                    item.closest('.column-collector').style.display = 'none'; // Show items within price range
+                    
+                  });
+                }
+                }
+              </script>
+              <div class="frame-child1"></div>
+              <div class="frame-parent2">
+                <div class="trips-parent">
+                  <div class="trips">Pharmacies</div>
+                  <img class="chevron-down-icon5" alt="" src="./public/chevron-down-1.svg">
+                </div>
+                <div class="frame-parent3" id="pharmalist">
+                  <div class="checkbox-parent" style="padding: 0px;">
+                    <input class="checkbox4" disabled="true" type="checkbox">
+
+                    <div class="round-trip">All</div>
+                  </div>
+                  <% for(var i=0; i < final.length-1; i++) { %>
+                  <div class="checkbox-parent" style="padding: 0px;">
+                    <input class="checkbox4" phnm="<%=final[i].name.trim().replace(/\s/g, '')%>" onchange="filterAsPerPharmacyName()" type="checkbox">
+
+                    <div class="pharmaNames"><%=final[i].name%></div>
+                  </div>
+               <%}%>
+                 
+                </div>
+              </div>
+            </div>
+            <script>
+              var ch=document.querySelectorAll('.checkbox4');
+              ch.forEach(function(item) {
+                item.checked=true;
+              })
+              function filterAsPerPharmacyName(){
+                var checkbox = event.target;
+                var phnmValue = checkbox.getAttribute('phnm');
+                if (checkbox.checked) {
+                    document.querySelectorAll(`.${phnmValue}`)[0].closest('.column-collector').style.display='flex';
+                  }else{
+                    document.querySelectorAll(`.${phnmValue}`)[0].closest('.column-collector').style.display='none';
+                  }
+              }
+            </script>
+            <div class="value-comparators"></div>
+            <div class="decision-maker-tree-parent">
+             
+              <div class="align-ally">
+                <div class="showing-4-of-container">
+                  <span id="fda">Found <%=final.length-1%> of </span>
+                  <span class="places" style="color: #529dff;">10 Pharmas</span>
+                </div>
+
+                <div class="spacer-strip">
+                  <div class="sort-by-recommended-container" style="text-align: left;">
+                    <span>Sort by</span>
+                    <span class="recommended"> 
+                      <select name="sortby" id="sortby" style="background: transparent;
+                      border: none;" onchange="btnSortPriceClick()">
+                        <option value="Cheapest"  data-sort-value="pt" id="sprice">Cheapest</option>
+                        <option value="Accuracy" data-sort-value="ut" id="saccuracy">Accuracy</option>
+                        <!-- <option value=""></option> -->
+                      </select>
+                    </span>
+                  </div>
+                 
+              </div>
+                
+              </div>
+
+              <% const imageLogos={
+                "Apollo" : 'https://image3.mouthshut.com/images/imagesp/925643839s.png'
+               , "NetMeds" : 'https://cashbackpot.in/img/netmedsede7e2b6d13a41ddf9f4bdef84fdc737.png'
+               , "PharmEasy" : 'https://etimg.etb2bimg.com/photo/92979760.cms'
+               , "HealthsKool Pharmacy" : 'https://www.healthskoolpharmacy.com/assets/uploads/326389268.png'
+               , "Pasumai Pharmacy" : 'https://content.jdmagicbox.com/comp/tirupur/m8/9999px421.x421.120614111802.r2m8/catalogue/pasumai-pharmacies-india-pvt-ltd-tirupur-ho-tirupur-chemists-kb992ui.jpg'
+               , "flipkart" : 'https://cdn.grabon.in/gograbon/images/merchant/1653477064516/flipkart-health-plus-logo.jpg'
+               , "PulsePlus" : 'https://aniportalimages.s3.amazonaws.com/media/details/pulsepluspiximpov23jkgh_8zvoiRv.jpg'
+               , "Tablet Shablet" : 'https://www.tabletshablet.com/wp-content/uploads/2020/09/TBS_logo.jpg'
+               , "healthmug" : 'https://static.oxinis.com/healthmug/image/healthmug/healthmuglogo-192.png'
+               , "myupchar" : 'https://image.myupchar.com/8910/original/jobs-in-myupchar-delhi-healthcare-healthtech-techjobs-content-doctor-marketing.jpg'
+               , "MedplusMart" :"https://upload.wikimedia.org/wikipedia/commons/3/3c/Medplus_logo.jpg"
+               , "TrueMeds" :"https://www.truemeds.in/logo192.png"
+               , "Tata 1mg" :"https://i.pinimg.com/736x/2a/61/83/2a618394e93bbdf6c4515463df2651af.jpg"
+              } 
+              %>
+              
+              <%var itemCount=0%>
+              <%var ApolloLink=0%>
+              <%var temp=0%>
+              <%var globalUrlForImg=0%>
+             
+                    <div class="col-lg-9" style="width: 100%;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;padding:0 0;">
+                      <div class="row" style="width: 100%;">
+  
+                         
+                        <div class="align-ally" style="margin-bottom: 10px;width: 100%;">
+                        
+  
+                        <div class="row-runner" id="isotope-container" style="width: 100%;">
+  
+                        <% for(var i=0; i < final.length-1; i++) { %>
+  
+                          <% if(final[i].price) {itemCount++;%>
+  
+  
+                            <%var finalP%>
+                                           
+                            <%
+                            if(final[i].deliveryCharge!="login"){
+                              finalP= (parseFloat(final[i].price) + parseFloat(final[i].deliveryCharge)).toFixed(2)
+                                }else{
+                                  finalP=parseFloat((final[i][0][k].price.toString()).replace( /,/g, "" ))
+                                    }
+                            %>
+                            <div class="column-collector itemForSorting" style="    position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;" data-ut="<%=final[i].similarityIndex%>" data-pt="<%=finalP%>" data-dt="<%=final[i].deliveryCharge%>">
+                              <div class="imgSec" style="    display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              gap: 10px;">
+
+                              
+                                        <img
+                                        class="image-40-icon"
+                                        loading="lazy"
+                                        alt=""
+                                        src="<%=final[i].imgLink%>"
+                                        />
+
+
+                            
+                              </div>
+            
+                              <div class="frame-parent4" >
+                                <div class="shape-shaper-parent">
+                                  <div class="shape-shaper">
+                                  
+                                    <div class="very-good-54-container">
+                                      <p id="itemname" style="text-wrap:pretty">  <%=final[i].item%></p>
+                                    </div>
+                                  </div>
+                               
+                                </div>
+                                <div class="filler-fill">
+                                  <div class="bordered-border">
+                                    <div class="align-arranger" style="justify-content: space-between;">
+                                      <div class="padding-planner">
+            
+                                        <div class="divider-designer">
+                                          <div class="grid-guide">
+                                            <div class="">Medicine Price</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="shape-shaper-x" style="text-align: right;">
+                                        <div class="h-28m" id="price_<%=i%>"> <%=final[i].price%></div>
+                                      </div>
+                                    </div>
+                                    <div class="align-arranger" style="justify-content: space-between;">
+                                      <div class="padding-planner">
+            
+                                        <div class="divider-designer">
+                                          <div class="grid-guide">
+                                            <div class="" >Delivery Price</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="shape-shaper-x" style="text-align: right;">
+                                        <div class="h-28m delprices" id="delivery_<%=i%>">    <%=final[i].deliveryCharge%></div>
+                                      </div>
+                                    </div>
+                                   
+                                    <div class="error-handler1"></div>
+                                    <div class="starting-from-parent" style="
+                                    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 15px;display: flex;">
+                                      <div class="starting-from" style="
+                                      font-size: larger;
+                                      font-weight: bold;
+                                      ">Cart Total</div>
+                                      <b  > ₹<span id="finalprice_<%=i%>" class="image-iris" style="font-weight: bold;"><%=finalP%></span></b>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="error-handler1"></div>
+                               <span class="pnmaes " style="font-weight: normal;text-wrap: pretty;font-size: inherit;">
+                                 Pharmacy : <span id="company_<%=i%>" class="pnmaes <%=final[i].name.trim().replace(/\s/g, '')%>" style="font-size: inherit;">  <%=final[i].name%> </span>
+                               </span> 
+                                <div class="button-group">
+                                  
+                                  <%if(final[i].medicineAvailability){%>
+                                    <a id="smbtn" type="submit" value="BUY" href="<%=final[i].link%>" style="width: 100%;color: black;text-decoration: none;">
+                                      <button class="button14 instock" style="width: 100%;background-color: transparent;">
+                                        <div class="style-layer2" style="background-color: #98c4ff">
+                                          <div class="button15" style="text-align: center;">Buy</div>
+                                        </div>
+                                      </button>
+                                    </a>
+                                    <div class="style-layer1" style="border: 1px solid #98c4ff;">
+                                      <select name="qty" id="qty_<%=i%>" style="    font-size: 19px;
+                                        position: absolute;
+                                        height: 40px;
+                                        border: none;
+                                        width: 40px;
+                                    " onchange="multiplyPriceByCount(this.id)">
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                      <option value="6">6</option>
+                                      <option value="7">7</option>
+                                      <option value="8">8</option>
+                                      <option value="9">9</option>
+                                    </select>
+                                  </div>
+                                    <%}else{%>
+                                      <a id="smbtn" type="submit" disable="true" value="Out Of Stock" style="width:100%;color: black;text-decoration: none;" href="<%=final[i].link%>">
+                                        <button class="button14 outofstock" style="width: 100%;background-color: #ff775e;">
+                                          <div class="style-layer2" style="background-color: #ff775e">
+                                            <div class="button15">Out Of Stock</div>
+                                          </div>  
+                                        </button>
+                                      </a>
+                                      <%}%>
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <%}%>
+                     <%}%>
+                            
+                          
+              
+           
+              </div>
+          
+            </div>
+          </div>
+        </div>
+      </section>
+
+   
+      <footer class="ftco-footer ftco-bg-dark ftco-section" style="padding-bottom: 10px;">
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-md">
+              <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Medicomp India.</h2>
+                <p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
+                  various pharmacies and online retailers in India.</p>
+                <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                  <li class="ftco-animate"><a href="https://www.linkedin.com/in/krishilsheth/"><span
+                        class="icon-linkedin"></span></a></li>
+                  <!-- <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li> -->
+                  <li class="ftco-animate"><a href="https://www.instagram.com/medicomp.india/"><span
+                        class="icon-instagram"></span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="ftco-footer-widget mb-4 ml-md-5">
+                <h2 class="ftco-heading-2">Information</h2>
+                <ul class="list-unstyled">
+                  <li><a href="/about.html" class="py-2 d-block">About</a></li>
+                  <li><a href="#" class="py-2 d-block">Med A-Z</a></li>
+                  <!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
+                  <li><a href="mailto:krishilsheth@gmail.com?subject=We Want To Collaborate With Medicomp India&body=//text here"
+                      class="py-2 d-block">Become a partner</a></li>
+                  <!-- <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li> -->
+                  <li><a href="/privacypolicy.html" class="py-2 d-block">Privacy and Policy</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Customer Support</h2>
+                <ul class="list-unstyled">
+                  <li><a href="/about.html" class="py-2 d-block">FAQ</a></li>
+                  <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+              <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+              <li><a href="#" class="py-2 d-block">How it works</a></li> -->
+                  <li><a href="/contact.html" class="py-2 d-block">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Have a Questions?</h2>
+                <div class="block-23 mb-3">
+                  <ul>
+    
+                    <!-- <li><a href="tel:9372677245"><span class="icon icon-phone"></span>
+                
+                <span class="text">9372677245</span></a></li> -->
+                    <li><a href="mailto:@krishilsheth@gmail.com"><span
+                          class="icon icon-envelope"></span><span
+                          class="text">krishilsheth@gmail.com</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+    
+              <p>
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | <i
+                  class="icon-plus" aria-hidden="true"></i> <a href="https://medicomp.in"
+                  target="_blank">Medicomp India</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+      <script>
+
+        var container = document.getElementById("isotope-container");
+        var items = Array.from(container.querySelectorAll(".itemForSorting")); // Assuming your item class is `.item`
+
+        // Function to sort items based on a comparator function
+        function sortItems(comparator) {
+          items.sort(comparator);
+          for (var i = 0; i < items.length; i++) {
+            container.appendChild(items[i]); // Re-order items in DOM
+          }
+        }
+
+        // Function to compare items based on a specific property (replace with your sort criteria)
+        function compareItemsByUT(item1, item2) {
+          var ut1 = parseInt(item1.dataset.ut); // Assuming data-ut attribute for sorting
+          var ut2 = parseInt(item2.dataset.ut);
+          return ut2 - ut1; // Ascending sort
+        }
+        
+        function compareItemsByPT(item1, item2) {
+          var ut1 = parseInt(item1.dataset.pt); // Assuming data-ut attribute for sorting
+          var ut2 = parseInt(item2.dataset.pt);
+          return ut1 - ut2; // Ascending sort
+        }
+
+        // Example sorting by data-ut attribute (replace with your sorting logic)
+        function sortByUT() {
+          console.log("called");
+          sortItems(compareItemsByUT);
+        }
+        
+        function sortByPT() {
+          console.log("called");
+          sortItems(compareItemsByPT);
+        }
+
+      
+      function btnSortPriceClick(){
+        console.log(document.getElementById('sortby').value); 
+        if(document.getElementById('sortby').value=='Accuracy'){
+          sortByUT();
+        }else{
+          sortByPT();
+        }
+      }
+
+      function filterPrice(){
+        var minPrice=(document.querySelectorAll('.min')[0].innerHTML)
+        var maxPrice=(document.querySelectorAll('.max')[0].innerHTML)
+
+        var c=0;
+        var items = Array.from(container.querySelectorAll('.column-collector')); // Assuming items have class 'item'
+        items.forEach(function(item) {
+          var pprice = parseInt(item.dataset.pt); // Assuming data-pprice attribute for price
+          if (pprice < minPrice || pprice > maxPrice) {
+            item.style.display = 'none'; // Hide items outside price range
+          } else {
+            item.style.display = 'flex'; // Show items within price range
+            c++;
+          }
+        });
+
+        document.getElementById('fda').innerHTML=`Found ${c} of`
+  
+      }
+      
+      function filterDelivery(){
+        console.log("called")
+        var minPrice=(document.getElementById('delmin').innerHTML)
+        var maxPrice=(document.getElementById('delmax').innerHTML)
+
+
+        var c=0;
+        var items = Array.from(container.querySelectorAll('.column-collector'));
+        items.forEach(function(item) {
+          console.log(item)
+          var pprice = parseInt(item.dataset.dt); // Assuming data-pprice attribute for price
+          if (pprice < minPrice || pprice > maxPrice) {
+            item.style.display = 'none'; // Hide items outside price range
+          } else {
+            item.style.display = 'flex'; // Show items within price range
+            c++;
+          }
+        });
+
+        document.getElementById('fda').innerHTML=`Found ${c} of`
+  
+      }
+
+
+
+    
+  </script>
+  
+  <script>
+    
+    async function multiplyPriceByCount(i) {
+      var num = parseInt(i.split('_')[1]);
+      var count = parseInt(document.getElementById(i).value);
+      console.log("count->" + count);
+      var companyname = document.getElementById(`company_${num}`).innerHTML.toLowerCase();
+      console.log(companyname);
+      var finalcost = parseFloat(document.getElementById(`finalprice_${num}`.innerHTML));
+      console.log("I --> "+i)
+      var myVariable=parseFloat(document.getElementById(`fc${num}`).innerText);
+      console.log(myVariable)
+      var deliveryCharge;
+      
+    
+      console.log("Value->>"+typeof(myVariable)+"Cout_>>"+typeof(count))
+    if (companyname.includes('netmeds')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfNetmeds?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('pharmeasy')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfPharmeasy?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('tablet')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfTabletShablet?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('pulseplus')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfPulsePlus?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('upchar')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfMyUpChar?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('pasumai')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfPasumaiPharmacy?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('medplus')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfMedPlusMart?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('truemeds')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfTruemeds?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('tata')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfTata1mg?val=${myVariable * count}`)).data;
+    }
+      
+    document.getElementById(`delivery_${num}`).innerHTML = parseFloat(deliveryCharge);
+    // console.log(document.getElementById(`price_${num}`).innerHTML);
+    document.getElementById(`price_${num}`).innerHTML = (parseFloat(myVariable) * (count)).toFixed(2);
+    document.getElementById(`finalprice_${num}`).innerHTML =   (parseFloat(deliveryCharge) + (parseFloat(myVariable) * (count))).toFixed(2);
+    }
+    
+  </script>
+
+
+<script>
+
+window.onload = async function() {
+  await sortByPT();
+  var finalPriceElements = document.querySelectorAll('.image-iris');
+
+// Initialize variables to store the highest price and its index
+var highestPrice = 0;
+var highestPriceIndex = -1;
+
+// Iterate over each element to find the highest price and its index
+for (var i = 0; i < finalPriceElements.length; i++) {
+    var finalPrice = parseFloat(finalPriceElements[i].innerHTML);
+    console.log(finalPrice)
+    if (finalPrice > highestPrice) {
+        highestPrice = finalPrice;
+    }
+}
+
+  var app = new Vue({
+name: 'Vue Price Range',
+el: '#app',
+data: {
+  
+   min: 0,
+    max: highestPrice+100,
+    minValue: 0,
+    maxValue:  highestPrice+100,
+    step: 5,
+    totalSteps: 0,
+    percentPerStep: 1,
+    trackWidth: null,
+    isDragging: false,
+    pos: {
+      curTrack: null
+    }
+  
+},
+
+methods: {
+  moveTrack(track, ev){
+    
+    let percentInPx = this.getPercentInPx();
+    
+    let trackX = Math.round(this.$refs._vpcTrack.getBoundingClientRect().left);
+    let clientX = ev.clientX;
+    let moveDiff = clientX-trackX;
+
+    let moveInPct = moveDiff / percentInPx
+    // console.log(moveInPct)
+
+    if(moveInPct<1 || moveInPct>100) return;
+    let value = ( Math.round(moveInPct / this.percentPerStep) * this.step ) + this.min;
+    if(track==='track1'){
+      if(value >= (this.maxValue - this.step)) return;
+      this.minValue = value;
+    }
+    
+    if(track==='track2'){
+      if(value <= (this.minValue + this.step)) return;
+      this.maxValue = value;
+    }
+    
+    this.$refs[track].style.left = moveInPct + '%';
+    this.setTrackHightlight()
+          
+  },
+  mousedown(ev, track){
+
+    if(this.isDragging) return;
+    this.isDragging = true;
+    this.pos.curTrack = track;
+  },
+
+  touchstart(ev, track){
+    this.mousedown(ev, track)
+  },
+
+  mouseup(ev, track){
+    if(!this.isDragging) return;
+    this.isDragging = false
+  },
+
+  touchend(ev, track){
+    this.mouseup(ev, track)
+  },
+
+  mousemove(ev, track){
+    if(!this.isDragging) return;      
+    this.moveTrack(track, ev)
+  },
+
+  touchmove(ev, track){
+    this.mousemove(ev.changedTouches[0], track)
+  },
+
+  valueToPercent(value){
+    return ((value - this.min) / this.step) * this.percentPerStep
+  },
+
+  setTrackHightlight(){
+    this.$refs.trackHighlight.style.left = this.valueToPercent(this.minValue) + '%'
+    this.$refs.trackHighlight.style.width = (this.valueToPercent(this.maxValue) - this.valueToPercent(this.minValue)) + '%'
+  },
+
+  getPercentInPx(){
+    let trackWidth = this.$refs._vpcTrack.offsetWidth;
+    let oneStepInPx = trackWidth / this.totalSteps;
+    // 1 percent in px
+    let percentInPx = oneStepInPx / this.percentPerStep;
+    
+    return percentInPx;
+  },
+
+  setClickMove(ev){
+    let track1Left = this.$refs.track1.getBoundingClientRect().left;
+    let track2Left = this.$refs.track2.getBoundingClientRect().left;
+    // console.log('track1Left', track1Left)
+    if(ev.clientX < track1Left){
+      this.moveTrack('track1', ev)
+    }else if((ev.clientX - track1Left) < (track2Left - ev.clientX) ){
+      this.moveTrack('track1', ev)
+    }else{
+      this.moveTrack('track2', ev)
+    }
+  }
+},
+
+mounted() {
+  // calc per step value
+  this.totalSteps = (this.max - this.min) / this.step;
+
+  // percent the track button to be moved on each step
+  this.percentPerStep = 100 / this.totalSteps;
+  // console.log('percentPerStep', this.percentPerStep)
+
+  // set track1 initilal
+  document.querySelector('.track1').style.left = this.valueToPercent(this.minValue) + '%'
+  // track2 initial position
+  document.querySelector('.track2').style.left = this.valueToPercent(this.maxValue) + '%'
+  // set initila track highlight
+  this.setTrackHightlight()
+
+  var self = this;
+
+  ['mouseup', 'mousemove'].forEach( type => {
+    document.body.addEventListener(type, (ev) => {
+      // ev.preventDefault();
+      if(self.isDragging && self.pos.curTrack){
+        self[type](ev, self.pos.curTrack)
+      }
+    })
+  });
+
+  ['mousedown', 'mouseup', 'mousemove', 'touchstart', 'touchmove', 'touchend'].forEach( type => {
+    document.querySelector('.track1').addEventListener(type, (ev) => {
+      ev.stopPropagation();
+      self[type](ev, 'track1')
+      filterPrice()
+    })
+
+    document.querySelector('.track2').addEventListener(type, (ev) => {
+      ev.stopPropagation();
+      self[type](ev, 'track2')
+      filterPrice()
+    })
+  })
+
+  // on track clik
+  // determine direction based on click proximity
+  // determine percent to move based on track.clientX - click.clientX
+  document.querySelector('.track').addEventListener('click', function(ev) {
+    ev.stopPropagation();
+    self.setClickMove(ev)
+    
+    
+  })
+  
+  document.querySelector('.track-highlight').addEventListener('click', function(ev) {
+    ev.stopPropagation();
+    self.setClickMove(ev)
+  })
+}
+})
+
+            
+      var deliveryElements = document.querySelectorAll('.delprices');
+
+      // Initialize variables to store the highest price and its index
+      var highestPriceDel = 0;
+      var highestPriceIndexDel = -1;
+
+      // Iterate over each element to find the highest price and its index
+      for (var i = 0; i < deliveryElements.length; i++) {
+          var deliveryPrice = parseFloat(deliveryElements[i].innerHTML);
+          console.log(deliveryPrice)
+          if (deliveryPrice > highestPriceDel) {
+            highestPriceDel = deliveryPrice;
+          }
+      }
+  var app = new Vue({
+name: 'Vue Price Range',
+el: '#app1',
+data: {
+  
+   min: 0,
+    max: parseFloat(highestPriceDel)+50,
+    minValue:0,
+    maxValue:  parseFloat(highestPriceDel)+50,
+    step: 5,
+    totalSteps: 0,
+    percentPerStep: 1,
+    trackWidth: null,
+    isDragging: false,
+    pos: {
+      curTrack: null
+    }
+  
+},
+
+methods: {
+  moveTrack(trackd, ev){
+    
+    let percentInPx = this.getPercentInPx();
+    
+    let trackX = Math.round(this.$refs._vpcTrackd.getBoundingClientRect().left);
+    let clientX = ev.clientX;
+    let moveDiff = clientX-trackX;
+
+    let moveInPct = moveDiff / percentInPx
+    // console.log(moveInPct)
+
+    if(moveInPct<1 || moveInPct>100) return;
+    let value = ( Math.round(moveInPct / this.percentPerStep) * this.step ) + this.min;
+    if(trackd==='track1d'){
+      if(value >= (this.maxValue - this.step)) return;
+      this.minValue = value;
+    }
+    
+    if(trackd==='track2d'){
+      if(value <= (this.minValue + this.step)) return;
+      this.maxValue = value;
+    }
+    
+    this.$refs[trackd].style.left = moveInPct + '%';
+    this.setTrackHightlight()
+          
+  },
+  mousedown(ev, track){
+
+    if(this.isDragging) return;
+    this.isDragging = true;
+    this.pos.curTrack = track;
+  },
+
+  touchstart(ev, track){
+    this.mousedown(ev, track)
+  },
+
+  mouseup(ev, track){
+    if(!this.isDragging) return;
+    this.isDragging = false
+  },
+
+  touchend(ev, track){
+    this.mouseup(ev, track)
+  },
+
+  mousemove(ev, track){
+    if(!this.isDragging) return;      
+    this.moveTrack(track, ev)
+  },
+
+  touchmove(ev, track){
+    this.mousemove(ev.changedTouches[0], track)
+  },
+
+  valueToPercent(value){
+    return ((value - this.min) / this.step) * this.percentPerStep
+  },
+
+  setTrackHightlight(){
+    this.$refs.trackHighlightd.style.left = this.valueToPercent(this.minValue) + '%'
+    this.$refs.trackHighlightd.style.width = (this.valueToPercent(this.maxValue) - this.valueToPercent(this.minValue)) + '%'
+  },
+
+  getPercentInPx(){
+    let trackWidth = this.$refs._vpcTrackd.offsetWidth;
+    let oneStepInPx = trackWidth / this.totalSteps;
+    // 1 percent in px
+    let percentInPx = oneStepInPx / this.percentPerStep;
+    
+    return percentInPx;
+  },
+
+  setClickMove(ev){
+    let track1Left = this.$refs.track1d.getBoundingClientRect().left;
+    let track2Left = this.$refs.track2d.getBoundingClientRect().left;
+    // console.log('track1Left', track1Left)
+    if(ev.clientX < track1Left){
+      this.moveTrack('track1d', ev)
+    }else if((ev.clientX - track1Left) < (track2Left - ev.clientX) ){
+      this.moveTrack('track1d', ev)
+    }else{
+      this.moveTrack('track2d', ev)
+    }
+  }
+},
+
+mounted() {
+  // calc per step value
+  this.totalSteps = (this.max - this.min) / this.step;
+
+  // percent the track button to be moved on each step
+  this.percentPerStep = 100 / this.totalSteps;
+  // console.log('percentPerStep', this.percentPerStep)
+
+  // set track1 initilal
+  document.getElementById('td1').style.left = this.valueToPercent(this.minValue) + '%'
+  // track2 initial position
+  document.getElementById('td2').style.left = this.valueToPercent(this.maxValue) + '%'
+  // set initila track highlight
+  this.setTrackHightlight()
+
+  var self = this;
+
+  ['mouseup', 'mousemove'].forEach( type => {
+    document.body.addEventListener(type, (ev) => {
+      // ev.preventDefault();
+      if(self.isDragging && self.pos.curTrack){
+        self[type](ev, self.pos.curTrack)
+      }
+    })
+  });
+
+  ['mousedown', 'mouseup', 'mousemove', 'touchstart', 'touchmove', 'touchend'].forEach( type => {
+    document.getElementById('td1').addEventListener(type, (ev) => {
+      ev.stopPropagation();
+      self[type](ev, 'track1d')
+      filterDelivery()
+    })
+
+    document.getElementById('td2').addEventListener(type, (ev) => {
+      ev.stopPropagation();
+      self[type](ev, 'track2d')
+      filterDelivery()
+    })
+  })
+
+  // on track clik
+  // determine direction based on click proximity
+  // determine percent to move based on track.clientX - click.clientX
+  document.querySelector('.trackd').addEventListener('click', function(ev) {
+    ev.stopPropagation();
+    self.setClickMove(ev)
+    
+    
+  })
+  
+  document.querySelector('.track-highlightd').addEventListener('click', function(ev) {
+    ev.stopPropagation();
+    self.setClickMove(ev)
+  })
+}
+})
+}
+</script>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.timepicker.min.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="js/range.js"></script>
+<script src="js/main.js"></script>
+
+    </div>
+  </body>
+</html>
