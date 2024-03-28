@@ -4074,7 +4074,7 @@ app.get('/compare', async (req, res) => {
         console.log(final[0].finalCharge)
         console.log(final.length)
         if(final[0].finalCharge>0 && final.length>2){
-            res.render(__dirname + '/resultsv4.ejs', { final });
+            res.render(__dirname + '/tour.ejs', { final });
         }else{
             res.sendFile(__dirname + '/noResultsFound.html');
         }
