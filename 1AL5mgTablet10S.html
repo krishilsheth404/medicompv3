@@ -1048,8 +1048,8 @@
                   })
                   .then((res) => {
                     document.getElementById("lod").remove();
-                    var z= res.data.length;
-                    document.getElementById('changingContent').innerHTML = "Found " + z + " Pharmacies";   
+                    console.log(res.data);
+                    document.getElementById('changingContent').innerHTML = "Found " +res.data.length+ " Pharmacies";    
                   })
                 };
               </script>
