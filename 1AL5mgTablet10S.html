@@ -1049,7 +1049,8 @@
                   .then((res) => {
                     document.getElementById("lod").remove();
                     console.log(res.data);
-                    document.getElementById('changingContent').innerHTML = "Found" +res.data.length+ "Pharmacies";    
+                    var z= res.data.length;          
+                    document.getElementById('changingContent').innerHTML = "Found" + z + "Pharmacies";    
                   })
                 };
               </script>
