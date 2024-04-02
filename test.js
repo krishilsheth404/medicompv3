@@ -54,73 +54,80 @@ app.post('/', (req, res) => {
 
 
 app.get('/ScrapeDataFromApollo', async (req, res) => {
-    extractAddress = async (urls) => {
-      
-        for (let i = 0; i < urls.length; i++) {
-            const { data } = await axios.get(urls[i]);
-            const $ = cheerio.load(data);
-
-            const medName = $('.medName').first().text();
-            const medStrips = $('.medStrips').first().text();
-            const manufacturer = $('#manufacturer').first().text();
-            const compositionDescription = $('.compositionDescription').first().text();
-
-            console.log(medName, medStrips, manufacturer, compositionDescription);
-
-            fs.appendFile('./TryAllMedicineNamesWithExtraDescStartingWithA.txt', `${medName},${medStrips},${manufacturer},${compositionDescription}\n`, (err) => {
-                if (err) {
-                    console.error('Error writing to file:', err);
-                } else {
-                    console.log(`Found ${urls[i]}`);
-                }
-            });
+    const downloadImage = async (imageUrl, localPath) => {
+        try {
+            // Fetch the image
+            const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    
+            // Save the image to a local file
+            fs.writeFileSync(localPath, response.data);
+    
+            console.log('Image downloaded successfully');
+        } catch (error) {
+            console.error('Error downloading image:', error);
         }
+    };
+    
+    extractAddress = async (url) => {
+            
+        const { data } = await axios.get(url, { responseType: 'arraybuffer' });
+        const $ = cheerio.load(data);
+        var medicompFileName=$('.black-txt').text().replace(/[%,+'\/\\\s.]/g, '').trim();
+        
+        // downloadImage($('.largeimage img').attr('src'), `./MedicineImage/${medicompFileName}.jpg`);
+
+        try {
+            // Fetch the image
+            // const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    
+            // Save the image to a local file
+            fs.writeFileSync(`./MedicineImage/${medicompFileName}.jpg`, data);
+    
+            console.log('Image downloaded successfully'+url);
+        } catch (error) {
+            console.error('Error downloading image:', error);
+        }
+        
+
+
+            // const { data } = await axios.get(url);
+            // const $ = cheerio.load(data);
+
+            // const image =$('.largeimage img').attr('src')
+
+            // fs.appendFile('./NetmedsImagesLink.txt', `${image}\n`, (err) => {
+            //     if (err) {
+            //         console.error('Error writing to file:', err);
+            //     } else {
+            //         console.log(`Saved Link ${image}`);
+            //     }
+            // })//for medlinks images links
+
+
+      
+        // for (let i = 0; i < urls.length; i++) {
+        //     const { data } = await axios.get(urls[i]);
+        //     const $ = cheerio.load(data);
+
+        //     const medName = $('.medName').first().text();
+        //     const medStrips = $('.medStrips').first().text();
+        //     const manufacturer = $('#manufacturer').first().text();
+        //     const compositionDescription = $('.compositionDescription').first().text();
+
+        //     console.log(medName, medStrips, manufacturer, compositionDescription);
+
+        //     fs.appendFile('./TryAllMedicineNamesWithExtraDescStartingWithA.txt', `${medName},${medStrips},${manufacturer},${compositionDescription}\n`, (err) => {
+        //         if (err) {
+        //             console.error('Error writing to file:', err);
+        //         } else {
+        //             console.log(`Found ${urls[i]}`);
+        //         }
+        //     });
+        // }
 
     };
     
-    extractLinksOnly = async (url) => {
-        const { data } = await axios.get(url)
-        const $ = cheerio.load(data);
-
-
-        var a=[];
-        if($('#np_tab1')){
-            a.push("Information")
-        }
-        
-        if($('#np_tab2')){
-            a.push("")
-        }
-        if($('#np_tab3')){
-            a.push("Uses")
-        }
-        if($('#np_tab1')){
-            a.push("Information")
-        }
-        if($('#np_tab5')){
-            a.push("How It Works")
-        }
-        if($('#np_tab6')){
-            a.push("Directions For Use")
-        }
-        if($('#np_tab7')){
-            a.push("Side Effects")
-        }
-        if($('#np_tab15')){
-            a.push("References")
-        }
-
-
-          
-    fs.appendFile('./netmedsDataAvailibility.txt', `${url},${a}\n`, (err) => { 
-            if (err) {
-                console.error('Error writing to file:', err);
-            } else {
-                console.log(`Found`);
-            }
-        });
-    
-    }
+   
     // const urlArray = [
     //     "https://www.netmeds.com/prescriptions/adhd",
     //     "https://www.netmeds.com/prescriptions/alcohol-addiction",
@@ -293,6 +300,8 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //     "https://www.netmeds.com/prescriptions/wound",
     //     "https://www.netmeds.com/prescriptions/wrinkle-anti-ageing"
     //    ];
+
+
     var d=["https://www.netmeds.com/prescriptions/1-al-10mg-tablet-15-s", 
     "https://www.netmeds.com/prescriptions/1-al-5mg-tablet-10-s", 
     "https://www.netmeds.com/prescriptions/1-al-m-syrup-60ml", 
@@ -25879,53 +25888,1179 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     "https://www.netmeds.com/prescriptions/zyven-od-50mg-tablet-10-s", 
     "https://www.netmeds.com/prescriptions/zyvimol-suspension-60ml", ]
 
-    var responses=await axiosParallel(d)
-       for(var i=0;i<=d.length;i++){
-        const $ = cheerio.load(responses.data);
+
+      for(var i=0;i<d.length;i++){
+       await extractAddress(d[i])
+      }
 
 
-        var a=[];
-        if($('#np_tab1')){
-            a.push("Information")
-        }
-        
-        if($('#np_tab2')){
-            a.push("")
-        }
-        if($('#np_tab3')){
-            a.push("Uses")
-        }
-        if($('#np_tab1')){
-            a.push("Information")
-        }
-        if($('#np_tab5')){
-            a.push("How It Works")
-        }
-        if($('#np_tab6')){
-            a.push("Directions For Use")
-        }
-        if($('#np_tab7')){
-            a.push("Side Effects")
-        }
-        if($('#np_tab15')){
-            a.push("References")
-        }
+
+    //    for(var i=0;i<1;i++){
+    //     const { data } = await axios.get(d[i])
+    //     const $ = cheerio.load(data);
+    //      var medicompFileName=$('.black-txt').text().replace(/[%,+'\s]/g, '').trim();
+    //      console.log(medicompFileName)
 
 
+    //     var a={
+    //         "Name":$('.black-txt').text(),
+    //         "Image":$('.largeimage img').attr('src'),
+    //         "unitCount":$('.drug-varient').first().text(),
+    //         "GenericName":$('.drug-conf').text(),
+    //         "Information":'',
+    //         "Uses":'',
+    //         "Direction":'',
+    //         "References":'',
+    //         "Disclaimer":'The contents of this website are for informational purposes only and not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please seek the advice of a physician or other qualified health provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.',
+    //     };
+
+    //         a['Information']=$('#np_tab1 p').text();
+    //         var tempuses = $('#np_tab3 li').map(function() {
+    //             return $(this).text();
+    //         }).get();
+
+    //         a['Uses']=tempuses;
+    //         a['Direction']=$('#np_tab6 p').text();
+    //         a['References']=$('#np_tab15 p').text();
+    //     console.log(a)
+
+    //         var HtmlContent=`
+    //         <html>
+    //         <head>
+    //         <meta charset="utf-8">
+    //         <meta name="viewport" content="initial-scale=1, width=device-width">
           
-    fs.appendFile('./netmedsDataAvailibility.txt', `${url},${a}\n`, (err) => { 
-            if (err) {
-                console.error('Error writing to file:', err);
-            } else {
-                console.log(`Found`);
-            }
-        });
-    
-       }
+    //         <title>Compare ${a['Name']} Prices - Best Deals Online | Medicomp India</title>
+    //         <meta name="description"
+    //           content="Find the best prices for ${a['Name']} strip across top online pharmacies in India. Compare prices, check offers & discounts. Buy Crocin tablets at lowest cost. - Medicomp India">
+          
+    //         <meta name="keywords"
+    //           content="${a['Name']}  tablet prices, ${a['Name']}  strip cost, ${a['Name']}  prices, best ${a['Name']}  deals, cheap ${a['Name']}  online, ${a['Name']} price comparison, Medicomp India">
+          
+    //         <meta name="robots" content="index, follow">
+    //         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    //         <meta name="language" content="English">
+    //         <meta name="revisit-after" content="1 days">
+          
+    //         <meta name="author" content="Medicomp India">
+    //         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    //         <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    //         <meta name="bingbot" content="index, follow, max-snippets:2, max-image-preview:large, max-video-preview:-1">
+          
+    //         <meta property="og:title" content="Compare ${a['Name']}  Prices - Best Deals Online | Medicomp India">
+    //         <meta property="og:description"
+    //           content="Find the best prices for ${a['Name']}  strip across top online pharmacies in India. Compare prices, check offers & discounts. Buy ${a['Name']}  at lowest cost. - Medicomp India">
+    //         <meta property="og:image" content="${a["Image"]}">
+    //         <meta property="og:url" content="${a["Image"]}">
+    //         <meta property="og:type" content="website">
+    //         <meta property="og:site_name" content="Medicomp India">
+          
+    //         <meta name="twitter:card" content="summary_large_image">
+    //         <meta name="twitter:site" content="@medicompindia">
+    //         <meta name="twitter:creator" content="@medicompindia">
+    //         <meta name="twitter:title" content="Compare ${a['Name']}  Prices - Best Deals Online | Medicomp India">
+    //         <meta name="twitter:description"
+    //           content="Find the best prices for ${a['Name']} strip across top online pharmacies in India. Compare prices, check offers & discounts. Buy ${a['Name']}  at lowest cost. - Medicomp India">
+    //         <meta name="twitter:image" content="${a["Image"]}">
+          
+    //           <style>
+    //             body {
+    //               margin: 0;
+    //               line-height: normal;
+    //             }
+            
+    //             :root {
+    //               /* fonts */
+    //               --montserrat-regular-14: Montserrat;
+    //               --tradegothic-bold-40: "TradeGothic LT Extended";
+    //               --font-inter: Inter;
+            
+    //               /* font sizes */
+    //               --montserrat-regular-14-size: 14px;
+    //               --montserrat-regular-16-size: 16px;
+    //               --tradegothic-bold-40-size: 40px;
+    //               --montserrat-bold-24-size: 24px;
+    //               --montserrat-semibold-32-size: 32px;
+    //               --tradegothic-bold-20-size: 20px;
+    //               --font-size-25xl: 44px;
+    //               --font-size-7xl: 26px;
+    //               --font-size-16xl: 35px;
+    //               --montserrat-medium-12-size: 12px;
+    //               --font-size-lgi: 19px;
+    //               --tradegothic-bold-36-size: 36px;
+    //               --font-size-3xl: 22px;
+    //               --font-size-mid: 17px;
+    //               --font-size-smi: 13px;
+    //               --font-size-lg: 18px;
+    //               --font-size-4xs: 9px;
+            
+    //               /* Colors */
+    //               --neutrals: #fff;
+    //               --mint-green: #8dd3bb;
+    //               --color-mediumaquamarine-100: rgba(141, 211, 187, 0.4);
+    //               --color-gray-100: #fafbfc;
+    //               --color-gray-200: #79747e;
+    //               --color-gray-300: #1c1b1f;
+    //               --blackish-green: #112211;
+    //               --color-gray-600: rgba(17, 34, 17, 0.78);
+    //               --color-gray-700: rgba(17, 34, 17, 0.4);
+    //               --color-gray-900: rgba(17, 34, 17, 0.8);
+    //               --color-gray-1000: rgba(17, 34, 17, 0.7);
+    //               --color-gray-500: rgba(17, 34, 17, 0.75);
+    //               --color-gray-400: rgba(17, 34, 17, 0.5);
+    //               --color-gray-800: rgba(17, 34, 17, 0.25);
+    //               --slamon: #ff8682;
+    //               --color-black: #000;
+    //               --color-lightcyan: #cdeae1;
+    //               --color-lavender: #d7e2ee;
+    //               --color-royalblue: #3463e7;
+    //               --color-lightblue-100: #97b9bf;
+    //               --color-darkgray-100: #99afbc;
+    //               --color-darkgray-200: #91abb8;
+    //               --color-darkslategray-100: #425c6e;
+    //               --color-whitesmoke: #f8f9fb;
+    //               --color-aliceblue: #eef7fb;
+    //               --color-dodgerblue: #598aff;
+            
+    //               /* Gaps */
+    //               --gap-85xl: 104px;
+    //               --gap-5xs: 8px;
+    //               --gap-45xl: 64px;
+    //               --gap-13xl: 32px;
+    //               --gap-base: 16px;
+    //               --gap-21xl: 40px;
+    //               --gap-xl: 20px;
+    //               --gap-5xl: 24px;
+    //               --gap-xs: 12px;
+    //               --gap-9xs: 4px;
+    //               --gap-4xl: 23px;
+    //               --gap-7xs: 6px;
+    //               --gap-sm: 14px;
+    //               --gap-3xs: 10px;
+    //               --gap-8xs: 5px;
+    //               --gap-2xl: 21px;
+            
+    //               /* Paddings */
+    //               --padding-85xl: 104px;
+    //               --padding-33xl: 52px;
+    //               --padding-32xl: 51px;
+    //               --padding-7xl: 26px;
+    //               --padding-6xl: 25px;
+    //               --padding-11xs: 2px;
+    //               --padding-5xl: 24px;
+    //               --padding-xl: 20px;
+    //               --padding-base: 16px;
+    //               --padding-4xs-3: 8.3px;
+    //               --padding-base-5: 15.5px;
+    //               --padding-9xs: 4px;
+    //               --padding-xs: 12px;
+    //               --padding-3xs: 10px;
+    //               --padding-5xs: 8px;
+    //               --padding-132xl: 151px;
+    //               --padding-79xl: 98px;
+    //               --padding-45xl: 64px;
+    //               --padding-23xl: 42px;
+    //               --padding-lgi-5: 19.5px;
+    //               --padding-sm: 14px;
+    //               --padding-smi: 13px;
+    //               --padding-158xl: 177px;
+    //               --padding-69xl: 88px;
+    //               --padding-4xs-5: 8.5px;
+    //               --padding-9xs-5: 3.5px;
+    //               --padding-11xs-5: 1.5px;
+    //               --padding-2xs: 11px;
+    //               --padding-13xl: 32px;
+    //               --padding-9xl: 28px;
+    //               --padding-2xl: 21px;
+    //               --padding-11xl: 30px;
+    //               --padding-190xl: 209px;
+    //               --padding-xs-5: 11.5px;
+    //               --padding-mini: 15px;
+    //               --padding-14xl: 33px;
+    //               --padding-42xl: 61px;
+    //               --padding-12xs: 1px;
+    //               --padding-8xl: 27px;
+    //               --padding-4xs: 9px;
+    //               --padding-8xs: 5px;
+    //               --padding-7xs: 6px;
+    //               --padding-10xs: 3px;
+    //               --padding-6xs: 7px;
+    //               --padding-mid: 17px;
+    //               --padding-4xl: 23px;
+    //               --padding-lgi: 19px;
+    //               --padding-lg: 18px;
+            
+    //               /* Border radiuses */
+    //               --br-11xl: 30px;
+    //               --br-8xs: 5px;
+    //               --br-9xs: 4px;
+    //               --br-xl: 20px;
+    //               --br-xs: 12px;
+    //               --br-base: 16px;
+    //               --br-5xs: 8px;
+    //               --br-5xl: 24px;
+    //               --br-24xl: 43px;
+            
+    //               /* Effects */
+    //               --cards-shadow: 0px 4px 16px rgba(17, 34, 17, 0.05);
+    //             }
+    //           </style>
+    //           <style>
+    //             .image2 {
+    //               height: 468px;
+    //               width: 293px;
+    //               position: relative;
+    //               display: none;
+    //             }
+            
+    //             .line-icon {
+    //               width: 1px;
+    //               flex: 1;
+    //               position: relative;
+    //               max-height: 100%;
+    //               object-fit: contain;
+    //             }
+            
+    //             .comparing-medicces,
+    //             .comparing-medicces1,
+    //             .figma-design-designer-6pn-inner {
+    //               height: 546px;
+    //               display: flex;
+    //               flex-direction: column;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //               padding: 0 var(--padding-6xs) 0 0;
+    //               box-sizing: border-box;
+    //             }
+            
+    //             .comparing-medicces,
+    //             .comparing-medicces1 {
+    //               border: 0;
+    //               background-color: var(--neutrals);
+    //               height: 196px;
+    //               width: auto;
+    //               outline: 0;
+    //               align-self: stretch;
+    //               flex-direction: column;
+    //               padding: 0 var(--padding-mini);
+    //               font-family: var(--font-inter);
+    //               font-size: var(--font-size-3xl);
+    //               font-size: 18px;
+    //               color: var(--color-darkslategray-100);
+    //             }
+            
+    //             .comparing-medicces1 {
+    //               padding: 0 var(--padding-4xs);
+    //             }
+            
+    //             .comparing-medicces-parent,
+    //             .frame-wrapper11 {
+    //               display: flex;
+    //               flex-direction: column;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //             }
+            
+    //             .comparing-medicces-parent {
+    //               align-self: stretch;
+    //               gap: 30px;
+    //             }
+            
+    //             .frame-wrapper11 {
+    //               height: 468px;
+    //               flex: 1;
+    //               max-width: calc(100% - 14px);
+    //             }
+            
+    //             .frame-child22 {
+    //               height: 547px;
+    //               width: 1px;
+    //               position: relative;
+    //               border-right: 1px solid rgba(0, 0, 0, 0.1);
+    //               box-sizing: border-box;
+    //             }
+            
+    //             .frame-parent52 {
+    //               flex: 1;
+    //               display: flex;
+    //               flex-direction: row;
+    //               align-items: flex-end;
+    //               justify-content: flex-start;
+    //               gap: 13px;
+    //               min-width: 227px;
+    //               max-width: 100%;
+    //             }
+            
+    //             .medicine-name,
+    //             .pharmacies-providing {
+    //               margin: 0;
+    //             }
+            
+    //             .pharmacies-providing-medicine-container {
+    //               height: 49px;
+    //               position: relative;
+    //               display: flex;
+    //               align-items: center;
+    //             }
+            
+    //             .pharmacies-providing-medicine-wrapper {
+    //               display: flex;
+    //               flex-direction: row;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //               padding: 0 var(--padding-4xs);
+    //             }
+            
+    //             .image3,
+    //             .image4,
+    //             .image5,
+    //             .image6 {
+    //               align-self: stretch;
+    //               position: relative;
+    //               background-color: var(--neutrals);
+    //               box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    //             }
+            
+    //             .image3 {
+    //               flex: 1;
+    //             }
+            
+    //             .image4,
+    //             .image5,
+    //             .image6 {
+    //               height: 150px;
+    //             }
+            
+    //             .figma-design-designer-6pn-child,
+    //             .frame-parent53 {
+    //               display: flex;
+    //               flex-direction: column;
+    //               align-items: flex-start;
+    //             }
+            
+    //             .frame-parent53 {
+    //               align-self: stretch;
+    //               flex: 1;
+    //               justify-content: flex-start;
+    //               gap: var(--gap-2xl);
+    //             }
+            
+    //             .figma-design-designer-6pn-child {
+    //               height: 474px;
+    //               width: 275px;
+    //               justify-content: flex-end;
+    //               padding: 0 0 var(--padding-8xs);
+    //               box-sizing: border-box;
+    //             }
+            
+    //             .image-icon22,
+    //             .medicce1 {
+    //               position: relative;
+    //               z-index: 1;
+    //             }
+            
+    //             .medicce1 {
+    //               height: auto;
+    //               font-size: 25px;
+    //               flex: 1;
+    //               display: flex;
+    //               align-items: center;
+    //             }
+            
+    //             .image-icon22 {
+    //               width: 21px;
+    //               height: 21px;
+    //               object-fit: cover;
+    //             }
+            
+    //             .image-wrapper1 {
+    //               height: 22px;
+    //               display: flex;
+    //               flex-direction: column;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //               padding: var(--padding-12xs) 0 0;
+    //               box-sizing: border-box;
+    //             }
+            
+    //             .s81 {
+    //               position: relative;
+    //               line-height: 19px;
+    //               display: inline-block;
+    //               min-width: 27px;
+    //               z-index: 1;
+    //             }
+            
+    //             .frame-parent55 {
+    //               display: flex;
+    //               flex-direction: row;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //               gap: var(--gap-sm);
+    //             }
+            
+    //             .medicce-label-inner {
+    //               display: flex;
+    //               flex-direction: column;
+    //               align-items: flex-start;
+    //               justify-content: flex-end;
+    //               padding: 0 0 var(--padding-2xs);
+    //               margin-left: -3px;
+    //               font-size: var(--font-size-lgi);
+    //               color: var(--color-lightblue-100);
+    //             }
+            
+    //             .medicce-label {
+    //               align-self: stretch;
+    //               display: flex;
+    //               flex-direction: row;
+    //               align-items: flex-end;
+    //               justify-content: flex-start;
+    //             }
+            
+    //             .conrfatiana1 {
+    //               width: 93px;
+    //               position: relative;
+    //               font-size: var(--font-size-smi);
+    //               color: var(--color-darkgray-200);
+    //               display: flex;
+    //               align-items: center;
+    //               z-index: 1;
+    //             }
+            
+    //             .frame-wrapper12,
+    //             .medicce-label-parent {
+    //               display: flex;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //             }
+            
+    //             .medicce-label-parent {
+    //               flex: 1;
+    //               flex-direction: column;
+    //               gap: var(--gap-3xs);
+    //             }
+            
+    //             .frame-wrapper12 {
+    //               align-self: stretch;
+    //               flex-direction: row;
+    //               padding: 0 var(--padding-sm) 0 var(--padding-6xs);
+    //             }
+            
+    //             .image7 {
+    //               align-self: stretch;
+    //               background: linear-gradient(180deg, #a6a6a6, rgba(255, 255, 255, 0));
+    //             }
+            
+    //             .image7,
+    //             .saere1 {
+    //               flex: 1;
+    //               position: relative;
+    //               z-index: 1;
+    //             }
+            
+    //             .frame-wrapper13,
+    //             .image-parent7,
+    //             .saere-container {
+    //               align-self: stretch;
+    //               display: flex;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //             }
+            
+    //             .saere-container {
+    //               flex-direction: row;
+    //             }
+            
+    //             .frame-wrapper13,
+    //             .image-parent7 {
+    //               flex: 1;
+    //             }
+            
+    //             .image-parent7 {
+    //               flex-direction: column;
+    //               gap: var(--gap-13xl);
+    //             }
+            
+    //             .frame-wrapper13 {
+    //               flex-direction: row;
+    //               padding: 0 var(--padding-smi) var(--padding-4xl) var(--padding-mid);
+    //               font-size: var(--montserrat-medium-12-size);
+    //               color: var(--color-darkgray-100);
+    //             }
+            
+    //             .background2 {
+    //               height: 64px;
+    //               width: 222px;
+    //               position: relative;
+    //               border-radius: var(--br-24xl);
+    //               background-color: var(--color-royalblue);
+    //               display: none;
+    //             }
+            
+    //             .compare-prices {
+    //               height: 53px;
+    //               flex: 1;
+    //               position: relative;
+    //               font-size: var(--tradegothic-bold-20-size);
+    //               font-family: var(--font-inter);
+    //               color: var(--neutrals);
+    //               text-align: left;
+    //               display: flex;
+    //               align-items: center;
+    //               z-index: 2;
+    //             }
+            
+    //             .compare-prices-label {
+    //               cursor: pointer;
+    //               border: 0;
+    //               padding: var(--padding-8xs) var(--padding-6xs) var(--padding-7xs) var(--padding-6xl);
+    //               background-color: var(--color-royalblue);
+    //               align-self: stretch;
+    //               border-radius: var(--br-24xl);
+    //               display: flex;
+    //               flex-direction: row;
+    //               align-items: flex-start;
+    //               justify-content: flex-start;
+    //               white-space: nowrap;
+    //               z-index: 1;
+    //             }
+            
+    //             .compare-prices-label:hover {
+    //               background-color: var(--color-dodgerblue);
+    //             }
+            
+    //             #mediblock,
+    //             .frame-parent54 {
+    //               display: flex;
+    //               flex-direction: column;
+    //               align-items: flex-start;
+    //               box-sizing: border-box;
+    //             }
+            
+    //             .frame-parent54 {
+    //               width: 242px;
+    //               flex: 1;
+    //               justify-content: flex-start;
+    //               padding: 0 var(--padding-xl) 0 0;
+    //               gap: var(--gap-13xl);
+    //             }
+            
+            
+    //             .figma-design-designer-6pn1 {
+    //               width: 100%;
+    //               position: relative;
+    //               background-color: var(--neutrals);
+    //               display: flex;
+    //               flex-direction: row;
+    //               flex-wrap: wrap;
+    //               align-items: flex-end;
+    //               justify-content: center;
+    //               padding: var(--padding-8xs) 8.6px 2.9px 66.4px;
+    //               box-sizing: border-box;
+    //               gap: var(--gap-5xs);
+    //               letter-spacing: normal;
+    //               text-align: left;
+    //               font-size: var(--font-size-3xl);
+    //               color: var(--color-black);
+    //               font-family: var(--font-inter);
+    //             }
+    //             #mediblock{
+    //               width: 33%;
+    //             height: auto;
+    //             align-items: center;
+    //             justify-content: center;
+    //             display: flex;
+    //             min-width: 400px;
+    //             position: sticky;
+    //             top: 0px;
+    //             }
+    //             #imgb{
+    //                 width: auto;
+    //                       height: auto;
+    //                       max-height: 250px;
+    //             }
+            
+    //             @media screen and (max-width: 500px) {
+    //               .figma-design-designer-6pn1 {
+    //                 padding-left: var(--padding-14xl);
+    //                 box-sizing: border-box;
+    //               }
+    //             }
+            
+    //             @media screen and (max-width: 450px) {
+            
+    //               .medicce1,
+    //               .pharmacies-providing-medicine-container {
+    //                 font-size: var(--font-size-lg);
+    //               }
+    //               .comparing-medicces1{
+    //               font-size: 15px;
+    //             }
+    //             #imgb{
+    //                 width: 100%;
+    //                       height: auto;
+    //                       max-height: 250px;
+    //             }
+    //             }
+            
+              
+    //             @media screen and (min-width:450px) and (max-width:700px) {
+    //               #mediblock{
+    //                 width: 33%;
+    //             height: auto;
+    //             align-items: center;
+    //             justify-content: center;
+    //             display: flex;
+    //             min-width: 350px;
+    //             position: relative;
+    //               }
+    //               .comparing-medicces1{
+    //               font-size: 15px;
+    //             }
+    //             #imgb{
+    //                 width: 100%;
+    //                       height: auto;
+    //                       max-height: 250px;
+    //             }
+    //             }
+    //             @media screen and (max-width:450px) {
+    //               #mediblock{
+    //                 width: 100%;
+    //             height: auto;
+    //             align-items: center;
+    //             justify-content: center;
+    //             display: flex;
+    //             min-width: 250px;
+    //             position: relative;
+    //               }
+    //               .comparing-medicces1{
+    //               font-size: 15px;
+    //             }
+    //             #imgb{
+    //                 width: 100%;
+    //                       height: auto;
+    //                       max-height: 250px;
+    //             }
+    //             }
+    //           </style>
+            
+    //           <meta property="og:image" content="medicompLogo.png">
+            
+            
+    //           <link rel="icon" type="image/png" href="medicomp_favicon.png">
+            
+    //           <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6943409373544581"
+    //             crossorigin="anonymous"></script>
+            
+    //           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+    //           <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    //           <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+            
+    //           <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    //           <link rel="stylesheet" href="css/animate.css">
+            
+    //           <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.js"
+    //             integrity="sha512-20FZL4lG1jTZXPeMkblgj4b/fsXASK5aW87Tm7Z5QK9QmmYleVGM0NlS9swfb6XT8yrFTAWkq3QfnMe7MKIX8A=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+    //           <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"
+    //             integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    //           <script src="https://js.upload.io/upload-js/v2"></script>
+            
+    //           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+    //             integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    //           <link rel="stylesheet"
+    //             href="https://fonts.googleapis.com/css2?family=TradeGothic LT Extended:wght@700&amp;display=swap">
+    //           <link rel="stylesheet"
+    //             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+    //           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&amp;display=swap">
+            
+            
+            
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KSWBE6PN2J"></script>
+    //           <script>
+    //             window.dataLayer = window.dataLayer || [];
+    //             function gtag() { dataLayer.push(arguments); }
+    //             gtag('js', new Date());
+            
+    //             gtag('config', 'G-KSWBE6PN2J');
+    //           </script>
+            
+    //           <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+            
+    //           <script src="
+    //         https://cdn.jsdelivr.net/npm/puppeteer@19.8.0/install.min.j"></script>
+            
+            
+            
+    //           <script src="
+    //         https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
+    //         "></script>
+            
+    //           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    //             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer">
+    //           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css"
+    //             integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer">
+    //           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
+    //             integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer">
+            
+    //           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css"
+    //             integrity="sha512-WidMaWaNmZqjk3gDE6KBFCoDpBz9stTsTZZTeocfq/eDNkLfpakEd7qR0bPejvy/x0iT0dvzIq4IirnBtVer5A=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer">
+    //           <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.1/css/all.css">
+            
+    //           <link rel="stylesheet" href="css/owl.carousel.min.css">
+    //           <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    //           <link rel="stylesheet" href="css/magnific-popup.css">
+            
+    //           <link rel="stylesheet" href="css/aos.css">
+            
+    //           <link rel="stylesheet" href="css/ionicons.min.css">
+            
+    //           <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    //           <link rel="stylesheet" href="css/jquery.timepicker.css">
+            
+            
+    //           <link rel="stylesheet" href="css/flaticon.css">
+    //           <link rel="stylesheet" href="css/icomoon.css">
+    //           <link rel="stylesheet" href="css/style.css">
+            
+            
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <style type="text/css">
+    //             .scrollax-performance,
+    //             .scrollax-performance *,
+    //             .scrollax-performance *:before,
+    //             .scrollax-performance *:after {
+    //               pointer-events: none !important;
+    //               -webkit-animation-play-state: paused !important;
+    //               animation-play-state: paused !important;
+    //             }
+            
+    //             ;
+    //           </style>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script type="text/javascript" charset="UTF-8"
+    //             src="https://maps.googleapis.com/maps-api-v3/api/js/56/6/common.js"></script>
+    //           <script type="text/javascript" charset="UTF-8"
+    //             src="https://maps.googleapis.com/maps-api-v3/api/js/56/6/util.js"></script>
+    //           <style type="text/css">
+    //             .scrollax-performance,
+    //             .scrollax-performance *,
+    //             .scrollax-performance *:before,
+    //             .scrollax-performance *:after {
+    //               pointer-events: none !important;
+    //               -webkit-animation-play-state: paused !important;
+    //               animation-play-state: paused !important;
+    //             }
+            
+    //             ;
+    //           </style>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script type="text/javascript" charset="UTF-8"
+    //             src="https://maps.googleapis.com/maps-api-v3/api/js/56/6/common.js"></script>
+    //           <script type="text/javascript" charset="UTF-8"
+    //             src="https://maps.googleapis.com/maps-api-v3/api/js/56/6/util.js"></script>
+    //           <style type="text/css">
+    //             .scrollax-performance,
+    //             .scrollax-performance *,
+    //             .scrollax-performance *:before,
+    //             .scrollax-performance *:after {
+    //               pointer-events: none !important;
+    //               -webkit-animation-play-state: paused !important;
+    //               animation-play-state: paused !important;
+    //             }
+            
+    //             ;
+    //           </style>
+    //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    //           <script type="text/javascript" charset="UTF-8"
+    //             src="https://maps.googleapis.com/maps-api-v3/api/js/56/6/common.js"></script>
+    //           <script type="text/javascript" charset="UTF-8"
+    //             src="https://maps.googleapis.com/maps-api-v3/api/js/56/6/util.js"></script>
+    //         </head>
+            
+    //         <body data-new-gr-c-s-check-loaded="14.1165.0" data-gr-ext-installed="" data-aos-easing="slide" data-aos-duration="800"
+    //           data-aos-delay="0">
+    //           <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light sleep" id="ftco-navbar"
+    //             style="position: relative;margin: 0px;padding-top: 20px;padding-bottom: 20px;position: static;background-color: #222831 !important;">
+    //             <div class="container">
+    //               <a class="navbar-brand" href="index.html">Medicomp India.</a>
+    //               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+    //                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+    //                 <span class="oi oi-menu"></span> Menu
+    //               </button>
+            
+    //               <div class="collapse navbar-collapse" id="ftco-nav">
+    //                 <ul class="navbar-nav ml-auto">
+    //                   <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+    //                   <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    //                   <li class="nav-item"><a href="#nearby" class="nav-link">NearbyChem</a></li>
+    //                   <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+    //                   <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+    //                   <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
+    //                   <!-- <li>
+    //                                 <form id="msform" action="/bookdoc" method="post" class="ss searchString">
+    //                                     <a onclick="this.parentNode.submit()">
+    //                                         <div class="textfield-search one-third"
+    //                                             style="background:white;color:black;padding:10px">
+    //                                             <p>bookdoc</p>
+    //                                             <input type="text" autocomplete="off" id="medname"
+    //                                                 style='word-wrap: break-word;display:none' contenteditable='false'
+    //                                                 name="medname" class="form-control foodItem"
+    //                                                 >
+    //                                         </div>
+    //                                     </a>
+    //                                 </form>
+    //                             </li> -->
+    //                 </ul>
+    //               </div>
+    //             </div>
+    //           </nav>
+            
+    //           <div class="figma-design-designer-6pn1" style="
+    //             margin-top: 50px;
+    //             align-items: flex-start;
+    //         ">
+            
+            
+    //             <div class="figma-design-designer-6pn-inner1" id="mediblock">
+    //               <div class="frame-parent54" style="
+    //             width: 90%;
+    //         ">
+    //                 <div class="frame-wrapper12">
+    //                   <div class="medicce-label-parent">
+    //                     <div class="medicce-label">
+    //                       <div class="medicce1" id="mainMedName">
+    //                         <b>
+    //                           ${a["Name"]}
+    //                         </b>
+    //                       </div>
+    //                       <div class="medicce-label-inner">
+            
+    //                       </div>
+    //                     </div>
+    //                     <div class="conrfatiana1" style="
+    //             width: auto;text-align: left;display: inline;">${a["unitCount"]}
+    //                       <br><span class="it" style="font-weight: bold;">
+    //                         Generic Name
+    //                       </span>
+    //                       <br>
+    //                       ${a["GenericName"]}
+    //                     </div>
+    //                   </div>
+    //                 </div>
+    //                 <div class="frame-wrapper13">
+    //                   <div class="image-parent7">
+    //                     <div class="image7"
+    //                       style="background:transparent;display: flex;align-items: center;justify-content: center;">
+    //                       <img src='${a["Image"]}' alt="" id="imgb" >
+    //                     </div>
+            
+    //                   </div>
+    //                 </div>
+    //                 <style>
+    //                   @keyframes circle-rotate {
+    //                     from {
+    //                       transform: rotate(0deg);
+    //                     }
+            
+    //                     to {
+    //                       transform: rotate(360deg);
+    //                     }
+    //                   }
+            
+    //                   .loading-icon {
+    //                     width: 30px;
+    //                     height: 30px;
+    //                   }
+            
+    //                   .loading-icon .icon {
+    //                     display: inline-block;
+    //                     width: 100%;
+    //                     height: 100%;
+    //                     border: 4px solid #e5e6e2;
+    //                     border-radius: 50%;
+    //                     position: relative;
+    //                     z-index: 5;
+    //                   }
+            
+    //                   .loading-icon .icon:after {
+    //                     content: '';
+    //                     display: inline-block;
+    //                     width: 30px;
+    //                     height: 30px;
+    //                     border-top: 4px solid transparent;
+    //                     border-right: 4px solid #598aff;
+    //                     border-bottom: 4px solid transparent;
+    //                     border-left: 4px solid transparent;
+    //                     border-radius: 50%;
+    //                     position: absolute;
+    //                     top: -4px;
+    //                     left: -4px;
+    //                     animation: circle-rotate 0.75s both linear infinite;
+    //                   }
+    //                 </style>
+    //                 <div
+    //                   style="width: auto;font-size: 12px;font-weight:bold;color: #598aff;display: flex;align-items: center;justify-content: center;flex-direction: row;" id="blockDelAfterLoading">
+    //                   <div class="loading-icon" id="lod">
+    //                     <div class="icon"></div>
+    //                   </div>
+    //                   <div style="
+    //             width: max-content;
+    //             display: block;
+    //             margin-left: 6px;
+    //         " id="changingContent">Searching...</div>
+    //                 </div>
+    //                 <button class="compare-prices-label" style="background-color: #89bcff;border-radius:10px;">
+    //                   <div class="background2"></div>
+    //                   <div class="compare-prices" style="text-align: center;justify-content: center;">COMPARE PRICES</div>
+    //                 </button>
+    //               </div>
+    //             </div>
+            
+    //             <div class="frame-parent52" style="
+    //             width: 66%;
+    //             height: auto;
+    //             align-items: flex-start;
+    //             justify-content: center;
+    //         ">
+    //               <div class="frame-wrapper11" style="
+    //             width: 100%;
+    //             height: auto;
+    //         ">
+    //                 <div class="comparing-medicces-parent">
+    //                   <div class="comparing-medicces1" placeholder="INFORMATION" style="height: fit-content;">
+    //                     <div style="font-weight: bold;">Information</div> <br>
+    //                     <div id="info_content">${a['Information']}
+    //                       <br>
+    //                     </div>
+    //                     <div>&nbsp;</div>
+    //                   </div>
+    //                   <div class="comparing-medicces1" placeholder="USES" style="height: fit-content;">
+    //                     <div style="
+    //             font-weight: bold;
+    //         ">Uses</div id='uses_content'> <br>
+    //                     <div>`
+                        
+    //                     for (let i = 0; i <= a['Uses'].length; i++) {
+    //                         HtmlContent+= `<li>${a['Uses'][i]}</li>\n`;
+    //                     }
 
-    console.log("DONE");
+    //                     HtmlContent+=
+    //                     `</div>
+    //                     <div>&nbsp;</div>
+    //                   </div>
+                      
+    //                   <div class="comparing-medicces1" placeholder="USES" style="height: fit-content;">
+    //                     <div style="
+    //             font-weight: bold;" id="direction_content">Direction To Use 6</div> <br>
+    //                     <div>${a['Direction']}
+    //                     </div>
+    //                     <div>&nbsp;</div>
+    //                   </div>
+    //                   <div class="comparing-medicces1" placeholder="USES" style="height: fit-content;" id="references_content">
+    //                     <div style="font-weight: bold;">References</div> <br>
+    //                     <div style="overflow-wrap: anywhere;font-size: 14px;">
+    //                         ${a['References']}    
+    //                     </div>
+    //                     <div>&nbsp;</div>
+    //                   </div>
+                     
+    //                   <div class="comparing-medicces1" placeholder="USES" style="height: fit-content;" id="references_content">
+    //                     <div style="font-weight: bold;">Disclaimer </div> <br>
+    //                     <div style="overflow-wrap: anywhere;font-size: 14px;">
+    //                       The contents of this website are for informational purposes only and not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please seek the advice of a physician or other qualified health provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.
+    //                     </div>
+    //                     <div>&nbsp;</div>
+                   
+    //                   </div>
+                     
+                     
+    //                 </div>
+    //               </div>
+    //               <div class="frame-child22"></div>
+            
+            
+    //             </div>
+            
+    //           </div>
+            
+    //           <footer class="ftco-footer ftco-bg-dark ftco-section" style="padding-bottom: 10px;">
+    //             <div class="container">
+    //               <div class="row mb-5">
+    //                 <div class="col-md">
+    //                   <div class="ftco-footer-widget mb-4">
+    //                     <h2 class="ftco-heading-2">Medicomp India.</h2>
+    //                     <p>Welcome to Medicomp India, your one-stop solution for comparing medicine prices across
+    //                       various pharmacies and online retailers in India.</p>
+    //                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+    //                       <li class="ftco-animate fadeInUp ftco-animated"><a href="https://www.linkedin.com/in/krishilsheth/"><span
+    //                             class="icon-linkedin"></span></a></li>
+    //                       <!-- <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li> -->
+    //                       <li class="ftco-animate fadeInUp ftco-animated"><a href="https://www.instagram.com/medicomp.india/"><span
+    //                             class="icon-instagram"></span></a></li>
+    //                     </ul>
+    //                   </div>
+    //                 </div>
+    //                 <div class="col-md">
+    //                   <div class="ftco-footer-widget mb-4 ml-md-5">
+    //                     <h2 class="ftco-heading-2">Information</h2>
+    //                     <ul class="list-unstyled">
+    //                       <li><a href="/about.html" class="py-2 d-block">About</a></li>
+    //                       <li><a href="#" class="py-2 d-block">Med A-Z</a></li>
+    //                       <!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
+    //                       <li><a
+    //                           href="mailto:krishilsheth@gmail.com?subject=We Want To Collaborate With Medicomp India&amp;body=//text here"
+    //                           class="py-2 d-block">Become a partner</a></li>
+    //                       <!-- <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li> -->
+    //                       <li><a href="/privacypolicy.html" class="py-2 d-block">Privacy and Policy</a></li>
+    //                     </ul>
+    //                   </div>
+    //                 </div>
+    //                 <div class="col-md">
+    //                   <div class="ftco-footer-widget mb-4">
+    //                     <h2 class="ftco-heading-2">Customer Support</h2>
+    //                     <ul class="list-unstyled">
+    //                       <li><a href="/about.html" class="py-2 d-block">FAQ</a></li>
+    //                       <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+    //                           <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+    //                           <li><a href="#" class="py-2 d-block">How it works</a></li> -->
+    //                       <li><a href="/contact.html" class="py-2 d-block">Contact Us</a></li>
+    //                     </ul>
+    //                   </div>
+    //                 </div>
+    //                 <div class="col-md">
+    //                   <div class="ftco-footer-widget mb-4">
+    //                     <h2 class="ftco-heading-2">Have a Questions?</h2>
+    //                     <div class="block-23 mb-3">
+    //                       <ul>
+            
+    //                         <!-- <li><a href="tel:9372677245"><span class="icon icon-phone"></span>
+                                  
+    //                               <span class="text">9372677245</span></a></li> -->
+    //                         <li><a href="mailto:@krishilsheth@gmail.com"><span class="icon icon-envelope"></span><span
+    //                               class="text">krishilsheth@gmail.com</span></a></li>
+    //                       </ul>
+    //                     </div>
+    //                   </div>
+    //                 </div>
+    //               </div>
+    //               <div class="row">
+    //                 <div class="col-md-12 text-center">
+            
+    //                   <p>
+    //                     Copyright ©
+    //                     <script>document.write(new Date().getFullYear());</script>202420242024 All rights reserved | <i
+    //                       class="icon-plus" aria-hidden="true"></i> <a href="https://medicomp.in" target="_blank">Medicomp India</a>
+    //                   </p>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </footer>
+            
+            
+    //           <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
+    //             integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    //           <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.js"
+    //             integrity="sha512-A/D/17S8jG62ka9f3jPwMs+bKGJ1f/xQts7bAUjTIKQf0anTGjlpuEz3q9q++3qRAVYKS3iVx6KzM8GPtIaYfw=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    //           <script src="https://cdnjs.cloudflare.com/ajax/libs/cheerio/0.22.0/index.js"
+    //             integrity="sha512-+obmGUxyA+OfXW4RU7Ez2JBbCFy+dmZatW/Z5u/PDZlY+SKzAMSHzpNfTDohw7RFfW+zmLrI9h19XiODWZRO5A=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    //           <script src="https://cdnjs.cloudflare.com/ajax/libs/cheerio/0.22.0/index.min.js"
+    //             integrity="sha512-e0BgZBWe7/3JF1To6KxVcaoki2aQd3f6aWyRf9R+dOPgDUfn7czha9/wLHzNgVmUaORT2cEq+lyjxjoQmPEiHA=="
+    //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+    //           <script>
+            
+    //         document.getElementById('changingContent').innerHTML = "Searching...";
+    //         let i = 1;
+            
+    //             setTimeout(() => {
+                  
+    //               const intervalId = setInterval(() => {
+    //                 document.getElementById('changingContent').innerHTML = "Checked" + ${`i`} +"of 16 Best Pharmacies";
+    //                 i++;
+    //                 if (i >= 16) {
+    //                   clearInterval(intervalId);
+    //                 }
+    //               }, 400);
+                  
+    //             }, 1000);
+                
+                
+    //             window.onload = async (event) => {
+    //               var a=document.getElementById('mainMedName').innerText.replace(/[%,+]/g, '');
+    //               await axios({
+    //                 method: "GET",
+    //                 url: "/fastCompMorePharmasFasterOp?medname=${a['Name']}",
+    //               })
+    //               .then((res) => {
+    //                 document.getElementById("lod").remove();
+    //                 console.log(res.data);
+    //                 document.getElementById('changingContent').innerHTML = "Found" +${`res.data.length`}+ " Pharmacies Providing This Medicine";    
+    //               })
+    //             };
+    //           </script>
+            
+            
+    //           <script src="js/jquery.min.js"></script>
+    //           <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    //           <script src="js/popper.min.js"></script>
+    //           <script src="js/bootstrap.min.js"></script>
+    //           <script src="js/jquery.easing.1.3.js"></script>
+    //           <script src="js/jquery.waypoints.min.js"></script>
+    //           <script src="js/jquery.stellar.min.js"></script>
+    //           <script src="js/owl.carousel.min.js"></script>
+    //           <script src="js/jquery.magnific-popup.min.js"></script>
+    //           <script src="js/aos.js"></script>
+    //           <script src="js/jquery.animateNumber.min.js"></script>
+    //           <script src="js/bootstrap-datepicker.js"></script>
+    //           <script src="js/jquery.timepicker.min.js"></script>
+    //           <script src="js/scrollax.min.js"></script>
+    //           <script
+    //             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
+    //           <script src="js/google-map.js"></script>
+    //           <script src="js/main.js"></script>
+            
+            
+    //         </body>
+            
+    //         </html>`
+
+    //         fs.writeFile(`./medicine/${medicompFileName}.html`, HtmlContent, (err) => {
+    //             if (err) {
+    //                 console.error(err);
+    //                 return;
+    //             }
+    //             console.log('HTML file created successfully');
+    //         });
+    // }
 })
-
+    // fs.appendFile('./netmedsDataAvailibility.txt', `${url},${a}\n`, (err) => { 
+    //         if (err) {
+    //             console.error('Error writing to file:', err);
+    //         } else {
+    //             console.log(`Found`);
+    //         }
+    //     });
+    
 app.get('/addLinksToMednames', async (req, res) => {
     fs.readFile('MedicineNamesStartingWithC.txt', 'utf8', async (err, data) => {
         if (err) {
@@ -26924,6 +28059,7 @@ extractDataOfPharmEasy = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity(a['props']['pageProps']['productDetails']['name'].toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: a['props']['pageProps']['productDetails']['manufacturer'],
             medicineAvailability:(a['props']['pageProps']['productDetails']['productAvailabilityFlags']['isAvailable']),
+            minQty: a['props']['pageProps']['productDetails']['minQuantity'],
             // saltName:a['props']['pageProps']['productDetails']['compositions'][0]['name'],
             // qtyItContainsDesc:a['props']['pageProps']['productDetails']['measurementUnit'],
         };
@@ -27046,6 +28182,7 @@ extractDataOfNetMeds = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity($('.product-detail .prodName h1').first().text().toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: $('span[class=drug-manu] > a').first().text(),
             medicineAvailability:$('.os-txt').text() == "" ? true:false,
+            minQty:parseInt(($('.min_qty_alert').first().text().split(':')[1])?($('.min_qty_alert').first().text().split(':')[1]):1),
             // saltName:$('.drug-conf').first().text(),
             // qtyItContainsDesc:$('.drug-varient').first().text(),
 
@@ -27340,6 +28477,7 @@ extractDataOfTruemeds = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity($('.medName').first().text().toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: $('#manufacturer').first().text(),
             medicineAvailability:$('#pdActionCta').text() == "Add To Cart" ? true:false,
+            minQty:1,
             // saltName:$('.compositionDescription ').first().text(),
             // qtyItContainsDesc:$('.medStrips').first().text(),
         };
@@ -27668,6 +28806,7 @@ extractDataOfmedplusMart = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity($('#divProductTitle>h1').text().toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: $('#divProductTitle>div').text(),
             medicineAvailability:$('.text-primary2').text() =="In Stock" ? true:false,
+            minQty:1,
         };
 
     } catch (error) {
@@ -27750,6 +28889,7 @@ extractDataOfMyUpChar = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity(a.toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: "NA",
             medicineAvailability:true,
+            minQty:1,
 
         };
 
@@ -27838,6 +28978,7 @@ extractDataOfOBP = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity($('.entry-title').text().toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: $('.woocommerce-product-attributes-item__value > p').first().text(),
             medicineAvailability:true,
+            minQty:1,
 
         };
 
@@ -27863,9 +29004,9 @@ extractDataOfPP = async (url, nameOfMed) => {
 
         var dc = '';
 
-        if (dataOfPP.offers.price < 280) {
+        if (dataOfPP.offers.price < 290) {
             dc = 68;
-        } else if (dataOfPP.offers.price >= 280 && dataOfPP.offers.price < 1000) {
+        } else if (dataOfPP.offers.price >= 290 && dataOfPP.offers.price < 1000) {
             dc = 58;
         } else if (dataOfPP.offers.price >= 1000) {
             dc = 8;
@@ -27884,6 +29025,7 @@ extractDataOfPP = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity(dataOfPP.name.toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: $('#divProductTitle > label[class=text-muted]').text(),
             medicineAvailability:dataOfPP.offers.availability=='http://schema.org/InStock'?true:false,
+            minQty:1,
         };
 
     } catch (error) {
@@ -27978,6 +29120,7 @@ extractDataOfOgMPM = async (url, nameOfMed) => {
             similarityIndex: calculateSimilarity(a.name.toLowerCase(), nameOfMed.toLowerCase()),
             manufacturerName: a.brand.name,
             medicineAvailability:true,
+            minQty:1,
 
         };
 
