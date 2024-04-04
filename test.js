@@ -62,17 +62,18 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
             // Save the image to a local file
             fs.writeFileSync(localPath, response.data);
     
-            console.log('Image downloaded successfully');
         } catch (error) {
-            console.error('Error downloading image:', error);
+            console.error(`Error downloading image: ${imageUrl}`, error);
         }
     };
-    
+
     extractAddress = async (url) => {
             
         const { data } = await axios.get(url, { responseType: 'arraybuffer' });
         const $ = cheerio.load(data);
         var medicompFileName=$('.black-txt').text().replace(/[%,+'\/\\\s.]/g, '').trim();
+              var imageUrl =$('.largeimage img').attr('src')
+
         
         // downloadImage($('.largeimage img').attr('src'), `./MedicineImage/${medicompFileName}.jpg`);
 
@@ -81,9 +82,10 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
             // const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
     
             // Save the image to a local file
-            fs.writeFileSync(`./MedicineImage/${medicompFileName}.jpg`, data);
+           await downloadImage(imageUrl, `./MedicineImage/${medicompFileName}.jpg`);
     
             console.log('Image downloaded successfully'+url);
+
         } catch (error) {
             console.error('Error downloading image:', error);
         }
@@ -302,7 +304,8 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //    ];
 
 
-    var d=["https://www.netmeds.com/prescriptions/1-al-10mg-tablet-15-s", 
+    var d=[
+    "https://www.netmeds.com/prescriptions/1-al-10mg-tablet-15-s", 
     "https://www.netmeds.com/prescriptions/1-al-5mg-tablet-10-s", 
     "https://www.netmeds.com/prescriptions/1-al-m-syrup-60ml", 
     "https://www.netmeds.com/prescriptions/1-al-m-10-5mg-tablet-10-s", 
@@ -1291,7 +1294,6 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     "https://www.netmeds.com/prescriptions/aloesof-cream-60gm", 
     "https://www.netmeds.com/prescriptions/aloesof-soap-75gm", 
     "https://www.netmeds.com/prescriptions/alograce-soap-75gm", 
-    "Honey & Aloe Vera Cream 50gm", 
     "https://www.netmeds.com/prescriptions/aloha-xt-tablet-30-s", 
     "https://www.netmeds.com/prescriptions/alonac-100mg-tablet-10-s", 
     "https://www.netmeds.com/prescriptions/alonac-p-tablet-10-s", 
@@ -25889,17 +25891,16 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     "https://www.netmeds.com/prescriptions/zyvimol-suspension-60ml", ]
 
 
-      for(var i=0;i<d.length;i++){
+      for(var i=6668;i<d.length;i++){
        await extractAddress(d[i])
       }
 
 
 
-    //    for(var i=0;i<1;i++){
+    //    for(var i=0;i<10;i++){
     //     const { data } = await axios.get(d[i])
     //     const $ = cheerio.load(data);
     //      var medicompFileName=$('.black-txt').text().replace(/[%,+'\s]/g, '').trim();
-    //      console.log(medicompFileName)
 
 
     //     var a={
@@ -25922,7 +25923,6 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //         a['Uses']=tempuses;
     //         a['Direction']=$('#np_tab6 p').text();
     //         a['References']=$('#np_tab15 p').text();
-    //     console.log(a)
 
     //         var HtmlContent=`
     //         <html>
@@ -25930,7 +25930,7 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //         <meta charset="utf-8">
     //         <meta name="viewport" content="initial-scale=1, width=device-width">
           
-    //         <title>Compare ${a['Name']} Prices - Best Deals Online | Medicomp India</title>
+    //         <title>Compare Prices : ${a['Name']} | Best Deals Online | Medicomp India</title>
     //         <meta name="description"
     //           content="Find the best prices for ${a['Name']} strip across top online pharmacies in India. Compare prices, check offers & discounts. Buy Crocin tablets at lowest cost. - Medicomp India">
           
@@ -25941,6 +25941,11 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     //         <meta name="language" content="English">
     //         <meta name="revisit-after" content="1 days">
+
+    //         <meta property="og:image" content="../medicompLogo.png">
+
+	
+	// <link rel="icon" type="image/png" href="../medicomp_favicon.png">
           
     //         <meta name="author" content="Medicomp India">
     //         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26543,6 +26548,13 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //                       max-height: 250px;
     //             }
     //             }
+
+
+    //             .dis{
+    //                 background-color: #89bcff;
+    //                 border-radius: 10px;
+    //                 width: 100%;
+    //             }
     //           </style>
             
     //           <meta property="og:image" content="medicompLogo.png">
@@ -26617,21 +26629,21 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //             crossorigin="anonymous" referrerpolicy="no-referrer">
     //           <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.1/css/all.css">
             
-    //           <link rel="stylesheet" href="css/owl.carousel.min.css">
-    //           <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    //           <link rel="stylesheet" href="css/magnific-popup.css">
+    //           <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    //           <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    //           <link rel="stylesheet" href="../css/magnific-popup.css">
             
-    //           <link rel="stylesheet" href="css/aos.css">
+    //           <link rel="stylesheet" href="../css/aos.css">
             
-    //           <link rel="stylesheet" href="css/ionicons.min.css">
+    //           <link rel="stylesheet" href="../css/ionicons.min.css">
             
-    //           <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    //           <link rel="stylesheet" href="css/jquery.timepicker.css">
+    //           <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    //           <link rel="stylesheet" href="../css/jquery.timepicker.css">
             
             
-    //           <link rel="stylesheet" href="css/flaticon.css">
-    //           <link rel="stylesheet" href="css/icomoon.css">
-    //           <link rel="stylesheet" href="css/style.css">
+    //           <link rel="stylesheet" href="../css/flaticon.css">
+    //           <link rel="stylesheet" href="../css/icomoon.css">
+    //           <link rel="stylesheet" href="../css/style.css">
             
             
     //           <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
@@ -26768,7 +26780,7 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //                   <div class="image-parent7">
     //                     <div class="image7"
     //                       style="background:transparent;display: flex;align-items: center;justify-content: center;">
-    //                       <img src='${a["Image"]}' alt="" id="imgb" >
+    //                       <img src='../MedicineImage/${(a['Name'].replace(/[%,+'\/\\\s.]/g, '').trim())+".jpg"}' alt="" id="imgb" >
     //                     </div>
             
     //                   </div>
@@ -26826,10 +26838,14 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //             margin-left: 6px;
     //         " id="changingContent">Searching...</div>
     //                 </div>
-    //                 <button class="compare-prices-label" style="background-color: #89bcff;border-radius:10px;">
+    //                 <form id="msform12" action="/compareViaBlog" method="post" class="ss searchString" style="width:100%">
+    //                 <input type="text" id='urls' name='urls' value='' style="font-size:0px;height:0px;width:0px;visibility:hidden">
+    //                 <input type="text" id='medicname' name='medname' value='' style="font-size:0px;height:0px;width:0px;visibility:hidden">
+    //                 <button onclick="this.parentNode.submit();loader()" class="compare-prices-label dis" id='cmpbtn' disabled>
     //                   <div class="background2"></div>
     //                   <div class="compare-prices" style="text-align: center;justify-content: center;">COMPARE PRICES</div>
     //                 </button>
+    //                 </form>
     //               </div>
     //             </div>
             
@@ -26857,7 +26873,7 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //         ">Uses</div id='uses_content'> <br>
     //                     <div>`
                         
-    //                     for (let i = 0; i <= a['Uses'].length; i++) {
+    //                     for (let i = 0; i < a['Uses'].length; i++) {
     //                         HtmlContent+= `<li>${a['Uses'][i]}</li>\n`;
     //                     }
 
@@ -26966,14 +26982,49 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //                   <p>
     //                     Copyright ©
     //                     <script>document.write(new Date().getFullYear());</script>202420242024 All rights reserved | <i
-    //                       class="icon-plus" aria-hidden="true"></i> <a href="https://medicomp.in" target="_blank">Medicomp India</a>
+    //                       class="icon-plus" aria-hidden="true"></i> <a href="http://localhost:4000" target="_blank">Medicomp India</a>
     //                   </p>
     //                 </div>
     //               </div>
     //             </div>
     //           </footer>
             
-            
+    //           <div id="ftco-loader" class="show fullscreen">
+
+    //           <div class="contain">
+    //             <ul id="list">
+          
+    //             </ul>
+    //             <!-- <a href="#" class="button" id="add">Add</a> -->
+    //           </div>
+          
+    //           <img src="../medicomp-loading-unscreen.gif" id="ftco-loader-loading"
+    //             style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: block;"
+    //             alt="">
+          
+    //         </div>
+
+    //         <script>
+    //           window.addEventListener("popstate", function () {
+    //       console.log('loading over');
+    //       document.body.style.display = 'block';
+
+    //       document.getElementById('ftco-loader').style.visibility = 'none';
+    //       document.getElementById('ftco-loader').style.opacity = 0;
+
+    //       document.getElementById('ftco-loader-loading').style.display = 'none';
+    //   });
+    //         function loader() {
+    //                 console.warn('loading...')
+    //                 // document.body.style.display='none';
+    //                 document.getElementById('ftco-loader').style.opacity = 1;
+    //                 document.getElementById('ftco-loader').style.visibility = 'visible';
+
+    //                 // document.getElementById('ftco-loader-loading').style.display = 'block';
+
+    //             }
+    //         </script>
+          
     //           <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
     //             integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
     //             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -26995,7 +27046,7 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //             setTimeout(() => {
                   
     //               const intervalId = setInterval(() => {
-    //                 document.getElementById('changingContent').innerHTML = "Checked" + ${`i`} +"of 16 Best Pharmacies";
+    //                 document.getElementById('changingContent').innerHTML = "Checked " + ${`i`} +" Of 16 Best Pharmacies";
     //                 i++;
     //                 if (i >= 16) {
     //                   clearInterval(intervalId);
@@ -27014,43 +27065,61 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //               .then((res) => {
     //                 document.getElementById("lod").remove();
     //                 console.log(res.data);
-    //                 document.getElementById('changingContent').innerHTML = "Found" +${`res.data.length`}+ " Pharmacies Providing This Medicine";    
+    //                 document.getElementById('changingContent').innerHTML = "Found " +${`res.data.length`}+ " Pharmacies Providing This Medicine";    
+    //                 document.getElementById('medicname').setAttribute('value',"${a['Name']}");    
+    //                 document.getElementById('urls').setAttribute('value',${`res.data`});    
+
+    //                 document.getElementById('cmpbtn').classList.remove('dis');
+    //                 document.getElementById('cmpbtn').disabled=false;
+    //                 document.getElementById('cmpbtn').style='    background-color: #64a7ff;border-radius: 10px;width: 100%;';
+
     //               })
     //             };
     //           </script>
             
             
-    //           <script src="js/jquery.min.js"></script>
-    //           <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    //           <script src="js/popper.min.js"></script>
-    //           <script src="js/bootstrap.min.js"></script>
-    //           <script src="js/jquery.easing.1.3.js"></script>
-    //           <script src="js/jquery.waypoints.min.js"></script>
-    //           <script src="js/jquery.stellar.min.js"></script>
-    //           <script src="js/owl.carousel.min.js"></script>
-    //           <script src="js/jquery.magnific-popup.min.js"></script>
-    //           <script src="js/aos.js"></script>
-    //           <script src="js/jquery.animateNumber.min.js"></script>
-    //           <script src="js/bootstrap-datepicker.js"></script>
-    //           <script src="js/jquery.timepicker.min.js"></script>
-    //           <script src="js/scrollax.min.js"></script>
+    //           <script src="../js/jquery.min.js"></script>
+    //           <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+    //           <script src="../js/popper.min.js"></script>
+    //           <script src="../js/bootstrap.min.js"></script>
+    //           <script src="../js/jquery.easing.1.3.js"></script>
+    //           <script src="../js/jquery.waypoints.min.js"></script>
+    //           <script src="../js/jquery.stellar.min.js"></script>
+    //           <script src="../js/owl.carousel.min.js"></script>
+    //           <script src="../js/jquery.magnific-popup.min.js"></script>
+    //           <script src="../js/aos.js"></script>
+    //           <script src="../js/jquery.animateNumber.min.js"></script>
+    //           <script src="../js/bootstrap-datepicker.js"></script>
+    //           <script src="../js/jquery.timepicker.min.js"></script>
+    //           <script src="../js/scrollax.min.js"></script>
     //           <script
     //             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-    //           <script src="js/google-map.js"></script>
-    //           <script src="js/main.js"></script>
+    //           <script src="../js/google-map.js"></script>
+    //           <script src="../js/main.js"></script>
             
             
     //         </body>
             
     //         </html>`
 
-    //         fs.writeFile(`./medicine/${medicompFileName}.html`, HtmlContent, (err) => {
-    //             if (err) {
-    //                 console.error(err);
-    //                 return;
-    //             }
-    //             console.log('HTML file created successfully');
-    //         });
+
+    //         if(a['Information']!=''){
+    //             fs.writeFile(`./medicine/${medicompFileName}.html`, HtmlContent, (err) => {
+    //                 if (err) {
+    //                     console.error(err);
+    //                     return;
+    //                 }
+    //                 console.log('HTML file created successfully');
+    //             });
+    //         }else{
+    //             fs.writeFile(`./medicine/ReSearch__${medicompFileName}.html`, HtmlContent, (err) => {
+    //                 if (err) {
+    //                     console.error(err);
+    //                     return;
+    //                 }
+    //                 console.log('HTML file created successfully');
+    //             });
+    //         }
     // }
 })
     // fs.appendFile('./netmedsDataAvailibility.txt', `${url},${a}\n`, (err) => { 
@@ -27077,7 +27146,7 @@ app.get('/addLinksToMednames', async (req, res) => {
         for (const medicineName of medicineNames) {
             try {
                 // Construct the URL for the API endpoint
-                const link = `https://medicomp.in/fastCompMorePharmasFasterOp?medname=${encodeURIComponent(medicineName)}`;
+                const link = `http://localhost:4000/fastCompMorePharmasFasterOp?medname=${encodeURIComponent(medicineName)}`;
                 
                 // Make the API request and wait for the response
                 const response = await axios.get(link);
@@ -27292,6 +27361,7 @@ app.get('/medname', async (req, res) => {
                 final.push({
                     name: $(elm).find('.ProductCard_medicineName__8Ydfq').text(),
                     img: (($(elm).find('.ProductCard_medicineImgDefault__Q8XbJ noscript').html()).split('src="')[1]).split('"')[0],
+                    manufacturerName:($(elm).find('.ProductCard_brandName__kmcog').text().split("By")[1]),
                 })
             });
 
@@ -27311,7 +27381,7 @@ app.get('/medname', async (req, res) => {
         }
     };
 
-    await Promise.all([extractMedNamesFromApollo(urlForAp), extractMedNamesFromPharmeasy(urlForPe)])
+    await Promise.all([extractMedNamesFromPharmeasy(urlForPe)])
 
     // final.sort();
     // console.log(final)
@@ -27394,7 +27464,7 @@ app.get('/med', async (req, res) => {
         }
     };
 
-    await Promise.all([extractMedNamesFromApollo(urlForAp), extractMedNamesFromPharmeasy(urlForPe)])
+    await Promise.all([extractMedNamesFromPharmeasy(urlForPe)])
 
     // final.sort();
     console.log(final)
@@ -28015,7 +28085,13 @@ function getDeliveryChargeForPharmeasy(totalMedPrice) {
     }
     return dc;
 }
-extractDataOfPharmEasy = async (url, nameOfMed) => {
+extractManufacNameFromPharmeasy=async(url)=>{
+    const { data } = await axios.get(url)
+    const $ = cheerio.load(data, { xmlMode: false });
+    var a = JSON.parse($('script[type=application/json]').text());
+    return a['props']['pageProps']['productDetails']['manufacturer'];
+}
+extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url)
@@ -28047,6 +28123,11 @@ extractDataOfPharmEasy = async (url, nameOfMed) => {
             imgurl = "";
         }
 
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity(a['props']['pageProps']['productDetails']['name'].toLowerCase(), nameOfMed.toLowerCase()) )+
+            parseFloat(calculateSimilarity( a['props']['pageProps']['productDetails']['manufacturer'].toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
+
         return {
             name: 'PharmEasy',
             item: a['props']['pageProps']['productDetails']['name'].substring(0, 30),
@@ -28056,7 +28137,9 @@ extractDataOfPharmEasy = async (url, nameOfMed) => {
             offer: '',
             deliveryCharge: dc ? dc : 0,
             finalCharge: parseFloat(a['props']['pageProps']['productDetails']['costPrice']) + dc,
-            similarityIndex: calculateSimilarity(a['props']['pageProps']['productDetails']['name'].toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex: simIndex,
+            smed:parseFloat(calculateSimilarity(a['props']['pageProps']['productDetails']['name'].toLowerCase(), nameOfMed.toLowerCase()) ),
+            sman:parseFloat(calculateSimilarity( a['props']['pageProps']['productDetails']['manufacturer'].toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: a['props']['pageProps']['productDetails']['manufacturer'],
             medicineAvailability:(a['props']['pageProps']['productDetails']['productAvailabilityFlags']['isAvailable']),
             minQty: a['props']['pageProps']['productDetails']['minQuantity'],
@@ -28150,7 +28233,7 @@ getOffersOfNetmeds = async () => {
     }
     return offers;
 }
-extractDataOfNetMeds = async (url, nameOfMed) => {
+extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url);
@@ -28169,6 +28252,11 @@ extractDataOfNetMeds = async (url, nameOfMed) => {
             dc = 0;
         }
 
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity($('.product-detail .prodName h1').first().text().toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity($('span[class=drug-manu] > a').first().text().toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
+
 
         return {
             name: 'NetMeds',
@@ -28179,7 +28267,9 @@ extractDataOfNetMeds = async (url, nameOfMed) => {
             offer: '',
             deliveryCharge: dc,
             finalCharge: parseFloat($('#last_price').attr('value')) + parseFloat(dc),
-            similarityIndex: calculateSimilarity($('.product-detail .prodName h1').first().text().toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex: simIndex,
+            smed: parseFloat(calculateSimilarity($('.product-detail .prodName h1').first().text().toLowerCase(), nameOfMed.toLowerCase())),
+            sman: parseFloat( calculateSimilarity($('span[class=drug-manu] > a').first().text().toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: $('span[class=drug-manu] > a').first().text(),
             medicineAvailability:$('.os-txt').text() == "" ? true:false,
             minQty:parseInt(($('.min_qty_alert').first().text().split(':')[1])?($('.min_qty_alert').first().text().split(':')[1]):1),
@@ -28445,7 +28535,7 @@ function getDeliveryChargeForTrueMeds(totalMedPrice) {
     return dc;
 }
 //newely added TRUEMEDS
-extractDataOfTruemeds = async (url, nameOfMed) => {
+extractDataOfTruemeds = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url)
@@ -28464,6 +28554,10 @@ extractDataOfTruemeds = async (url, nameOfMed) => {
             dc = 0;
         }
 
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity($('.medName').first().text().toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity( $('#manufacturer').first().text().toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
 
         return {
             name: 'TrueMeds',
@@ -28474,7 +28568,9 @@ extractDataOfTruemeds = async (url, nameOfMed) => {
             offer: '',
             deliveryCharge: dc,
             finalCharge: parseInt($('.medSelling').first().text().split('₹')[1]) + parseFloat(dc),
-            similarityIndex: calculateSimilarity($('.medName').first().text().toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex:simIndex,
+            smed:  parseFloat(calculateSimilarity($('.medName').first().text().toLowerCase(), nameOfMed.toLowerCase())),
+            sman:parseFloat( calculateSimilarity( $('#manufacturer').first().text().toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: $('#manufacturer').first().text(),
             medicineAvailability:$('#pdActionCta').text() == "Add To Cart" ? true:false,
             minQty:1,
@@ -28767,7 +28863,7 @@ getNameOfPulsePlus = async (url) => {
     return temp;
 }
 
-extractDataOfmedplusMart = async (url, nameOfMed) => {
+extractDataOfmedplusMart = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url)
@@ -28791,6 +28887,11 @@ extractDataOfmedplusMart = async (url, nameOfMed) => {
         } else if (t >= 1000) {
             dc = 15;
         }
+        
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity($('#divProductTitle>h1').text().toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity($('#divProductTitle>div').text().toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
 
         return {
             name: 'PulsePlus',
@@ -28803,7 +28904,9 @@ extractDataOfmedplusMart = async (url, nameOfMed) => {
             offer: '',
             deliveryCharge: dc,
             finalCharge: parseFloat(t) + parseFloat(dc),
-            similarityIndex: calculateSimilarity($('#divProductTitle>h1').text().toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex: simIndex,
+            smed: parseFloat(calculateSimilarity($('#divProductTitle>h1').text().toLowerCase(), nameOfMed.toLowerCase())) ,
+            sman:parseFloat( calculateSimilarity($('#divProductTitle>div').text().toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: $('#divProductTitle>div').text(),
             medicineAvailability:$('.text-primary2').text() =="In Stock" ? true:false,
             minQty:1,
@@ -28838,7 +28941,7 @@ getOffersOfMyUpChar = async () => {
     });
     return offers;
 }
-extractDataOfMyUpChar = async (url, nameOfMed) => {
+extractDataOfMyUpChar = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url)
@@ -28847,6 +28950,9 @@ extractDataOfMyUpChar = async (url, nameOfMed) => {
         const $ = cheerio.load(data);
 
         // const offers = await getOffersOfMyUpChar();
+
+        var dd=JSON.parse($('script[type=application/ld+json]').first().html());
+
 
         // console.log($.html());
         var a = $('.head h1').first().text();
@@ -28876,6 +28982,10 @@ extractDataOfMyUpChar = async (url, nameOfMed) => {
             dc = 0;
         }
 
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity(a.toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity(dd[0]['manufacturer']['name'].toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
 
         return {
             name: 'myupchar',
@@ -28886,8 +28996,10 @@ extractDataOfMyUpChar = async (url, nameOfMed) => {
             offer: '',
             deliveryCharge: dc,
             finalCharge: parseFloat(b) + parseFloat(dc),
-            similarityIndex: calculateSimilarity(a.toLowerCase(), nameOfMed.toLowerCase()),
-            manufacturerName: "NA",
+            similarityIndex: simIndex,
+            smed: parseFloat(calculateSimilarity(a.toLowerCase(), nameOfMed.toLowerCase())),
+            sman: parseFloat( calculateSimilarity(dd[0]['manufacturer']['name'].toLowerCase(), manufacturer.toLowerCase())),
+            manufacturerName: dd[0]['manufacturer']['name'],
             medicineAvailability:true,
             minQty:1,
 
@@ -28914,7 +29026,7 @@ function getDeliveryChargeForTabletShablet(totalMedPrice) {
     }
     return dc;
 }
-extractDataOfOBP = async (url, nameOfMed) => {
+extractDataOfOBP = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url)
@@ -28966,6 +29078,12 @@ extractDataOfOBP = async (url, nameOfMed) => {
             dc = 0;
         }
 
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity($('.entry-title').text().toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity($('.woocommerce-product-attributes-item__value > p').first().text().toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
+
+
         return {
             name: 'Tablet Shablet',
             item: $('.entry-title').text().substring(0, 30),
@@ -28975,7 +29093,9 @@ extractDataOfOBP = async (url, nameOfMed) => {
             offer: '',
             deliveryCharge: dc,
             finalCharge: parseFloat(p) + parseFloat(dc),
-            similarityIndex: calculateSimilarity($('.entry-title').text().toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex: simIndex,
+            smed:parseFloat(calculateSimilarity($('.entry-title').text().toLowerCase(), nameOfMed.toLowerCase())) ,
+            sman: parseFloat( calculateSimilarity($('.woocommerce-product-attributes-item__value > p').first().text().toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: $('.woocommerce-product-attributes-item__value > p').first().text(),
             medicineAvailability:true,
             minQty:1,
@@ -28990,7 +29110,7 @@ extractDataOfOBP = async (url, nameOfMed) => {
     }
 };
 
-extractDataOfPP = async (url, nameOfMed) => {
+extractDataOfPP = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url)
@@ -29013,6 +29133,11 @@ extractDataOfPP = async (url, nameOfMed) => {
         }
         // console.log($.html());
 
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity(dataOfPP.name.toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity($('#divProductTitle > label[class=text-muted]').text().toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
+
         return {
             name: 'Pasumai Pharmacy',
             item: dataOfPP.name.substring(0, 30),
@@ -29022,7 +29147,9 @@ extractDataOfPP = async (url, nameOfMed) => {
             offer: '',
             deliveryCharge: dc,
             finalCharge: parseFloat(dataOfPP.offers.price) + parseFloat(dc),
-            similarityIndex: calculateSimilarity(dataOfPP.name.toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex: simIndex,
+            smed: parseFloat(calculateSimilarity(dataOfPP.name.toLowerCase(), nameOfMed.toLowerCase())),
+            sman:parseFloat( calculateSimilarity($('#divProductTitle > label[class=text-muted]').text().toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: $('#divProductTitle > label[class=text-muted]').text(),
             medicineAvailability:dataOfPP.offers.availability=='http://schema.org/InStock'?true:false,
             minQty:1,
@@ -29093,7 +29220,7 @@ function getDeliveryChargeForOgMedPlusMart(totalMedPrice) {
 
 //added new 
 
-extractDataOfOgMPM = async (url, nameOfMed) => {
+extractDataOfOgMPM = async (url, nameOfMed,manufacturer) => {
     try {
         // Fetching HTML
         const { data } = await axios.get(url)
@@ -29108,6 +29235,11 @@ extractDataOfOgMPM = async (url, nameOfMed) => {
         } else if (parseInt(a.offers.mrp ? a.offers.mrp : 0) >= 350) {
             dc = 20;
         }
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity(a.name.toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity(a.brand.name.toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
+
         return {
             name: 'MedplusMart',
             item: a.name,
@@ -29117,7 +29249,9 @@ extractDataOfOgMPM = async (url, nameOfMed) => {
             deliveryCharge: dc,
             offer: '',
             finalCharge: parseInt(a.offers.mrp ? a.offers.mrp : 0),
-            similarityIndex: calculateSimilarity(a.name.toLowerCase(), nameOfMed.toLowerCase()),
+            similarityIndex: simIndex,
+            smed:parseFloat(calculateSimilarity(a.name.toLowerCase(), nameOfMed.toLowerCase())) ,
+            sman: parseFloat( calculateSimilarity(a.brand.name.toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: a.brand.name,
             medicineAvailability:true,
             minQty:1,
@@ -30690,14 +30824,14 @@ app.post('/multiSearch', async (req, res) => {
         for (mednames in req.body.multiItems) {
 
             var medicineN=req.body.multiItems[mednames].replace(/[^a-zA-Z0-9 %+|]/g, '')
-            linkdata.push(`https://medicomp.in/fastComp?medname=${medicineN}`)
+            linkdata.push(`http://localhost:4000/fastComp?medname=${medicineN}`)
             mnames.push(medicineN)
         }
     } else {
         console.log(typeof (req.body.multiItems))
         var nameOfMed = req.body.multiItems.trim().replace(/[^a-zA-Z0-9 %+|]/g, '');
         console.log(nameOfMed);
-        linkdata.push(`https://medicomp.in/fastComp?medname=${nameOfMed}`);
+        linkdata.push(`http://localhost:4000/fastComp?medname=${nameOfMed}`);
         mnames.push(nameOfMed)
     }
 
@@ -30718,7 +30852,7 @@ app.post('/multiSearch', async (req, res) => {
 
     var finalMultiPriceData = [];
     for (var i = 0; i < responses.length; i++) {
-        finalMultiPriceData.push(`https://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}&medname=${mnames[i]}`);
+        finalMultiPriceData.push(`http://localhost:4000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}&medname=${mnames[i]}`);
     }
 
     // console.log(finalMultiPriceData)
@@ -30765,6 +30899,75 @@ app.post('/multiSearch', async (req, res) => {
 });
 
 
+app.post('/compareViaBlog', async (req, res) => {
+    // Insert Login Code Here
+
+
+    var nameOfMed=req.body.medname;
+    var item=req.body.urls.split(',');
+    console.log(item)
+    const final=[];
+
+    const start1 = performance.now();
+    // const LinkDataResponses = await axiosParallel(item);
+
+    const responses = await Promise.all([extractDataOfNetMeds(item[0], nameOfMed), extractDataOfPharmEasy(item[1], nameOfMed),
+    extractDataOfOBP(item[2], nameOfMed),
+    extractDataOfmedplusMart(item[3], nameOfMed), extractDataOfMyUpChar(item[4], nameOfMed),
+    extractDataOfPP(item[5], nameOfMed), extractDataOfOgMPM(item[6], nameOfMed),
+    //   extractSubsfApollo(item[8],final),
+    extractDataOfTruemeds(item[7], nameOfMed),
+    ]);
+
+    const end1 = performance.now() - start1;
+    console.log(`Execution time for pharmas: ${end1}ms`);
+    // const responses = await Promise.all(FinalDataFunc);
+
+    console.log(responses)
+    for (var i = 0; i < 8; i++) {
+        if (responses[i].name != "NA" && responses[i].price) {
+            final.push(responses[i]);
+        }
+    }
+
+    // final.push(responses[0])
+    // final.push(responses[1])
+    // final.push(responses[2])
+    // final.push(responses[3])
+    // final.push(responses[4])
+    // final.push(responses[5])
+    // final.push(responses[6])
+    // final.push(responses[7])
+    // final.push(responses[8])
+    // final.push(responses[9])
+
+
+    // final.sort((a, b) => a.finalCharge - b.finalCharge); // b - a for reverse sort
+    final.push(nameOfMed)
+    console.log(final)
+
+    console.log('Found Everything Sir!..')
+        try {
+
+        console.log(final[0].finalCharge)
+        console.log(final.length)
+        if(final[0].finalCharge>0 && final.length>2){
+            res.render(__dirname + '/resultsv4.ejs', { final });
+        }else{
+            res.sendFile(__dirname + '/noResultsFound.html');
+        }
+        
+    } catch (error) {
+        console.error(error);
+        res.sendFile(__dirname + '/noResultsFound.html');
+    }
+    //   res.render(__dirname + '/temptour.ejs', { final: final });
+
+
+
+});
+
+
 app.get('/compare', async (req, res) => {
     // Insert Login Code Here
 
@@ -30774,7 +30977,7 @@ app.get('/compare', async (req, res) => {
 
 
     const nameOfMed = req.query['medname'] + '\n';
-    console.log(req.query['medname']);
+    
     const presReq = ["No"];
 
     // const nameOfMed = req.body.foodItem + '\n';
@@ -30963,10 +31166,13 @@ app.get('/compare', async (req, res) => {
     };
 
     const start = performance.now();
-    const item = await Promise.all([extractLinkFromyahoo(urlForTorus), extractLinkFromyahoo(urlForNetMeds), extractLinkFromyahoo(urlForPharmEasy), extractLinkFromyahoo(urlForOBP),
-    extractLinkFromyahoo(urlForPulsePlus), extractLinkFromyahoo(urlForMyUpChar), extractLinkFromyahoo(urlForHealthmug),
-    extractLinkFromyahoo(urlForPP), extractLinkFromyahoo(urlForApollo), extractLinkFromyahoo(urlForFH), extractLinkFromyahoo(urlForTruemeds),
-    extractLinkFromyahoo(urlForMedPlusMart), extractLinkFromyahoo(urlForTata)])
+    const item = await Promise.all([ extractLinkFromyahoo(urlForNetMeds), extractLinkFromyahoo(urlForPharmEasy), extractLinkFromyahoo(urlForOBP),
+    extractLinkFromyahoo(urlForPulsePlus), extractLinkFromyahoo(urlForMyUpChar),
+    extractLinkFromyahoo(urlForPP), extractLinkFromyahoo(urlForTruemeds),
+    extractLinkFromyahoo(urlForMedPlusMart)])
+
+    const manufacturerN=await extractManufacNameFromPharmeasy(item[1]);
+    console.log(manufacturerN)
 
     const end = performance.now() - start;
     console.log(`Execution time for yahoo: ${end}ms`);
@@ -30974,12 +31180,12 @@ app.get('/compare', async (req, res) => {
     const start1 = performance.now();
     // const LinkDataResponses = await axiosParallel(item);
 
-    const responses = await Promise.all([extractDataOfTorus(item[0], nameOfMed), extractDataOfNetMeds(item[1], nameOfMed), extractDataOfPharmEasy(item[2], nameOfMed),
-    extractDataOfOBP(item[3], nameOfMed),
-    extractDataOfmedplusMart(item[4], nameOfMed), extractDataOfMyUpChar(item[5], nameOfMed),
-    extractDataOfPP(item[7], nameOfMed),
+    const responses = await Promise.all([extractDataOfNetMeds(item[0], nameOfMed,manufacturerN), extractDataOfPharmEasy(item[1], nameOfMed,manufacturerN),
+    extractDataOfOBP(item[2], nameOfMed,manufacturerN),
+    extractDataOfmedplusMart(item[3], nameOfMed,manufacturerN), extractDataOfMyUpChar(item[4], nameOfMed,manufacturerN),
+    extractDataOfPP(item[5], nameOfMed,manufacturerN),
     //   extractSubsfApollo(item[8],final),
-    extractDataOfTruemeds(item[10], nameOfMed), extractDataOfOgMPM(item[11], nameOfMed), extractDataOfTata(item[12], nameOfMed),
+    extractDataOfTruemeds(item[6], nameOfMed,manufacturerN), extractDataOfOgMPM(item[7], nameOfMed,manufacturerN),
     ]);
 
     const end1 = performance.now() - start1;
@@ -30987,7 +31193,7 @@ app.get('/compare', async (req, res) => {
     // const responses = await Promise.all(FinalDataFunc);
 
     console.log(responses)
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 8; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
         }
