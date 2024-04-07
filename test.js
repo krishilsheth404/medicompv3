@@ -27013,7 +27013,7 @@ app.get('/ScrapeDataFromApollo', async (req, res) => {
     //                   <p>
     //                     Copyright ©
     //                     <script>document.write(new Date().getFullYear());</script>202420242024 All rights reserved | <i
-    //                       class="icon-plus" aria-hidden="true"></i> <a href="http://localhost:4000" target="_blank">Medicomp India</a>
+    //                       class="icon-plus" aria-hidden="true"></i> <a href="https://medicomp.in" target="_blank">Medicomp India</a>
     //                   </p>
     //                 </div>
     //               </div>
@@ -27177,7 +27177,7 @@ app.get('/addLinksToMednames', async (req, res) => {
         for (const medicineName of medicineNames) {
             try {
                 // Construct the URL for the API endpoint
-                const link = `http://localhost:4000/fastCompMorePharmasFasterOp?medname=${encodeURIComponent(medicineName)}`;
+                const link = `https://medicomp.in/fastCompMorePharmasFasterOp?medname=${encodeURIComponent(medicineName)}`;
                 
                 // Make the API request and wait for the response
                 const response = await axios.get(link);
@@ -30871,14 +30871,14 @@ app.post('/multiSearch', async (req, res) => {
         for (mednames in req.body.multiItems) {
 
             var medicineN=req.body.multiItems[mednames].replace(/[^a-zA-Z0-9 %+|]/g, '')
-            linkdata.push(`http://localhost:4000/fastComp?medname=${medicineN}`)
+            linkdata.push(`https://medicomp.in/fastComp?medname=${medicineN}`)
             mnames.push(medicineN)
         }
     } else {
         console.log(typeof (req.body.multiItems))
         var nameOfMed = req.body.multiItems.trim().replace(/[^a-zA-Z0-9 %+|]/g, '');
         console.log(nameOfMed);
-        linkdata.push(`http://localhost:4000/fastComp?medname=${nameOfMed}`);
+        linkdata.push(`https://medicomp.in/fastComp?medname=${nameOfMed}`);
         mnames.push(nameOfMed)
     }
 
@@ -30899,7 +30899,7 @@ app.post('/multiSearch', async (req, res) => {
 
     var finalMultiPriceData = [];
     for (var i = 0; i < responses.length; i++) {
-        finalMultiPriceData.push(`http://localhost:4000/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}&medname=${mnames[i]}`);
+        finalMultiPriceData.push(`https://medicomp.in/FastGetPharmaDataFromLinks?pharmalinks=${responses[i]['data']}&medname=${mnames[i]}`);
     }
 
     // console.log(finalMultiPriceData)
