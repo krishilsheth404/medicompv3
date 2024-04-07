@@ -1445,6 +1445,7 @@ body {
 	</script>
 
 	<script>
+					// document.getElementById('ftco-loader-loading').style.display = 'none';
 		function loader() {
 			console.warn('loading...')
 			document.getElementById('ftco-loader').style.opacity = 1;
@@ -1456,7 +1457,7 @@ body {
 		}
 		
 		
-		window.addEventListener("popstate", function () {
+		window.addEventListener("onload", function () {
 			loader();
 			console.log('loading over');
 			document.body.style.display = 'block';
