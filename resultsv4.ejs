@@ -4566,6 +4566,34 @@
         <% } %>
     <% } catch (error) { %>
     <% } %>
+  
+    <% try { %>
+        <% if (final[9].price) { %>
+          <span id='fc9'><%=final[8].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+
+    <% try { %>
+        <% if (final[10].price) { %>
+          <span id='fc10'><%=final[8].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+
+    <% try { %>
+        <% if (final[11].price) { %>
+          <span id='fc11'><%=final[8].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
+
+    <% try { %>
+        <% if (final[12].price) { %>
+          <span id='fc12'><%=final[8].price%></span>
+        <% } %>
+    <% } catch (error) { %>
+    <% } %>
   </div>
 
   
@@ -4790,7 +4818,7 @@
               <div class="align-ally">
                 <div class="showing-4-of-container">
                   <span id="fda">Found <%=final.length-1%> of </span>
-                  <span class="places" style="color: #529dff;">10 Pharmas</span>
+                  <span class="places" style="color: #529dff;">11 Pharmas</span>
                 </div>
 
                 <div class="spacer-strip">
@@ -5218,6 +5246,133 @@
 
 window.onload = async function() {
   await sortByPT();
+
+  var newDiv=`
+   <div class="column-collector itemForSorting" style="
+                            position: relative;
+                            width: 47%  ;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: #ceffce80;
+                            ">
+                              <div class="imgSec" style="
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              background: transparent;
+                              
+                              gap: 10px;
+                              ">
+
+                              
+                                        <img class="image-40-icon" loading="lazy" alt="" src="https://static2.medplusmart.com/products/_4e4b323_/CROC0012_S.jpg">
+
+
+                            
+                              </div>
+            
+                              <div class="frame-parent4" style="
+    background: transparent;min-width:auto;
+">
+                                <div class="shape-shaper-parent">
+                                  <div class="shape-shaper">
+                                  
+                                    <div class="very-good-54-container">
+                                      <p id="itemname" style="text-wrap:pretty">  CROCIN ADVANCE TAB</p>
+                                    </div>
+                                  </div>
+                               
+                                </div>
+                                <div class="filler-fill">
+                                  <div class="bordered-border">
+                                    <div class="align-arranger" style="justify-content: space-between;">
+                                      <div class="padding-planner">
+            
+                                        <div class="divider-designer">
+                                          <div class="grid-guide">
+                                            <div class="">Medicine Price</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="shape-shaper-x" style="text-align: right;">
+                                        <div class="h-28m" id="price_5"> 19</div>
+                                      </div>
+                                    </div>
+                                    <div class="align-arranger" style="justify-content: space-between;">
+                                      <div class="padding-planner">
+            
+                                        <div class="divider-designer">
+                                          <div class="grid-guide">
+                                            <div class="">Delivery Price</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="shape-shaper-x" style="text-align: right;">
+                                        <div class="h-28m delprices" id="delivery_5">    40</div>
+                                      </div>
+                                    </div>
+                                   
+                                    <div class="error-handler1"></div>
+                                    <div class="starting-from-parent" style="
+                                    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 15px;display: flex;">
+                                      <div class="starting-from" style="
+                                      font-size: larger;
+                                      font-weight: bold;
+                                      ">Cart Total</div>
+                                      <b> ₹<span id="finalprice_5" class="image-iris" style="font-weight: bold;color: #2c8630;">59.00</span></b>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="error-handler1"></div>
+                               <span class="pnmaes " style="font-weight: normal;text-wrap: pretty;font-size: inherit;">
+                                 Pharmacy : <span id="company_5" class="pnmaes MedplusMart" style="font-size: inherit;">  MedplusMart </span>
+                               </span> 
+                               <span class="pnmaes " style="font-weight: normal;text-wrap: pretty;font-size: inherit;">
+                                 Min Qty : <span class="pnmaes>" style="font-size: inherit;"> <b>1</b>  </span>
+                               </span> 
+                                <div class="button-group">
+                                  
+                                  
+                                    <a id="smbtn" type="submit" value="BUY" href="https://www.medplusmart.com/product/crocin-advance-tab_croc0012" style="width: 100%;color: black;text-decoration: none;">
+                                      <button class="button14 instock" style="width: 100%;background-color: transparent;">
+                                        <div class="style-layer2" style="background-color: #2c8630;color: white;">
+                                          <div class="button15" style="text-align: center;color: white;">Buy</div>
+                                        </div>
+                                      </button>
+                                    </a>
+                                    
+                                    
+                                    </div>
+                                  </div>
+                            </div>
+  `;
+
+  // document.querySelectorAll('.itemForSorting')[0].style.width='47%'
+  // document.querySelectorAll('.style-layer1')[0].style.display='none'
+
+  // document.querySelectorAll('.row-runner')[0].style=`width:100%;flex-wrap: wrap;
+  //   flex-direction: row;
+  //   align-items: center;
+  //   justify-content: space-around;`;
+
+  // document.querySelectorAll('.frame-parent4')[0].style=`min-width:auto`;
+
+  // var container = document.querySelectorAll(".column-collector");
+
+  // var targetDiv = container[0];
+
+  // Insert the new div after the target div
+  // targetDiv.insertAdjacentHTML('afterend', newDiv);
+
+ 
+  
   var finalPriceElements = document.querySelectorAll('.image-iris');
 
 // Initialize variables to store the highest price and its index
