@@ -15,7 +15,7 @@ const cookieParser = require('cookie-parser');
 const { MongoClient } = require('mongodb');
 
 const stringSimilarity = require('string-similarity');
-const customerRoute = require("./routes/customer.route.js");
+// const customerRoute = require("./routes/customer.route.js");
 
 
 // const connection = mysql.createConnection({
@@ -34,7 +34,7 @@ const ejs = require("ejs");
 
 
 
-app.use("/customer", customerRoute);
+// app.use("/customer", customerRoute);
 
 mongoose
 .connect(
