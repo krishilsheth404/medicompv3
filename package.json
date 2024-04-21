@@ -27,6 +27,7 @@
     "ejs": "^3.1.8",
     "es": "^0.8.0",
     "express": "^4.18.2",
+    "express-session": "^1.18.0",
     "fs": "^0.0.1-security",
     "fuzzywuzzy": "^0.1.0",
     "googleapis": "^95.0.0",
