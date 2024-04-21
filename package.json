@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krishilsheth404/medicomp3"
+    "url": "git+https://github.com/krishilsheth404/medicompv3"
   },
   "author": "",
   "license": "ISC",
@@ -22,18 +22,23 @@
     "axios-parallel": "^1.1.2",
     "body-parser": "^1.20.1",
     "cheerio": "^1.0.0-rc.10",
+    "cookie-session": "^2.1.0",
     "domutils": "^2.8.0",
     "ejs": "^3.1.8",
     "es": "^0.8.0",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
+    "fuzzywuzzy": "^0.1.0",
     "googleapis": "^95.0.0",
     "hammer": "^0.0.5",
     "kuzzle-sdk": "^7.10.5",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.1",
     "mysql": "^2.18.1",
     "path": "^0.12.7",
     "puppeteer": "^13.7.0",
     "request": "^2.88.2",
+    "serve-static": "^1.15.0",
     "sql": "^0.78.0",
     "string-similarity": "^4.0.4",
     "twilio": "^3.72.0"
