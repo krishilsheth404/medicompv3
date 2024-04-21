@@ -60,17 +60,17 @@ app.set('view engine', 'ejs');
 
 
 //session middleware
-app.use(sessions({
-secret: "thisismysecrctekey",
-saveUninitialized:true,
-cookie: {
-    secure: false,           // Set to true if you're using HTTPS
-    maxAge: 30 * 24 * 60 * 60 * 1000  // Set maxAge to 30 days (in milliseconds)
-},
-resave: false
-}));
+// app.use(sessions({
+// secret: "thisismysecrctekey",
+// saveUninitialized:true,
+// cookie: {
+//     secure: false,           // Set to true if you're using HTTPS
+//     maxAge: 30 * 24 * 60 * 60 * 1000  // Set maxAge to 30 days (in milliseconds)
+// },
+// resave: false
+// }));
 
-app.use(cookieParser());
+// app.use(cookieParser());
 
 
 // app.set('views', './');
