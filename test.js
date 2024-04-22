@@ -38,20 +38,20 @@ const ejs = require("ejs");
 
 
 
-// mongoose
-// .connect(
-//   "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority&appName=medicompUser"
-// )
-// .then(() => {
-//   console.log("Connected to DB");
-//   app.listen(3001, () => {
-//     console.log("Server running on port 3001");
-//   });
-// })
-// .catch((e) => {
-//   console.log(e);
-//   console.log("Could not connect to MongoDB");
-// });
+mongoose
+.connect(
+  "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority&appName=medicompUser"
+)
+.then(() => {
+  console.log("Connected to DB");
+  app.listen(3001, () => {
+    console.log("Server running on port 3001");
+  });
+})
+.catch((e) => {
+  console.log(e);
+  console.log("Could not connect to MongoDB");
+});
 
 app.use(express.static(__dirname));
   
@@ -59,18 +59,18 @@ app.set('view engine', 'ejs');
 
 
 
-//session middleware
-// app.use(sessions({
-// secret: "thisismysecrctekey",
-// saveUninitialized:true,
-// cookie: {
-//     secure: false,           // Set to true if you're using HTTPS
-//     maxAge: 30 * 24 * 60 * 60 * 1000  // Set maxAge to 30 days (in milliseconds)
-// },
-// resave: false
-// }));
+// session middleware
+app.use(sessions({
+secret: "thisismysecrctekey",
+saveUninitialized:true,
+cookie: {
+    secure: false,           // Set to true if you're using HTTPS
+    maxAge: 30 * 24 * 60 * 60 * 1000  // Set maxAge to 30 days (in milliseconds)
+},
+resave: false
+}));
 
-// app.use(cookieParser());
+app.use(cookieParser());
 
 
 // app.set('views', './');
@@ -31040,19 +31040,19 @@ app.get('/searchPharmacies', async (req, res) => {
     nameOfMed = nameOfMed.trim().replace(/[%,+]/g, '');
     console.log(nameOfMed);
     
-    // try {
-    //     const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
-    //     var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    //     const database = client.db('MedicompDb');
-    //     const collection = database.collection('searchPharmas');
+    try {
+        const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
+        var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const database = client.db('MedicompDb');
+        const collection = database.collection('searchPharmas');
 
-    //     // Insert a single document
-    //     const result = await collection.insertOne({ medicine: nameOfMed });
+        // Insert a single document
+        const result = await collection.insertOne({ medicine: nameOfMed });
 
-    //     console.log(`Inserted ${nameOfMed} document`);
-    // } catch (err) {
-    //     console.error('Error inserting medicine', err);
-    // }
+        console.log(`Inserted ${nameOfMed} document`);
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    }
 
     var tempf = [];
     var t = [0, 0, 0, 0, 0, 0, 0,0,0,0,0,0];
@@ -32152,19 +32152,19 @@ app.post('/medicomp', async (req, res) => {
     console.log(item)
     const final=[];
 
-    // try {
-    //     const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
-    //     var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    //     const database = client.db('MedicompDb');
-    //     const collection = database.collection('finalResultPageMedicomp');
+    try {
+        const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
+        var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const database = client.db('MedicompDb');
+        const collection = database.collection('finalResultPageMedicomp');
 
-    //     // Insert a single document
-    //     const result = await collection.insertOne({ medicine: nameOfMed });
+        // Insert a single document
+        const result = await collection.insertOne({ medicine: nameOfMed });
 
-    //     console.log(`Inserted ${nameOfMed} document`);
-    // } catch (err) {
-    //     console.error('Error inserting medicine', err);
-    // }
+        console.log(`Inserted ${nameOfMed} document`);
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    }
 
     
 
