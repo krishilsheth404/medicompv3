@@ -38,20 +38,20 @@ const ejs = require("ejs");
 
 
 
-mongoose
-.connect(
-  "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority&appName=medicompUser"
-)
-.then(() => {
-  console.log("Connected to DB");
-  app.listen(3001, () => {
-    console.log("Server running on port 3001");
-  });
-})
-.catch((e) => {
-  console.log(e);
-  console.log("Could not connect to MongoDB");
-});
+// mongoose
+// .connect(
+//   "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority&appName=medicompUser"
+// )
+// .then(() => {
+//   console.log("Connected to DB");
+//   app.listen(3001, () => {
+//     console.log("Server running on port 3001");
+//   });
+// })
+// .catch((e) => {
+//   console.log(e);
+//   console.log("Could not connect to MongoDB");
+// });
 
 app.use(express.static(__dirname));
   
@@ -60,15 +60,15 @@ app.set('view engine', 'ejs');
 
 
 // session middleware
-app.use(sessions({
-secret: "thisismysecrctekey",
-saveUninitialized:true,
-cookie: {
-    secure: false,           // Set to true if you're using HTTPS
-    maxAge: 30 * 24 * 60 * 60 * 1000  // Set maxAge to 30 days (in milliseconds)
-},
-resave: false
-}));
+// app.use(sessions({
+// secret: "thisismysecrctekey",
+// saveUninitialized:true,
+// cookie: {
+//     secure: false,           // Set to true if you're using HTTPS
+//     maxAge: 30 * 24 * 60 * 60 * 1000  // Set maxAge to 30 days (in milliseconds)
+// },
+// resave: false
+// }));
 
 app.use(cookieParser());
 
@@ -31047,7 +31047,7 @@ app.get('/searchPharmacies', async (req, res) => {
         const collection = database.collection('searchPharmas');
 
         // Insert a single document
-        const result = await collection.insertOne({ medicine: nameOfMed });
+        const result = await collection.insertOne({ medicine: nameOfMed ,DateOfSearch:await getCurrentDate()});
 
         console.log(`Inserted ${nameOfMed} document`);
     } catch (err) {
@@ -31055,7 +31055,7 @@ app.get('/searchPharmacies', async (req, res) => {
     }
 
     var tempf = [];
-    var t = [0, 0, 0, 0, 0, 0, 0,0,0,0,0,0];
+    var t = [0, 0, 0, 0, 0, 0, 0,0,0,0,0];
     const presReq = ["No"];
 
 
@@ -31079,9 +31079,8 @@ app.get('/searchPharmacies', async (req, res) => {
 
         'netmeds.com', 'pharmeasy.in','pasumaipharmacy.com', 
         'pulseplus.in','tabletshablet.com', 'medplusmart.com',
-        'truemeds.in', 
-        'kauverymeds.com', 'indimedo.com', 'secondmedic.com',
-        'chemistbox.in','chemistsworld.com',
+        'truemeds.in', 'kauverymeds.com', 'indimedo.com', 
+        'secondmedic.com','chemistbox.in',
         //  'myupchar.com',
         // '1mg.com', 
         // 'onebharatpharmacy.com',
@@ -31095,7 +31094,7 @@ app.get('/searchPharmacies', async (req, res) => {
    
     var tries = 0;
     var cpyOftempf;
-    while (cont != 12) {
+    while (cont != 11) {
 
 
         tries++;
@@ -31155,8 +31154,6 @@ app.get('/searchPharmacies', async (req, res) => {
             t[9] = tempf[k];
         }else if (tempf[k].includes("chemistbox")) {
             t[10] = tempf[k];
-        } else if (tempf[k].includes("chemistsworld")) {
-            t[11] = tempf[k];
         } 
     }
 
@@ -32134,8 +32131,41 @@ app.get('/compare', async (req, res) => {
 
 });
 
+function getCurrentDate() {
+    const today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; // January is 0!
+    const yyyy = today.getFullYear();
 
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
 
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    return dd + '/' + mm + '/' + yyyy;
+}
+
+app.post('/redirectFromMedicomp', async (req, res) => {
+  console.log(req.body.MedicineName)
+  
+  try {
+        const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
+        var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const database = client.db('MedicompDb');
+        const collection = database.collection('RedirectsFromMedicomp');
+
+        // Insert a single document
+        const result = await collection.insertOne({ PharmacyName: req.body.pharmaName,MedicineName:req.body.MedicineName,DateOfRedirect : getCurrentDate() });
+
+        console.log(`Inserted ${req.body.pharmaName} document`);
+        res.redirect(req.body.pharmaLink)
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    }
+});
 
 app.post('/medicomp', async (req, res) => {
     // Insert Login Code Here
@@ -32159,7 +32189,7 @@ app.post('/medicomp', async (req, res) => {
         const collection = database.collection('finalResultPageMedicomp');
 
         // Insert a single document
-        const result = await collection.insertOne({ medicine: nameOfMed });
+        const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
 
         console.log(`Inserted ${nameOfMed} document`);
     } catch (err) {
@@ -32184,7 +32214,6 @@ app.post('/medicomp', async (req, res) => {
    
     extractDataOfKauveryMeds(item[7], nameOfMed,manufacturerN),extractDataOfIndiMedo(item[8], nameOfMed,manufacturerN),
     extractDataOfSecondMedic(item[9], nameOfMed,manufacturerN),extractDataOfChemistBox(item[10], nameOfMed,manufacturerN),
-    extractDataOfChemistsWorld(item[11], nameOfMed,manufacturerN),
     // extractDataOfMyUpChar(item[4], nameOfMed,manufacturerN),
     //   extractSubsfApollo(item[8],final),
     ]);
@@ -32194,7 +32223,7 @@ app.post('/medicomp', async (req, res) => {
     // const responses = await Promise.all(FinalDataFunc);
 
     console.log(responses)
-    for (var i = 0; i <12; i++) {
+    for (var i = 0; i <11; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
         }

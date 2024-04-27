@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <script src="https://cdn.jsdelivr.net/npm/mongodb@4.0.3"></script>
 
     <style>
       body {
@@ -4974,13 +4975,15 @@
                                 <div class="button-group">
                                   
                                   <%if(final[i].medicineAvailability){%>
-                                    <a id="smbtn" type="submit" value="BUY" href="<%=final[i].link%>" style="width: 100%;color: black;text-decoration: none;">
-                                      <button class="button14 instock" style="width: 100%;background-color: transparent;">
+                                   
+
+                                      <button class="button14 instock" style="width: 100%;background-color: transparent;" link="<%=final[i].link%>">
                                         <div class="style-layer2" style="background-color: #98c4ff">
                                           <div class="button15" style="text-align: center;">Buy</div>
                                         </div>
                                       </button>
-                                    </a>
+
+
                                     <div class="style-layer1" style="border: 1px solid #98c4ff;">
                                       <select name="qty" id="qty_<%=i%>" style="    font-size: 19px;
                                         position: absolute;
@@ -5000,13 +5003,11 @@
                                     </select>
                                   </div>
                                     <%}else{%>
-                                      <a id="smbtn" type="submit" disable="true" value="Out Of Stock" style="width:100%;color: black;text-decoration: none;" href="<%=final[i].link%>">
-                                        <button class="button14 outofstock" style="width: 100%;background-color: #ff775e;">
+                                       <button class="button14 outofstock" style="width: 100%;background-color: #ff775e;" link="<%=final[i].link%>">
                                           <div class="style-layer2" style="background-color: #ff775e">
                                             <div class="button15">Out Of Stock</div>
                                           </div>  
                                         </button>
-                                      </a>
                                       <%}%>
                                     </div>
                                   </div>
@@ -5099,6 +5100,12 @@
           </div>
         </div>
       </footer>
+
+      <form action="/redirectFromMedicomp" method="post" id="redForm" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
+        <input type="text" name="pharmaName" id="pharmaName">
+        <input type="text" name="MedicineName" id="MedicineName" value="<%=final[final.length-1]%>">
+        <input type="text" name="pharmaLink" id="pharmaLink">
+      </form>
     
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -5340,13 +5347,11 @@ window.onload = async function() {
                                 <div class="button-group">
                                   
                                   
-                                    <a id="smbtn" type="submit" value="BUY" href="https://www.medplusmart.com/product/crocin-advance-tab_croc0012" style="width: 100%;color: black;text-decoration: none;">
-                                      <button class="button14 instock" style="width: 100%;background-color: transparent;">
+                                      <button class="button14 instock" style="width: 100%;background-color: transparent;" link="<%=final[i].link%>">
                                         <div class="style-layer2" style="background-color: #2c8630;color: white;">
                                           <div class="button15" style="text-align: center;color: white;">Buy</div>
                                         </div>
                                       </button>
-                                    </a>
                                     
                                     
                                     </div>
@@ -5354,22 +5359,22 @@ window.onload = async function() {
                             </div>
   `;
 
-  // document.querySelectorAll('.itemForSorting')[0].style.width='47%'
-  // document.querySelectorAll('.style-layer1')[0].style.display='none'
+  document.querySelectorAll('.itemForSorting')[0].style.width='47%'
+  document.querySelectorAll('.style-layer1')[0].style.display='none'
 
-  // document.querySelectorAll('.row-runner')[0].style=`width:100%;flex-wrap: wrap;
-  //   flex-direction: row;
-  //   align-items: center;
-  //   justify-content: space-around;`;
+  document.querySelectorAll('.row-runner')[0].style=`width:100%;flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;`;
 
-  // document.querySelectorAll('.frame-parent4')[0].style=`min-width:auto`;
+  document.querySelectorAll('.frame-parent4')[0].style=`min-width:auto`;
 
-  // var container = document.querySelectorAll(".column-collector");
+  var container = document.querySelectorAll(".column-collector");
 
-  // var targetDiv = container[0];
+  var targetDiv = container[0];
 
   // Insert the new div after the target div
-  // targetDiv.insertAdjacentHTML('afterend', newDiv);
+  targetDiv.insertAdjacentHTML('afterend', newDiv);
 
  
   
@@ -5756,4 +5761,37 @@ mounted() {
 
     </div>
   </body>
+  <script>
+    function getCurrentDate() {
+    const today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; // January is 0!
+    const yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    return dd + '/' + mm + '/' + yyyy;
+}
+
+
+
+   const buttons = document.querySelectorAll('.button14');
+    buttons.forEach(button => {
+        button.addEventListener('click', async function(event) {
+            const pharmacyNameElement = button.closest('.frame-parent4').querySelector('.pnmaes'); // Get the nearest parent element containing the pharmacy name
+            // const pharmacyName = pharmacyNameElement.pharmacyNameElement.getElementsByTagName('span').textContent.trim(); // Get the pharmacy name
+            var PharmaName=pharmacyNameElement.getElementsByTagName('span')[0].innerHTML;
+            // console.log(button.parentElement.getAttribute('href'))
+           document.getElementById('pharmaName').value=PharmaName;
+           document.getElementById('pharmaLink').value=button.getAttribute('link');
+           document.getElementById('redForm').submit(); 
+        });
+      });
+  </script>
 </html>
