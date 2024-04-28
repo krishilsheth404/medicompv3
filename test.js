@@ -316,8 +316,10 @@ app.get('/temp', async (req, res) => {
                 // const result = await collection.createIndex({ medicineName: 1 });
                 // console.log("Index created successfully:", result);
 
-                const regex = new RegExp("ant", 'i'); // 'i' for case-insensitive
-                const cursor = collection.find({ medicineName: { $regex: regex } }).limit(20);
+                await collection.createIndex({ medicineName: 'text', medicinePackSize: 'text', manufacturerName: 'text' });
+
+                // const regex = new RegExp("ant", 'i'); // 'i' for case-insensitive
+                // const cursor = collection.find({ medicineName: { $regex: regex } }).limit(20);
         
                 // Convert cursor to array and log the results
                 const records = await cursor.toArray();
@@ -32198,8 +32200,10 @@ app.get('/medicineName', async (req, res) => {
         // const result = await collection.createIndex({ medicineName: 1 });
         // console.log("Index created successfully:", result);
 
-        const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
-        const cursor = collection.find({ medicineName: { $regex: regex } }).project({ medicineName: 1 ,medicinePackSize:1,manufacturerName:1}).limit(10);
+        // const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
+        const cursor = collection.find({ $text: { $search: req.query['q'] } })
+        .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 })
+        .limit(10);;
         
 
         // Convert cursor to array and log the results
