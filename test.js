@@ -32198,8 +32198,9 @@ app.get('/medicineName', async (req, res) => {
         // const result = await collection.createIndex({ medicineName: 1 });
         // console.log("Index created successfully:", result);
 
-        const regex = new RegExp(`${req.query['q']}`, 'i'); // 'i' for case-insensitive
+        const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
         const cursor = collection.find({ medicineName: { $regex: regex } }).limit(10);
+        
 
         // Convert cursor to array and log the results
         const records = await cursor.toArray();
