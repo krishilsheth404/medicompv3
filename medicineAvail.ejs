@@ -1028,7 +1028,7 @@ body {
 		<%var Pharmacy_Name%>	
 		<%var Pharmacy_Ratings%>	
 
-			<%for(var k=0;k<t.length-1;k++){%>
+			<%for(var k=0;k<t.length-2;k++){%>
 
 				<%
 			if (t[k].includes("netmeds")) {
@@ -1080,6 +1080,9 @@ body {
 			} else if (t[k].includes("callhealth")) {
 				Pharmacy_Name = "Call Health";
 				Pharmacy_Ratings=2.7;
+			}else if (t[k].includes("chemistbox")) {
+				Pharmacy_Name = "Chemist Box";
+				Pharmacy_Ratings=2.2;
 			}
 			%>
 
@@ -1101,6 +1104,7 @@ body {
           </ul>
 		  <form action="/medicomp" method="post" style="height: 0px;" id="mainform">
 			<input type="text" name="medlinks" id="medlinks" value="<%=t%>" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
+			<input type="text" name="manufacturerName" id="manufacturerName" value="<%=t[t.length-2]%>" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
 		</form>
 		<button onclick="done()" class="summary_button">Compare Prices</button></section>
       </main>

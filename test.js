@@ -280,7 +280,7 @@ app.post('/logout', (req, res) => {
 
 
 
-app.post('/temp', async (req, res) => {
+app.get('/temp', async (req, res) => {
     // axios.post('http://localhost:3001/customer',req.body)
     // .then(() => {
     //     console.log("data sent")
@@ -300,33 +300,44 @@ app.post('/temp', async (req, res) => {
     const lines = data.split('\n');
 
 
-    for (const line of lines) {
-        console.log(line);
-        const td = line.split(',');
-        
-        
-        await DataFinalForMDB.push({medicineName:td[0],manufacturerName:td[1],medicinePackSize:td[2],saltComposition:td[3].split('+'),prescriptionReq:td[4]})
-    }
-    });
+    
 
         async function addData() {
             const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
             const dbName = 'MedicompDb'; // Replace with your database name
             const collectionName = 'medicineList'; // Replace with your collection name
-
-          
+            
+            
             try {
-              const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-              const db = client.db(dbName);
-              const collection = db.collection(collectionName);
-            //   await collection.insertOne(data);
-            await collection.insertMany(DataFinalForMDB);
-              console.log('Data inserted successfully');
-              client.close();
-            } catch (err) {
+                const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+                const db = client.db(dbName);
+                const collection = db.collection(collectionName);
+
+                // const result = await collection.createIndex({ medicineName: 1 });
+                // console.log("Index created successfully:", result);
+
+                const regex = new RegExp("ant", 'i'); // 'i' for case-insensitive
+                const cursor = collection.find({ medicineName: { $regex: regex } }).limit(20);
+        
+                // Convert cursor to array and log the results
+                const records = await cursor.toArray();
+                console.log("Found the following records:");
+                console.log(records);
+
+
+            //   for (const line of lines) {
+            //     console.log(line);
+            //     const td = line.split(',');
+                
+            //         // await collection.insertOne({medicineName:td[0],manufacturerName:td[1],medicinePackSize:td[2],saltComposition:td[3].split('+'),prescriptionReq:td[4],prodLink:td[5]});
+            //         await collectionName.createIndex({medicineName: `${td[0]}`})
+                // }
+
+            }catch (err) {
               console.error('Error inserting data:', err);
             }
           }
+        
 
         // const myData = { // Replace with your actual data object
         //     name: "Hello World",
@@ -334,12 +345,13 @@ app.post('/temp', async (req, res) => {
         //     city: "India"
         // };
        
-
         await addData();
+        console.log('Data inserted successfully');
+        client.close();
 
 
 })
-
+});
 
 app.get('/ScrapeDataFromApollo', async (req, res) => {
     const downloadImage = async (imageUrl, localPath) => {
@@ -28667,6 +28679,7 @@ getOffersOfNetmeds = async () => {
     return offers;
 }
 extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
+    
     try {
         // Fetching HTML
         const { data } = await axios.get(url);
@@ -31036,6 +31049,7 @@ app.get('/searchPharmacies', async (req, res) => {
     // } for delivery price change as per location
 
 
+    console.log(req.query)
     var nameOfMed = req.query['medname'] + '\n';
     nameOfMed = nameOfMed.trim().replace(/[%,+]/g, '');
     console.log(nameOfMed);
@@ -31157,6 +31171,7 @@ app.get('/searchPharmacies', async (req, res) => {
         } 
     }
 
+    t.push(req.query['manufacturerName']);
     t.push(nameOfMed)
     console.log(t);
 
@@ -32167,6 +32182,47 @@ app.post('/redirectFromMedicomp', async (req, res) => {
     }
 });
 
+app.get('/medicineName', async (req, res) => {
+    console.log((req.query['q']))
+    
+    const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
+    const dbName = 'MedicompDb'; // Replace with your database name
+    const collectionName = 'medicineList'; // Replace with your collection name
+    
+    
+    try {
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+
+        // const result = await collection.createIndex({ medicineName: 1 });
+        // console.log("Index created successfully:", result);
+
+        const regex = new RegExp(`${req.query['q']}`, 'i'); // 'i' for case-insensitive
+        const cursor = collection.find({ medicineName: { $regex: regex } }).limit(20);
+
+        // Convert cursor to array and log the results
+        const records = await cursor.toArray();
+        if(records){
+            console.log("Found the following records:");
+            // console.log(records);
+        }else{
+            records.push({medicineName:"Product Not Found"})
+        }
+
+        res.send(records)
+    
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    }
+    
+    
+      
+
+
+  });
+
+
 app.post('/medicomp', async (req, res) => {
     // Insert Login Code Here
 
@@ -32177,6 +32233,7 @@ app.post('/medicomp', async (req, res) => {
 
     var item = req.body.medlinks;
     console.log(item)
+    console.log(req.body.manufacturerName)
     item=item.split(',');
     const nameOfMed=item[item.length-1]
     console.log(item)
@@ -32187,6 +32244,7 @@ app.post('/medicomp', async (req, res) => {
         var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         const database = client.db('MedicompDb');
         const collection = database.collection('finalResultPageMedicomp');
+
 
         // Insert a single document
         const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
@@ -32199,8 +32257,7 @@ app.post('/medicomp', async (req, res) => {
     
 
 
-    const manufacturerN=await extractManufacNameFromPharmeasy(item[1]);
-    console.log(manufacturerN)
+    const manufacturerN=req.body.manufacturerName;
 
 
     const start1 = performance.now();
@@ -32222,7 +32279,7 @@ app.post('/medicomp', async (req, res) => {
     console.log(`Execution time for pharmas: ${end1}ms`);
     // const responses = await Promise.all(FinalDataFunc);
 
-    console.log(responses)
+    // console.log(responses)
     for (var i = 0; i <11; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
