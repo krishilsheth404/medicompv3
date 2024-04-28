@@ -32199,7 +32199,7 @@ app.get('/medicineName', async (req, res) => {
         // console.log("Index created successfully:", result);
 
         const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
-        const cursor = collection.find({ medicineName: { $regex: regex } }).project({ medicineName: 1 ,medicinePackSize:1}).limit(10);
+        const cursor = collection.find({ medicineName: { $regex: regex } }).project({ medicineName: 1 ,medicinePackSize:1,manufacturerName:1}).limit(10);
         
 
         // Convert cursor to array and log the results
@@ -32211,6 +32211,7 @@ app.get('/medicineName', async (req, res) => {
             records.push({medicineName:"Product Not Found"})
         }
 
+        console.log(records)
         res.send(records)
     
     } catch (err) {
@@ -32271,7 +32272,9 @@ app.post('/medicomp', async (req, res) => {
     extractDataOfOgMPM(item[5], nameOfMed,manufacturerN),extractDataOfTruemeds(item[6], nameOfMed,manufacturerN),
    
     extractDataOfKauveryMeds(item[7], nameOfMed,manufacturerN),extractDataOfIndiMedo(item[8], nameOfMed,manufacturerN),
-    extractDataOfSecondMedic(item[9], nameOfMed,manufacturerN),extractDataOfChemistBox(item[10], nameOfMed,manufacturerN),
+    extractDataOfSecondMedic(item[9], nameOfMed,manufacturerN),
+    // extractDataOfChemistBox(item[10], nameOfMed,manufacturerN),
+    
     // extractDataOfMyUpChar(item[4], nameOfMed,manufacturerN),
     //   extractSubsfApollo(item[8],final),
     ]);
@@ -32281,7 +32284,7 @@ app.post('/medicomp', async (req, res) => {
     // const responses = await Promise.all(FinalDataFunc);
 
     // console.log(responses)
-    for (var i = 0; i <11; i++) {
+    for (var i = 0; i <10; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
         }
