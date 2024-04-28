@@ -31027,6 +31027,22 @@ app.get('/searchPharm', async (req, res) => {
 
 });
 
+app.get('/storeSearchedMedicineData', async (req, res) => {
+    try {
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+        const database = client.db('MedicompDb');
+        const collection = database.collection('searchPharmas');
+
+        // Insert a single document
+        const result = await collection.insertOne({ medicine: req.query['medicineName'] ,DateOfSearch:await getCurrentDate()});
+
+        console.log(`Inserted ${req.query['medicineName']} document`);
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    }
+  });
+
 app.get('/searchPharmacies', async (req, res) => {
     // Insert Login Code Here
 
@@ -31058,19 +31074,19 @@ app.get('/searchPharmacies', async (req, res) => {
     nameOfMed = nameOfMed.trim().replace(/[%,+]/g, '');
     console.log(nameOfMed);
     
-    try {
-        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    // try {
+    //     const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-        const database = client.db('MedicompDb');
-        const collection = database.collection('searchPharmas');
+    //     const database = client.db('MedicompDb');
+    //     const collection = database.collection('searchPharmas');
 
-        // Insert a single document
-        const result = await collection.insertOne({ medicine: nameOfMed ,DateOfSearch:await getCurrentDate()});
+    //     // Insert a single document
+    //     const result = await collection.insertOne({ medicine: nameOfMed ,DateOfSearch:await getCurrentDate()});
 
-        console.log(`Inserted ${nameOfMed} document`);
-    } catch (err) {
-        console.error('Error inserting medicine', err);
-    }
+    //     console.log(`Inserted ${nameOfMed} document`);
+    // } catch (err) {
+    //     console.error('Error inserting medicine', err);
+    // }
 
     var tempf = [];
     var t = [0, 0, 0, 0, 0, 0, 0,0,0,0,0];
@@ -32185,6 +32201,26 @@ app.post('/redirectFromMedicomp', async (req, res) => {
     }
 });
 
+
+app.get('/storeComparisonData', async (req, res) => {
+  console.log(req.query['medicineName'])
+    try {
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+        const database = client.db('MedicompDb');
+        const collection = database.collection('finalResultPageMedicomp');
+
+
+        // Insert a single document
+        const result = await collection.insertOne({ medicine: req.query['medicineName'] , DateOfComparison : await getCurrentDate() });
+
+        console.log(`Inserted ${req.query['medicineName']} document`);
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    } 
+});
+
+
 app.get('/medicineName', async (req, res) => {
     console.log((req.query['q']))
     
@@ -32243,20 +32279,20 @@ app.post('/medicomp', async (req, res) => {
     console.log(item)
     const final=[];
 
-    try {
-        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    // try {
+    //     const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-        const database = client.db('MedicompDb');
-        const collection = database.collection('finalResultPageMedicomp');
+    //     const database = client.db('MedicompDb');
+    //     const collection = database.collection('finalResultPageMedicomp');
 
 
-        // Insert a single document
-        const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
+    //     // Insert a single document
+    //     const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
 
-        console.log(`Inserted ${nameOfMed} document`);
-    } catch (err) {
-        console.error('Error inserting medicine', err);
-    }
+    //     console.log(`Inserted ${nameOfMed} document`);
+    // } catch (err) {
+    //     console.error('Error inserting medicine', err);
+    // }
 
     
 

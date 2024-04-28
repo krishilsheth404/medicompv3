@@ -1105,6 +1105,7 @@ body {
 		  <form action="/medicomp" method="post" style="height: 0px;" id="mainform">
 			<input type="text" name="medlinks" id="medlinks" value="<%=t%>" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
 			<input type="text" name="manufacturerName" id="manufacturerName" value="<%=t[t.length-2]%>" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
+			<input type="text" name="MedicineName" id="MedicineName" value="<%=t[t.length-1]%>" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
 		</form>
 		<button onclick="done()" class="summary_button">Compare Prices</button></section>
       </main>
@@ -1113,6 +1114,19 @@ body {
 		function done(){
 			document.getElementById('mainform').submit();
 		}
+	  </script>
+	  <script>
+		 document.addEventListener('DOMContentLoaded', async (event) => {
+      console.log("inside func")
+								await axios({
+									method: "GET",
+									url: `/storeSearchedMedicineData?medicineName=${document.getElementById('MedicineName').value}`,
+								})
+
+									.then((res) => {
+                    
+                  })
+     });
 	  </script>
      
 

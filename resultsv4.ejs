@@ -5107,6 +5107,8 @@
         <input type="text" name="pharmaLink" id="pharmaLink">
       </form>
     
+   
+    
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
       <script>
@@ -5762,6 +5764,18 @@ mounted() {
     </div>
   </body>
   <script>
+     document.addEventListener('DOMContentLoaded', async (event) => {
+      console.log("inside func")
+								await axios({
+									method: "GET",
+									url: `/storeComparisonData?medicineName=${document.getElementById('MedicineName').value}`,
+								})
+
+									.then((res) => {
+                    
+                  })
+     });
+
     function getCurrentDate() {
     const today = new Date();
     let dd = today.getDate();
