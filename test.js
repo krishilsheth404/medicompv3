@@ -70,6 +70,8 @@ app.set('view engine', 'ejs');
 // resave: false
 // }));
 
+const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
+
 app.use(cookieParser());
 
 
@@ -81,7 +83,7 @@ app.use(bodyParser.json());
 // var newItem;
 // Route to Login Page
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res)  => {
     res.sendFile(__dirname+'/home.html');
     // if (req.session.user) {
     //     res.redirect('/home')
@@ -31057,8 +31059,8 @@ app.get('/searchPharmacies', async (req, res) => {
     console.log(nameOfMed);
     
     try {
-        const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
-        var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
         const database = client.db('MedicompDb');
         const collection = database.collection('searchPharmas');
 
@@ -32169,8 +32171,7 @@ app.post('/redirectFromMedicomp', async (req, res) => {
   console.log(req.body.MedicineName)
   
   try {
-        const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
-        var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+       
         const database = client.db('MedicompDb');
         const collection = database.collection('RedirectsFromMedicomp');
 
@@ -32187,15 +32188,12 @@ app.post('/redirectFromMedicomp', async (req, res) => {
 app.get('/medicineName', async (req, res) => {
     console.log((req.query['q']))
     
-    const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
-    const dbName = 'MedicompDb'; // Replace with your database name
-    const collectionName = 'medicineList'; // Replace with your collection name
-    
+   
     
     try {
         const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        const db = client.db(dbName);
-        const collection = db.collection(collectionName);
+        const db = client.db("MedicompDb");
+        const collection = db.collection("medicineList");
 
         // const result = await collection.createIndex({ medicineName: 1 });
         // console.log("Index created successfully:", result);
@@ -32246,8 +32244,8 @@ app.post('/medicomp', async (req, res) => {
     const final=[];
 
     try {
-        const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
-        var client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
         const database = client.db('MedicompDb');
         const collection = database.collection('finalResultPageMedicomp');
 
