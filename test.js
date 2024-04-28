@@ -32187,7 +32187,8 @@ app.post('/redirectFromMedicomp', async (req, res) => {
   console.log(req.body.MedicineName)
   
   try {
-       
+    const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
         const database = client.db('MedicompDb');
         const collection = database.collection('RedirectsFromMedicomp');
 
