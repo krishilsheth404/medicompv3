@@ -32199,7 +32199,7 @@ app.get('/medicineName', async (req, res) => {
         // console.log("Index created successfully:", result);
 
         const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
-        const cursor = collection.find({ medicineName: { $regex: regex } }).limit(10);
+        const cursor = collection.find({ medicineName: { $regex: regex } }).project({ medicineName: 1 ,medicinePackSize:1}).limit(10);
         
 
         // Convert cursor to array and log the results
