@@ -31135,7 +31135,8 @@ app.get('/searchPharmacies', async (req, res) => {
 
 
        
-        mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed},${req.query['packSize']} ${req.query['manufacturerName']})&vs=`;
+        // mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed},${req.query['packSize']} ${req.query['manufacturerName']})&vs=`;
+        mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=`;
         for (var i = 0; i < arr.length; i++) {
             if (arr[i] != 0) {
                 mixUrl += arr[i] + "+%2C+";
@@ -32227,35 +32228,35 @@ app.get('/medicineName', async (req, res) => {
     
    
     
-    try {
-        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        const db = client.db("MedicompDb");
-        const collection = db.collection("medicineList");
+    // try {
+    //     const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    //     const db = client.db("MedicompDb");
+    //     const collection = db.collection("medicineList");
 
-        // const result = await collection.createIndex({ medicineName: 1 });
-        // console.log("Index created successfully:", result);
+    //     // const result = await collection.createIndex({ medicineName: 1 });
+    //     // console.log("Index created successfully:", result);
 
-        // const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
-        const cursor = collection.find({ $text: { $search: req.query['q'] } })
-        .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 })
-        .limit(10);;
+    //     // const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
+    //     const cursor = collection.find({ $text: { $search: req.query['q'] } })
+    //     .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 })
+    //     .limit(10);;
         
 
-        // Convert cursor to array and log the results
-        const records = await cursor.toArray();
-        if(records){
-            console.log("Found the following records:");
-            // console.log(records);
-        }else{
-            records.push({medicineName:"Product Not Found"})
-        }
+    //     // Convert cursor to array and log the results
+    //     const records = await cursor.toArray();
+    //     if(records){
+    //         console.log("Found the following records:");
+    //         // console.log(records);
+    //     }else{
+    //         records.push({medicineName:"Product Not Found"})
+    //     }
 
-        console.log(records)
-        res.send(records)
+    //     console.log(records)
+    //     res.send(records)
     
-    } catch (err) {
-        console.error('Error inserting medicine', err);
-    }
+    // } catch (err) {
+    //     console.error('Error inserting medicine', err);
+    // }
     
     
       
@@ -32298,8 +32299,9 @@ app.post('/medicomp', async (req, res) => {
     
 
 
-    const manufacturerN=req.body.manufacturerName;
-
+    // const manufacturerN=req.body.manufacturerName;
+    const manufacturerN= await extractManufacNameFromPharmeasy(item[1]);
+    console.log(manufacturerN)
 
     const start1 = performance.now();
     // const LinkDataResponses = await axiosParallel(item);
