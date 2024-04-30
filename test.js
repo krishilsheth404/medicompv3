@@ -32314,26 +32314,26 @@ app.post('/medicomp', async (req, res) => {
     console.log(item)
     const final=[];
 
-    try {
-        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    // try {
+    //     const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-        const database = client.db('MedicompDb');
-        const collection = database.collection('finalResultPageMedicomp');
+    //     const database = client.db('MedicompDb');
+    //     const collection = database.collection('finalResultPageMedicomp');
 
 
-        // Insert a single document
-        const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
+    //     // Insert a single document
+    //     const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
 
-        console.log(`Inserted ${nameOfMed} document`);
-        try {
-            await client.close();
-            console.log('Closed MongoDB connection');
-        } catch (err) {
-            console.error('Error closing MongoDB connection', err);
-        }
-    } catch (err) {
-        console.error('Error inserting medicine', err);
-    }
+    //     console.log(`Inserted ${nameOfMed} document`);
+    //     try {
+    //         await client.close();
+    //         console.log('Closed MongoDB connection');
+    //     } catch (err) {
+    //         console.error('Error closing MongoDB connection', err);
+    //     }
+    // } catch (err) {
+    //     console.error('Error inserting medicine', err);
+    // }
 
     
     
