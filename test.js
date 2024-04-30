@@ -31038,9 +31038,17 @@ app.get('/storeSearchedMedicineData', async (req, res) => {
         const result = await collection.insertOne({ medicine: req.query['medicineName'] ,DateOfSearch:await getCurrentDate()});
 
         console.log(`Inserted ${req.query['medicineName']} document`);
+        try {
+            await client.close();
+            console.log('Closed MongoDB connection');
+        } catch (err) {
+            console.error('Error closing MongoDB connection', err);
+        }
     } catch (err) {
         console.error('Error inserting medicine', err);
     }
+    
+    
   });
 
 app.get('/searchPharmacies', async (req, res) => {
@@ -32197,10 +32205,18 @@ app.post('/redirectFromMedicomp', async (req, res) => {
         const result = await collection.insertOne({ PharmacyName: req.body.pharmaName,MedicineName:req.body.MedicineName,DateOfRedirect : getCurrentDate() });
 
         console.log(`Inserted ${req.body.pharmaName} document`);
+        try {
+            await client.close();
+            console.log('Closed MongoDB connection');
+        } catch (err) {
+            console.error('Error closing MongoDB connection', err);
+        }
         res.redirect(req.body.pharmaLink)
     } catch (err) {
         console.error('Error inserting medicine', err);
     }
+   
+    
 });
 
 
@@ -32217,9 +32233,17 @@ app.get('/storeComparisonData', async (req, res) => {
         const result = await collection.insertOne({ medicine: req.query['medicineName'] , DateOfComparison : await getCurrentDate() });
 
         console.log(`Inserted ${req.query['medicineName']} document`);
+        try {
+            await client.close();
+            console.log('Closed MongoDB connection');
+        } catch (err) {
+            console.error('Error closing MongoDB connection', err);
+        }
+        
     } catch (err) {
         console.error('Error inserting medicine', err);
     } 
+    
 });
 
 
@@ -32228,35 +32252,44 @@ app.get('/medicineName', async (req, res) => {
     
    
     
-    // try {
-    //     const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    //     const db = client.db("MedicompDb");
-    //     const collection = db.collection("medicineList");
+    try {
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const db = client.db("MedicompDb");
+        const collection = db.collection("medicineList");
 
-    //     // const result = await collection.createIndex({ medicineName: 1 });
-    //     // console.log("Index created successfully:", result);
+        // const result = await collection.createIndex({ medicineName: 1 });
+        // console.log("Index created successfully:", result);
 
-    //     // const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
-    //     const cursor = collection.find({ $text: { $search: req.query['q'] } })
-    //     .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 })
-    //     .limit(10);;
+        // const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
+        const cursor = collection.find({ $text: { $search: req.query['q'] } })
+        .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 })
+        .limit(10);;
         
 
-    //     // Convert cursor to array and log the results
-    //     const records = await cursor.toArray();
-    //     if(records){
-    //         console.log("Found the following records:");
-    //         // console.log(records);
-    //     }else{
-    //         records.push({medicineName:"Product Not Found"})
-    //     }
+        // Convert cursor to array and log the results
+        const records = await cursor.toArray();
+        if(records){
+            console.log("Found the following records:");
+            // console.log(records);
+        }else{
+            records.push({medicineName:"Product Not Found"})
+        }
 
-    //     console.log(records)
-    //     res.send(records)
+        console.log(records)
+        try {
+            await client.close();
+            console.log('Closed MongoDB connection');
+        } catch (err) {
+            console.error('Error closing MongoDB connection', err);
+        }
+
+        res.send(records)
     
-    // } catch (err) {
-    //     console.error('Error inserting medicine', err);
-    // }
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    }
+
+    
     
     
       
@@ -32281,21 +32314,28 @@ app.post('/medicomp', async (req, res) => {
     console.log(item)
     const final=[];
 
-    // try {
-    //     const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    try {
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-    //     const database = client.db('MedicompDb');
-    //     const collection = database.collection('finalResultPageMedicomp');
+        const database = client.db('MedicompDb');
+        const collection = database.collection('finalResultPageMedicomp');
 
 
-    //     // Insert a single document
-    //     const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
+        // Insert a single document
+        const result = await collection.insertOne({ medicine: nameOfMed , DateOfComparison : await getCurrentDate() });
 
-    //     console.log(`Inserted ${nameOfMed} document`);
-    // } catch (err) {
-    //     console.error('Error inserting medicine', err);
-    // }
+        console.log(`Inserted ${nameOfMed} document`);
+        try {
+            await client.close();
+            console.log('Closed MongoDB connection');
+        } catch (err) {
+            console.error('Error closing MongoDB connection', err);
+        }
+    } catch (err) {
+        console.error('Error inserting medicine', err);
+    }
 
+    
     
 
 

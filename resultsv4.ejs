@@ -5764,17 +5764,17 @@ mounted() {
     </div>
   </body>
   <script>
-    //  document.addEventListener('DOMContentLoaded', async (event) => {
-    //   console.log("inside func")
-		// 						await axios({
-		// 							method: "GET",
-		// 							url: `/storeComparisonData?medicineName=${document.getElementById('MedicineName').value}`,
-		// 						})
+     document.addEventListener('DOMContentLoaded', async (event) => {
+      console.log("inside func")
+								await axios({
+									method: "GET",
+									url: `/storeComparisonData?medicineName=${document.getElementById('MedicineName').value}`,
+								})
 
-		// 							.then((res) => {
+									.then((res) => {
                     
-    //               })
-    //  });
+                  })
+     });
 
     function getCurrentDate() {
     const today = new Date();
