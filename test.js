@@ -28542,11 +28542,8 @@ extractManufacNameFromPharmeasy=async(url)=>{
 }
 extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
     try {
-        // Fetching HTML
-        const { data } = await axios.get(url)
+    const { data } = await axios.get(url)
 
-        // Using cheerio to extract <a> tags
-        // const offer =await getOffersOfPharmeasy();
         const $ = cheerio.load(data, { xmlMode: false });
 
         var a = JSON.parse($('script[type=application/json]').text());
@@ -28685,13 +28682,9 @@ getOffersOfNetmeds = async () => {
 extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
     
     try {
-        // Fetching HTML
         const { data } = await axios.get(url);
 
-        // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
-        // console.log($.html());
-
         var dc = '';
 
         if ($('#last_price').attr('value') < 250) {
@@ -31097,7 +31090,7 @@ app.get('/searchPharmacies', async (req, res) => {
     // }
 
     var tempf = [];
-    var t = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var t = [0, 0, 0, 0, 0, 0, 0];
     const presReq = ["No"];
 
 
@@ -31120,15 +31113,15 @@ app.get('/searchPharmacies', async (req, res) => {
     var arr = [
 
         'netmeds.com', 'pharmeasy.in','pasumaipharmacy.com', 
-        'pulseplus.in','tabletshablet.com', 'medplusmart.com',
-        'truemeds.in', 'kauverymeds.com', 'indimedo.com', 
-        'secondmedic.com','chemistbox.in',
+        'pulseplus.in', 'medplusmart.com','truemeds.in', 
+        'kauverymeds.com',
         //  'myupchar.com',
         // '1mg.com', 
         // 'onebharatpharmacy.com',
         // 'wellnessforever.com',
         // 'secondmedic.com', 'chemistsworld.com', 'callhealth.com',
     ]
+    
 
 
     var cont = checkforzero(arr);
@@ -31136,14 +31129,14 @@ app.get('/searchPharmacies', async (req, res) => {
    
     var tries = 0;
     var cpyOftempf;
-    while (cont != 11) {
+    while (cont != 7) {
 
 
         tries++;
 
 
        
-         mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed},${req.query['packSize']} ${req.query['manufacturerName']})&vs=`;
+        mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed},${req.query['packSize']} ${req.query['manufacturerName']})&vs=`;
         // mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=intitle:(${nameOfMed})&vs=`;
         for (var i = 0; i < arr.length; i++) {
             if (arr[i] != 0) {
@@ -31183,21 +31176,13 @@ app.get('/searchPharmacies', async (req, res) => {
         } 
         else if (tempf[k].includes("pulseplus")) {
             t[3] = tempf[k];
-        } else if (tempf[k].includes("tabletshablet")) {
-            t[4] = tempf[k];
         }else if (tempf[k].includes("medplusmart")) {
-            t[5] = tempf[k];
+            t[4] = tempf[k];
         } else if (tempf[k].includes("truemeds")) {
-            t[6] = tempf[k];
+            t[5] = tempf[k];
         } else if (tempf[k].includes("kauverymeds")) {
-            t[7] = tempf[k];
-        } else if (tempf[k].includes("indimedo")) {
-            t[8] = tempf[k];
-        } else if (tempf[k].includes("secondmedic")) {
-            t[9] = tempf[k];
-        }else if (tempf[k].includes("chemistbox")) {
-            t[10] = tempf[k];
-        } 
+            t[6] = tempf[k];
+        }
     }
 
     t.push(req.query['manufacturerName']);
@@ -32263,7 +32248,7 @@ app.get('/medicineName', async (req, res) => {
         // const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
         const cursor = collection.find({ $text: { $search: req.query['q'] } })
         .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 })
-        .limit(10);;
+        .limit(10);
         
 
         // Convert cursor to array and log the results
@@ -32346,14 +32331,21 @@ app.post('/medicomp', async (req, res) => {
     const start1 = performance.now();
     // const LinkDataResponses = await axiosParallel(item);
 
-    const responses = await Promise.all([extractDataOfNetMeds(item[0], nameOfMed,manufacturerN), extractDataOfPharmEasy(item[1], nameOfMed,manufacturerN),
+    // 'netmeds.com', 'pharmeasy.in','pasumaipharmacy.com', 
+    // 'pulseplus.in', 'medplusmart.com','truemeds.in', 
+    // 'kauverymeds.com',
+
+    const responses = await Promise.all([
+    extractDataOfNetMeds(item[0], nameOfMed,manufacturerN), 
+    extractDataOfPharmEasy(item[1], nameOfMed,manufacturerN),
     extractDataOfPP(item[2], nameOfMed,manufacturerN),
     extractDataOfmedplusMart(item[3], nameOfMed,manufacturerN), 
-    extractDataOfOBP(item[4], nameOfMed,manufacturerN),
-    extractDataOfOgMPM(item[5], nameOfMed,manufacturerN),extractDataOfTruemeds(item[6], nameOfMed,manufacturerN),
-   
-    extractDataOfKauveryMeds(item[7], nameOfMed,manufacturerN),extractDataOfIndiMedo(item[8], nameOfMed,manufacturerN),
-    extractDataOfSecondMedic(item[9], nameOfMed,manufacturerN),
+    extractDataOfOgMPM(item[4], nameOfMed,manufacturerN),
+    extractDataOfTruemeds(item[5], nameOfMed,manufacturerN),
+    extractDataOfKauveryMeds(item[6], nameOfMed,manufacturerN),
+    // extractDataOfOBP(item[4], nameOfMed,manufacturerN),
+    // extractDataOfIndiMedo(item[7], nameOfMed,manufacturerN),
+    // extractDataOfSecondMedic(item[7], nameOfMed,manufacturerN),
     // extractDataOfChemistBox(item[10], nameOfMed,manufacturerN),
     
     // extractDataOfMyUpChar(item[4], nameOfMed,manufacturerN),
@@ -32362,28 +32354,14 @@ app.post('/medicomp', async (req, res) => {
 
     const end1 = performance.now() - start1;
     console.log(`Execution time for pharmas: ${end1}ms`);
-    // const responses = await Promise.all(FinalDataFunc);
-
-    // console.log(responses)
-    for (var i = 0; i <10; i++) {
+    
+    for (var i = 0; i <7; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
         }
     }
 
-    // final.push(responses[0])
-    // final.push(responses[1])
-    // final.push(responses[2])
-    // final.push(responses[3])
-    // final.push(responses[4])
-    // final.push(responses[5])
-    // final.push(responses[6])
-    // final.push(responses[7])
-    // final.push(responses[8])
-    // final.push(responses[9])
-
-
-    // final.sort((a, b) => a.finalCharge - b.finalCharge); // b - a for reverse sort
+    
     final.push(nameOfMed)
     console.log(final)
 
