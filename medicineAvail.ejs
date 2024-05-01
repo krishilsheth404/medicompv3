@@ -1010,7 +1010,7 @@ body {
     color: white;
 ">
             <p class="circle_numbers" style="margin: 0px;">
-				<span class="circle_numbers_result"><%=t.length-1%></span>
+				<span class="circle_numbers_result"><%=t.length-2%></span>
 				<span class="circle_numbers_total" style="color: white;">Pharmacies Founded For</span>
             </p>
           </div>
@@ -1031,7 +1031,10 @@ body {
 			<%for(var k=0;k<t.length-2;k++){%>
 
 				<%
-			if (t[k].includes("netmeds")) {
+			 if (t[k].includes("apollo")) {
+					Pharmacy_Name ="Apollo Pharmacy";
+					Pharmacy_Ratings=4.7;
+				}else if (t[k].includes("netmeds")) {
 				Pharmacy_Name ="Netmeds";
 				Pharmacy_Ratings=4.5;
 			} else if (t[k].includes("pharmeasy")) {
