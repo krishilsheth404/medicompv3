@@ -32343,6 +32343,7 @@ app.post('/medicomp', async (req, res) => {
     extractDataOfOgMPM(item[4], nameOfMed,manufacturerN),
     extractDataOfTruemeds(item[5], nameOfMed,manufacturerN),
     extractDataOfKauveryMeds(item[6], nameOfMed,manufacturerN),
+]);
     // extractDataOfOBP(item[4], nameOfMed,manufacturerN),
     // extractDataOfIndiMedo(item[7], nameOfMed,manufacturerN),
     // extractDataOfSecondMedic(item[7], nameOfMed,manufacturerN),
@@ -32350,7 +32351,6 @@ app.post('/medicomp', async (req, res) => {
     
     // extractDataOfMyUpChar(item[4], nameOfMed,manufacturerN),
     //   extractSubsfApollo(item[8],final),
-    ]);
 
     const end1 = performance.now() - start1;
     console.log(`Execution time for pharmas: ${end1}ms`);
