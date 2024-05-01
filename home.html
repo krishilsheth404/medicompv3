@@ -1688,8 +1688,8 @@ display: inline-block;margin:2px" id="mediname${i + 1}">
 ">${res.data[i]['medicinePackSize']}</span>
 							</p>
 					<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicineName']}">
-					<input type="text" autocomplete="off" id="manufacturerName" style='word-wrap: break-word;display:none' contenteditable='false'  name="manufacturerName" class="form-control foodItem_${i + 1}"   value="${res.data[i]['manufacturerName']}">
-					<input type="text" autocomplete="off" id="packSize" style='word-wrap: break-word;display:none' contenteditable='false'  name="packSize" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicinePackSize']}">
+					<input type="text" autocomplete="off" id="manufacturerName" style='word-wrap: break-word;display:none' contenteditable='false'  name="manufacturerName" class="form-control foodItem_${i + 1}"   value="${res.data[i]['manufacturerName']?res.data[i]['manufacturerName']:''}">
+					<input type="text" autocomplete="off" id="packSize" style='word-wrap: break-word;display:none' contenteditable='false'  name="packSize" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicinePackSize']?res.data[i]['medicinePackSize']:''}">
 					</div>
 					</a>
 			</form>
@@ -1729,8 +1729,8 @@ display: inline-block;margin:2px" id="mediname${i + 1}">
 ">${res.data[i]['medicinePackSize']}</span>
 							</p>
 					<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicineName']}">
-					<input type="text" autocomplete="off" id="manufacturerName" style='word-wrap: break-word;display:none' contenteditable='false'  name="manufacturerName" class="form-control foodItem_${i + 1}"   value="${res.data[i]['manufacturerName']}">
-					<input type="text" autocomplete="off" id="packSize" style='word-wrap: break-word;display:none' contenteditable='false'  name="packSize" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicinePackSize']}">
+					<input type="text" autocomplete="off" id="manufacturerName" style='word-wrap: break-word;display:none' contenteditable='false'  name="manufacturerName" class="form-control foodItem_${i + 1}"   value="${res.data[i]['manufacturerName']?res.data[i]['manufacturerName']:''}">
+					<input type="text" autocomplete="off" id="packSize" style='word-wrap: break-word;display:none' contenteditable='false'  name="packSize" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicinePackSize']?res.data[i]['medicinePackSize']:''}">
 
 					</div>
 					</a>
