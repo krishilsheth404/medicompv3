@@ -32339,9 +32339,9 @@ app.post('/medicomp', async (req, res) => {
     
 
 
-    // const manufacturerN=req.body.manufacturerName;
-    const manufacturerN= await extractManufacNameFromPharmeasy(item[1]);
-    console.log(manufacturerN)
+    const manufacturerN=req.body.manufacturerName;
+    // const manufacturerN= await extractManufacNameFromPharmeasy(item[1]);
+    // console.log(manufacturerN)
 
     const start1 = performance.now();
     // const LinkDataResponses = await axiosParallel(item);
