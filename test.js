@@ -28654,9 +28654,11 @@ extractDataOfFlipkart = async (url, nameOfMed) => {
 
 function getDeliveryChargeForNetmeds(totalMedPrice) {
     var dc = 0;
-    if (totalMedPrice < 250) {
-        dc = 99;
-    } else if (totalMedPrice >= 250 && totalMedPrice < 1000) {
+    if (totalMedPrice < 199) {
+        dc = 69;
+    } else if (totalMedPrice >= 199 && totalMedPrice < 499) {
+        dc = 49;
+    } else if (totalMedPrice >= 499 && totalMedPrice < 999) {
         dc = 29;
     } else if (totalMedPrice > 1000) {
         dc = 0;
@@ -28693,9 +28695,13 @@ extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
         const $ = cheerio.load(data);
         var dc = '';
 
-        if ($('#last_price').attr('value') < 250) {
-            dc = 99;
-        } else if ($('#last_price').attr('value') >= 250 && $('#last_price').attr('value') < 1000) {
+        
+
+        if ($('#last_price').attr('value') < 199) {
+            dc = 69;
+        } else if ($('#last_price').attr('value') >= 199 && $('#last_price').attr('value') < 499) {
+            dc = 49;
+        } else if ($('#last_price').attr('value') >= 499 && $('#last_price').attr('value') < 999) {
             dc = 29;
         } else if ($('#last_price').attr('value') > 1000) {
             dc = 0;
@@ -31562,16 +31568,18 @@ app.get('/getDeliveryPriceOfPharmeasy', async (req, res) => {
 })
 app.get('/getDeliveryPriceOfNetmeds', async (req, res) => {
     var dc = 0;
-    var price = parseFloat(req.query['val']) 
+    var totalMedPrice = parseFloat(req.query['val']) 
     
     
-    if (price < 250) {
-            dc = 99;
-        } else if (price >= 250 && price < 1000) {
-            dc = 29;
-        } else if (price > 1000) {
-            dc = 0;
-        }
+    if (totalMedPrice < 199) {
+        dc = 69;
+    } else if (totalMedPrice >= 199 && totalMedPrice < 499) {
+        dc = 49;
+    } else if (totalMedPrice >= 499 && totalMedPrice < 999) {
+        dc = 29;
+    } else if (totalMedPrice > 1000) {
+        dc = 0;
+    }
 
         res.send((dc).toString());;
 })
@@ -32701,7 +32709,7 @@ app.post('/medicomp', async (req, res) => {
     extractDataOfmedplusMart(item[4], nameOfMed,manufacturerN), 
     extractDataOfOgMPM(item[5], nameOfMed,manufacturerN),
     extractDataOfTruemeds(item[6], nameOfMed,manufacturerN),
-    extractDataOfKauveryMeds(item[7], nameOfMed,manufacturerN),
+    // extractDataOfKauveryMeds(item[7], nameOfMed,manufacturerN),
 ]);
     // extractDataOfOBP(item[4], nameOfMed,manufacturerN),
     // extractDataOfIndiMedo(item[7], nameOfMed,manufacturerN),
@@ -32714,7 +32722,7 @@ app.post('/medicomp', async (req, res) => {
     const end1 = performance.now() - start1;
     console.log(`Execution time for pharmas: ${end1}ms`);
     
-    for (var i = 0; i <8; i++) {
+    for (var i = 0; i <7; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
         }
