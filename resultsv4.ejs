@@ -4977,7 +4977,7 @@
                                   <%if(final[i].medicineAvailability){%>
                                    
 
-                                      <button class="button14 instock" style="width: 100%;background-color: transparent;" link="<%=final[i].link%>">
+                                      <button class="button14 instock" style="width: 100%;background-color: transparent;" link="<%=final[i].link%>" target="_blank">
                                         <div class="style-layer2" style="background-color: #98c4ff">
                                           <div class="button15" style="text-align: center;">Buy</div>
                                         </div>
@@ -5240,6 +5240,10 @@
       deliveryCharge =(await axios.get(`/getDeliveryPriceOfTruemeds?val=${myVariable * count}`)).data;
     } else if (companyname.includes('tata')) {
       deliveryCharge =(await axios.get(`/getDeliveryPriceOfTata1mg?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('kauvery')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfKauvery?val=${myVariable * count}`)).data;
+    } else if (companyname.includes('apollo')) {
+      deliveryCharge =(await axios.get(`/getDeliveryPriceOfApollo?val=${myVariable * count}`)).data;
     }
       
     document.getElementById(`delivery_${num}`).innerHTML = parseFloat(deliveryCharge);
