@@ -1124,6 +1124,11 @@ body {
             </p>
           </div>
           <h1 class="title" id="med"><%=t[t.length-1]%></h1>
+		  <script>
+			const title = document.getElementById('med');
+const maxLength = 15; // Set the maximum number of characters
+title.textContent = title.textContent.slice(0, maxLength)+"...";
+		  </script>
 		  
           <!-- <p class="paragraph" style="
     color: white;
@@ -1243,15 +1248,15 @@ body {
 			}, 100); 
 
 				
-      console.log("inside func")
-								await axios({
-									method: "GET",
-									url: `/storeSearchedMedicineData?medicineName=${document.getElementById('MedicineName').value}`,
-								})
+    //   console.log("inside func")
+				// 				await axios({
+				// 					method: "GET",
+				// 					url: `/storeSearchedMedicineData?medicineName=${document.getElementById('MedicineName').value}`,
+				// 				})
 
-									.then((res) => {
+				// 					.then((res) => {
                     
-                  })
+                //   })
      });
 	  </script>
      
