@@ -758,6 +758,10 @@ https://cdn.jsdelivr.net/npm/puppeteer/install.min.js
   --bg-primary: hsla(234, 85%, 45%, 0.15);
 }
 
+#loaderLine{
+	height: 4vh;
+}
+
 html,
 body,
 main,
@@ -909,7 +913,7 @@ body {
 	display: block;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   body {
     justify-content: center;
   }
@@ -935,6 +939,8 @@ body {
 	width: 50%;
   }
 
+  
+
   .paragraph {
     width: 250px;
   }
@@ -954,11 +960,20 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.summary{
+	padding: 3.5rem 1.5rem 2.5rem;
+}
  
 }
 
-@media screen and (max-width:1000px) {
-	.summary{
+ @media screen  and (min-width:700px) and (max-width:1200px) {
+	 body{
+		display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	 }
+	/* .summary{
 		overflow: unset;
 	}
 
@@ -981,8 +996,90 @@ body {
 	}
 	.circle{
 		display: none;
+	} */
+	#mainId{
+		display: flex;
+		flex-direction: row;
+		max-height: 60vh;
+		width: 90%;
+		
 	}
+.result {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  border-radius: 30px;
 }
+} 
+
+@media screen  and (max-width:700px) {
+	 body{
+		display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	font-size: smaller;
+	 }
+	 .summary_list_item{
+		display: flex;
+    align-items: center;
+    justify-content: flex-start;
+	/* padding: 0px; */
+	margin: 0px;
+	 }
+
+	 .summary_list_item,.summary_list_item_title {
+		font-size: 12px;
+		font-weight: bold;
+		text-align: left;
+	 }
+	 .circle_numbers_result{
+		font-size: 33px;
+	 }
+	 .circle_numbers_total{
+		font-size: 10px;
+	 }
+	 .title,.subtitle{
+		font-size: 15px;
+		margin: 0px;
+	 }
+	 .summary > .subtitle{
+		font-size: 15px;
+	 }
+	.summary{
+		padding: 1.5rem 0.5rem 2.5rem;
+	}
+
+	#mainId{
+		display: flex;
+		flex-direction: row;
+		max-height: 40vh;
+		width: 90%;
+		
+	}
+	.result {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 100%;
+	justify-content: center;
+	border-radius: 15px;
+	}
+	.summary_list{
+		gap: 0.5rem;
+	}
+	.result{
+		padding: 1.5rem 1.5rem 0.5rem;
+	}
+	#loaderLine{
+	height: 2vh;
+}
+.title{
+	width: max-content;
+}
+} 
 
 
 </style><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
@@ -996,8 +1093,20 @@ body {
 <body data-new-gr-c-s-check-loaded="14.1166.0" data-gr-ext-installed="">
 
 
-
     <main id="mainId" class="ftco-animate fadeInUp ftco-animated">
+	<div id="loaderLine" style="
+    
+    width: 100%;
+    background: rgb(48, 59, 90);
+    display: block;
+    position: absolute;
+    top: -2px;
+    z-index: 100;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    transition: all 0.1s ease 0s;
+    left: 0px;
+"></div>
         <section class="result" style="
   
     background: linear-gradient(45deg, rgb(91, 140, 235), rgb(192, 215, 255));color: white;gap: 20px;">
@@ -1011,7 +1120,7 @@ body {
 ">
             <p class="circle_numbers" style="margin: 0px;">
 				<span class="circle_numbers_result"><%=t.length-2%></span>
-				<span class="circle_numbers_total" style="color: white;">Pharmacies Founded For</span>
+				<span class="circle_numbers_total" style="color: white;">Pharmacies Founded <br> For</span>
             </p>
           </div>
           <h1 class="title" id="med"><%=t[t.length-1]%></h1>
@@ -1097,11 +1206,13 @@ body {
                 <img src="./assets/images/icon-reaction.svg" alt="">
                 <h3 class="summary_list_item_title"><%=Pharmacy_Name%></h3>
               </div>
-              <div class="summary_list_item_result">
+              <!-- <div class="summary_list_item_result">
                 <p class="summary_list_item_result_numbers">
-                  <span class="summary_list_item_result_numbers_result"><small>Ratings</small>	 <%=Pharmacy_Ratings%></span>
+                  <span class="summary_list_item_result_numbers_result"><small>Ratings</small>
+						 <%=Pharmacy_Ratings%>
+						</span>
                 </p>
-              </div>
+              </div> -->
             </li>
 			<%}%>
       
@@ -1113,16 +1224,25 @@ body {
 			<input type="text" name="manufacturerName" id="manufacturerName" value="<%=t[t.length-2]%>" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
 			<input type="text" name="MedicineName" id="MedicineName" value="<%=t[t.length-1]%>" style="height: 0px;width: 0px;font-size: 0px;visibility: hidden;">
 		</form>
-		<button onclick="done()" class="summary_button">Compare Prices</button></section>
+		<!-- <button onclick="done()" class="summary_button">Compare Prices</button></section> -->
       </main>
 
-	  <script>
-		function done(){
-			document.getElementById('mainform').submit();
-		}
-	  </script>
+	 
 	  <script>
 		 document.addEventListener('DOMContentLoaded', async (event) => {
+			document.getElementById('mainform').submit();
+			let count = 10;
+			const interval = setInterval(() => {
+				console.log(count);
+				document.getElementById('loaderLine').style.width=`${count}%`;
+				document.getElementById('loaderLine').style.transition=`all 0.1s`;
+				count++;
+				if (count === 101) {
+					clearInterval(interval);
+				}
+			}, 100); 
+
+				
       console.log("inside func")
 								await axios({
 									method: "GET",

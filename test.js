@@ -31225,9 +31225,9 @@ app.get('/searchPharmacies', async (req, res) => {
     // const result = await collection.findOne({ medicineName: "Crocin 650 Tablet 15" }, { links: 1, _id: 0 });
 
         const result = await collection.findOne({ medicineName: `${nameOfMed}` }, { links: 1 });
-        linksExistsInDb = !!result && !!result.links;
+        linksExistsInDb = !!result.links;
 
-        if (result && result.links) {
+        if (result.links) {
         t = result.links;
         t=t.flat();
         console.log(t);
@@ -31921,7 +31921,7 @@ app.post('/algoSuggest', async (req, res) => {
     }
 
 
-    console.log(smallesTotalCombValues)//here the main logic has to be applied
+    console.log(smallesTotalCombValues)//here the main final data of lowest prices 
     tempcombiChart.pop();
     tempcombiChart = [].concat(...tempcombiChart);
 
@@ -31966,8 +31966,10 @@ app.post('/algoSuggest', async (req, res) => {
     for(var i=1;i<=pharmaFinaldata.length;i++){
      set.push(i)
     }
+    console.log("Set - "+set)
     const partitions = partitionSet(set);
     console.log("=====>> >> "+typeof(partitions));
+    console.log("=====>> paritions "+partitions);
 
     var tempLowestValue=set.toString().replace(/,/g, '');
     var newtemparea=[];
@@ -31985,7 +31987,7 @@ app.post('/algoSuggest', async (req, res) => {
             newtemparea.length=0;
             tempLowestValue=vvtmp;
             console.log("k---"+partitions[i])
-            newtemparea.push(partitions[i]);
+            newtemparea.push(partitions[i].flat());
         }
         vvtmp=0;
     }
@@ -31997,15 +31999,17 @@ app.post('/algoSuggest', async (req, res) => {
     var mnames=[];
 
     console.log(typeof(newtemparea))
-    console.log(newtemparea)
-    if(newtemparea.includes(',')){
-        x = newtemparea.split(",").map(num => parseFloat(num));
+    console.log(newtemparea.flat())
+    newtemparea=newtemparea.flat();
+
+
+    if(newtemparea.length>1){
+        x = newtemparea;
         for(var i=0;i<x.length;i++){
             // 'apollopharmacy.in','netmeds.com', 'pharmeasy.in',
             // 'pasumaipharmacy.com', 'pulseplus.in', 'medplusmart.com',
             // 'truemeds.in', 'kauverymeds.com',
             var pname;
-            console.log((smallesTotalCombValues[`${x[i]}+'from'`]))
             if (smallesTotalCombValues[x[i]+"from"] == '0' ) {
                 pname="Apollo";
             }else if (smallesTotalCombValues[x[i]+"from"] == '1' ) {
@@ -32027,7 +32031,6 @@ app.post('/algoSuggest', async (req, res) => {
         }
     }else{
             var pname;
-            console.log(typeof(smallesTotalCombValues[`${newtemparea}from`]))
             if (smallesTotalCombValues[newtemparea+"from"] == '0' ) {
                 pname="Apollo";
             }else if (smallesTotalCombValues[newtemparea+"from"] == '1' ) {
@@ -32037,7 +32040,6 @@ app.post('/algoSuggest', async (req, res) => {
             }else if (smallesTotalCombValues[newtemparea+"from"]=='3') {
                 pname="PasumaiPharmacy";
             } else if (smallesTotalCombValues[newtemparea+"from"]=='4') {
-                console.log("8444444444444444449")
                 pname="PulsePlus";
             } else if (smallesTotalCombValues[newtemparea+"from"]=='5') {
                 pname="MedplusMart";
@@ -32085,7 +32087,7 @@ app.post('/algoSuggest', async (req, res) => {
         }
     });
 
-    console.log(final.medNames)
+    // console.log(final.medNames)
     res.send(final);
 
 })
