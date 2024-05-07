@@ -32667,9 +32667,7 @@ app.get('/medicineName', async (req, res) => {
 
         console.log(records)
         try {
-            setTimeout(async () => {
                 await client.close();
-            }, 1000);
             console.log('Closed MongoDB connection');
         } catch (err) {
             console.error('Error closing MongoDB connection', err);
