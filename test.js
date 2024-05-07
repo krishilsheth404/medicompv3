@@ -70,7 +70,7 @@ app.set('view engine', 'ejs');
 // resave: false
 // }));
 
-const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
+const uri = "mongodb+srv://krishil:hwMRi.iXePK.4J3@medicompuser.vjqrgbt.mongodb.net"; // Replace with your MongoDB URI
 
 app.use(cookieParser());
 
