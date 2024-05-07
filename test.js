@@ -293,13 +293,7 @@ app.get('/temp', async (req, res) => {
     //   });
 
     var DataFinalForMDB=[];
-        await fs.readFile('medicineDb.txt', 'utf8', async (err, data) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-
-    const lines = data.split('\n');
+   
 
 
     
@@ -318,15 +312,14 @@ app.get('/temp', async (req, res) => {
                 // const result = await collection.createIndex({ medicineName: 1 });
                 // console.log("Index created successfully:", result);
 
-                await collection.createIndex({ medicineName: 'text', medicinePackSize: 'text', manufacturerName: 'text' });
+                 await collection.createIndex({ medicineName: 'text' });
 
+                // console.log(collection('medicineList').getIndexes())
                 // const regex = new RegExp("ant", 'i'); // 'i' for case-insensitive
                 // const cursor = collection.find({ medicineName: { $regex: regex } }).limit(20);
         
                 // Convert cursor to array and log the results
-                const records = await cursor.toArray();
                 console.log("Found the following records:");
-                console.log(records);
 
 
             //   for (const line of lines) {
@@ -336,7 +329,8 @@ app.get('/temp', async (req, res) => {
             //         // await collection.insertOne({medicineName:td[0],manufacturerName:td[1],medicinePackSize:td[2],saltComposition:td[3].split('+'),prescriptionReq:td[4],prodLink:td[5]});
             //         await collectionName.createIndex({medicineName: `${td[0]}`})
                 // }
-
+                
+                await client.close();
             }catch (err) {
               console.error('Error inserting data:', err);
             }
@@ -351,10 +345,8 @@ app.get('/temp', async (req, res) => {
        
         await addData();
         console.log('Data inserted successfully');
-        client.close();
 
 
-})
 });
 
 app.get('/ScrapeDataFromApollo', async (req, res) => {
@@ -32651,13 +32643,29 @@ app.get('/medicineName', async (req, res) => {
         // console.log("Index created successfully:", result);
 
         // const regex = new RegExp(`^${req.query['q']}`, 'i'); // '^' for matching the start of the string
-        const cursor = collection.find({ $text: { $search: req.query['q'] } })
-        .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 })
-        .limit(10);
+        // const cursor = collection.find({ $text: { $search: req.query['q'] } })
+        // .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 }) 
+        // .limit(10);
         
+        const records = await collection.aggregate([
+            {
+                $search: {
+                    index: 'medicineName',
+                    text: {
+                        query: req.query['q'],
+                        path: {
+                            wildcard: '*' // Search all fields
+                        }
+                    }
+                }
+            } ,
+            {
+                $limit: 10 // Limit to fetch only the top 10 results
+            }
+        ]).toArray();
+
 
         // Convert cursor to array and log the results
-        const records = await cursor.toArray();
         if(records){
             console.log("Found the following records:");
             // console.log(records);
