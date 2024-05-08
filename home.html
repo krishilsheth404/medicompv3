@@ -1643,8 +1643,6 @@ body {
 			window.clearTimeout(timer);
 		// status.innerHTML = 'Typing...';
 		document.getElementById('medlist').innerHTML = '';
-// document.getElementById('mlblock').style.display='none';
-
 document.getElementById('medlist').innerHTML = `
 <div class="skeleton">
 <div class="skeleton__block"></div>
@@ -1661,16 +1659,6 @@ document.getElementById('medlist').innerHTML = `
 			timer = window.setTimeout(async () => {
 			
 				if (document.getElementById('q').value.trim().length > 0) {
-
-document.getElementById('medlist').innerHTML = '';
-// document.getElementById('mlblock').style.display='none';
-
-document.getElementById('medlist').innerHTML = `
-<div class="skeleton">
-<div class="skeleton__block"></div>
-</div>
-`;
-
 
 
 
