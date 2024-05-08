@@ -1627,10 +1627,8 @@ body {
 			}
 		}
 		
-		async function formVal() {
 
-		let timer
-		var timeoutVal = 1000; // time it takes to wait for user to stop typing in ms
+		let timer,timeoutVal = 500; // time it takes to wait for user to stop typing in ms
 
 		const status = document.getElementById('status');
 		const typer = document.getElementById('q');
@@ -1641,24 +1639,35 @@ body {
 		// when user is pressing down on keys, clear the timeout
 		function handleKeyPress(e) {
 			window.clearTimeout(timer);
-		// status.innerHTML = 'Typing...';
-		document.getElementById('medlist').innerHTML = '';
+			document.getElementById('medlist').innerHTML = '';
+	document.getElementById('medlist').innerHTML = `
+	<div class="skeleton">
+	<div class="skeleton__block"></div>
+	</div>
+	`;
+		
+		}
+
+		async function handleKeyUp(e) {
+			window.clearTimeout(timer);
+
+		
+			
+			
+			timer = window.setTimeout(async () => {
+			
+
+				if (document.getElementById('q').value.trim().length > 0) {
+
+document.getElementById('medlist').innerHTML = '';
+// document.getElementById('mlblock').style.display='none';
+
 document.getElementById('medlist').innerHTML = `
 <div class="skeleton">
 <div class="skeleton__block"></div>
 </div>
 `;
 
-		}
-
-		// when the user has stopped pressing on keys, set the timeout
-		// if the user presses on keys before the timeout is reached, then this timeout is canceled
-		async function handleKeyUp(e) {
-
-			window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
-			timer = window.setTimeout(async () => {
-			
-				if (document.getElementById('q').value.trim().length > 0) {
 
 
 
@@ -1790,6 +1799,14 @@ display: inline-block;margin:2px" id="mediname${i + 1}">
 
 
 
+		}else{
+			
+document.getElementById('medlist').innerHTML = `
+<div class="skeleton">
+<div class="skeleton__block"></div>
+</div>
+`;
+
 		}
 
 
@@ -1800,7 +1817,7 @@ display: inline-block;margin:2px" id="mediname${i + 1}">
 			
 		
 		
-	}
+	
 
 
 
