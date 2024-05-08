@@ -1629,7 +1629,38 @@ body {
 		
 		async function formVal() {
 
-			if (document.getElementById('q').value.trim().length > 0) {
+		let timer
+		var timeoutVal = 1000; // time it takes to wait for user to stop typing in ms
+
+		const status = document.getElementById('status');
+		const typer = document.getElementById('q');
+
+		typer.addEventListener('keypress', handleKeyPress);
+		typer.addEventListener('keyup', handleKeyUp);
+
+		// when user is pressing down on keys, clear the timeout
+		function handleKeyPress(e) {
+			window.clearTimeout(timer);
+		// status.innerHTML = 'Typing...';
+		document.getElementById('medlist').innerHTML = '';
+// document.getElementById('mlblock').style.display='none';
+
+document.getElementById('medlist').innerHTML = `
+<div class="skeleton">
+<div class="skeleton__block"></div>
+</div>
+`;
+
+		}
+
+		// when the user has stopped pressing on keys, set the timeout
+		// if the user presses on keys before the timeout is reached, then this timeout is canceled
+		async function handleKeyUp(e) {
+
+			window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
+			timer = window.setTimeout(async () => {
+			
+				if (document.getElementById('q').value.trim().length > 0) {
 
 document.getElementById('medlist').innerHTML = '';
 // document.getElementById('mlblock').style.display='none';
@@ -1750,6 +1781,7 @@ display: inline-block;margin:2px" id="mediname${i + 1}">
 					<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicineName']}">
 					<input type="text" autocomplete="off" id="manufacturerName" style='word-wrap: break-word;display:none' contenteditable='false'  name="manufacturerName" class="form-control foodItem_${i + 1}"   value="${res.data[i]['manufacturerName']?res.data[i]['manufacturerName']:''}">
 					<input type="text" autocomplete="off" id="packSize" style='word-wrap: break-word;display:none' contenteditable='false'  name="packSize" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicinePackSize']?res.data[i]['medicinePackSize']:''}">
+					<input type="text" autocomplete="off" id="prodLink" style='word-wrap: break-word;display:none' contenteditable='false'  name="prodLink" class="form-control foodItem_${i + 1}"   value="${res.data[i]['prodLink']?res.data[i]['prodLink']:''}">
 
 					</div>
 					</a>
@@ -1771,6 +1803,13 @@ display: inline-block;margin:2px" id="mediname${i + 1}">
 
 
 		}
+
+
+				
+		}, timeoutVal);
+		}
+
+			
 		
 		
 	}

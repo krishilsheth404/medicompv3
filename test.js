@@ -27636,6 +27636,24 @@ function calculateSimilarity(name1, name2) {
     const percentage = similarity * 100;
     return percentage.toFixed(2);
 }
+function compareStringArraysByIndex(arr1, arr2) {
+    const similarities = [];
+    let totalSimilarity = 0;
+    const shortestLength = Math.min(arr1.length, arr2.length);
+    for (let i = 0; i < shortestLength; i++) {
+      const element1 = arr1[i].toLowerCase(); // Convert to lowercase
+      const element2 = arr2[i].toLowerCase(); // Convert to lowercase
+      if (element1 && element2) {
+        const similarity = stringSimilarity.compareTwoStrings(element1, element2);
+        totalSimilarity += similarity;
+        const percentage = similarity * 100;
+        similarities.push({ element1, element2, similarity: percentage.toFixed(2) });
+      }
+    }
+    const averageSimilarity = totalSimilarity / (shortestLength || 1);
+    return { similarities, averageSimilarity: (averageSimilarity*100).toFixed(2) };
+  }
+  
 
 app.post('/getImageData', async (req, res) => {
     const start = performance.now();
@@ -28572,6 +28590,8 @@ extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
             parseFloat(calculateSimilarity( a['props']['pageProps']['productDetails']['manufacturer'].toLowerCase(), manufacturer.toLowerCase()))
         )/2;
 
+        var salts= a['props']['pageProps']['productDetails']['compositions'].map(composition => composition.name)
+
         return {
             name: 'PharmEasy',
             item: a['props']['pageProps']['productDetails']['name'].substring(0, 30),
@@ -28587,7 +28607,7 @@ extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
             manufacturerName: a['props']['pageProps']['productDetails']['manufacturer'],
             medicineAvailability:(a['props']['pageProps']['productDetails']['productAvailabilityFlags']['isAvailable']),
             minQty: a['props']['pageProps']['productDetails']['minQuantity'],
-            // saltName:a['props']['pageProps']['productDetails']['compositions'][0]['name'],
+            saltName:salts.length>1?salts:"NA",
             // qtyItContainsDesc:a['props']['pageProps']['productDetails']['measurementUnit'],
         };
 
@@ -28707,7 +28727,7 @@ extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
 
         return {
             name: 'NetMeds',
-            item: $('.product-detail .prodName h1').first().text(),
+            item: $('.prodName h1').first().text(),
             link: url,
             imgLink: $('.largeimage img').attr('src'),
             price: $('#last_price').attr('value'),
@@ -28720,8 +28740,8 @@ extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
             manufacturerName: $('span[class=drug-manu] > a').first().text(),
             medicineAvailability:$('.os-txt').text() == "" ? true:false,
             minQty:parseFloat(($('.min_qty_alert').first().text().split(':')[1])?($('.min_qty_alert').first().text().split(':')[1]):1),
-            // saltName:$('.drug-conf').first().text(),
-            // qtyItContainsDesc:$('.drug-varient').first().text(),
+            saltName:$('.drug-conf').first().text().split('+'),
+            // qtyItContainsDesc:$(".drug-varient").first().html(),
 
         };
 
@@ -28949,7 +28969,7 @@ FastextractDataOfApollo = async (url, nameOfMed,manufacturer) => {
             manufacturerName: apolloData.manufacturer.name,
             medicineAvailability:apolloData.offers.availability=='http://schema.org/InStock'?true:false,
             minQty:1,
-            // saltName:$('.compositionDescription ').first().text(),
+            saltName:$('div[class="r s"]').html().split('+'),
             // qtyItContainsDesc:$('.medStrips').first().text(),
 
         };
@@ -29054,7 +29074,7 @@ extractDataOfTruemeds = async (url, nameOfMed,manufacturer) => {
             manufacturerName: $('#manufacturer').first().text(),
             medicineAvailability:$('#pdActionCta').text() == "Add To Cart" ? true:false,
             minQty:1,
-            // saltName:$('.compositionDescription ').first().text(),
+            saltName:$('.compositionDescription ').first().text().split("+"),
             // qtyItContainsDesc:$('.medStrips').first().text(),
         };
 
@@ -29391,6 +29411,9 @@ extractDataOfmedplusMart = async (url, nameOfMed,manufacturer) => {
             manufacturerName: $('#divProductTitle>div').text(),
             medicineAvailability:$('.text-primary2').text() =="In Stock" ? true:false,
             minQty:1,
+            saltName:'NA',
+            // qtyItContainsDesc:"NA"
+
         };
 
     } catch (error) {
@@ -29483,7 +29506,6 @@ extractDataOfMyUpChar = async (url, nameOfMed,manufacturer) => {
             manufacturerName: dd[0]['manufacturer']['name'],
             medicineAvailability:true,
             minQty:1,
-
         };
 
     } catch (error) {
@@ -29634,6 +29656,9 @@ extractDataOfPP = async (url, nameOfMed,manufacturer) => {
             manufacturerName: $('#divProductTitle > label[class=text-muted]').text(),
             medicineAvailability:dataOfPP.offers.availability=='http://schema.org/InStock'?true:false,
             minQty:1,
+            saltName:($('.item-header').first().text().split("+")),
+            // qtyItContainsDesc: dataOfPP.name.match(/\d+/g),
+            
         };
 
     } catch (error) {
@@ -29759,6 +29784,7 @@ extractDataOfOgMPM = async (url, nameOfMed,manufacturer) => {
             manufacturerName: a[0].brand.name,
             medicineAvailability:true,
             minQty:1,
+            saltName:a[1].activeIngredient.split("+"),
 
         };
 
@@ -31205,26 +31231,21 @@ app.get('/searchPharmacies', async (req, res) => {
     nameOfMed = nameOfMed.trim().replace(/[%,+]/g, '');
     console.log(nameOfMed);
     var tempf = [];
-    var t = [0, 0, 0, 0, 0, 0, 0, 0];
+    var t = [0, 0, 0, 0, 0, 0, 0];
     var mixUrl;
 
     try {
         
-        const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });    
-        const database = client.db('MedicompDb');
-        const collection = database.collection('medicineList');
+    //     const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });    
+    //     const database = client.db('MedicompDb');
+    //     const collection = database.collection('medicineList');
     
-    // const result = await collection.findOne({ medicineName: "Crocin 650 Tablet 15" }, { links: 1, _id: 0 });
+    // // const result = await collection.findOne({ medicineName: "Crocin 650 Tablet 15" }, { links: 1, _id: 0 });
 
-        const result = await collection.findOne({ medicineName: `${nameOfMed}` }, { links: 1 });
-        linksExistsInDb = !!result.links;
+    //     const result = await collection.findOne({ medicineName: `${nameOfMed}` }, { links: 1 });
+    //     linksExistsInDb = !!result.links;
 
-        if (result.links) {
-        t = result.links;
-        t=t.flat();
-        console.log(t);
-        
-        } else {
+ 
             console.log("Hola! New Medicine Searched - "+nameOfMed);
        
                 // var mixUrl = `https://search.yahoo.com/search?&vl=lang_en&p=medicine intitle:(${nameOfMed})&vs=pharmeasy.in+%2C+myupchar.com+%2C+netmeds.com+%2C+medplusmart.com+%2C+tabletshablet.com+%2C+pulseplus.in+%2C+pasumaipharmacy.com+%2C+truemeds.in+%2C+1mg.com`;
@@ -31244,7 +31265,7 @@ app.get('/searchPharmacies', async (req, res) => {
             
                     'apollopharmacy.in','netmeds.com', 'pharmeasy.in',
                     'pasumaipharmacy.com', 'pulseplus.in', 'medplusmart.com',
-                    'truemeds.in', 'kauverymeds.com',
+                     'kauverymeds.com',
                     //  'myupchar.com',
                     // '1mg.com', 
                     // 'onebharatpharmacy.com',
@@ -31259,7 +31280,7 @@ app.get('/searchPharmacies', async (req, res) => {
                
                 var tries = 0;
                 var cpyOftempf;
-                while (cont != 8) {
+                while (cont != 7) {
             
             
                     tries++;
@@ -31279,7 +31300,7 @@ app.get('/searchPharmacies', async (req, res) => {
             
             
                     tempf = [...tempf, await fasterIgextractLinkFromOptimizedyahoo(mixUrl, arr, nameOfMed)];
-                    if(cpyOftempf==tempf||tries>=8){
+                    if(cpyOftempf==tempf||tries>=7){
                         break;
                     }else{
                     cont = checkforzero(arr);
@@ -31293,10 +31314,10 @@ app.get('/searchPharmacies', async (req, res) => {
                 tempf = tempf.flat();
                     tempfzz.push(1);
             
-            
-            
-                for (var k = 0; k < tempf.length; k++) {
-                    if (tempf[k].includes("apollo")) {
+
+                    
+                    for (var k = 0; k < tempf.length; k++) {
+                        if (tempf[k].includes("apollo")) {
                         t[0] = tempf[k];
                     } else if (tempf[k].includes("netmeds")) {
                         t[1] = tempf[k];
@@ -31310,28 +31331,24 @@ app.get('/searchPharmacies', async (req, res) => {
                         t[4] = tempf[k];
                     }else if (tempf[k].includes("medplusmart")) {
                         t[5] = tempf[k];
-                    } else if (tempf[k].includes("truemeds")) {
-                        t[6] = tempf[k];
                     } else if (tempf[k].includes("kauverymeds")) {
-                        t[7] = tempf[k];
+                        t[6] = tempf[k];
                     }
                 }
             
+                t.push(req.query['prodLink']);
                 t.push(req.query['manufacturerName']);
                 t.push(nameOfMed)
                 console.log(t);
             
                 
-                    await collection.updateOne(
-                        { medicineName: `${nameOfMed}` },
-                        { $push: { links: t } }
-                    )
+                   
                     
             
                    console.log("Links Added To Db - "+nameOfMed);
         
 
-        }
+        
 
 
         try {
@@ -32647,7 +32664,31 @@ app.get('/medicineName', async (req, res) => {
         // .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 }) 
         // .limit(10);
         
-         const records = await collection.find({
+        // const records = await collection.aggregate([
+        //     {
+        //         $search: {
+        //             index: 'medicineName',
+        //             text: {
+        //                 query: req.query['q'],
+        //                 path: ['medicineName', 'manufacturerName', 'medicinePackSize']
+        //             }
+        //         }
+        //     } ,
+        //     {
+        //         $project: {
+        //             score: { $meta: "textScore" },
+        //             medicineName: 1,
+        //         }
+        //     },
+        //     {
+        //         $sort: { score: { $meta: "textScore" } }
+        //     },
+        //     {
+        //         $limit: 10 // Limit to fetch only the top 10 results
+        //     }
+        // ]).toArray();
+
+        const records = await collection.find({
             medicineName: { $regex: req.query['q'], $options: 'i' }
         }).limit(10).toArray();
 
@@ -32742,7 +32783,7 @@ app.post('/medicomp', async (req, res) => {
     extractDataOfPP(item[3], nameOfMed,manufacturerN),
     extractDataOfmedplusMart(item[4], nameOfMed,manufacturerN), 
     extractDataOfOgMPM(item[5], nameOfMed,manufacturerN),
-    extractDataOfTruemeds(item[6], nameOfMed,manufacturerN),
+    extractDataOfTruemeds(item[7], nameOfMed,manufacturerN),
     // extractDataOfKauveryMeds(item[7], nameOfMed,manufacturerN),
 ]);
     // extractDataOfOBP(item[4], nameOfMed,manufacturerN),
