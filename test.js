@@ -32647,22 +32647,9 @@ app.get('/medicineName', async (req, res) => {
         // .project({ medicineName: 1, medicinePackSize: 1, manufacturerName: 1 }) 
         // .limit(10);
         
-        const records = await collection.aggregate([
-            {
-                $search: {
-                    index: 'medicineName',
-                    text: {
-                        query: req.query['q'],
-                        path: {
-                            wildcard: '*' // Search all fields
-                        }
-                    }
-                }
-            } ,
-            {
-                $limit: 10 // Limit to fetch only the top 10 results
-            }
-        ]).toArray();
+         const records = await collection.find({
+            medicineName: { $regex: req.query['q'], $options: 'i' }
+        }).limit(10).toArray();
 
 
         // Convert cursor to array and log the results
