@@ -1130,12 +1130,12 @@ body {
 						style="    border: 1px solid white;cursor: pointer;">
 						<input type="radio" id="switchMonthly" name="switchPlan" value="Monthly" checked="checked"/>
 
-						<input type="radio" disabled id="switchYearly" name="switchPlan" value="Yearly"
+						<input type="radio"  id="switchYearly" name="switchPlan" value="Yearly"
 							style="color: black;font-weight: bold"  />
 
 						<label for="switchMonthly" onclick="singleComp()" style="color: black;z-index: 4;font-weight: 400;">Single
 							Compare</label>
-						<label for="switchYearly" onclick="MediPro()" id="sy"
+						<label for="switchYearly" onclick="multiComp()" id="sy"
 							style="color: rgb(0, 0, 0);z-index: 4; font-weight: 400;">Multi Compare </label>
 						<!-- <img src="crown_6941697.png"
 							style="height: 15px;width: 15px;position: absolute;right: 10px;top:3px;z-index: 10;"> -->
@@ -1456,14 +1456,14 @@ body {
 	</script>
 
 	<script>
-					document.getElementById('ftco-loader').style.opacity= 0;
-					document.getElementById('ftco-loader').style.visibility ='hidden';
+					document.getElementById('ftco-loader').style.opacity= 1;
+					document.getElementById('ftco-loader').style.visibility ='visible';
+
 		function loader() {
 			console.warn('loading...')
 			document.getElementById('ftco-loader').style.opacity = 1;
+			document.getElementById('ftco-loader').style.visibility = 'visible';
 			// document.getElementById("ParentdivOfMainId").style.display='flex'
-			document.getElementById('ftco-loader-loading').style.display = 'block';
-			
 
 		}
 		
@@ -1471,10 +1471,10 @@ body {
 		window.addEventListener("onload", function () {
 			loader();
 			console.log('loading over');
-			document.body.style.display = 'block';
+			document.body.style.display = 'none';
 
-			document.getElementById('ftco-loader').style.visibility = 'none';
-			document.getElementById('ftco-loader').style.opacity = 0;
+			document.getElementById('ftco-loader').style.opacity = 1;
+			document.getElementById('ftco-loader').style.visibility = 'visible';
 
 		});
 
@@ -1626,6 +1626,7 @@ body {
 				document.getElementById('invisibleBlock').innerHTML += `	<input type='text'  href="#" id="medname" name="medname" value="${item}"><img src="medicine.png" style="height: 20px;width: 20px;">${item}`;
 			}
 		}
+		
 		async function formVal() {
 
 			if (document.getElementById('q').value.trim().length > 0) {
@@ -1733,9 +1734,9 @@ padding-left: 20px;background-color:black;color:white'>+</span>
 							document.getElementById('medlist').innerHTML += `
 				<div style="position:relative" id="manblck${i + 1}">
 			<div style="position:relative" onMouseOver="this.style.cursor='pointer'">
-			<form id="msform${i + 1}"  action="/searchPharmacies" method="get" class="ss searchString${i + 1}">
-				<a onclick="this.parentNode.submit();fetchUpdatesForSingleComparison()">
-					<div   onclick="loader()" class="textfield-search one-third" style="background:white;color:black;padding:10px" >
+			<form id="msform${i + 1}"  action="/searchPharmacies" method="get" class="ss searchString${i + 1}" >
+				<a onclick="this.parentNode.submit();fetchUpdatesForSingleComparison(),loader()">
+					<div class="textfield-search one-third" style="background:white;color:black;padding:10px" >
 						<p style="width: 90%;
 color: black;
 height: auto;
