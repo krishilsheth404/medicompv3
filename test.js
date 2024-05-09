@@ -28969,7 +28969,7 @@ FastextractDataOfApollo = async (url, nameOfMed,manufacturer) => {
             manufacturerName: apolloData.manufacturer.name,
             medicineAvailability:apolloData.offers.availability=='http://schema.org/InStock'?true:false,
             minQty:1,
-            saltName:$('div[class="r s"]').html().split('+'),
+            // saltName:$('div[class="r s"]').html().split('+'),
             // qtyItContainsDesc:$('.medStrips').first().text(),
 
         };
@@ -29784,7 +29784,7 @@ extractDataOfOgMPM = async (url, nameOfMed,manufacturer) => {
             manufacturerName: a[0].brand.name,
             medicineAvailability:true,
             minQty:1,
-            saltName:a[1].activeIngredient.split("+"),
+           // saltName:a[1].activeIngredient.split("+"),
 
         };
 
