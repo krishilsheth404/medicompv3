@@ -29784,7 +29784,7 @@ extractDataOfOgMPM = async (url, nameOfMed,manufacturer) => {
             manufacturerName: a[0].brand.name,
             medicineAvailability:true,
             minQty:1,
-           // saltName:a[1].activeIngredient.split("+"),
+            // saltName:a[1].activeIngredient.split("+"),
 
         };
 
@@ -31351,12 +31351,12 @@ app.get('/searchPharmacies', async (req, res) => {
         
 
 
-        try {
-            await client.close();
-            console.log('Closed MongoDB connection');
-        } catch (err) {
-            console.error('Error closing MongoDB connection', err);
-        }
+        // try {
+        //     await client.close();
+        //     console.log('Closed MongoDB connection');
+        // } catch (err) {
+        //     console.error('Error closing MongoDB connection', err);
+        // }
    
 
     } catch (err) {
@@ -32694,7 +32694,7 @@ app.get('/medicineName', async (req, res) => {
 
 
         // Convert cursor to array and log the results
-        if(records){
+        if(records.length>0){
             console.log("Found the following records:");
             // console.log(records);
         }else{
@@ -32853,6 +32853,20 @@ app.post('/medicomp', async (req, res) => {
 });
 
 
+app.post('/checkout', (req, res) => {
+
+    const final=[];
+    final.push({
+        pharmacyName:req.body.pharmacyName,
+        medicineName:req.body.medicineName,
+        ImgSrc:req.body.ImgSrc,
+        medicinePrice:req.body.medicinePrice,
+        deliveryCharge:req.body.deliveryCharge,
+    })
+ 
+
+   res.render(__dirname + '/checkOutPage.ejs', { final });
+});
 
 
 const port = process.env.PORT || 4000 // Port we will listen on
