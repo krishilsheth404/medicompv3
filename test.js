@@ -91,6 +91,14 @@ app.get('/', async (req, res)  => {
     //    res.redirect('/login')
     // }
 });
+app.get('/index.html', async (req, res)  => {
+    res.sendFile(__dirname+'/home.html');
+    // if (req.session.user) {
+    //     res.redirect('/home')
+    // } else {
+    //    res.redirect('/login')
+    // }
+});
 
 app.get('/home', (req, res) => {
 
@@ -30107,6 +30115,73 @@ extractDataOfChemistsWorld = async (url, nameOfMed,manufacturer) => {
         };
     }
 };
+
+
+
+extractDataOfMedkart = async (url, nameOfMed,manufacturer) => {
+    try {
+        // Fetching HTML
+        const { data } = await axios.get('https://api-console.mkart.dev/api/v1/token')
+
+        // Using cheerio to extract <a> tags
+        const $ = cheerio.load(data);
+        const d=JSON.parse($.html());
+        const token=d[0].data.token;
+
+
+        var dc=55;
+        var simIndex=parseFloat(
+            parseFloat(calculateSimilarity($('h1[itemprop="name"]').first().text().toLowerCase(), nameOfMed.toLowerCase())) +
+           parseFloat( calculateSimilarity($('.marketer__sec a').first().text().trim().toLowerCase(), manufacturer.toLowerCase()))
+        )/2;
+
+        var p=$('.product_cart_area__1 li').first().text();
+
+        if(!p){
+            p=$('span[itemprop="price"]').first().text();
+        }
+
+        return {
+            name: 'Chemists World',
+            item: $('h1[itemprop="name"]').first().text(),
+            link: url,
+            imgLink:$('.img_area img').attr('src'),
+            price: parseFloat(p),
+            deliveryCharge: 55,
+            offer: '',
+            finalCharge: 0,
+            similarityIndex: simIndex,
+            smed:parseFloat(calculateSimilarity($('h1[itemprop="name"]').first().text().toLowerCase(), nameOfMed.toLowerCase())) ,
+            sman: parseFloat(calculateSimilarity($('.marketer__sec a').first().text().trim().toLowerCase(), manufacturer.toLowerCase())),
+            manufacturerName: $('.marketer__sec a').first().text().trim(),
+            medicineAvailability:true,
+            minQty:1,
+
+        };
+
+    } catch (error) {
+        // res.sendFile(__dirname + '/try.html');
+        // res.sendFile(__dirname + '/error.html');
+        console.log(error);
+        return {
+            name: 'Chemists World',
+            item: 'NA',
+            link: url,
+            imgLink:$('.img_area img').attr('src'),
+            price: '',
+            deliveryCharge: '',
+            offer: '',
+            finalCharge: 0,
+            similarityIndex: '',
+            smed:'' ,
+            sman: '',
+            manufacturerName: '',
+            medicineAvailability:'',
+            minQty:1,
+        };
+    }
+};
+
 
 
 // extractDataOfKauverymeds = async (url, nameOfMed) => {
