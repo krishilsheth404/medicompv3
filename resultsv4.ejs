@@ -4616,7 +4616,7 @@
 					<li class="nav-item"><a href="#nearby" class="nav-link">NearbyChem</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<!-- <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li> -->
+					<li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
 					<!-- <li>
 						<form id="msform" action="/bookdoc" method="post" class="ss searchString">
 							<a onclick="this.parentNode.submit()">
@@ -4891,145 +4891,6 @@
                                   finalP=parseFloat((final[i][0][k].price.toString()).replace( /,/g, "" ))
                                     }
                             %>
-                              <% if(final[i].name=="TrueMeds") {%>
-                                <div class="column-collector itemForSorting" style="    position: relative;
-                                  width: 100%;
-                                  display: flex;
-                                  align-items: center;
-                                  justify-content: center;" data-ut="<%=final[i].smed%>" data-pt="<%=finalP%>" data-dt="<%=final[i].deliveryCharge%>">
-                                    <div class="imgSec" style="    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    gap: 10px;">
-      
-      
-                                      <img
-                                      class="image-40-icon"
-                                      loading="lazy"
-                                      alt=""
-                                      src="<%=final[i].imgLink%>"
-                                      />
-      
-      
-                                  
-                                   </div>
-    
-                                  <form action="/checkout" id="checkoutForm" method="post" style="width: auto;">
-                                  <div class="frame-parent4" >
-                                      <div class="shape-shaper-parent">
-                                        <div class="shape-shaper">
-                                        
-                                          <div class="very-good-54-container">
-                                            <p id="itemname" style="text-wrap:pretty">  <%=final[i].item%></p>
-                                            <input type="text" name="medicineName" id="medicineName" value="<%=final[i].item%>" style="height: 0px;width: 0px;display: none;font-size: 0px;">
-                                            <input type="text" name="ImgSrc" id="ImgSrc" value="<%=final[i].imgLink%>" style="height: 0px;width: 0px;display: none;font-size: 0px;">
-                                          </div>
-                                        </div>
-                                     
-                                      </div>
-                                      <div class="filler-fill">
-                                        <div class="bordered-border">
-                                          <div class="align-arranger" style="justify-content: space-between;">
-                                            <div class="padding-planner">
-                  
-                                              <div class="divider-designer">
-                                                <div class="grid-guide">
-                                                  <div class="">Medicine Price</div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="shape-shaper-x" style="text-align: right;">
-                                              <div class="h-28m" id="price_<%=i%>"> <%=final[i].price%></div>
-                                              <input type="text" name="medicinePrice" id="medicinePrice" value="<%=final[i].price%>" style="height: 0px;width: 0px;display: none;font-size: 0px;">
-
-                                            </div>
-                                          </div>
-                                          <div class="align-arranger" style="justify-content: space-between;">
-                                            <div class="padding-planner">
-                  
-                                              <div class="divider-designer">
-                                                <div class="grid-guide">
-                                                  <div class="" >Delivery Price</div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="shape-shaper-x" style="text-align: right;">
-                                              <div class="h-28m delprices" id="delivery_<%=i%>">    <%=final[i].deliveryCharge%></div>
-                                              <input type="text" name="deliveryCharge" id="deliveryCharge" value="<%=final[i].deliveryCharge%>" style="height: 0px;width: 0px;display: none;font-size: 0px;">
-
-                                            </div>
-                                          </div>
-                                         
-                                          <div class="error-handler1"></div>
-                                          <div class="starting-from-parent" style="
-                                          align-items: center;
-          justify-content: space-between;
-          flex-wrap: nowrap;
-          flex-direction: row;
-          width: 100%;
-          margin-top: 15px;display: flex;">
-                                            <div class="starting-from" style="
-                                            font-size: larger;
-                                            font-weight: bold;
-                                            ">Cart Total</div>
-                                            <b  > ₹<span id="finalprice_<%=i%>" class="image-iris" style="font-weight: bold;"><%=finalP%></span></b>
-                                            
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="error-handler1"></div>
-                                     <span class="pnmaes " style="font-weight: normal;text-wrap: pretty;font-size: inherit;">
-                                       Pharmacy : <span id="company_<%=i%>" class="pnmaes <%=final[i].name.trim().replace(/\s/g, '')%>" style="font-size: inherit;">  <%=final[i].name%> </span>
-                                       <input type="text" name="pharmacyName" id="pharmacyName" value="<%=final[i].name%>" style="height: 0px;width: 0px;display: none;font-size: 0px;">
-
-                                     </span> 
-                                     <span class="pnmaes " style="font-weight: normal;text-wrap: pretty;font-size: inherit;">
-                                       Min Qty : <span class="pnmaes>" style="font-size: inherit;"> <b><%=final[i].minQty%></b>  </span>
-                                     </span> 
-                                      <div class="button-group" style="
-                                      width: 80%;
-                                  ">
-                                        
-                                        <%if(final[i].medicineAvailability){%>
-                                         
-      
-                                            <button class="button14 instock" style="width: 100%;background-color: transparent;" link="<%=final[i].link%>" target="_blank">
-                                              <div class="style-layer2" style="background-color: #89efff">
-                                                <div class="button15" style="text-align: center;">Buy From Medicomp</div>
-                                              </div>
-                                            </button>
-      
-      
-                                          <div class="style-layer1" style="border: none;">
-                                            <select name="qty" id="qty_<%=i%>" style="    font-size: 19px;
-                                              position: absolute;
-                                              height: 40px;
-                                              border: none;
-                                              width: 40px;border: 1px solid #98c4ff;
-                                          " onchange="multiplyPriceByCount(this.id)">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                          </select>
-                                        </div>
-                                          <%}else{%>
-                                             <button class="button14 outofstock" style="width: 100%;background-color: #ff775e;" link="<%=final[i].link%>">
-                                                <div class="style-layer2" style="background-color: #ff775e">
-                                                  <div class="button15">Out Of Stock</div>
-                                                </div>  
-                                              </button>
-                                            <%}%>
-                                          </div>
-                                        </div>
-                                      </form>
-                                  </div>
-                              <%}else{%>
                             <div class="column-collector itemForSorting" style="    position: relative;
                             width: 100%;
                             display: flex;
@@ -5157,7 +5018,6 @@
                                     </div>
                                   </div>
                             </div>
-                                 <%}%>
 
                             <%}%>
                      <%}%>
