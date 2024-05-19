@@ -32764,8 +32764,9 @@ app.get('/medicineName', async (req, res) => {
         // ]).toArray();
 
         const records = await collection.find({
-            medicineName: { $regex: req.query['q'], $options: 'i' }
-        }).limit(10).toArray();
+            medicineName: { $regex: `^${req.query['q']}`, $options: 'i' }
+        }).limit(5).toArray();
+        
 
 
         // Convert cursor to array and log the results

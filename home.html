@@ -1092,7 +1092,22 @@ body {
 					<li class="nav-item"><a href="#nearby" class="nav-link">NearbyChem</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta"><a href="/home.html" style="background-color: black;color: white;" class="nav-link"><span>Login</span></a></li>
+					<!-- <li class="nav-item cta">
+						<div class="pe_signin_button" data-client-id="18693321474032141740"><script src="https://www.phone.email/sign_in_button_v1.js" async></script></div>
+<script>
+    function phoneEmailListener(userObj){
+        var user_json_url = userObj.user_json_url;
+        var user_country_code = userObj.user_country_code;
+        var user_phone_number = userObj.user_phone_number;
+        alert('SUCCESS !!\nYour phone number '+user_country_code+' '+user_phone_number+' has been authenticated.');
+        // You can submit your form here or redirect user to post login dashboard page
+        // Send user_json_url to your backend to retrieve user info (i.e. country code and phone number) from this URL.
+    }
+</script> 
+</li> -->
+
+
+
 					<!-- <li>
 						<form id="msform" action="/bookdoc" method="post" class="ss searchString">
 							<a onclick="this.parentNode.submit()">
@@ -1116,38 +1131,166 @@ body {
 		style="    background:linear-gradient(45deg, #3875eb, rgb(192, 215, 255))">
 		<!-- <span><img src="doctoon-removebg-preview.png" style="position: absolute;bottom:0px;right: 0px;height: 50vh;width: auto;" alt=""></span> -->
 		<div class="overlay"></div>
-		<div class="container" id="idcontainer">
-			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
+		<div class="container" id="idcontainer" style="height: 65vh;">
+			<div id="medHeight" class="row no-gutters slider-text  align-items-center justify-content-start"
 				data-scrollax-parent="true">
 				<div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-					<h1 class="mb-4" style="margin-top: 100px;"
+					<h1 class="mb-4"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong style=" overflow-wrap: anywhere;opacity: 1;
 							">Save Money On <br> Medicines💊</strong> </h1>
-					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><b
+							<div class="block-17 my-4" style="display: flex;
+							align-items: center;
+							justify-content: space-between;background-color: transparent;position: relative;">
+								<div class="d-block d-flex" style="width: 100%;display: flex;align-items: center;justify-content: stretch;gap: 10px;flex-wrap: wrap;">
+									<!-- <div class="fields d-block d-flex" style="width: 250px">
+										<div class="textfield-search one-third">
+											<input type="text" autocomplete="off"  class="form-control" placeholder="Pin Code ">
+		
+										</div>
+									</div> -->
+									<style>
+										#medLL{
+											width: 100%;
+										}
+
+										#medHeight{
+											height: 750px;
+										}
+										
+										@media screen and (max-width:1200px) {
+											#medLL{
+												width: 100%;
+											}	
+											#medHeight{
+											height: 600px;
+										}								
+										}
+									</style>
+									<div class="fields d-block d-flex" id="medLL">
+										<div class="textfield-search one-third">
+											<input type="text" oninput="formVal()" autocomplete="off" id="q" name="q" class="form-control" placeholder="Enter Medicine Name ">
+											<div id="medlist" style=" 
+											position: absolute;
+											top: 70px;
+											width: inherit;
+											z-index: 100;">
+					
+															</div>
+										</div>
+									</div>
+									<div id="invisibleBlock" style="display: none;">
+		
+										<!-- <input type="submit" class="search-submit btn btn-primary" value="Search"> -->
+								
+							</div></div>
+
+						
+		
+		
+							<style>
+								#uploadBtn {
+									background-color: #00000000;
+									/* Green */
+									border: none;
+									color: white;
+		
+									text-align: center;
+									text-decoration: none;
+									display: inline-block;
+									font-size: 16px;
+								}
+		
+								#uploadBtn i {
+									font-size: 2rem;
+									color: black;
+								}
+		
+								#blah {
+									width: 100px;
+									height: 100px;
+								}
+							</style>
+							<!-- <button id="uploadBtn" onclick="importData()"> <i
+									class="fas fa-camera-alt fa-4x fa-fw"></i></i></button> -->
+							<form action="/getImageData" method="post" id="imgForm">
+								<input type="text" name="blah" id="blah" style="
+										width: 0px;
+										height: 0px;
+										visibility: hidden;
+									">
+								<input type="submit" value="submit" id="sub" style="
+									   width: 0px;
+									   height: 0px;
+									   visibility: hidden;
+								   ">
+		
+								<!-- <img id="blah" src="http://placehold.it/180" alt="your image"> -->
+							</form>
+		
+							<script>
+								function importData() {
+									let input = document.createElement('input');
+									input.type = 'file';
+									input.id = 'fileSec'
+									input.onchange = async _ => {
+										console.log('in')
+										// you can use this method to get file and perform respective operations
+										let files = Array.from(input.files);
+										console.log(files[0]);
+										var reader = new FileReader();
+										reader.readAsDataURL(input.files[0]);
+										const upload = Upload({ apiKey: "free" })
+										document.getElementById('ftco-loader').style.visibility = 'visible';
+										document.getElementById('ftco-loader').style.opacity = 1;
+		
+		
+		
+										document.getElementById('loading_val').style.display = 'block';
+										document.getElementById('loading_data').style.display = 'block';
+										document.getElementById('loading_img').style.display = 'block';
+		
+										const [file] = event.target.files;
+										const { fileUrl } = await upload.uploadFile(
+											file,
+											{
+												onBegin: ({ cancel }) => console.log("File upload started!"),
+												onProgress: ({ progress }) => console.log(`File uploading... ${progress}%`, document.getElementById('loading_val').innerHTML = progress + "%")
+											}
+										);
+										console.log(`File uploaded! ${fileUrl}`);
+										document.getElementById('loading_val').style.display = 'none';
+										document.getElementById('loading_data').style.display = 'none';
+										document.getElementById('loading_img').style.display = 'none';
+		
+										document.getElementById('sec_load').style.visibility = 'visible';
+		
+		
+										document.getElementById('blah').value = fileUrl;
+		
+										console.warn('loading...')
+										document.getElementById('sub').click();
+		
+		
+									};
+		
+									input.click();
+		
+		
+		
+		
+									// reader.readAsDataURL(input.files[0]);
+		
+								}
+							</script>
+						</div>
+					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+						<b id="tagLine"
 							style="font-weight: bold;font-size: 20px;color: white;">COMPARE , SAVE , REPEAT</b>
 
-					<div class="switches-container" id="switchContWidth"
-						style="    border: 1px solid white;cursor: pointer;">
-						<input type="radio" id="switchMonthly" name="switchPlan" value="Monthly" checked="checked"/>
+							
 
-						<input type="radio"  id="switchYearly" name="switchPlan" value="Yearly"
-							style="color: black;font-weight: bold"  />
 
-						<label for="switchMonthly" onclick="singleComp()" style="color: black;z-index: 4;font-weight: 400;">Single
-							Compare</label>
-						<label for="switchYearly" disabled="true" onclick="MediPro()" id="sy"
-							style="color: rgb(0, 0, 0);z-index: 4; font-weight: 400;">Multi Compare </label>
-						<!-- <img src="crown_6941697.png"
-							style="height: 15px;width: 15px;position: absolute;right: 10px;top:3px;z-index: 10;"> -->
-						<div class="switch-wrapper">
-							<div id="switch" style="background-color: #ffffff;">
-								<div style="color: black;font-weight: bold;">Single Compare</div>
-								<div style="font-weight: bold;color: white;" >Multi Compare </div>
-								<input type="text" name="typeForComp" id="typeForComp" value="single">
-							</div>
-						</div>
-					</div>
-
+					
 					<script>
 						function MediPro() {
 							window.open('/MedicompProWaitlist.html', "_self")
@@ -1188,24 +1331,10 @@ body {
 					</script>
 
 					</p>
-					<div class="block-17 my-4" style="display: flex;
-					align-items: center;
-					justify-content: space-between;">
-						<form action="#" class="d-block d-flex" style="    width: 100%;;">
-							<div class="fields d-block d-flex">
-								<div class="textfield-search one-third">
-									<input type="text" oninput="formVal()" autocomplete="off" id="q" name="q"
-										class="form-control" placeholder="Enter Medicine Name ">
+					
 
-								</div>
-							</div>
-							<div id="invisibleBlock" style="display: none;">
-
-								<!-- <input type="submit" class="search-submit btn btn-primary" value="Search"> -->
-						</form>
-					</div>
-
-
+					
+					<div>
 					<style>
 						#uploadBtn {
 							background-color: #00000000;
@@ -1335,9 +1464,7 @@ body {
             	<span class="d-flex justify-content-md-center align-items-md-center" style="margin: 5px;"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span> 
             	<span class="d-flex justify-content-md-center align-items-md-center" style="margin: 5px;"><a href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span> -->
 				</p>
-				<div id="medlist">
-
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -1439,7 +1566,9 @@ body {
 	</script>
 
 	<script>
-		async function fetchUpdatesForSingleComparison(){
+		async function fetchUpdatesForSingleComparison(a){
+
+			document.getElementById(`msform${a}`).submit();
 			var cpunt=1;
 			
 		var aTimer=setInterval(async () => {
@@ -1460,6 +1589,7 @@ body {
 					// document.getElementById('ftco-loader').style.visibility ='visible';
 
 		function loader() {
+
 			console.warn('loading...')
 			document.getElementById('ftco-loader').style.opacity = 1;
 			document.getElementById('ftco-loader').style.visibility = 'visible';
@@ -1640,6 +1770,9 @@ body {
 		function handleKeyPress(e) {
 			window.clearTimeout(timer);
 			document.getElementById('medlist').innerHTML = '';
+
+			document.getElementById('tagLine').innerHTML='';
+
 	document.getElementById('medlist').innerHTML = `
 	<div class="skeleton">
 	<div class="skeleton__block"></div>
@@ -1679,119 +1812,62 @@ await axios({
 })
 	.then((res) => {
 		console.log(res.data.length);
-		document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
+
+		// document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
 		console.log(document.getElementById('idcontainer').style.height)
 
-		if (window.innerWidth > 500) {
-			// document.getElementById('idcontainer').style.height = `${(res.data.length * 120) + 300 + document.getElementById(`mainMedListBox`).clientHeight + 150}px `;
-			// if(res.data.length<3){
-			// 	document.getElementById('idcontainer').style.height = `${(res.data.length * 100) + 300 + document.getElementById(`mainMedListBox`).clientHeight + 350}px `;
-			// }
-			document.getElementById('idcontainer').style.height = `${(res.data.length * 150) +300 + parseInt(document.getElementById(`mainMedListBox`).clientHeight*2)}px`;
-			if(res.data.length<3){
-				document.getElementById('idcontainer').style.height = `${(res.data.length * 150) +600+ parseInt(document.getElementById(`mainMedListBox`).clientHeight*2)}px `;
-			}
-			// document.getElementById('fullheight').style.height = `${(res.data.length * 80) + 300}px`;
-		} else {
-			document.getElementById('idcontainer').style.height = `${(res.data.length * 150) + 500 + parseInt(document.getElementById(`mainMedListBox`).clientHeight*2)}px`;
-			if(res.data.length<3){
-				document.getElementById('idcontainer').style.height = `${(res.data.length * 150) + 550 + parseInt(document.getElementById(`mainMedListBox`).clientHeight*2)}px `;
-			}
-			// document.getElementById('fullheight').style.height = `${(res.data.length * 100) + 250}px`;
-		}
+		
+			
 		// document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
 		// document.getElementById('idcontainer').style.transition='all 1s';
 		// document.getElementById('fullheight').style.transition='all 1s';
 
 		document.getElementById('medlist').innerHTML = '';
-		document.getElementById('medlist').style.height = `100vh`;
-		// document.getElementById('medlist').style.overflow='scroll';
-		for (var i = 0; i < res.data.length; i++) {
-			if (res.data[i]['medicineName']) {
+		// document.getElementById('medlist').style.height = 150 * res.data.length;
+		document.querySelectorAll('.services-section')[0].style.marginTop = 90 * res.data.length +"px";
+		document.getElementById('medlist').style.overflow = `scroll`;
 
-				console.log(res.data[i]['medicineName']);
-
-				console.log(document.getElementById('typeForComp').value)
-
-
-				if(document.getElementById('typeForComp').value=='multi'){
-				document.getElementById('medlist').innerHTML += `
-				<div style="position:relative" id="manblck${i + 1}">
-			<div style="position:relative" onMouseOver="this.style.cursor='pointer'">
-			<form id="msform${i + 1}"  action="/searchPharmacies" method="get" class="ss searchString${i + 1}">
-				<a onclick="this.parentNode.submit()">
-					<div   onclick="loader()" class="textfield-search one-third" style="background:white;color:black;padding:10px" >
-						<p style="width: 80%;
-color: black;
-height: auto;
-display: inline-block;margin:2px" id="mediname${i + 1}">
-							${res.data[i]['medicineName']} , <br>
-							<span style="
-    font-size: small;
-    font-weight: 500;
-">${res.data[i]['medicinePackSize']} </span>
-							</p>
-
-<span id="mediname${i + 1}_manu" style="font-size:0px;height:0px;width:0px">${res.data[i]['manufacturerName']?res.data[i]['manufacturerName']:''}</span>
-					
-<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicineName']}">
-					<input type="text" autocomplete="off" id="manufacturerName" style='word-wrap: break-word;display:none' contenteditable='false'  name="manufacturerName" class="form-control foodItem_${i + 1}"   value="${res.data[i]['manufacturerName']?res.data[i]['manufacturerName']:''}">
-					<input type="text" autocomplete="off" id="packSize" style='word-wrap: break-word;display:none' contenteditable='false'  name="packSize" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicinePackSize']?res.data[i]['medicinePackSize']:''}">
-					</div>
-					</a>
-			</form>
-					</div>
-					<span id="addbtn_${i + 1}" class="toggleBtnRem" onclick="addMedToSearchList('${i + 1}')"
-					onMouseOver="this.style.background='black';this.style.color='white';this.style.cursor='pointer'"
-					onMouseOut="this.style.background='black';this.style.color='white'"
-					style='position: absolute;height:100%;
-right: 0px;
-top: 50%;
-color: black;
-font-size: 2rem;
-transform: translate(0%, -50%);
-padding-right: 10px;
-padding-left: 20px;background-color:black;color:white'>+</span>
-							</div>
-					<br>`;
-						
-				
-				}else{
-
-
-							document.getElementById('medlist').innerHTML += `
-				<div style="position:relative" id="manblck${i + 1}">
-			<div style="position:relative" onMouseOver="this.style.cursor='pointer'">
-			<form id="msform${i + 1}"  action="/searchPharmacies" method="get" class="ss searchString${i + 1}" >
-				<a onclick="this.parentNode.submit();fetchUpdatesForSingleComparison(),loader()">
-					<div class="textfield-search one-third" style="background:white;color:black;padding:10px" >
-						<p style="width: 90%;
-color: black;
-height: auto;
-display: inline-block;margin:2px" id="mediname${i + 1}">
-							${res.data[i]['medicineName']} <br>
-							<span style="
-    font-size: small;
-    font-weight: 500;
-">${res.data[i]['medicinePackSize']}</span>
-							</p>
-					<input type="text" autocomplete="off" id="medname" style='word-wrap: break-word;display:none' contenteditable='false'  name="medname" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicineName']}">
-					<input type="text" autocomplete="off" id="manufacturerName" style='word-wrap: break-word;display:none' contenteditable='false'  name="manufacturerName" class="form-control foodItem_${i + 1}"   value="${res.data[i]['manufacturerName']?res.data[i]['manufacturerName']:''}">
-					<input type="text" autocomplete="off" id="packSize" style='word-wrap: break-word;display:none' contenteditable='false'  name="packSize" class="form-control foodItem_${i + 1}"   value="${res.data[i]['medicinePackSize']?res.data[i]['medicinePackSize']:''}">
-					<input type="text" autocomplete="off" id="prodLink" style='word-wrap: break-word;display:none' contenteditable='false'  name="prodLink" class="form-control foodItem_${i + 1}"   value="${res.data[i]['prodLink']?res.data[i]['prodLink']:''}">
-
-					</div>
-					</a>
-			</form>
-					</div>
-					
-							</div>
-					<br>`;
-						}
-			}
-
-
+		function formSub(a){
+			 document.getElementById(`msform${a}`).submit();
 		}
+		// document.getElementById('medlist').style.overflow='scroll';
+		let htmlContent = '';
+
+for (var i = 0; i < res.data.length; i++) {
+    const medicine = res.data[i];
+    if (medicine['medicineName']) {
+        console.log(medicine['medicineName']);
+        htmlContent += `
+            <div id="manblck${i + 1}" style="position: relative;
+    padding-bottom: 10px;
+    background: white;
+    margin-bottom: 1px;
+    margin-top: 1px;">
+                <div style="position:relative" onMouseOver="this.style.cursor='pointer'">
+                    <form id="msform${i + 1}" action="/searchPharmacies" method="get" class="ss searchString${i + 1}">
+                        <a onclick="event.preventDefault(); this.parentNode.submit(); fetchUpdatesForSingleComparison(); loader();" id="pntr">
+                            <div class="textfield-search one-third" style="background:white;color:black;padding:10px">
+                                <p style="width: 90%; color: black; height: auto; display: inline-block; margin: 2px" id="mediname${i + 1}">
+                                    ${medicine['medicineName']} <br>
+                                    <span style="font-size: small; font-weight: 500;">
+                                        ${medicine['medicinePackSize']}
+                                    </span>
+                                </p>
+                            </div>
+                        </a>
+                        <input type="text" autocomplete="off" id="medname" style="word-wrap: break-word; display:none" contenteditable="false" name="medname" class="form-control foodItem_${i + 1}" value="${medicine['medicineName']}">
+                        <input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word; display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_${i + 1}" value="${medicine['manufacturerName'] ? medicine['manufacturerName'] : ''}">
+                        <input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word; display:none" contenteditable="false" name="packSize" class="form-control foodItem_${i + 1}" value="${medicine['medicinePackSize'] ? medicine['medicinePackSize'] : ''}">
+                        <input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word; display:none" contenteditable="false" name="prodLink" class="form-control foodItem_${i + 1}" value="${medicine['prodLink'] ? medicine['prodLink'] : ''}">
+                    </form>
+                </div>
+            </div>
+        `;
+    }
+}
+
+document.getElementById('medlist').innerHTML = htmlContent;
+
 	})
 	.catch((err) => {
 		throw err;
@@ -1827,9 +1903,9 @@ document.getElementById('medlist').innerHTML = `
 
 
 	<section class="ftco-section services-section bg-light">
-		<div class="container">
+		<div class="container" style="margin-top: 0px;">
 			<div class="row d-flex">
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+				<div class="col-md-3 d-flex align-self-stretch ">
 					<div class="media block-6 services d-block text-center">
 						<div class="d-flex justify-content-center">
 							<div class="icon"><span class="flaticon-guarantee"></span></div>
@@ -1840,7 +1916,7 @@ document.getElementById('medlist').innerHTML = `
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+				<div class="col-md-3 d-flex align-self-stretch ">
 					<div class="media block-6 services d-block text-center">
 						<div class="d-flex justify-content-center">
 							<div class="icon"><span class="flaticon-like"></span></div>
@@ -1852,7 +1928,7 @@ document.getElementById('medlist').innerHTML = `
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+				<div class="col-md-3 d-flex align-self-stretch ">
 					<div class="media block-6 services d-block text-center">
 						<div class="d-flex justify-content-center">
 							<div class="icon"><span class="flaticon-detective"></span></div>
@@ -1864,7 +1940,7 @@ document.getElementById('medlist').innerHTML = `
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+				<div class="col-md-3 d-flex align-self-stretch ">
 					<div class="media block-6 services d-block text-center">
 						<div class="d-flex justify-content-center">
 							<div class="icon"><span class="flaticon-support"></span></div>
@@ -2011,8 +2087,9 @@ document.getElementById('medlist').innerHTML = `
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<div class="row">
+		<div class="container" >
+			<div class="row" style="    align-items: flex-end;
+			">
 				<div class="col-sm col-md-6 col-lg ftco-animate">
 					<div class="destination">
 						<a href="" class="img img-2 d-flex justify-content-center align-items-center"
@@ -2087,7 +2164,7 @@ document.getElementById('medlist').innerHTML = `
 											text-align: center;
 											color: black;
 											padding: 10px;
-											background: #8bc34a;
+											background: #a5e160;
 											color: white;
 											margin-top: 5px;">
 												
@@ -2182,7 +2259,7 @@ document.getElementById('medlist').innerHTML = `
 											text-align: center;
 											color: black;
 											padding: 10px;
-											background: #8bc34a;
+											background: #a5e160;
 											color: white;
 											margin-top: 5px;">
 												
@@ -2278,7 +2355,7 @@ document.getElementById('medlist').innerHTML = `
 											text-align: center;
 											color: black;
 											padding: 10px;
-											background: #8bc34a;
+											background: #a5e160;
 											color: white;
 											margin-top: 5px;">
 												
@@ -2300,197 +2377,7 @@ document.getElementById('medlist').innerHTML = `
 						</div>
 					</div>
 				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/c/o/cofsils_ginger_lemon.png);background-size: contain;">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<!-- <h3><a href="#">Volini Spray</a></h3> -->
-									<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-								</div>
-								<div class="two">
-									<span class="price" style="opacity: 0.4;color: green;">₹25</span>
-								</div>
-							</div>
-							<div class="d-flex">
-								<div class="one">
-									<h3><a href="#">Cofsils Lozenges Orange</a></h3>
-									<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-								</div>
-								<div class="two">
-									<span class="price">₹31</span>
-								</div>
-							</div>
-							<div class="d-flex">
-								<div class="one">
-									<!-- <h3><a href="#">Volini Spray</a></h3> -->
-									<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-								</div>
-								<div class="two">
-									<span class="price" style="opacity: 0.4;color: red">₹33</span>
-								</div>
-							</div>
-							<p><b>Uses Of Cofsils Lozenges Orange</b> <br> Sore throat, cough, and cold</p>
-							<!-- <p class="days"><span>2 days 3 nights</span></p> -->
-							<hr>
-								<span><i class="icon-map-o"></i>10 Lozenges in 1 Strip</span>
-								<span class="ml-auto">
-									<style>
-										#pntr:hover{
-											cursor: pointer;
-										}
-									</style>
-									<form action="/searchPharmacies" method="GET" class="ss searchString7">
-										<a onclick="this.parentNode.submit();fetchUpdatesForSingleComparison(),loader()" id="pntr">
-											<div class="textfield-search one-third" style="background: white;
-											text-align: center;
-											color: black;
-											padding: 10px;
-											background: #8bc34a;
-											color: white;
-											margin-top: 5px;">
-												
-												<span style="
-							font-size: small;
-							font-weight: 500;
-							">
-							Compare
-						</span>
-											<input type="text" autocomplete="off" id="medname" style="word-wrap: break-word;display:none" contenteditable="false" name="medname" class="form-control foodItem_7" value="Cofsils Orange Lozenges 10">
-											<input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word;display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_7" value="Cipla Ltd..">
-											<input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word;display:none" contenteditable="false" name="packSize" class="form-control foodItem_7" value="Pack of 10 Units">
-											<input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word;display:none" contenteditable="false" name="prodLink" class="form-control foodItem_7" value="https://www.truemeds.in/medicine/cofsils-orange-1206-mg-lozenges-10-tm-loon1-000013">
-						
-											</div>
-											</a>
-									</form>	
-								</span>	
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(https://newassets.apollo247.com/pub/media/catalog/product/m/o/moo0020_1_1.jpg);background-size: contain;">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<!-- <h3><a href="#">Volini Spray</a></h3> -->
-									<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-								</div>
-								<div class="two">
-									<span class="price" style="opacity: 0.4;color: green;">₹61</span>
-								</div>
-							</div>
-							<div class="d-flex">
-								<div class="one">
-									<h3><a href="#">Moov Pain Relief Cream</a></h3>
-									<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-								</div>
-								<div class="two">
-									<span class="price">₹70</span>
-								</div>
-							</div>
-							<div class="d-flex">
-								<div class="one">
-									<!-- <h3><a href="#">Volini Spray</a></h3> -->
-									<!-- <p class="rate">
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star-o"></i>
-											<span>8 Rating</span>
-										</p> -->
-								</div>
-								<div class="two">
-									<span class="price" style="opacity: 0.4;color: red;">₹75</span>
-								</div>
-							</div>
-							<p> <b>Uses of Moov Pain Relief Cream
-								</b> <br>Pain Relief</p>
-							<!-- <p class="days"><span>2 days 3 nights</span></p> -->
-							<hr>
-								<span><i class="icon-map-o"></i> 15 gm Ointment in 1 Tube</span>
-								<span class="ml-auto">
-									<style>
-										#pntr:hover{
-											cursor: pointer;
-										}
-									</style>
-									<form action="/searchPharmacies" method="GET" class="ss searchString7">
-										<a onclick="this.parentNode.submit();fetchUpdatesForSingleComparison(),loader()" id="pntr">
-											<div class="textfield-search one-third" style="background: white;
-											text-align: center;
-											color: black;
-											padding: 10px;
-											background: #8bc34a;
-											color: white;
-											margin-top: 5px;">
-												
-												<span style="
-							font-size: small;
-							font-weight: 500;
-							">
-							Compare
-						</span>
-											<input type="text" autocomplete="off" id="medname" style="word-wrap: break-word;display:none" contenteditable="false" name="medname" class="form-control foodItem_7" value="Moov Pain Relief Cream 15gm">
-											<input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word;display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_7" value="Paras Pharmaceuticals Ltd.">
-											<input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word;display:none" contenteditable="false" name="packSize" class="form-control foodItem_7" value="Tube Of 15 gm">
-											<input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word;display:none" contenteditable="false" name="prodLink" class="form-control foodItem_7" value="https://www.truemeds.in/medicine/moov-cream-15-gm-tm-coom1-003154">
-						
-											</div>
-											</a>
-									</form>	
-								</span>	
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</section>
