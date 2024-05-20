@@ -1,0 +1,35 @@
+<svg width="608" height="608" viewBox="0 0 608 608" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.3" clip-path="url(#clip0_6020_231)" filter="url(#filter0_f_6020_231)">
+<path d="M454.467 92.5211H153.012C119.316 92.5211 92 119.837 92 153.533V454.988C92 488.684 119.316 516 153.012 516H454.467C488.163 516 515.479 488.684 515.479 454.988V153.533C515.479 119.837 488.163 92.5211 454.467 92.5211Z" stroke="#89ACF1" stroke-miterlimit="10"/>
+<path d="M449.463 159.8V303.956H304.956L449.219 159.8H449.463Z" fill="url(#paint0_linear_6020_231)"/>
+<path d="M160.8 159.45H304.956V303.956L160.8 159.694V159.45Z" fill="url(#paint1_linear_6020_231)"/>
+<path d="M160.45 448.113V303.956H304.956L160.709 448.113H160.45Z" fill="url(#paint2_linear_6020_231)"/>
+<path d="M449.113 448.462H304.956V303.956L449.113 448.204V448.462Z" fill="url(#paint3_linear_6020_231)"/>
+</g>
+<defs>
+<filter id="filter0_f_6020_231" x="0" y="-1" width="609" height="609" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="46" result="effect1_foregroundBlur_6020_231"/>
+</filter>
+<linearGradient id="paint0_linear_6020_231" x1="449.463" y1="159.8" x2="244.44" y2="308.757" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C0D7FF"/>
+<stop offset="1" stop-color="#3875EB"/>
+</linearGradient>
+<linearGradient id="paint1_linear_6020_231" x1="304.956" y1="159.45" x2="99.7457" y2="307.823" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C0D7FF"/>
+<stop offset="1" stop-color="#3875EB"/>
+</linearGradient>
+<linearGradient id="paint2_linear_6020_231" x1="304.956" y1="303.956" x2="99.9334" y2="452.913" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C0D7FF"/>
+<stop offset="1" stop-color="#3875EB"/>
+</linearGradient>
+<linearGradient id="paint3_linear_6020_231" x1="449.113" y1="303.956" x2="243.902" y2="452.329" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C0D7FF"/>
+<stop offset="1" stop-color="#3875EB"/>
+</linearGradient>
+<clipPath id="clip0_6020_231">
+<rect width="425" height="425" fill="white" transform="translate(92 91)"/>
+</clipPath>
+</defs>
+</svg>
