@@ -320,10 +320,10 @@ app.get('/temp', async (req, res) => {
                 // const result = await collection.createIndex({ medicineName: 1 });
                 // console.log("Index created successfully:", result);
 
-                 await collection.createIndex({ medicineName: 'text' });
-                         const result = await collection.createIndex({ medicineName: 1 });
+                await collection.createIndex({ "medicineName": "text" }, { "default_language": "english", "weights": { "medicineName": 10 } });
 
 
+                console.log("done")
                 // console.log(collection('medicineList').getIndexes())
                 // const regex = new RegExp("ant", 'i'); // 'i' for case-insensitive
                 // const cursor = collection.find({ medicineName: { $regex: regex } }).limit(20);
@@ -32741,17 +32741,18 @@ app.get('/medicineName', async (req, res) => {
             {
               $search: {
                 index: "medicompSearch",
-                text: {
+                autocomplete: {
                   query: req.query['q'],
-                  path: ["medicineName","manufacturerName", "medicinePackSize"]
+                  path: "medicineName",
+                  fuzzy: {
+                    maxEdits: 1
+                  }
                 }
               }
             },
-            {
-              $limit: 5
-            }
+            { $limit: 5 }
           ];
-      
+
           // Execute the query
           const records = await collection.aggregate(query).toArray();
     
@@ -32759,7 +32760,10 @@ app.get('/medicineName', async (req, res) => {
             console.log("Found the following records:");
             // console.log(records);
         }else{
-            records.push({medicineName:"Product Not Found"})
+            setTimeout(() => {
+                records.push({medicineName:"Product Not Found"})
+                
+            }, 1000);
         }
 
         console.log(records)
