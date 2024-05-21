@@ -32744,9 +32744,7 @@ app.get('/medicineName', async (req, res) => {
                 autocomplete: {
                   query: req.query['q'],
                   path: "medicineName",
-                  fuzzy: {
-                    maxEdits: 1
-                  }
+                
                 }
               }
             },
