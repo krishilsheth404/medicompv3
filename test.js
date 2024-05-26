@@ -32932,7 +32932,7 @@ app.post('/checkout', (req, res) => {
 });
 
 
-const port = process.env.PORT || 4000 // Port we will listen on
+const port = process.env.PORT || 5000 // Port we will listen on
 
 // Function to listen on the port
 app.listen(port, () => console.log(`This app is listening on port ${port}`));
