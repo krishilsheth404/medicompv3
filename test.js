@@ -84,7 +84,7 @@ app.use(bodyParser.json());
 // Route to Login Page
 
 app.get('/', async (req, res)  => {
-    res.sendFile(__dirname+'/home.html');
+    res.sendFile(__dirname+'/index.html');
     // if (req.session.user) {
     //     res.redirect('/home')
     // } else {
@@ -92,7 +92,7 @@ app.get('/', async (req, res)  => {
     // }
 });
 app.get('/index.html', async (req, res)  => {
-    res.sendFile(__dirname+'/home.html');
+    res.sendFile(__dirname+'/index.html');
     // if (req.session.user) {
     //     res.redirect('/home')
     // } else {
@@ -103,9 +103,9 @@ app.get('/index.html', async (req, res)  => {
 app.get('/home', (req, res) => {
 
     console.log(req.session.user)
-    res.sendFile(__dirname+'/home.html');
+    res.sendFile(__dirname+'/index.html');
     // if (req.session.user) {
-    //     res.sendFile(__dirname+'/home.html');
+    //     res.sendFile(__dirname+'/index.html');
     // } else {
     //    res.redirect('/login')
     // }
@@ -115,7 +115,7 @@ app.post('/home', (req, res) => {
 
     console.log(req.session.user)
     if (req.session.user) {
-        res.sendFile(__dirname+'/home.html');
+        res.sendFile(__dirname+'/index.html');
     } else {
        res.redirect('/login')
     }
@@ -32932,7 +32932,7 @@ app.post('/checkout', (req, res) => {
 });
 
 
-const port = process.env.PORT || 5000 // Port we will listen on
+const port = process.env.PORT || 4000 // Port we will listen on
 
 // Function to listen on the port
 app.listen(port, () => console.log(`This app is listening on port ${port}`));
