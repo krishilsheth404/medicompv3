@@ -12,6 +12,12 @@ const mongoose = require("mongoose");
 const sessions = require('express-session');
 const cookieParser = require('cookie-parser');
 
+const Razorpay = require('razorpay');
+var instance = new Razorpay({
+    key_id: 'YOUR_KEY_ID',
+    key_secret: 'YOUR_KEY_SECRET',
+  });
+
 const { MongoClient } = require('mongodb');
 
 const stringSimilarity = require('string-similarity');
@@ -85,6 +91,15 @@ app.use(bodyParser.json());
 
 app.get('/', async (req, res)  => {
     res.sendFile(__dirname+'/index.html');
+    // if (req.session.user) {
+    //     res.redirect('/home')
+    // } else {
+    //    res.redirect('/login')
+    // }
+});
+
+app.get('/about-us', async (req, res)  => {
+    res.sendFile(__dirname+'/about.html');
     // if (req.session.user) {
     //     res.redirect('/home')
     // } else {
@@ -28617,8 +28632,8 @@ extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
             manufacturerName: a['props']['pageProps']['productDetails']['manufacturer'],
             medicineAvailability:(a['props']['pageProps']['productDetails']['productAvailabilityFlags']['isAvailable']),
             minQty: a['props']['pageProps']['productDetails']['minQuantity'],
-            saltName:salts.length>1?salts:"NA",
-            // qtyItContainsDesc:a['props']['pageProps']['productDetails']['measurementUnit'],
+            saltName:salts.length>0?salts:"NA",
+            qtyItContainsDesc:a['props']['pageProps']['productDetails']['measurementUnit'],
         };
 
 
@@ -28751,10 +28766,10 @@ extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
             medicineAvailability:$('.os-txt').text() == "" ? true:false,
             minQty:parseFloat(($('.min_qty_alert').first().text().split(':')[1])?($('.min_qty_alert').first().text().split(':')[1]):1),
             saltName:$('.drug-conf').first().text().split('+'),
-            // qtyItContainsDesc:$(".drug-varient").first().html(),
+            qtyItContainsDesc:$(".drug-varient").first().html(),
 
         };
-
+        
     } catch (error) {
         // res.sendFile(__dirname + '/try.html');
         // res.sendFile(__dirname + '/error.html');
@@ -28979,8 +28994,8 @@ FastextractDataOfApollo = async (url, nameOfMed,manufacturer) => {
             manufacturerName: apolloData.manufacturer.name,
             medicineAvailability:apolloData.offers.availability=='http://schema.org/InStock'?true:false,
             minQty:1,
-            // saltName:$('div[class="r s"]').html().split('+'),
-            // qtyItContainsDesc:$('.medStrips').first().text(),
+            saltName:$('h3:contains("Composition")').next('a').find('div').text(),
+            qtyItContainsDesc:$('p:contains("Selected Pack Size")').find('span').text()?$('p:contains("Selected Pack Size")').find('span').text():"NA",
 
         };
 
@@ -29084,8 +29099,8 @@ extractDataOfTruemeds = async (url, nameOfMed,manufacturer) => {
             manufacturerName: $('#manufacturer').first().text(),
             medicineAvailability:$('#pdActionCta').text() == "Add To Cart" ? true:false,
             minQty:1,
-            saltName:$('.compositionDescription ').first().text().split("+"),
-            // qtyItContainsDesc:$('.medStrips').first().text(),
+            saltName:$('.compositionDescription').first().text().split("+"),
+            qtyItContainsDesc:$('.medStrips').first().text(),
         };
 
     } catch (error) {
@@ -29422,7 +29437,7 @@ extractDataOfmedplusMart = async (url, nameOfMed,manufacturer) => {
             medicineAvailability:$('.text-primary2').text() =="In Stock" ? true:false,
             minQty:1,
             saltName:'NA',
-            // qtyItContainsDesc:"NA"
+            qtyItContainsDesc:"NA"
 
         };
 
@@ -29516,6 +29531,8 @@ extractDataOfMyUpChar = async (url, nameOfMed,manufacturer) => {
             manufacturerName: dd[0]['manufacturer']['name'],
             medicineAvailability:true,
             minQty:1,
+            saltName:$('li:contains("Contains / Salt")').text().split(":")[1],
+            qtyItContainsDesc:$('.pack_size').first().text(),
         };
 
     } catch (error) {
@@ -29667,7 +29684,7 @@ extractDataOfPP = async (url, nameOfMed,manufacturer) => {
             medicineAvailability:dataOfPP.offers.availability=='http://schema.org/InStock'?true:false,
             minQty:1,
             saltName:($('.item-header').first().text().split("+")),
-            // qtyItContainsDesc: dataOfPP.name.match(/\d+/g),
+            qtyItContainsDesc:$('.panel-content div:contains("Packing")').next('div').find('span').text(),
             
         };
 
@@ -29794,7 +29811,8 @@ extractDataOfOgMPM = async (url, nameOfMed,manufacturer) => {
             manufacturerName: a[0].brand.name,
             medicineAvailability:true,
             minQty:1,
-            // saltName:a[1].activeIngredient.split("+"),
+            saltName:a[1].activeIngredient.split("+"),
+            qtyItContainsDesc:"NA",
 
         };
 
@@ -31043,23 +31061,23 @@ app.get('/fastCompMorePharmasUsingAxiosParallel', async (req, res) => {
 
     var t = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    const urlForNetMeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+netmeds.com) &vs=netmeds.com`;
-    const urlForPharmEasy = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pharmeasy.in) &vs=pharmeasy.in`;  //*//
-    const urlForPP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pasumaipharmacy.com) &vs=pasumaipharmacy.com`;
-    const urlForPulsePlus = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pulseplus.in) &vs=pulseplus.in`;
-    const urlForOBP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+tabletshablet.com) &vs=tabletshablet.com`;
-    const urlForMedPlusMart = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+medplusmart.com) &vs=medplusmart.com`;
-    const urlForMyUpChar = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+myupchar.com) &vs=myupchar.com`;
-    const urlForTruemeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+truemeds.in) &vs=truemeds.in`;
-    const urlForTata = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=1mg.com`;
+    const urlForNetMeds = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+netmeds.com) &vs=netmeds.com`;
+    const urlForPharmEasy = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+pharmeasy.in) &vs=pharmeasy.in`;  //*//
+    const urlForPP = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+pasumaipharmacy.com) &vs=pasumaipharmacy.com`;
+    const urlForPulsePlus = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+pulseplus.in) &vs=pulseplus.in`;
+    const urlForOBP = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+tabletshablet.com) &vs=tabletshablet.com`;
+    const urlForMedPlusMart = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+medplusmart.com) &vs=medplusmart.com`;
+    const urlForMyUpChar = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+myupchar.com) &vs=myupchar.com`;
+    const urlForTruemeds = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+truemeds.in) &vs=truemeds.in`;
+    const urlForTata = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=1mg.com`;
 
-    const urlForOneBharat = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+onebharatpharmacy.com) &vs=onebharatpharmacy.com`;
-    const urlForKauverymeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+kauverymeds.com) &vs=kauverymeds.com`;
-    const urlForIndimedo = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+indimedo.com) &vs=indimedo.com`;
-    const urlForWellnessforever = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+wellnessforever.com) &vs=wellnessforever.com`;
-    const urlForSecondmedic = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+secondmedic.com) &vs=secondmedic.com`;
-    const urlForChemistsworld = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+chemistsworld.com) &vs=chemistsworld.com`;
-    const urlForCallhealth = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+callhealth.com) &vs=callhealth.com`;
+    const urlForOneBharat = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+onebharatpharmacy.com) &vs=onebharatpharmacy.com`;
+    const urlForKauverymeds = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+kauverymeds.com) &vs=kauverymeds.com`;
+    const urlForIndimedo = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+indimedo.com) &vs=indimedo.com`;
+    const urlForWellnessforever = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+wellnessforever.com) &vs=wellnessforever.com`;
+    const urlForSecondmedic = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+secondmedic.com) &vs=secondmedic.com`;
+    const urlForChemistsworld = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+chemistsworld.com) &vs=chemistsworld.com`;
+    const urlForCallhealth = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+callhealth.com) &vs=callhealth.com`;
 
 
     t = await Promise.all([
@@ -32420,37 +32438,37 @@ app.get('/compare', async (req, res) => {
     // });
     // https://www.ask.com/web?q=site:apollopharmacy.in%20crocin%20advance+&ad=dirN&o=0
 
-    // const urlForPharmEasy = `https://in.search.yahoo.com/search;_ylt=?p=site:pharmeasy.in+${nameOfMed} medicine`;  //*//
-    // const urlForNetMeds = `https://in.search.yahoo.com/search;_ylt=?p=site:netmeds.com+${nameOfMed} medicine`;
-    // const urlForApollo = `https://in.search.yahoo.com/search;_ylt=?p=site:apollopharmacy.in+${nameOfMed} medicine`;
-    // const urlForHealthsKool = `https://in.search.yahoo.com/search;_ylt=?p=site:healthskoolpharmacy.com+${nameOfMed} medicine`;
+    // const urlForPharmEasy = `https://search.yahoo.com/search;_ylt=?p=site:pharmeasy.in+${nameOfMed} medicine`;  //*//
+    // const urlForNetMeds = `https://search.yahoo.com/search;_ylt=?p=site:netmeds.com+${nameOfMed} medicine`;
+    // const urlForApollo = `https://search.yahoo.com/search;_ylt=?p=site:apollopharmacy.in+${nameOfMed} medicine`;
+    // const urlForHealthsKool = `https://search.yahoo.com/search;_ylt=?p=site:healthskoolpharmacy.com+${nameOfMed} medicine`;
     // // const urlForHealthmug = `https://www.healthmug.com/search?keywords=${nameOfMed}`;
-    // const urlForTata = `https://in.search.yahoo.com/search;_ylt=?p=site:1mg.com+${nameOfMed} medicine`;
-    // const urlForOBP = `https://in.search.yahoo.com/search;_ylt=?p=site:tabletshablet.com+${nameOfMed} medicine`;
-    // const urlForPulsePlus = `https://in.search.yahoo.com/search;_ylt=?p=site:pulseplus.in+${nameOfMed} medicine`;
-    // const urlForMyUpChar = `https://in.search.yahoo.com/search;_ylt=?p=site:myupchar.com+${nameOfMed} medicine`;
-    // // const urlFor3Meds = `https://in.search.yahoo.com/search;_ylt=?p=site:3meds.com+${nameOfMed}`
-    // const urlForHealthmug = `https://in.search.yahoo.com/search;_ylt=?p=site:healthmug.com+${nameOfMed} medicine`;
-    // const urlForPP = `https://in.search.yahoo.com/search;_ylt=?p=site:pasumaipharmacy.com+${nameOfMed} medicine`;
-    // const urlForFH = `https://in.search.yahoo.com/search;_ylt=?p=site:healthplus.flipkart.com+${nameOfMed} medicine`;
+    // const urlForTata = `https://search.yahoo.com/search;_ylt=?p=site:1mg.com+${nameOfMed} medicine`;
+    // const urlForOBP = `https://search.yahoo.com/search;_ylt=?p=site:tabletshablet.com+${nameOfMed} medicine`;
+    // const urlForPulsePlus = `https://search.yahoo.com/search;_ylt=?p=site:pulseplus.in+${nameOfMed} medicine`;
+    // const urlForMyUpChar = `https://search.yahoo.com/search;_ylt=?p=site:myupchar.com+${nameOfMed} medicine`;
+    // // const urlFor3Meds = `https://search.yahoo.com/search;_ylt=?p=site:3meds.com+${nameOfMed}`
+    // const urlForHealthmug = `https://search.yahoo.com/search;_ylt=?p=site:healthmug.com+${nameOfMed} medicine`;
+    // const urlForPP = `https://search.yahoo.com/search;_ylt=?p=site:pasumaipharmacy.com+${nameOfMed} medicine`;
+    // const urlForFH = `https://search.yahoo.com/search;_ylt=?p=site:healthplus.flipkart.com+${nameOfMed} medicine`;
 
-    const urlForPharmEasy = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pharmeasy.in) &vs=pharmeasy.in`;  //*//
-    const urlForNetMeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+netmeds.com) &vs=netmeds.com`;
-    const urlForApollo = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+apollopharmacy.in) &vs=apollopharmacy.in`;
-    const urlForHealthsKool = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthskoolpharmacy.com) &vs=healthskoolpharmacy.com`;
+    const urlForPharmEasy = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+pharmeasy.in) &vs=pharmeasy.in`;  //*//
+    const urlForNetMeds = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+netmeds.com) &vs=netmeds.com`;
+    const urlForApollo = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+apollopharmacy.in) &vs=apollopharmacy.in`;
+    const urlForHealthsKool = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+healthskoolpharmacy.com) &vs=healthskoolpharmacy.com`;
     // const urlForHealthmug = `https://www.healthmug.com/search?keywords=${nameOfMed}`;
-    const urlForTata = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=1mg.com`;
-    const urlForOBP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+tabletshablet.com) &vs=tabletshablet.com`;
-    const urlForPulsePlus = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pulseplus.in) &vs=pulseplus.in`;
-    const urlForMyUpChar = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+myupchar.com) &vs=myupchar.com`;
-    // const urlFor3Meds = `https://in.in.search.yahoo.com/search=?p=3meds.com+${nameOfMed}`
-    const urlForHealthmug = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthmug.com) &vs=healthmug.com`;
-    const urlForPP = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+pasumaipharmacy.com) &vs=pasumaipharmacy.com`;
-    const urlForFH = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+healthplus.flipkart.com) &vs=healthplus.flipkart.com`;
+    const urlForTata = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+1mg.com) &vs=1mg.com`;
+    const urlForOBP = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+tabletshablet.com) &vs=tabletshablet.com`;
+    const urlForPulsePlus = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+pulseplus.in) &vs=pulseplus.in`;
+    const urlForMyUpChar = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+myupchar.com) &vs=myupchar.com`;
+    // const urlFor3Meds = `https://in.search.yahoo.com/search=?p=3meds.com+${nameOfMed}`
+    const urlForHealthmug = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+healthmug.com) &vs=healthmug.com`;
+    const urlForPP = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+pasumaipharmacy.com) &vs=pasumaipharmacy.com`;
+    const urlForFH = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+healthplus.flipkart.com) &vs=healthplus.flipkart.com`;
 
-    const urlForTorus = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+health.torusdigital.in) &vs=health.torusdigital.in`;
-    const urlForTruemeds = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+truemeds.in) &vs=truemeds.in`;
-    const urlForMedPlusMart = `https://in.search.yahoo.com/search?p=inurl:(${nameOfMed}+medplusmart.com) &vs=medplusmart.com`;
+    const urlForTorus = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+health.torusdigital.in) &vs=health.torusdigital.in`;
+    const urlForTruemeds = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+truemeds.in) &vs=truemeds.in`;
+    const urlForMedPlusMart = `https://search.yahoo.com/search?p=inurl:(${nameOfMed}+medplusmart.com) &vs=medplusmart.com`;
     const
         final = [];
     // getLinks = async() => {
@@ -32930,6 +32948,41 @@ app.post('/checkout', (req, res) => {
 
    res.render(__dirname + '/checkOutPage.ejs', { final });
 });
+
+app.post('/create-order', async (req, res) => {
+    const options = {
+      amount: req.body.amount * 100,  // amount in the smallest currency unit
+      currency: 'INR',
+      receipt: 'order_rcptid_11'
+    };
+  
+    try {
+      const order = await razorpay.orders.create(options);
+      res.json({
+        id: order.id,
+        currency: order.currency,
+        amount: order.amount,
+        key_id: process.env.RAZORPAY_KEY_ID // Send the key_id to the client
+      });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+app.post('/verify-payment', (req, res) => {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const body = razorpay_order_id + '|' + razorpay_payment_id;
+    const expectedSignature = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+                                    .update(body.toString())
+                                    .digest('hex');
+    
+    if (expectedSignature === razorpay_signature) {
+      res.json({ status: 'success' });
+    } else {
+      res.json({ status: 'failure' });
+    }
+  });
+
 
 
 const port = process.env.PORT || 4000 // Port we will listen on
