@@ -29084,6 +29084,9 @@ extractDataOfTruemeds = async (url, nameOfMed,manufacturer) => {
            parseFloat( calculateSimilarity( $('#manufacturer').first().text().toLowerCase(), manufacturer.toLowerCase()))
         )/2;
 
+        var a = JSON.parse($('script[type=application/ld+json]').eq(1).text());
+    
+
         return {
             name: 'TrueMeds',
             item: $('.medName').first().text(),
@@ -29097,7 +29100,7 @@ extractDataOfTruemeds = async (url, nameOfMed,manufacturer) => {
             smed:  parseFloat(calculateSimilarity($('.medName').first().text().toLowerCase(), nameOfMed.toLowerCase())),
             sman:parseFloat( calculateSimilarity( $('#manufacturer').first().text().toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: $('#manufacturer').first().text(),
-            medicineAvailability:$('#pdActionCta').text() == "Add To Cart" ? true:false,
+            medicineAvailability:a.about.offers.availability.includes('InStock')?a.about.offers.availability.includes('InStock'):false,
             minQty:1,
             saltName:$('.compositionDescription').first().text().split("+"),
             qtyItContainsDesc:$('.medStrips').first().text(),
