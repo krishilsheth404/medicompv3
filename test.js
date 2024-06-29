@@ -90,7 +90,29 @@ app.use(bodyParser.json());
 // Route to Login Page
 
 app.get('/', async (req, res)  => {
-    res.sendFile(__dirname+'/index.html');
+
+
+
+      
+      const url = 'https://api-console.mkart.dev/api/v1/check';
+      const data = { // Object containing data to be sent in the request body
+       
+      };
+      
+      const headers = {
+        'Content-Type': 'application/json', // Example header
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzhlOGVkMTZiMTBlMmFiYzhiNDdkNDdkYTExZmI5MzFlYjNlMGZiNzBhZjg4Njg2NDI3MTFjMjU5ZjRiZjVjMGQ0MWU4MDhlNzhkZGM3MjUiLCJpYXQiOjE3MTk2NTkyNTYuMzYyOTY0LCJuYmYiOjE3MTk2NTkyNTYuMzYyOTY2LCJleHAiOjE3NTExOTUyNTYuMzQ5NzcsInN1YiI6IjQiLCJzY29wZXMiOltdfQ.jJw6_397To_aq8fdRqBIsJPNsSCJopU75SZIGOmzoe5iRlINC17d4yJrg1vW6GfBse8SEM8FHg98dQOFYc3nxaIfP8fZwLgk6LcGapBWtZPV4w3p9VqRP8Iwx8-z4R48W5MW9qLE-6SB0ikcuBZzYDj6adyxgBfZDvOGqqBgk3lDM-YCUZl6SFWvtO0emkPjq9ZnB5P_HUBArPgzEY5rE9U9kWbKYCgpB_N19qcSiconCSjJJDXu-cfPIudYsJvSYREluz9hfh02gyxFdcxmgafNM32MRjx3x7KU1OcD3F7tTzxkDDCunPNn9P36lKV5SHVCg0-3og621uTsl5Xc5tO137jupbNSTqCzyRZ4bzqt3amAhRD01aHkEl0jZ4qyFJDPy6c7z8wyQP4W2zk1paucsgFmvmZY0IqiY9EVe-YVN3jks5uTstUVvOWdladFVAQrmUsiL0wNKomRUY9slgi0zAN47fnCOGz5sTit7fYqRpNyS2g2luYtpgq6u_AGEve2sEjOXmxKcrm5hCOUL9xsIedv6KfttZmBqFmoMLbIYENc6GK4EwEn3UinC0_aOnARpzYE9r1LEdTTB76vRaONDvPLJzZdVZROtpWjEFPdp2v8JnsnOjwpDszwfFOYSqlcEaSb2VtaNW8Y1bL38vdaT3pTJbTdMtQZGnB_UxE',
+      };
+      
+      await axios.post(url, data, { headers })
+        .then(response => {
+          console.log(response.data); // Response data from the server
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        res.sendFile(__dirname+'/index.html');
+
     // if (req.session.user) {
     //     res.redirect('/home')
     // } else {
@@ -143,6 +165,25 @@ app.get('/login', (req, res) => {
         res.sendFile(__dirname+'/loginPage.html');
     }
 });
+
+
+app.get('/medkart',async  (req, res) => {   
+    const url = 'https://api-console.mkart.dev/api/v1/product/search?q=Deinogest&page=1';
+      
+      const headers = {
+        'Content-Type': 'application/json', // Example header
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzhlOGVkMTZiMTBlMmFiYzhiNDdkNDdkYTExZmI5MzFlYjNlMGZiNzBhZjg4Njg2NDI3MTFjMjU5ZjRiZjVjMGQ0MWU4MDhlNzhkZGM3MjUiLCJpYXQiOjE3MTk2NTkyNTYuMzYyOTY0LCJuYmYiOjE3MTk2NTkyNTYuMzYyOTY2LCJleHAiOjE3NTExOTUyNTYuMzQ5NzcsInN1YiI6IjQiLCJzY29wZXMiOltdfQ.jJw6_397To_aq8fdRqBIsJPNsSCJopU75SZIGOmzoe5iRlINC17d4yJrg1vW6GfBse8SEM8FHg98dQOFYc3nxaIfP8fZwLgk6LcGapBWtZPV4w3p9VqRP8Iwx8-z4R48W5MW9qLE-6SB0ikcuBZzYDj6adyxgBfZDvOGqqBgk3lDM-YCUZl6SFWvtO0emkPjq9ZnB5P_HUBArPgzEY5rE9U9kWbKYCgpB_N19qcSiconCSjJJDXu-cfPIudYsJvSYREluz9hfh02gyxFdcxmgafNM32MRjx3x7KU1OcD3F7tTzxkDDCunPNn9P36lKV5SHVCg0-3og621uTsl5Xc5tO137jupbNSTqCzyRZ4bzqt3amAhRD01aHkEl0jZ4qyFJDPy6c7z8wyQP4W2zk1paucsgFmvmZY0IqiY9EVe-YVN3jks5uTstUVvOWdladFVAQrmUsiL0wNKomRUY9slgi0zAN47fnCOGz5sTit7fYqRpNyS2g2luYtpgq6u_AGEve2sEjOXmxKcrm5hCOUL9xsIedv6KfttZmBqFmoMLbIYENc6GK4EwEn3UinC0_aOnARpzYE9r1LEdTTB76vRaONDvPLJzZdVZROtpWjEFPdp2v8JnsnOjwpDszwfFOYSqlcEaSb2VtaNW8Y1bL38vdaT3pTJbTdMtQZGnB_UxE',
+      };
+      
+      await axios.get(url, { headers:headers })
+        .then(response => {
+          res.send(response.data); // Response data from the server
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
+
 
 
 app.get('/get', (req, res) => {
@@ -32758,14 +32799,14 @@ app.get('/medicineName', async (req, res) => {
         //     medicineName: { $regex: `^${req.query['q']}`, $options: 'i' }
         // }).limit(5).toArray();
 
-        const query = [
+        var query = [
             {
               $search: {
                 index: "medicompSearch",
                 autocomplete: {
                   query: req.query['q'],
                   path: "medicineName",
-                
+                 
                 }
               }
             },
@@ -32773,16 +32814,32 @@ app.get('/medicineName', async (req, res) => {
           ];
 
           // Execute the query
-          const records = await collection.aggregate(query).toArray();
+          var records = await collection.aggregate(query).toArray();
     
           if(records.length>0){
             console.log("Found the following records:");
             // console.log(records);
         }else{
-            setTimeout(() => {
-                records.push({medicineName:"Product Not Found"})
-                
-            }, 1000);
+            console.log("Not Found")
+            query = [
+                {
+                  $search: {
+                    index: "medicompSearch",
+                    autocomplete: {
+                      query: req.query['q'],
+                      path: "medicineName",
+                      fuzzy: {
+                        maxEdits: 2, // Adjust based on your fuzzy search needs
+                        prefixLength: 1
+                      }
+                    }
+                  }
+                },
+                { $limit: 5 }
+              ];
+    
+              // Execute the query
+            records = await collection.aggregate(query).toArray();    
         }
 
         console.log(records)
