@@ -1,0 +1,34 @@
+<svg width="82" height="20" viewBox="0 0 82 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_191_719)">
+<path d="M9.99995 14.1668L5.10162 17.1585L6.43328 11.5752L2.07495 7.84183L7.79578 7.3835L9.99995 2.0835L12.2041 7.3835L17.9258 7.84183L13.5666 11.5752L14.8983 17.1585L9.99995 14.1668Z" fill="#F2994A"/>
+</g>
+<g clip-path="url(#clip1_191_719)">
+<path d="M28 14.1668L23.1016 17.1585L24.4333 11.5752L20.075 7.84183L25.7958 7.3835L28 2.0835L30.2041 7.3835L35.9258 7.84183L31.5666 11.5752L32.8983 17.1585L28 14.1668Z" fill="#F2994A"/>
+</g>
+<g clip-path="url(#clip2_191_719)">
+<path d="M46 14.1668L41.1016 17.1585L42.4333 11.5752L38.075 7.84183L43.7958 7.3835L46 2.0835L48.2041 7.3835L53.9258 7.84183L49.5666 11.5752L50.8983 17.1585L46 14.1668Z" fill="#F2994A"/>
+</g>
+<g clip-path="url(#clip3_191_719)">
+<path d="M64 14.1668L59.1016 17.1585L60.4333 11.5752L56.075 7.84183L61.7958 7.3835L64 2.0835L66.2041 7.3835L71.9258 7.84183L67.5666 11.5752L68.8983 17.1585L64 14.1668Z" fill="#F2994A"/>
+</g>
+<g clip-path="url(#clip4_191_719)">
+<path d="M82 14.1668L77.1016 17.1585L78.4333 11.5752L74.075 7.84183L79.7958 7.3835L82 2.0835L84.2041 7.3835L89.9258 7.84183L85.5666 11.5752L86.8983 17.1585L82 14.1668Z" fill="#F2994A"/>
+</g>
+<defs>
+<clipPath id="clip0_191_719">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+<clipPath id="clip1_191_719">
+<rect width="20" height="20" fill="white" transform="translate(18)"/>
+</clipPath>
+<clipPath id="clip2_191_719">
+<rect width="20" height="20" fill="white" transform="translate(36)"/>
+</clipPath>
+<clipPath id="clip3_191_719">
+<rect width="20" height="20" fill="white" transform="translate(54)"/>
+</clipPath>
+<clipPath id="clip4_191_719">
+<rect width="10" height="20" fill="white" transform="translate(72)"/>
+</clipPath>
+</defs>
+</svg>
