@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <script src="https://kit.fontawesome.com/78b9613813.js" crossorigin="anonymous"></script>
+    <script>
+      
+      const screenWidth = window.innerWidth;
+        console.log(screenWidth)
+    if (screenWidth > 618) {
+        window.location.href = 'Laptopindex.html';
+    } 
+    
+
+        document.getElementById('ftco-loader').style.opacity = 0;
+        document.getElementById('ftco-loader').style.visibility = 'hidden';
+        document.getElementById('ftco-loader-loading').style.visibility = 'hidden';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+          
+          document.getElementById('ftco-loader').style.opacity = 0;
+          document.getElementById('ftco-loader').style.visibility = 'hidden';
+          document.getElementById('ftco-loader-loading').style.visibility = 'hidden';
+
+        });
+        
+
+  </script>
+     <style>
+      .location-main-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        box-sizing: border-box;
+      }
+      .location-main-container {
+        display: none;
+        position: absolute;
+          top: 100px;
+          left: 4%;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: var(--br-xl);
+        background-color: var(--white);
+        width: 300px;
+        flex-direction: column;
+        padding: 20px;
+        gap: var(--gap-4xl);
+        z-index: 2;
+      }
+          </style>
+      
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./MobileGlobal.css" />
+    <link rel="stylesheet" href="./MobileIndex.css" />
+    
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=SF Pro Text:wght@600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=SF Pro:wght@600&display=swap"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
+integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.js"
+integrity="sha512-A/D/17S8jG62ka9f3jPwMs+bKGJ1f/xQts7bAUjTIKQf0anTGjlpuEz3q9q++3qRAVYKS3iVx6KzM8GPtIaYfw=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cheerio/0.22.0/index.js"
+integrity="sha512-+obmGUxyA+OfXW4RU7Ez2JBbCFy+dmZatW/Z5u/PDZlY+SKzAMSHzpNfTDohw7RFfW+zmLrI9h19XiODWZRO5A=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cheerio/0.22.0/index.min.js"
+integrity="sha512-e0BgZBWe7/3JF1To6KxVcaoki2aQd3f6aWyRf9R+dOPgDUfn7czha9/wLHzNgVmUaORT2cEq+lyjxjoQmPEiHA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+
+
+  <body>
+    <div id="ftco-loader" class="show fullscreen" style="
+    visibility: hidden;
+background-color: rgb(255, 255, 255);
+z-index: 102;
+opacity: 1;
+height: 100vh;
+width: 100%;
+position: absolute;
+top: 0px;
+left: 0px;">
+
+    <img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
+        style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: block;visibility: hidden;"
+        alt="">
+</div>
+
+    <div id="searchBarScreen"
+    style="width: 100%;height: 100vh;background-color: white;z-index: 100;display: none;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
+    <div id="backToHome" onclick="BackHomePage()" style="font-size: 28px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: auto;
+    height: auto;
+    cursor: pointer;">x</div>
+
+    <div class="searchResults" style="margin-top: 200px;left: 1%;">
+
+        <div class="d-flex px-3 justify-content-center mb-3">
+            <div id="searchResultsLists" class="col-lg-9 col-md-10 col-xl-11 col-xxl-9 d-flex flex-row align-items-center" style="gap: 20px;
+            gap: 20px;
+            width: 100%;
+            position: relative;
+            top: 0px;
+            left: 1%;
+            border: none;
+            z-index: 101;
+            transition: all 0.5s ease 0s;
+            justify-content: center;
+            flex-direction: column !important;
+            ">
+                
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+    <div class="mobile-home">
+      <div class="mobile-home-child"></div>
+      <section class="headlinesearch" style="border-bottom-right-radius: 60px;
+    border-bottom-left-radius: 60px;">
+        <img
+          class="headlinesearch-child"
+          alt=""
+          src="./public/rectangle-1.svg"
+        />
+
+        <div class="delivery-input pb-4" onclick="toggleCurrentLocations()">
+          <div class="deliver-to">
+            <a class="deliver-to1">Deliver to</a>
+            <div class="address" id="addressContainer">
+              <div class="location-selector">
+                <div class="select-your-location">Select Your Location</div>
+              </div>
+              <img class="toggle-arrow down-icon ms-1" alt="" src="./public/up.svg" style="-webkit-filter: invert(100%); /* Safari/Chrome */
+    filter: invert(100%);"
+                            onclick="toggleCurrentLocation()" />
+            </div>
+          </div>
+        </div>
+        <div class="save-money-on-medicines-parent pb-4">
+          <h1 class="save-money-on-medicines-container">
+            <p class="save-money">Save Money</p>
+            <p class="on-medicines">On Medicines</p>
+          </h1>
+          <div class="india-comparison">
+            <div class="helping-india-compare-container">
+              <span class="helping">Helping </span>
+              <b>India</b>
+              <span class="compare-medicine-prices">
+                Compare Medicine Prices</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="search-input col-12" id="search-box" onclick="openSearchBar()" style="transition: all 0.5s;position: relative;
+        top: 0px;
+        left: 0px;cursor: pointer;">
+          <div class="input col-lg-9" style="
+          display: flex;
+          align-items: center;
+          justify-content: center;width: 100%;
+      ">
+            <img class="outline-search-magnifer" alt="" src="./public/outline--search--magnifer.svg">
+            <input class="search-bar" id="q" name="q" autocomplete="off" placeholder="Medicine Name" type="search" style="border: none;border: 0;
+    outline: 0;
+    background-color: transparent;
+    height: 21.5px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-10xs-5) 0 0;
+    box-sizing: border-box;
+    font-family: var(--px-regular);
+    font-size: var(--small-paragraph-size);
+    color: var(--color-gray-1500);
+    width:100%;
+    padding-left:10px">
+        </div>
+        </div>
+      </section>
+    
+      <div class="location-main-container">
+        <p class="mb-2" style="font-size: 11px;">Enter Pincode To Get More Accurate Results</p>
+        <div class="input2">
+          <input class="location-input-box" placeholder="Pin Code" type="number" id="zipcode" style="border: none;padding-top: 5px;padding-bottom: 5px;" />
+          <img class="outline-search-magnifer2" alt="" src="./public/outline--search--magnifer-1.svg" onclick="fetchDetails()"/>
+        </div>
+    </div>
+ 
+    <script>
+      function fetchDetails(){
+        var zc=document.getElementById('zipcode').value;
+        console.log(zc)
+        if(zc.length==6){
+          axios.get(`https://api.postalpincode.in/pincode/${zc}`)
+        .then(response => {
+          const data = response.data;
+          const postOffice = data[0].PostOffice[0];
+          const block = postOffice.Block;
+          const state = postOffice.State;
+          const country = postOffice.Country;
+  
+          // Store the values in variables or wherever you need
+          // console.log("Block:", block);
+          // console.log("State:", state);
+         
+          // document.getElementById('city').value=block;
+          // document.getElementById('state').value=state;
+          // console.log("Country:", country);
+  
+          // Display the values in the DOM
+          document.getElementById('zipcode').style.border='1px solid green'
+          document.querySelectorAll('.select-your-location')[0].innerHTML=zc;
+          document.querySelectorAll('.delivery-input')[0].click();
+
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+        
+        }else{
+          document.getElementById('zipcode').style.border='1px solid red'
+        }
+      }
+    </script>
+
+      
+      <script>
+        document.getElementById('search-box').style.maxWidth = `1000px`;
+
+        function openSearchBar() {
+            document.getElementById('searchBarScreen').style.display = 'block';
+            document.body.style.height = '100vh';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('grandparentcont').style = `
+            position: absolute;
+            top: 100px;
+            width: 100%;
+            left: 1%;
+            border: none;
+            z-index: 101;
+            transition: all 0.5s ease 0s;
+            justify-content: center;
+align-items: center;
+display: flex;
+
+            `;
+
+            document.getElementById("q").focus();
+
+            // document.getElementById('searchBar').style.margin = `auto`;
+            document.getElementById('search-box').style.maxWidth = `1600px`;
+            document.getElementById('search-box').style.width = `100%`;
+            document.getElementById('search-box').style.transition = `all 0.5s`;
+        }
+        
+        function BackHomePage() {
+            document.getElementById('searchBarScreen').style.display = 'none';
+            document.body.style.height = 'auto';
+            document.body.style.overflowY = 'scroll';
+            document.getElementById('grandparentcont').style = `
+            position: absolute;
+            top: 390px;
+            width: 60%;
+            left:auto;
+            border: none;
+            z-index: 101;
+            transition: all 0.5s ease 0s;`;
+            
+            document.getElementById('search-box').style.margin = `0px`;
+            document.getElementById('search-box').style.maxWidth = `1000px`;
+            document.getElementById('search-box').style.maxWidth = `all 0.5s`;
+            document.getElementById('search-box').style.width = `100%`;
+
+        }
+    </script>
+
+    
+      <div class="div"></div>
+      <section class="categories-grid-wrapper">
+        <div class="categories-grid">
+          <div class="category-row">
+            <div class="category-tile">
+              <div class="categories">Categories</div>
+            </div>
+            <div class="product-icons">
+              <button class="rectangle-parent" style="gap:1px;
+              display: flex;
+              align-items: flex-start;
+              justify-content: space-around;">
+                <div class="frame-item"></div>
+                <img
+                  class="capsule-pill"
+                  alt=""
+                  src="./public/capsule--pill.svg"
+                />
+
+                <div class="medicine-labtest-icons">
+                  <div class="medicine">Medicine</div>
+                </div>
+              </button>
+              <div class="rectangle-group" style="gap:1px">
+                <div class="frame-inner"></div>
+                <img
+                  class="medicoboldmicroscope-icon"
+                  loading="lazy"
+                  alt=""
+                  src="./public/medicoboldmicroscope.svg"
+                />
+
+                <div class="lab-tests-wrapper">
+                  <div class="lab-tests">Lab Tests</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rectangle-container" style="gap: 4px;
+          padding-left: 10px;
+          padding-right: 10px;">
+            <div class="stats-trios" style="min-width: 85px;
+    height: 90px;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 33%;">
+              <div class="stats-trios-child"></div>
+              <div class="stats-number-icons">
+                <div class="empty-stat">10+</div>
+              </div>
+              <div class="pharmacies-listed">Pharmacies Listed</div>
+            </div>
+            <div class="stats-trios1" style="min-width: 85px;
+    height: 90px;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 33%;">
+              <div class="stats-trios-item"></div>
+              <div class="l-wrapper">
+                <div class="l">2L+</div>
+              </div>
+              <div class="medicines">Medicines</div>
+            </div>
+            <div class="stats-trios2" style="min-width: 85px;
+    height: 90px;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 33%;">
+              <div class="stats-trios-inner"></div>
+              <div class="k-wrapper">
+                <div class="k">10k+</div>
+              </div>
+              <div class="happy-users">Happy Users</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="deals-grid-wrapper">
+        <div class="deals-grid">
+          <div class="deals-title">
+            <div class="featured-deals">Featured Deals</div>
+          </div>
+          <div class="deal-items">
+            <div class="rectangle-parent3">
+              <div class="frame-child5"></div>
+              <div class="frame-wrapper3">
+                <div class="frame-parent3">
+                  <div class="frame-wrapper4">
+                    <div class="rectangle-parent4">
+                      <div class="frame-child6"></div>
+                      <img
+                        class="mask-group-icon2"
+                        loading="lazy"
+                        alt=""
+                        src="./public/mask-group@2x.png"
+                      />
+
+                      <div class="frame-child7"></div>
+                    </div>
+                  </div>
+                  <div class="pack-of-401">Pack Of 40 gm</div>
+                </div>
+              </div>
+              <div class="frame-parent4">
+                <div class="volini-pain-relief-spray-40-g-group">
+                  <div class="volini-pain-relief1">
+                    Volini Pain Relief Spray, 40 gm
+                  </div>
+                  <div class="sun-pharmaceutical-industries1">
+                    SUN PHARMACEUTICAL INDUSTRIES LTD
+                  </div>
+                </div>
+                <div class="frame-wrapper5">
+                  <button class="view-comparison-container">
+                    <b class="view-comparison2">View Comparison</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="rectangle-parent3">
+              <div class="frame-child5"></div>
+              <div class="frame-wrapper3">
+                <div class="frame-parent3">
+                  <div class="frame-wrapper4">
+                    <div class="rectangle-parent4">
+                      <div class="frame-child6"></div>
+                      <img
+                        class="mask-group-icon2"
+                        loading="lazy"
+                        alt=""
+                        src="./public/mask-group-1@2x.png"
+                      />
+
+                      <div class="frame-child7"></div>
+                    </div>
+                  </div>
+                  <div class="pack-of-401">Pack Of 15 gm</div>
+                </div>
+              </div>
+              <div class="frame-parent4">
+                <div class="volini-pain-relief-spray-40-g-group">
+                  <div class="volini-pain-relief1">
+                    Moov Pain Relief Cream, 15 gm
+                  </div>
+                  <div class="sun-pharmaceutical-industries1">
+                    RECKITT BENCKISER (INDIA) PVT LTD
+                  </div>
+                </div>
+                <div class="frame-wrapper5">
+                  <button class="view-comparison-container">
+                    <b class="view-comparison2">View Comparison</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="rectangle-parent3">
+              <div class="frame-child5"></div>
+              <div class="frame-wrapper3">
+                <div class="frame-parent3">
+                  <div class="frame-wrapper4">
+                    <div class="rectangle-parent4">
+                      <div class="frame-child6"></div>
+                      <img
+                        class="mask-group-icon2"
+                        loading="lazy"
+                        alt=""
+                        src="./public/mask-group-2@2x.png"
+                      />
+
+                      <div class="frame-child7"></div>
+                    </div>
+                  </div>
+                  <div class="pack-of-401">Pack Of 40 gm</div>
+                </div>
+              </div>
+              <div class="frame-parent4">
+                <div class="volini-pain-relief-spray-40-g-group">
+                  <div class="volini-pain-relief1">
+                    Volini Pain Relief Spray, 40 gm
+                  </div>
+                  <div class="sun-pharmaceutical-industries1">
+                    SUN PHARMACEUTICAL INDUSTRIES LTD
+                  </div>
+                </div>
+                <div class="frame-wrapper5">
+                  <button class="view-comparison-container">
+                    <b class="view-comparison2">View Comparison</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="rectangle-parent3">
+              <div class="frame-child5"></div>
+              <div class="frame-wrapper3">
+                <div class="frame-parent3">
+                  <div class="frame-wrapper4">
+                    <div class="rectangle-parent4">
+                      <div class="frame-child6"></div>
+                      <img
+                        class="mask-group-icon2"
+                        loading="lazy"
+                        alt=""
+                        src="./public/mask-group-3@2x.png"
+                      />
+                      <!-- The class frame-child7 manages the green light on the photo, to change status of green light, you have to play with the div below -->
+                      <div class="frame-child7"></div>
+                    </div>
+                  </div>
+                  <div class="pack-of-401">Pack Of 40 gm</div>
+                </div>
+              </div>
+              <div class="frame-parent4">
+                <div class="volini-pain-relief-spray-40-g-group">
+                  <div class="volini-pain-relief1">
+                    Volini Pain Relief Spray, 40 gm
+                  </div>
+                  <div class="sun-pharmaceutical-industries1">
+                    SUN PHARMACEUTICAL INDUSTRIES LTD
+                  </div>
+                </div>
+                <div class="frame-wrapper5">
+                  <button class="view-comparison-container">
+                    <b class="view-comparison2">View Comparison</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="view-all-button mt-4">
+            <div class="view-all-container">
+            
+
+              <a class="view-all">View ALL</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="app-preview">
+        <img
+          class="screenshot-2024-06-02-152044-1"
+          loading="lazy"
+          alt=""
+          src="./public/screenshot-20240602-152044-1@2x.png"
+        />
+      </section>
+      <section class="slogan-content-wrapper">
+        <div class="slogan-content">
+          <h3 class="lets-make-healthcare-container">
+            <p class="lets-make-healthcare">Lets Make HealthCare</p>
+            <p class="more-affordable">More Affordable</p>
+          </h3>
+          <!-- <div class="slogan-dots">
+            <img
+              class="slogan-dots-child"
+              loading="lazy"
+              alt=""
+              src="./public/vector-64.svg"
+            /> -->
+
+            <div class="slogan-dots-main-li-container" style="line-height: 48px; font-weight: 500;">
+              <ul style="font-size: 18px; padding-inline-start: 20px;">
+                <li>Live Medicine Price Comparison</li>
+                <li>Accessible 24/7</li>
+                <li>Real-Time Availability Checking</li>
+                <li>Access To 2,00,000 + Medicine Data</li>
+                <li>Substitute Suggestions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="blog-content-wrapper">
+        <div class="blog-content">
+          <div class="blog-title">
+            <div class="recent-blogs">Recent Blogs</div>
+          </div>
+          <div class="blog-posts">
+            <div class="blog-post-image">
+              <img
+                class="blog-image-icon col-6"
+                loading="lazy"
+                alt=""
+                src="./public/rectangle-3-2@2x.png"
+              />
+
+              <img
+                class="blog-image-icon1 col-6"
+                loading="lazy"
+                alt=""
+                src="./public/rectangle-12@2x.png"
+              />
+            </div>
+            <div class="rectangle-parent6">
+              <img
+                class="rectangle-icon"
+                loading="lazy"
+                alt=""
+                src="./public/rectangle-13@2x.png"
+              />
+
+                <img
+                  class="frame-child9"
+                  loading="lazy"
+                  alt=""
+                  src="./public/rectangle-14@2x.png"
+                />
+            </div>
+          </div>
+          <div class="blog-view-all" style="    align-self: stretch;
+          justify-content: center;
+          padding: var(--padding-xl) var(--padding-8xl);
+          border: 1px solid var(--color-cornflowerblue-100);
+          font-size: var(--px-semi-bold1-size);
+          color: var(--color-cornflowerblue-200);
+          border-radius: 15px;">
+            <a class="view-all1">View All</a>
+          </div>
+        </div>
+      </section>
+      <div class="home-indicator">
+        <div class="container"></div>
+        <div class="indicator"></div>
+      </div>
+      <div class="status-bar-02-transparent">
+        <div class="status-bar-time-01-default">
+          <div class="div1">09:41</div>
+        </div>
+        <img class="battery-icon" alt="" src="./public/battery.svg" />
+
+        <img class="wifi-icon" alt="" src="./public/wifi.svg" />
+
+        <img
+          class="mobile-signal-icon"
+          alt=""
+          src="./public/mobile-signal.svg"
+        />
+      </div>
+      <footer class="category-stats" style="    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;">
+        <div class="category-stats-child"></div>
+        <div class="footer-content">
+          <div class="brand-info">
+            <h3 class="medicomp-india">Medicomp India</h3>
+            
+          </div>
+          <div class="brand-description">
+            <div class="welcome-to-medicomp">
+              Welcome to Medicomp India, your one-stop solution for comparing
+              medicine prices across various pharmacies and online retailers in
+              India.
+            </div>
+            <div class="features">
+              <div class="feature-icons">
+                <a href="https://www.linkedin.com/in/krishilsheth/">
+                  <div class="wrapper-group-433">
+                    <img
+                    class="wrapper-group-433-child"
+                    loading="lazy"
+                    alt=""
+                    src="./public/group-433.svg"
+                    />
+                  </div>
+                </a>
+
+                <a href="https://instagram.com/medicomp.india" style="text-decoration: none;">
+                  <div class="wrapper-group-432" style="background: white;
+    border-radius: 1005px;">
+                    <i class="fa-brands fa-instagram" style="color: black"></i>
+                  </div>
+                </a>
+
+                
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="information-parent">
+            <h3 class="information">Information</h3>
+            <nav class="integration-platforms">
+              <div class="integrations" style="width: max-content;">About Us</div>
+              <div class="hello" style="width: max-content;">Privacy and Policy</div>
+              <div class="intercom" style="width: max-content;">Terms And Conditions</div>
+              <div class="customer" style="width: max-content;">Refund/Cancellation Policy</div>
+            </nav>
+          </div>
+          <div class="about-parent">
+            <h3 class="about">Support</h3>
+            <div class="link-list">
+              <div class="our-blog">Contact Us</div>
+            </div>
+           
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    
+<script>
+
+  document.getElementById('ftco-loader').style.opacity = 0;
+  document.getElementById('ftco-loader').style.visibility = 'hidden';
+  document.getElementById('ftco-loader-loading').style.visibility = 'hidden';
+
+
+  function loader() {
+
+  console.warn('loading...')
+  document.getElementById('ftco-loader').style.opacity = 1;
+  document.getElementById('ftco-loader').style.visibility = 'visible';
+  document.getElementById('ftco-loader-loading').style.visibility = 'visible';
+  // document.getElementById("ParentdivOfMainId").style.display='flex'
+
+  }
+
+
+        let timer,timeoutVal = 100;
+      const typer = document.getElementById('q');
+      
+      typer.addEventListener('keyup', handleKeyUp);
+      
+      async function handleKeyUp(e) {
+                  window.clearTimeout(timer);
+      
+              
+                  
+                  
+                  timer = window.setTimeout(async () => {
+                  
+      
+      if (document.getElementById('q').value.trim().length > 0) {
+      
+      document.getElementById('searchResultsLists').innerHTML = '';
+      // document.getElementById('mlblock').style.display='none';
+      
+      document.getElementById('searchResultsLists').innerHTML = `
+      <div class="skeleton">
+      <div class="skeleton__block"></div>
+      </div>
+      `;
+      
+
+      
+      
+      
+      
+      
+      await axios({
+          method: "GET",
+          url: `/medicineName?q=${document.getElementById('q').value + ' '}`,
+      })
+          .then((res) => {
+              console.log(res.data.length);
+      
+              // document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
+              // console.log(document.getElementById('idcontainer').style.height)
+      
+              
+                  
+              // document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
+              // document.getElementById('idcontainer').style.transition='all 1s';
+              // document.getElementById('fullheight').style.transition='all 1s';
+      
+              document.getElementById('searchResultsLists').innerHTML = '';
+              // document.getElementById('medlist').style.height = 150 * res.data.length;
+              // document.querySelectorAll('.services-section')[0].style.marginTop = 90 * res.data.length +"px";
+              // document.getElementById('searchResultsLists').style.overflow = `scroll`;
+      
+              function formSub(a){
+                   document.getElementById(`msform${a}`).submit();
+              }
+              // document.getElementById('medlist').style.overflow='scroll';
+              let htmlContent = '';
+      
+      for (var i = 0; i < res.data.length; i++) {
+          const medicine = res.data[i];
+          if (medicine['medicineName']) {
+              console.log(medicine['medicineName']);
+              htmlContent += `
+                 <div class="col-9 d-flex justify-content-start p-4 flex-column" style="background-color: black; border-radius: 17px; border: 2px solid rgba(247, 248, 248, 1); background: rgba(255, 255, 255, 1);width: 99%;max-width: 1600px;cursor:pointer">
+          
+   <form id="msform${i + 1}" action="/searchPharmacies" method="get" class="ss searchString${i + 1}">
+          <a onclick="event.preventDefault(); this.parentNode.submit();loader();" id="pntr">
+             
+          <h6 class="m-0" style="color: rgba(38, 50, 87, 1); font-weight: 500; font-family: Poppins, sans-serif;">${medicine['medicineName']}</h6>
+          <p class="m-0" style="font-size: 12px; font-weight: 500; color: rgba(138, 150, 188, 1);">${medicine['manufacturerName'] ? medicine['manufacturerName'] : ''}</p>
+    </a>
+           <input type="text" autocomplete="off" id="medname" style="word-wrap: break-word; display:none" contenteditable="false" name="medname" class="form-control foodItem_${i + 1}" value="${medicine['medicineName']}">
+          <input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word; display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_${i + 1}" value="${medicine['manufacturerName'] ? medicine['manufacturerName'] : ''}">
+          <input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word; display:none" contenteditable="false" name="packSize" class="form-control foodItem_${i + 1}" value="${medicine['medicinePackSize'] ? medicine['medicinePackSize'] : ''}">
+          <input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word; display:none" contenteditable="false" name="prodLink" class="form-control foodItem_${i + 1}" value="${medicine['prodLink'] ? medicine['prodLink'] : ''}">
+     </form>
+          </div>
+
+              `;
+          }
+      }
+      
+      document.getElementById('searchResultsLists').innerHTML = htmlContent;
+      
+          })
+          .catch((err) => {
+              throw err;
+          });
+      
+      
+      
+              }else{
+                  
+      document.getElementById('searchResultsLists').innerHTML = `
+      <div class="skeleton">
+      <div class="skeleton__block"></div>
+      </div>
+      `;
+      
+              }
+      
+      
+                      
+              }, timeoutVal);
+              }
+      
+                  
+          </script>
+  
+
+
+
+ <script>
+
+                        function openSearchBar() {
+                            document.getElementById('searchBarScreen').style.display = 'block';
+                            document.body.style.height = '100vh';
+                            document.body.style.overflow = 'hidden';
+                            document.getElementById('search-box').style = `
+                            position: absolute;
+                            top: 100px;
+                            width: 95%;
+                            border: none;
+                            z-index: 101;
+                            justify-content: flex-start;
+                            align-items: center;
+                            display: flex;
+                            left: 2%;
+                            transition: all 0.5s ease 0s;
+                            box-shadow: rgba(0, 0, 0, 0.1) 8px 8px 20px;
+    
+                            `;
+
+
+                        }
+                        
+                        function BackHomePage() {
+                            document.getElementById('searchBarScreen').style.display = 'none';
+                            document.body.style.height = 'auto';
+                            document.body.style.overflowY = 'scroll';
+                            document.getElementById('search-box').style = `
+                            flex-direction: row;
+                            padding: 0 var(--padding-4xl);
+                            font-size: var(--h4-medical-size);
+                            color: var(--color-lightslategray);
+                            height: 60px;
+                            display: flex;
+                            align-items: center;
+                            background: white;
+                            border-radius: 15px;
+                            transition: all 0.5s ease 0s;
+                            position: relative;
+                            top: 0px;
+                            left: 0px;`;
+                                                    
+                            
+                        }
+                    </script>
+
+
+    <script>
+   
+   function toggleCurrentLocations() {
+    console.log("clicked")
+    const arrow = document.querySelector('.toggle-arrow');
+    const locationContainer = document.querySelector('.location-main-container');
+
+    if (arrow.classList.contains('down-icon')) {
+        arrow.src = './public/down.svg'; 
+        arrow.classList.remove('down-icon');
+        arrow.classList.add('up-icon');
+        locationContainer.style.display = 'block';
+    } else {
+        arrow.src = './public/up.svg';
+        arrow.classList.remove('up-icon');
+        arrow.classList.add('down-icon');
+        locationContainer.style.display = 'none';
+    }
+}
+      
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  </body>
+</html>

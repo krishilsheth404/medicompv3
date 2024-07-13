@@ -129,7 +129,9 @@ app.get('/about-us', async (req, res)  => {
     // }
 });
 app.get('/index.html', async (req, res)  => {
-    res.sendFile(__dirname+'/index.html');
+    // res.sendFile(__dirname+'/index.html');
+    res.sendFile(__dirname+'/Laptopindex.html');
+
     // if (req.session.user) {
     //     res.redirect('/home')
     // } else {
@@ -139,8 +141,8 @@ app.get('/index.html', async (req, res)  => {
 
 app.get('/home', (req, res) => {
 
-    console.log(req.session.user)
-    res.sendFile(__dirname+'/index.html');
+    // console.log(req.session.user)
+    res.sendFile(__dirname+'/Laptopindex.html');
     // if (req.session.user) {
     //     res.sendFile(__dirname+'/index.html');
     // } else {
@@ -177,6 +179,8 @@ app.get('/medkart',async  (req, res) => {
       
       await axios.get(url, { headers:headers })
         .then(response => {
+        const products = response.data.data.products;
+        console.log(products);
           res.send(response.data); // Response data from the server
         })
         .catch(error => {
@@ -28688,6 +28692,74 @@ extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
     }
 };
 
+extractDataOfMedkart = async (nameOfMed,manufacturer) => {
+    try {
+
+    const url = `https://api-console.mkart.dev/api/v1/product/search?q=${nameOfMed}&page=1`;
+      
+    const headers = {
+      'Content-Type': 'application/json', // Example header
+      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzhlOGVkMTZiMTBlMmFiYzhiNDdkNDdkYTExZmI5MzFlYjNlMGZiNzBhZjg4Njg2NDI3MTFjMjU5ZjRiZjVjMGQ0MWU4MDhlNzhkZGM3MjUiLCJpYXQiOjE3MTk2NTkyNTYuMzYyOTY0LCJuYmYiOjE3MTk2NTkyNTYuMzYyOTY2LCJleHAiOjE3NTExOTUyNTYuMzQ5NzcsInN1YiI6IjQiLCJzY29wZXMiOltdfQ.jJw6_397To_aq8fdRqBIsJPNsSCJopU75SZIGOmzoe5iRlINC17d4yJrg1vW6GfBse8SEM8FHg98dQOFYc3nxaIfP8fZwLgk6LcGapBWtZPV4w3p9VqRP8Iwx8-z4R48W5MW9qLE-6SB0ikcuBZzYDj6adyxgBfZDvOGqqBgk3lDM-YCUZl6SFWvtO0emkPjq9ZnB5P_HUBArPgzEY5rE9U9kWbKYCgpB_N19qcSiconCSjJJDXu-cfPIudYsJvSYREluz9hfh02gyxFdcxmgafNM32MRjx3x7KU1OcD3F7tTzxkDDCunPNn9P36lKV5SHVCg0-3og621uTsl5Xc5tO137jupbNSTqCzyRZ4bzqt3amAhRD01aHkEl0jZ4qyFJDPy6c7z8wyQP4W2zk1paucsgFmvmZY0IqiY9EVe-YVN3jks5uTstUVvOWdladFVAQrmUsiL0wNKomRUY9slgi0zAN47fnCOGz5sTit7fYqRpNyS2g2luYtpgq6u_AGEve2sEjOXmxKcrm5hCOUL9xsIedv6KfttZmBqFmoMLbIYENc6GK4EwEn3UinC0_aOnARpzYE9r1LEdTTB76vRaONDvPLJzZdVZROtpWjEFPdp2v8JnsnOjwpDszwfFOYSqlcEaSb2VtaNW8Y1bL38vdaT3pTJbTdMtQZGnB_UxE',
+    };
+    
+    const response=await axios.get(url, { headers:headers })
+      const product = response.data.data.products;
+    //   console.log(product);
+      
+        var simIndex=parseFloat(
+            parseFloat(parseFloat(calculateSimilarity(product[0].name.toLowerCase(), nameOfMed.toLowerCase()) ) )+
+            parseFloat(parseFloat(calculateSimilarity(product[0].manufacturer_name.toLowerCase(), manufacturer.toLowerCase())))
+        )/2;
+
+
+            return {
+                name: 'Medkart',
+                item: product[0].name?product[0].name:'',
+                link: product[0].slug ? `https://www.medkart.in/${product[0].slug}` : '',
+                imgLink: product[0].images && product[0].images[0] ? product[0].images[0].url : '',
+                price: product[0].mrp?product[0].mrp:0,
+                offer: product[0].sales_price?product[0].sales_price:0,
+                deliveryCharge: product[0]['delivery-information'] || 0,
+                finalCharge: product[0].sales_price + (product[0]['delivery-information'] || 0),
+                similarityIndex: simIndex,
+                smed: parseFloat(calculateSimilarity(product[0].name.toLowerCase(), nameOfMed.toLowerCase()) ),
+                sman: parseFloat(calculateSimilarity(product[0].manufacturer_name.toLowerCase(), manufacturer.toLowerCase())),
+                manufacturerName: product[0].manufacturer_name?product[0].manufacturer_name:0,
+                medicineAvailability: product[0].is_live?product[0].is_live:0,
+                minQty: 1,
+                saltName: product[0].combinations?product[0].combinations:0,
+                qtyItContainsDesc: `${product[0].package_size?product[0].package_size:0} ${product[0].uom?product[0].uom:0}`
+            };
+        
+    } catch (error) {
+        // res.sendFile(__dirname + '/try.html');
+        // res.sendFile(__dirname + '/error.html');
+        // console.log(error);
+        return {
+            name: '',
+            item: '',
+            link: '',
+            imgLink:'',
+            price: 0,
+            offer: 0,
+            deliveryCharge:  0,
+            finalCharge: 0,
+            similarityIndex: simIndex,
+            smed:0,
+            sman: 0,
+            manufacturerName:0,
+            medicineAvailability: 0,
+            minQty: 1,
+            saltName: 0,
+            qtyItContainsDesc:0,
+        };
+
+        console.log(error);
+        // return {};
+    }
+};
+
+
 extractDataOfFlipkart = async (url, nameOfMed) => {
     try {
         // Fetching HTML
@@ -28773,15 +28845,22 @@ extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
         const $ = cheerio.load(data);
         var dc = '';
 
-        
+        var pric=$('#last_price').attr('value');
+        if(typeof(pric)=='string')
+        {
+            if(pric.includes(',')){
+                pric=pric.replace(/,/g, '');
+                pric=parseFloat(pric);
+            }
+        }
 
-        if ($('#last_price').attr('value') < 199) {
+        if (parseFloat(pric) < 199) {
             dc = 69;
-        } else if ($('#last_price').attr('value') >= 199 && $('#last_price').attr('value') < 499) {
+        } else if (parseFloat(pric) >= 199 && parseFloat(pric) < 499) {
             dc = 49;
-        } else if ($('#last_price').attr('value') >= 499 && $('#last_price').attr('value') < 999) {
+        } else if (parseFloat(pric) >= 499 && parseFloat(pric) < 999) {
             dc = 29;
-        } else if ($('#last_price').attr('value') > 1000) {
+        } else if (parseFloat(pric) > 1000) {
             dc = 0;
         }
 
@@ -28796,10 +28875,10 @@ extractDataOfNetMeds = async (url, nameOfMed,manufacturer) => {
             item: $('.prodName h1').first().text(),
             link: url,
             imgLink: $('.largeimage img').attr('src'),
-            price: $('#last_price').attr('value'),
+            price: parseInt(pric),
             offer: '',
             deliveryCharge: dc,
-            finalCharge: parseFloat($('#last_price').attr('value')) + parseFloat(dc),
+            finalCharge: parseFloat(pric) + parseFloat(dc),
             similarityIndex: simIndex,
             smed: parseFloat(calculateSimilarity($('.product-detail .prodName h1').first().text().toLowerCase(), nameOfMed.toLowerCase())),
             sman: parseFloat( calculateSimilarity($('span[class=drug-manu] > a').first().text().toLowerCase(), manufacturer.toLowerCase())),
@@ -29141,7 +29220,7 @@ extractDataOfTruemeds = async (url, nameOfMed,manufacturer) => {
             smed:  parseFloat(calculateSimilarity($('.medName').first().text().toLowerCase(), nameOfMed.toLowerCase())),
             sman:parseFloat( calculateSimilarity( $('#manufacturer').first().text().toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: $('#manufacturer').first().text(),
-            medicineAvailability:a.about.offers.availability.includes('InStock')?a.about.offers.availability.includes('InStock'):false,
+            medicineAvailability:a.offers.availability.includes('InStock')?a.offers.availability.includes('InStock'):false,
             minQty:1,
             saltName:$('.compositionDescription').first().text().split("+"),
             qtyItContainsDesc:$('.medStrips').first().text(),
@@ -29855,7 +29934,7 @@ extractDataOfOgMPM = async (url, nameOfMed,manufacturer) => {
             manufacturerName: a[0].brand.name,
             medicineAvailability:true,
             minQty:1,
-            saltName:a[1].activeIngredient.split("+"),
+            saltName:'',
             qtyItContainsDesc:"NA",
 
         };
@@ -30182,69 +30261,69 @@ extractDataOfChemistsWorld = async (url, nameOfMed,manufacturer) => {
 
 
 
-extractDataOfMedkart = async (url, nameOfMed,manufacturer) => {
-    try {
-        // Fetching HTML
-        const { data } = await axios.get('https://api-console.mkart.dev/api/v1/token')
+// extractDataOfMedkart = async (url, nameOfMed,manufacturer) => {
+//     try {
+//         // Fetching HTML
+//         const { data } = await axios.get('https://api-console.mkart.dev/api/v1/token')
 
-        // Using cheerio to extract <a> tags
-        const $ = cheerio.load(data);
-        const d=JSON.parse($.html());
-        const token=d[0].data.token;
+//         // Using cheerio to extract <a> tags
+//         const $ = cheerio.load(data);
+//         const d=JSON.parse($.html());
+//         const token=d[0].data.token;
 
 
-        var dc=55;
-        var simIndex=parseFloat(
-            parseFloat(calculateSimilarity($('h1[itemprop="name"]').first().text().toLowerCase(), nameOfMed.toLowerCase())) +
-           parseFloat( calculateSimilarity($('.marketer__sec a').first().text().trim().toLowerCase(), manufacturer.toLowerCase()))
-        )/2;
+//         var dc=55;
+//         var simIndex=parseFloat(
+//             parseFloat(calculateSimilarity($('h1[itemprop="name"]').first().text().toLowerCase(), nameOfMed.toLowerCase())) +
+//            parseFloat( calculateSimilarity($('.marketer__sec a').first().text().trim().toLowerCase(), manufacturer.toLowerCase()))
+//         )/2;
 
-        var p=$('.product_cart_area__1 li').first().text();
+//         var p=$('.product_cart_area__1 li').first().text();
 
-        if(!p){
-            p=$('span[itemprop="price"]').first().text();
-        }
+//         if(!p){
+//             p=$('span[itemprop="price"]').first().text();
+//         }
 
-        return {
-            name: 'Chemists World',
-            item: $('h1[itemprop="name"]').first().text(),
-            link: url,
-            imgLink:$('.img_area img').attr('src'),
-            price: parseFloat(p),
-            deliveryCharge: 55,
-            offer: '',
-            finalCharge: 0,
-            similarityIndex: simIndex,
-            smed:parseFloat(calculateSimilarity($('h1[itemprop="name"]').first().text().toLowerCase(), nameOfMed.toLowerCase())) ,
-            sman: parseFloat(calculateSimilarity($('.marketer__sec a').first().text().trim().toLowerCase(), manufacturer.toLowerCase())),
-            manufacturerName: $('.marketer__sec a').first().text().trim(),
-            medicineAvailability:true,
-            minQty:1,
+//         return {
+//             name: 'Chemists World',
+//             item: $('h1[itemprop="name"]').first().text(),
+//             link: url,
+//             imgLink:$('.img_area img').attr('src'),
+//             price: parseFloat(p),
+//             deliveryCharge: 55,
+//             offer: '',
+//             finalCharge: 0,
+//             similarityIndex: simIndex,
+//             smed:parseFloat(calculateSimilarity($('h1[itemprop="name"]').first().text().toLowerCase(), nameOfMed.toLowerCase())) ,
+//             sman: parseFloat(calculateSimilarity($('.marketer__sec a').first().text().trim().toLowerCase(), manufacturer.toLowerCase())),
+//             manufacturerName: $('.marketer__sec a').first().text().trim(),
+//             medicineAvailability:true,
+//             minQty:1,
 
-        };
+//         };
 
-    } catch (error) {
-        // res.sendFile(__dirname + '/try.html');
-        // res.sendFile(__dirname + '/error.html');
-        console.log(error);
-        return {
-            name: 'Chemists World',
-            item: 'NA',
-            link: url,
-            imgLink:$('.img_area img').attr('src'),
-            price: '',
-            deliveryCharge: '',
-            offer: '',
-            finalCharge: 0,
-            similarityIndex: '',
-            smed:'' ,
-            sman: '',
-            manufacturerName: '',
-            medicineAvailability:'',
-            minQty:1,
-        };
-    }
-};
+//     } catch (error) {
+//         // res.sendFile(__dirname + '/try.html');
+//         // res.sendFile(__dirname + '/error.html');
+//         console.log(error);
+//         return {
+//             name: 'Chemists World',
+//             item: 'NA',
+//             link: url,
+//             imgLink:$('.img_area img').attr('src'),
+//             price: '',
+//             deliveryCharge: '',
+//             offer: '',
+//             finalCharge: 0,
+//             similarityIndex: '',
+//             smed:'' ,
+//             sman: '',
+//             manufacturerName: '',
+//             medicineAvailability:'',
+//             minQty:1,
+//         };
+//     }
+// };
 
 
 
@@ -32418,7 +32497,6 @@ app.post('/compareViaBlog', async (req, res) => {
 
 
 
-
 app.get('/compare', async (req, res) => {
     // Insert Login Code Here
 
@@ -32637,6 +32715,7 @@ app.get('/compare', async (req, res) => {
     extractDataOfPP(item[5], nameOfMed,manufacturerN),
     //   extractSubsfApollo(item[8],final),
     extractDataOfTruemeds(item[6], nameOfMed,manufacturerN), extractDataOfOgMPM(item[7], nameOfMed,manufacturerN),
+    extractDataOfMedkart(nameOfMed,manufacturerN),
     ]);
 
     const end1 = performance.now() - start1;
@@ -32644,7 +32723,7 @@ app.get('/compare', async (req, res) => {
     // const responses = await Promise.all(FinalDataFunc);
 
     console.log(responses)
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 9; i++) {
         if (responses[i].name != "NA" && responses[i].price) {
             final.push(responses[i]);
         }
@@ -32925,6 +33004,7 @@ app.post('/medicomp', async (req, res) => {
     extractDataOfmedplusMart(item[4], nameOfMed,manufacturerN), 
     extractDataOfOgMPM(item[5], nameOfMed,manufacturerN),
     extractDataOfTruemeds(item[7], nameOfMed,manufacturerN),
+    extractDataOfMedkart(nameOfMed,manufacturerN),
     // extractDataOfKauveryMeds(item[7], nameOfMed,manufacturerN),
 ]);
     // extractDataOfOBP(item[4], nameOfMed,manufacturerN),
@@ -32938,9 +33018,10 @@ app.post('/medicomp', async (req, res) => {
     const end1 = performance.now() - start1;
     console.log(`Execution time for pharmas: ${end1}ms`);
     
-    for (var i = 0; i <7; i++) {
+    for (var i = 0; i <8; i++) {
+        final.push(responses[i]);
         if (responses[i].name != "NA" && responses[i].price) {
-            final.push(responses[i]);
+            console.log(responses[i].name)
         }
     }
 

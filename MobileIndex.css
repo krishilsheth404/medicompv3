@@ -1,0 +1,1928 @@
+.mobile-home-child {
+    align-self: stretch;
+    height: 143px;
+    position: relative;
+    border-radius: 0 0 var(--br-13xl) var(--br-13xl);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), #fff);
+    display: none;
+    z-index: 0;
+  }
+  .headlinesearch-child {
+    width: 414px;
+    height: 357px;
+    position: relative;
+    display: none;
+    max-width: 100%;
+  }
+  .deliver-to1,
+  .select-your-location {
+    position: relative;
+    display: inline-block;
+  }
+  .deliver-to1 {
+    text-decoration: none;
+    color: inherit;
+    min-width: 46px;
+  }
+  .select-your-location {
+    font-weight: 600;
+    /* min-width: 112px; */
+  }
+  .location-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-8xs) 0 0;
+  }
+  .bold-arrows-alt-arrow-down {
+    height: 24px;
+    width: 24px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .address {
+    flex-direction: row;
+    gap: var(--gap-5xs);
+    cursor: pointer;
+    font-size: var(--h5-medical-size);
+  }
+  .address,
+  .deliver-to,
+  .delivery-input {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .deliver-to {
+    backdrop-filter: blur(4px);
+    flex-direction: column;
+    padding: 0 0 var(--padding-9xs);
+    gap: var(--gap-5xs);
+    z-index: 3;
+  }
+  .delivery-input {
+    flex-direction: row;
+    padding: 0 var(--padding-12xs);
+    font-family: var(--px-semi-bold);
+  }
+  .on-medicines,
+  .save-money {
+    margin: 0;
+  }
+  .save-money-on-medicines-container {
+    margin: 0;
+    height: 89px;
+    position: relative;
+    font-size: inherit;
+    line-height: 44.16px;
+    font-weight: 600;
+    font-family: inherit;
+    display: inline-block;
+    z-index: 1;
+  }
+  .compare-medicine-prices,
+  .helping {
+    font-weight: 500;
+  }
+  .helping-india-compare-container {
+    flex: 1;
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 19px;
+    z-index: 3;
+  }
+  .india-comparison,
+  .save-money-on-medicines-parent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .india-comparison {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 0 0 var(--padding-12xs);
+    font-size: var(--font-size-smi);
+  }
+  .save-money-on-medicines-parent {
+    width: 280px;
+    flex-direction: column;
+    gap: 14px;
+    font-size: var(--h1-medical-size);
+  }
+  .iconlybrokensearch {
+    height: 26.5px;
+    width: 26.5px;
+    position: relative;
+    min-height: 27px;
+    z-index: 2;
+  }
+  .frame-child {
+    height: 60px;
+    width: 362px;
+    position: absolute;
+    margin: 0 !important;
+    top: -19.9px;
+    right: -118.8px;
+    border-radius: 14.91px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .enter-medicine-name {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 22px;
+    z-index: 2;
+  }
+  .search-field-inner,
+  .vector-parent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .vector-parent {
+    flex-direction: row;
+    position: relative;
+  }
+  .search-field-inner {
+    flex-direction: column;
+    padding: 2.3px 0 0;
+  }
+  .search-field {
+    flex-direction: row;
+    gap: var(--gap-base-6);
+  }
+  .headlinesearch,
+  .search-field,
+  .search-input {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .search-input {
+    flex-direction: row;
+    padding: 0 var(--padding-4xl);
+    font-size: var(--h4-medical-size);
+    color: var(--color-lightslategray);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 15px;
+  }
+  .headlinesearch {
+    align-self: stretch;
+    background: linear-gradient(121.94deg, #3875eb, #c0d7ff);
+    flex-direction: column;
+    padding: var(--padding-15xl) var(--padding-6xl) 44.6px;
+    box-sizing: border-box;
+    /* gap: var(--gap-21xl-5); */
+    max-width: 100%;
+    text-align: left;
+    font-size: 11px;
+    color: var(--white);
+    font-family: var(--h2-medical);
+  }
+  .div {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: none;
+    z-index: 2;
+  }
+  .categories {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 21px;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 116px;
+  }
+  .category-tile {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-7xs);
+  }
+  .frame-item {
+    height: 75px;
+    width: 180px;
+    position: relative;
+    border-radius: var(--br-xl);
+    background-color: var(--white);
+    border: 2px solid var(--color-cornflowerblue-100);
+    box-sizing: border-box;
+    display: none;
+  }
+  .capsule-pill,
+  .medicine {
+    position: relative;
+    z-index: 1;
+  }
+  .capsule-pill {
+    height: 50px;
+    width: 50px;
+  }
+  .medicine {
+    font-size: var(--font-size-smi);
+    letter-spacing: 0.02em;
+    line-height: 14px;
+    font-weight: 500;
+    font-family: var(--h2-medical);
+    color: var(--color-steelblue-100);
+    text-align: left;
+    display: inline-block;
+    min-width: 62px;
+  }
+  .medicine-labtest-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-lg) 0 0;
+  }
+  .frame-inner,
+  .rectangle-parent {
+    border-radius: var(--br-xl);
+    background-color: var(--white);
+    box-sizing: border-box;
+  }
+  .rectangle-parent {
+    cursor: pointer;
+    border: 2px solid var(--color-cornflowerblue-100);
+    padding: var(--padding-2xs) var(--padding-3xs) var(--padding-5xs);
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-11xl);
+    min-width: 117px;
+  }
+  .frame-inner {
+    height: 75px;
+    width: 180px;
+    position: relative;
+    border: 2px solid var(--stroke);
+    display: none;
+  }
+  .medicoboldmicroscope-icon {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    z-index: 1;
+  }
+  .lab-tests {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 14px;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 64px;
+    z-index: 1;
+  }
+  .lab-tests-wrapper,
+  .rectangle-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-xl) 0 0;
+  }
+  .rectangle-group {
+    flex: 0.9167;
+    border-radius: var(--br-xl);
+    background-color: var(--white);
+    border: 2px solid var(--stroke);
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--padding-4xs) var(--padding-3xl) var(--padding-3xs)
+      var(--padding-2xs);
+    min-width: 117px;
+    gap: var(--gap-xl);
+  }
+  .category-row,
+  .product-icons {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .product-icons {
+    flex-direction: row;
+    gap: var(--gap-5xs);
+    font-size: var(--font-size-smi);
+    color: var(--color-steelblue-100);
+  }
+  .category-row {
+    flex-direction: column;
+    gap: var(--gap-3xl);
+  }
+  .rectangle-div {
+    height: 106px;
+    width: 362px;
+    position: relative;
+    border-radius: var(--br-xl);
+    background: linear-gradient(121.94deg, #c0d7ff, #3875eb);
+    flex-shrink: 0;
+    display: none;
+    max-width: 100%;
+  }
+  .stats-trios-child {
+    align-self: stretch;
+    height: 76px;
+    position: relative;
+    border-radius: var(--br-mini);
+    background-color: var(--white);
+    display: none;
+  }
+  .empty-stat {
+    position: relative;
+    line-height: 35px;
+    font-weight: 600;
+    background: linear-gradient(121.94deg, #3875eb, #c0d7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    min-width: 49px;
+    z-index: 2;
+  }
+  .stats-number-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-8xl) 0 28px;
+  }
+  .pharmacies-listed {
+    align-self: stretch;
+    position: relative;
+    font-size: var(--font-size-4xs);
+    letter-spacing: 0.02em;
+    line-height: 15px;
+    font-weight: 500;
+    text-align: center;
+    z-index: 2;
+  }
+  .stats-trios,
+  .stats-trios-item {
+    width: 104px;
+    border-radius: var(--br-mini);
+    background-color: var(--white);
+  }
+  .stats-trios {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-mini) 0 var(--padding-7xs);
+    box-sizing: border-box;
+    gap: var(--gap-8xs);
+    z-index: 1;
+  }
+  .stats-trios-item {
+    height: 76px;
+    position: relative;
+    display: none;
+  }
+  .l {
+    position: relative;
+    line-height: 35px;
+    font-weight: 600;
+    background: linear-gradient(121.94deg, #3875eb, #c0d7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    min-width: 50px;
+    z-index: 2;
+  }
+  .l-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-3xs);
+  }
+  .medicines {
+    align-self: stretch;
+    position: relative;
+    font-size: var(--font-size-4xs);
+    letter-spacing: 0.02em;
+    line-height: 14.2px;
+    font-weight: 500;
+    text-align: center;
+    z-index: 2;
+  }
+  .stats-trios-inner,
+  .stats-trios1 {
+    width: 104px;
+    border-radius: var(--br-mini);
+    background-color: var(--white);
+  }
+  .stats-trios1 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-mini) var(--padding-mid) var(--padding-5xs);
+    box-sizing: border-box;
+    gap: var(--gap-8xs);
+    z-index: 1;
+  }
+  .stats-trios-inner {
+    height: 76px;
+    position: relative;
+    display: none;
+  }
+  .k {
+    position: relative;
+    line-height: 35px;
+    font-weight: 600;
+    background: linear-gradient(121.94deg, #3875eb, #c0d7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    min-width: 66px;
+    z-index: 2;
+  }
+  .k-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-mid);
+  }
+  .happy-users {
+    align-self: stretch;
+    position: relative;
+    font-size: var(--font-size-4xs);
+    letter-spacing: 0.02em;
+    line-height: 15px;
+    font-weight: 500;
+    text-align: center;
+    z-index: 2;
+  }
+  .rectangle-container,
+  .stats-trios2 {
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  .stats-trios2 {
+    width: 104px;
+    border-radius: var(--br-mini);
+    background-color: var(--white);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: var(--padding-mini) var(--padding-11xs) var(--padding-7xs);
+    gap: var(--gap-8xs);
+    z-index: 1;
+  }
+  .rectangle-container {
+    align-self: stretch;
+    border-radius: var(--br-xl);
+    background: linear-gradient(121.94deg, #c0d7ff, #3875eb);
+    /* overflow-x: auto; */
+    flex-direction: row;
+    padding: var(--padding-mini);
+    /* gap: 10px; */
+    font-size: var(--font-size-10xl);
+    color: var(--color-lightslategray);
+  }
+  .categories-grid,
+  .categories-grid-wrapper,
+  .rectangle-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 100%;
+  }
+  .categories-grid {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 36px;
+  }
+  .categories-grid-wrapper {
+    align-self: stretch;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0 var(--padding-xl) var(--padding-2xs) var(--padding-xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--h2-medical-size);
+    color: var(--color-darkslateblue-200);
+    font-family: var(--h2-medical);
+  }
+  .featured-deals {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 21px;
+    font-weight: 500;
+  }
+  .deals-title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-8xs);
+    font-size: var(--h2-medical-size);
+    color: var(--color-darkslateblue-200);
+  }
+  .frame-child1 {
+    height: 130px;
+    width: 362px;
+    position: relative;
+    border-radius: 16.56px;
+    background-color: var(--white);
+    border: 2px solid var(--stroke);
+    box-sizing: border-box;
+    display: none;
+    mix-blend-mode: normal;
+    max-width: 100%;
+  }
+  .frame-child2,
+  .mask-group-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .frame-child2 {
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    display: none;
+    z-index: 2;
+  }
+  .mask-group-icon {
+    object-fit: cover;
+    z-index: 3;
+  }
+  .notification-badge {
+    position: absolute;
+    top: 0;
+    left: 47px;
+    border-radius: 50%;
+    background-color: var(--color-aquamarine);
+    border: 0 solid var(--white);
+    box-sizing: border-box;
+    width: 12px;
+    height: 11.7px;
+    z-index: 4;
+  }
+  .frame-div {
+    height: 60px;
+    flex: 1;
+    position: relative;
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    z-index: 2;
+  }
+  .frame-container {
+    width: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-8xs);
+    box-sizing: border-box;
+  }
+  .pack-of-40 {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 14px;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 85px;
+    z-index: 1;
+  }
+  .frame-parent,
+  .frame-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .frame-parent {
+    gap: var(--gap-xl);
+  }
+  .frame-wrapper {
+    padding: var(--padding-9xs) 0 0;
+  }
+  .sun-pharmaceutical-industries,
+  .volini-pain-relief {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 19px;
+    font-weight: 500;
+    z-index: 2;
+  }
+  .volini-pain-relief {
+    width: 233px;
+    display: inline-block;
+  }
+  .sun-pharmaceutical-industries {
+    align-self: stretch;
+    font-size: var(--font-size-3xs);
+    color: var(--color-steelblue-100);
+  }
+  .volini-pain-relief-spray-40-g-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1px;
+  }
+  .view-comparison {
+    position: relative;
+    font-size: var(--h5-medical-size);
+    letter-spacing: 0.02em;
+    line-height: 13.25px;
+    display: inline-block;
+    font-family: var(--h2-medical);
+    color: var(--white);
+    text-align: left;
+    min-width: 114px;
+  }
+  .appointment-button,
+  .appointment-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .appointment-button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-3xs) var(--padding-4xs);
+    background-color: var(--color-cornflowerblue-200);
+    border-radius: var(--br-3xs);
+    justify-content: flex-start;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .appointment-button:hover,
+  .featured-button:hover,
+  .view-comparison-container:hover,
+  .view-comparison-wrapper:hover {
+    background-color: var(--color-cornflowerblue-300);
+  }
+  .appointment-button-wrapper {
+    justify-content: flex-end;
+    padding: 0 var(--padding-9xs);
+  }
+  .frame-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-xs);
+    min-width: 157px;
+    font-size: var(--h3-medical-size);
+    color: var(--labels-primary);
+  }
+  .frame-child3,
+  .group-div {
+    border-radius: 16.56px;
+    background-color: var(--white);
+    border: 2px solid var(--stroke);
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .group-div {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-smi) var(--padding-6xs) var(--padding-6xs)
+      var(--padding-smi);
+    gap: var(--gap-2xs);
+  }
+  .frame-child3 {
+    width: 362px;
+    height: 130px;
+    position: relative;
+    display: none;
+    mix-blend-mode: normal;
+  }
+  .frame-child4,
+  .mask-group-icon1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .frame-child4 {
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    display: none;
+    z-index: 2;
+  }
+  .mask-group-icon1 {
+    object-fit: cover;
+    z-index: 3;
+  }
+  .ellipse-div {
+    position: absolute;
+    top: 0;
+    left: 47px;
+    border-radius: 50%;
+    background-color: var(--color-aquamarine);
+    border: 0 solid var(--white);
+    box-sizing: border-box;
+    width: 12px;
+    height: 11.7px;
+    z-index: 4;
+  }
+  .rectangle-parent2 {
+    align-self: stretch;
+    height: 60px;
+    position: relative;
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    z-index: 2;
+  }
+  .frame-wrapper1 {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-9xs) 0 0;
+    box-sizing: border-box;
+  }
+  .moov-pain-relief {
+    width: 233px;
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 19px;
+    font-weight: 500;
+    display: inline-block;
+    z-index: 2;
+  }
+  .reckitt-benckiser-india {
+    align-self: stretch;
+    height: 14px;
+    position: relative;
+    font-size: var(--font-size-3xs);
+    line-height: 28px;
+    color: var(--color-steelblue-100);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+  .frame-parent1,
+  .moov-pain-relief-cream-15-gm-parent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .moov-pain-relief-cream-15-gm-parent {
+    flex: 1;
+    flex-direction: column;
+    gap: var(--gap-9xs);
+    min-width: 157px;
+  }
+  .frame-parent1 {
+    width: 333px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 31px;
+    max-width: 100%;
+  }
+  .pack-of-15 {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 14px;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 85px;
+    z-index: 1;
+  }
+  .pack-of-15-gm-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-sm) 0 0;
+  }
+  .view-comparison1 {
+    position: relative;
+    font-size: var(--h5-medical-size);
+    letter-spacing: 0.02em;
+    line-height: 13.25px;
+    display: inline-block;
+    font-family: var(--h2-medical);
+    color: var(--white);
+    text-align: left;
+    min-width: 114px;
+  }
+  .view-comparison-wrapper {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-3xs) var(--padding-4xs);
+    background-color: var(--color-cornflowerblue-200);
+    border-radius: var(--br-3xs);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .frame-parent2,
+  .frame-wrapper2 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+  .frame-parent2 {
+    flex: 1;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+  }
+  .frame-wrapper2 {
+    align-self: stretch;
+    justify-content: flex-end;
+    padding: 0 var(--padding-9xs) 0 var(--padding-7xs);
+    box-sizing: border-box;
+    font-size: var(--font-size-2xs-3);
+    color: var(--color-gray-500);
+  }
+  .frame-child5,
+  .rectangle-parent1 {
+    border-radius: 16.56px;
+    background-color: var(--white);
+    border: 2px solid var(--stroke);
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .rectangle-parent1 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: var(--padding-smi) var(--padding-6xs) var(--padding-6xs);
+    gap: var(--gap-7xs);
+    font-size: var(--h3-medical-size);
+    color: var(--labels-primary);
+  }
+  .frame-child5 {
+    height: 130px;
+    width: 362px;
+    position: relative;
+    display: none;
+    mix-blend-mode: normal;
+  }
+  .frame-child6,
+  .mask-group-icon2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .frame-child6 {
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    display: none;
+    z-index: 2;
+  }
+  .mask-group-icon2 {
+    object-fit: cover;
+    z-index: 3;
+  }
+  .frame-child7 {
+    position: absolute;
+    top: 0;
+    left: 47px;
+    border-radius: 50%;
+    background-color: var(--color-aquamarine);
+    border: 0 solid var(--white);
+    box-sizing: border-box;
+    width: 12px;
+    height: 11.7px;
+    z-index: 4;
+  }
+  .rectangle-parent4 {
+    height: 60px;
+    flex: 1;
+    position: relative;
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    z-index: 2;
+  }
+  .frame-wrapper4 {
+    width: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-8xs);
+    box-sizing: border-box;
+  }
+  .pack-of-401 {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 14px;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 85px;
+    z-index: 1;
+  }
+  .frame-parent3,
+  .frame-wrapper3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .frame-parent3 {
+    gap: var(--gap-xl);
+  }
+  .frame-wrapper3 {
+    padding: var(--padding-9xs) 0 0;
+  }
+  .sun-pharmaceutical-industries1,
+  .volini-pain-relief1 {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 19px;
+    font-weight: 500;
+    z-index: 2;
+  }
+  .volini-pain-relief1 {
+    display: inline-block;
+  }
+  .sun-pharmaceutical-industries1 {
+    align-self: stretch;
+    font-size: var(--font-size-3xs);
+    color: var(--color-steelblue-100);
+  }
+  .volini-pain-relief-spray-40-g-group {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-9xs);
+  }
+  .view-comparison2 {
+    position: relative;
+    font-size: var(--h5-medical-size);
+    letter-spacing: 0.02em;
+    line-height: 13.25px;
+    display: inline-block;
+    font-family: var(--h2-medical);
+    color: var(--white);
+    text-align: left;
+    min-width: 114px;
+  }
+  .frame-wrapper5,
+  .view-comparison-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .view-comparison-container {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-3xs) var(--padding-4xs);
+    background-color: var(--color-cornflowerblue-200);
+    border-radius: var(--br-3xs);
+    justify-content: flex-start;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .frame-wrapper5 {
+    justify-content: flex-end;
+    padding: 0 var(--padding-9xs);
+  }
+  .frame-parent4 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-4xs);
+    min-width: 157px;
+    font-size: var(--h3-medical-size);
+    color: var(--labels-primary);
+  }
+  .deal-items,
+  .rectangle-parent3 {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .rectangle-parent3 {
+    border-radius: 16.56px;
+    background-color: var(--white);
+    border: 2px solid var(--stroke);
+    box-sizing: border-box;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: var(--padding-smi) var(--padding-6xs) var(--padding-6xs)
+      var(--padding-smi);
+    gap: var(--gap-2xs);
+  }
+  .deal-items {
+    flex-direction: column;
+    gap: var(--gap-lgi);
+  }
+  .frame-child8 {
+    height: 130px;
+    width: 362px;
+    position: relative;
+    border-radius: 16.56px;
+    background-color: var(--white);
+    border: 2px solid var(--stroke);
+    box-sizing: border-box;
+    display: none;
+    mix-blend-mode: normal;
+    max-width: 100%;
+  }
+  .featured-mask-wrapper-child,
+  .mask-group-icon3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .featured-mask-wrapper-child {
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    display: none;
+    z-index: 2;
+  }
+  .mask-group-icon3 {
+    object-fit: cover;
+    z-index: 3;
+  }
+  .featured-mask-wrapper-item {
+    position: absolute;
+    top: 0;
+    left: 47px;
+    border-radius: 50%;
+    background-color: var(--color-aquamarine);
+    border: 0 solid var(--white);
+    box-sizing: border-box;
+    width: 12px;
+    height: 11.7px;
+    z-index: 4;
+  }
+  .featured-mask-wrapper {
+    height: 60px;
+    flex: 1;
+    position: relative;
+    border-radius: var(--br-xl);
+    background-color: var(--color-lemonchiffon);
+    z-index: 2;
+  }
+  .featured-image-wrapper {
+    width: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-8xs);
+    box-sizing: border-box;
+  }
+  .pack-of-40mg {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 14px;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 85px;
+    z-index: 1;
+  }
+  .featured-product-image,
+  .featured-product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .featured-product-image {
+    gap: var(--gap-xl);
+  }
+  .featured-product-info {
+    padding: var(--padding-9xs) 0 0;
+  }
+  .sun-pharmaceutical-industries2,
+  .volini-pain-relief2 {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 19px;
+    font-weight: 500;
+    z-index: 2;
+  }
+  .volini-pain-relief2 {
+    width: 233px;
+    display: inline-block;
+  }
+  .sun-pharmaceutical-industries2 {
+    align-self: stretch;
+    font-size: var(--font-size-3xs);
+    color: var(--color-steelblue-100);
+  }
+  .featured-product-name {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-9xs);
+  }
+  .view-comparison3 {
+    position: relative;
+    font-size: var(--h5-medical-size);
+    letter-spacing: 0.02em;
+    line-height: 13.25px;
+    display: inline-block;
+    font-family: var(--h2-medical);
+    color: var(--white);
+    text-align: left;
+    min-width: 114px;
+  }
+  .featured-button,
+  .featured-comparison {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .featured-button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-3xs) var(--padding-4xs);
+    background-color: var(--color-cornflowerblue-200);
+    border-radius: var(--br-3xs);
+    justify-content: flex-start;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .featured-comparison {
+    justify-content: flex-end;
+    padding: 0 var(--padding-9xs);
+  }
+  .featured-product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-4xs);
+    min-width: 157px;
+    font-size: var(--h3-medical-size);
+    color: var(--labels-primary);
+  }
+  .featured-deal,
+  .rectangle-parent5 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .rectangle-parent5 {
+    flex: 1;
+    border-radius: 16.56px;
+    background-color: var(--white);
+    border: 2px solid var(--stroke);
+    flex-wrap: wrap;
+    padding: var(--padding-smi) var(--padding-6xs) var(--padding-6xs)
+      var(--padding-smi);
+    gap: var(--gap-2xs);
+  }
+  .featured-deal {
+    align-self: stretch;
+    padding: 0 0 var(--padding-lg);
+  }
+  .view-all-container-child {
+    height: 60px;
+    width: 362px;
+    position: absolute;
+    margin: 0 !important;
+    top: -19px;
+    left: -146px;
+    border-radius: 14.91px;
+  }
+  .view-all {
+    text-decoration: none;
+    position: relative;
+    font-weight: 700;
+    color: inherit;
+    display: inline-block;
+    min-width: 77px;
+    z-index: 1;
+  }
+  .view-all-button,
+  .view-all-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .view-all-container {
+    justify-content: flex-start;
+    position: relative;
+  }
+  .view-all-button {
+    align-self: stretch;
+    justify-content: center;
+    padding: var(--padding-xl) var(--padding-8xl);
+    border: 1px solid var(--color-cornflowerblue-100);
+    font-size: var(--px-semi-bold1-size);
+    color: var(--color-cornflowerblue-200);
+    border-radius: 15px;
+  }
+  .deals-grid,
+  .deals-grid-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .deals-grid {
+    flex: 1;
+    flex-direction: column;
+    gap: var(--gap-lgi);
+  }
+  .deals-grid-wrapper {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 var(--padding-7xl) var(--padding-11xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--font-size-2xs-3);
+    color: var(--color-gray-500);
+    font-family: var(--h2-medical);
+  }
+  .screenshot-2024-06-02-152044-1 {
+    height: 330.9px;
+    flex: 1;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    object-fit: contain;
+  }
+  .app-preview {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 32px 29.1px;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .lets-make-healthcare {
+    margin-block-start: 0;
+    margin-block-end: 5px;
+  }
+  .more-affordable {
+    margin: 0;
+    color: var(--medicompboldcolor);
+  }
+  .lets-make-healthcare-container {
+    margin: 0;
+    align-self: stretch;
+    position: relative;
+    font-size: inherit;
+    font-weight: 700;
+    font-family: inherit;
+  }
+  .slogan-dots-child {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 2px;
+    height: 215px;
+  }
+  
+  .slogan-dots-child1,
+  .slogan-dots-child2,
+  .slogan-dots-child3,
+  .slogan-dots-inner {
+    top: 55px;
+  }
+  .slogan-dots-child1,
+  .slogan-dots-child2,
+  .slogan-dots-child3 {
+    top: 110px;
+    width: 10.3px;
+  }
+  .slogan-dots-child2,
+  .slogan-dots-child3 {
+    top: 163px;
+    width: 10.2px;
+  }
+  .slogan-dots-child3 {
+    top: 218px;
+  }
+  .slogan-dots {
+    width: 10.3px;
+    height: 228px;
+    position: relative;
+  }
+  .slogan-content,
+  .slogan-content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .slogan-content {
+    flex: 1;
+    flex-direction: column;
+    gap: var(--gap-2xs);
+  }
+  .slogan-content-wrapper {
+    width: 397px;
+    flex-direction: row;
+    padding: 0 var(--padding-5xl) 60px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 23px;
+    color: var(--color-gray-200);
+    font-family: var(--h2-medical);
+  }
+  .recent-blogs {
+    position: relative;
+    letter-spacing: 0.02em;
+    line-height: 21px;
+    font-weight: 500;
+  }
+  .blog-title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-3xs);
+  }
+  .blog-image-icon,
+  .blog-image-icon1 {
+    flex: 1; /* Ensure equal size */
+    border-radius: var(--br-3xs);
+    object-fit: cover;
+    width: calc(50% - 5px); /* Ensure they fill the flex container with gap */
+    aspect-ratio: 1/1;
+  }
+  .blog-post-image {
+    align-self: stretch;
+    /* display: flex; */
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-11xs) 0 0;
+    gap: var(--gap-xl);
+    width: 100%; 
+  }
+  /* .rectangle-icon {
+    min-height: 175px;
+  } */
+  .frame-child9,
+  .rectangle-icon {
+    flex: 1; /* Ensure equal size */
+    border-radius: var(--br-3xs);
+    object-fit: cover;
+    width: calc(50% - 5px); /* Ensure they fill the flex container with gap */
+    aspect-ratio: 1/1; 
+  }
+  .blog-posts,
+  .rectangle-parent6,
+  .rectangle-wrapper {
+    /* display: flex; */
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .rectangle-wrapper {
+    flex: 1;
+    flex-direction: column;
+    padding: var(--padding-11xs) 0 0;
+    box-sizing: border-box;
+    min-width: 115px;
+  }
+  .blog-posts,
+  .rectangle-parent6 {
+    align-self: stretch;
+  }
+  .rectangle-parent6 {
+    align-self: stretch;
+    /* display: flex; */
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-11xs) 0 0;
+    gap: var(--gap-xl);
+    width: 100%; 
+  }
+  .blog-posts {
+    flex-direction: column;
+    padding: 0 0 var(--padding-8xs);
+    gap: var(--gap-4xl);
+  }
+  .view-all1 {
+    text-decoration: none;
+    position: relative;
+    font-weight: 700;
+    color: inherit;
+    display: inline-block;
+    min-width: 77px;
+  }
+  .blog-view-all {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 var(--padding-2xl) 0 var(--padding-xl);
+    font-size: var(--px-semi-bold1-size);
+    color: var(--color-cornflowerblue-200);
+  }
+  .blog-content,
+  .blog-content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .blog-content {
+    flex: 1;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .blog-content-wrapper {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 var(--padding-lgi) var(--padding-30xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--h2-medical-size);
+    color: var(--color-darkslateblue-200);
+    font-family: var(--h2-medical);
+  }
+  .container,
+  .indicator {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .indicator {
+    height: 14.71%;
+    width: 35.73%;
+    top: 55.88%;
+    right: 32%;
+    bottom: 29.41%;
+    left: 32.27%;
+    border-radius: var(--br-10xs-5);
+    background-color: var(--color-darkslateblue-300);
+  }
+  .home-indicator {
+    width: 375px;
+    height: 34px;
+    position: relative;
+    display: none;
+    max-width: 100%;
+    z-index: 8;
+  }
+  .div1 {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    letter-spacing: -0.24px;
+    font-weight: 600;
+    display: inline-block;
+    width: 54px;
+    height: 17px;
+    white-space: nowrap;
+  }
+  .status-bar-time-01-default {
+    position: absolute;
+    top: 12px;
+    left: 21px;
+    width: 54px;
+    height: 21px;
+    overflow: hidden;
+  }
+  .battery-icon {
+    position: absolute;
+    top: 17px;
+    right: 16px;
+    width: 24px;
+    height: 11px;
+  }
+  .mobile-signal-icon,
+  .wifi-icon {
+    position: relative;
+    width: 15px;
+    height: 11px;
+  }
+  .mobile-signal-icon {
+    width: 17px;
+  }
+  .status-bar-02-transparent {
+    width: 375px;
+    height: 44px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: none;
+    max-width: 100%;
+    z-index: 9;
+    text-align: center;
+    font-size: var(--h4-medical-size);
+    color: var(--white);
+    font-family: var(--font-sf-pro-text);
+  }
+  
+  .slogan-dots-main-li-container{
+  
+  }
+  .category-stats-child {
+    width: 414px;
+    height: 588px;
+    position: relative;
+    border-radius: var(--br-13xl);
+    background-color: var(--color-gray-100);
+    display: none;
+    max-width: 100%;
+  }
+  .medicomp-india {
+    margin: 0;
+    position: relative;
+    font-size: inherit;
+    letter-spacing: 0.05em;
+    line-height: 28px;
+    font-weight: 800;
+    font-family: inherit;
+    z-index: 2;
+  }
+  .wrapper-group-431-child {
+    height: 90%;
+    width: 90%;
+    z-index: 2;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    transform: scale(2.292);
+  }
+  .wrapper-group-431 {
+    height: 41.8px;
+    width: 42px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand-info {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+  }
+  .welcome-to-medicomp {
+    flex: 1;
+    position: relative;
+    line-height: 150%;
+    display: inline-block;
+    min-width: 195px;
+    z-index: 2;
+  }
+  .wrapper-group-433-child {
+    width: 90%;
+    height: 90%;
+    flex-shrink: 0;
+    z-index: 2;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    transform: scale(2.292);
+  }
+  .wrapper-group-433 {
+    width: 42px;
+    height: 41.8px;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapper-group-432-child {
+    width: 90%;
+    height: 90%;
+    flex-shrink: 0;
+    z-index: 2;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    transform: scale(2.292);
+  }
+  .wrapper-group-432 {
+    width: 42px;
+    height: 41.8px;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .feature-icons {
+    flex: 1;
+    flex-direction: column;
+    gap: 16.1px;
+  }
+  .brand-description,
+  .feature-icons,
+  .features,
+  .footer-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .features {
+    height: 105.5px;
+    flex-direction: column;
+    padding: 5.8px 0 0;
+    box-sizing: border-box;
+  }
+  .brand-description,
+  .footer-content {
+    align-self: stretch;
+  }
+  .brand-description {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-size: var(--px-semi-bold1-size);
+    color: var(--color-darkgray-100);
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 10.2px;
+  }
+  .information {
+    margin: 0;
+    font-size: inherit;
+    text-transform: capitalize;
+    font-weight: 700;
+    font-family: inherit;
+    flex-shrink: 0;
+  }
+  .information,
+  .integrations {
+    align-self: stretch;
+    position: relative;
+    line-height: 150%;
+  }
+  .customer,
+  .hello,
+  .intercom {
+    width: 60.3px;
+    position: relative;
+    line-height: 150%;
+    display: inline-block;
+  }
+  .customer,
+  .intercom {
+    width: 106.3px;
+  }
+  .customer {
+    width: 115px;
+  }
+  .information-parent,
+  .integration-platforms {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .integration-platforms {
+    margin: 0;
+    width: 140.8px;
+    gap: var(--gap-mini);
+    flex-shrink: 0;
+    text-align: left;
+    font-size: var(--px-semi-bold1-size);
+    color: var(--color-darkgray-100);
+    font-family: var(--font-montserrat);
+  }
+  .information-parent {
+    flex: 1;
+    gap: 10.1px;
+    min-width: 63px;
+  }
+  .about,
+  .our-blog {
+    position: relative;
+    line-height: 150%;
+  }
+  .about {
+    margin: 0;
+    width: 125.8px;
+    font-size: var(--font-size-5xl);
+    text-transform: capitalize;
+    font-weight: 700;
+    font-family: inherit;
+    color: var(--white);
+    display: inline-block;
+  }
+  .our-blog {
+    flex: 1;
+  }
+  .link-list {
+    width: 117.7px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-8xs-7);
+    box-sizing: border-box;
+  }
+  .customers {
+    flex: 1;
+    position: relative;
+    line-height: 150%;
+    flex-shrink: 0;
+  }
+  .link-list1 {
+    width: 140.3px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-8xs-7);
+    box-sizing: border-box;
+  }
+  .our-team {
+    flex: 1;
+    position: relative;
+    line-height: 150%;
+  }
+  .link-list2 {
+    width: 127.4px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-8xs-7);
+    box-sizing: border-box;
+  }
+  .careers {
+    flex: 1;
+    position: relative;
+    line-height: 150%;
+    flex-shrink: 0;
+  }
+  .link-list3 {
+    width: 98.3px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-8xs-7);
+    box-sizing: border-box;
+  }
+  .integrations1 {
+    align-self: stretch;
+    position: relative;
+    line-height: 150%;
+  }
+  .about-parent {
+    flex: 1;
+    flex-direction: column;
+    gap: 10.3px;
+    min-width: 63px;
+    font-size: var(--px-semi-bold1-size);
+    color: var(--color-darkgray-100);
+  }
+  .about-parent,
+  .category-stats,
+  .footer-links,
+  .mobile-home {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .footer-links {
+    align-self: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 var(--padding-11xs) 0 0;
+    gap: 26px 54px;
+    z-index: 2;
+    font-size: var(--font-size-5xl);
+  }
+  .category-stats,
+  .mobile-home {
+    border-radius: var(--br-13xl);
+    flex-direction: column;
+    text-align: left;
+    font-family: var(--font-montserrat);
+  }
+  .category-stats {
+    align-self: stretch;
+    background-color: var(--color-gray-100);
+    padding: 46px var(--padding-2xl) 82.7px;
+    box-sizing: border-box;
+    gap: 61px;
+    max-width: 100%;
+    z-index: 1;
+    font-size: var(--px-semi-bold2-size);
+    color: var(--white);
+  }
+  .mobile-home {
+    width: 100%;
+    position: relative;
+    background-color: var(--white);
+    gap: 35px;
+    line-height: normal;
+    letter-spacing: normal;
+    font-size: var(--font-size-mid);
+    color: var(--color-gray-200);
+  }
+  @media screen and (max-width: 395px) {
+    .blog-post-image {
+      flex-wrap: wrap;
+    }
+  }
+  @media screen and (max-width: 376px) {
+    .blog-content {
+      gap: var(--gap-base);
+    }
+  }
+  @media screen and (max-width: 372px) {
+    .footer-links {
+      gap: 27px;
+    }
+  }
+  @media screen and (max-width: 368px) {
+    .categories-grid {
+      gap: 18px;
+    }
+  }
+  @media screen and (max-width: 357px) {
+    .headlinesearch {
+      padding-top: var(--padding-3xl);
+      padding-bottom: 29px;
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 340px) {
+    .rectangle-group,
+    .rectangle-parent {
+      flex: 1;
+    }
+    .product-icons {
+      flex-wrap: wrap;
+    }
+  }
+  @media screen and (max-width: 333px) {
+    .frame-parent1 {
+      gap: var(--gap-mini);
+    }
+  }
+  @media screen and (max-width: 330px) {
+    .headlinesearch {
+      gap: var(--gap-xl);
+    }
+  }
+  @media screen and (max-width: 314px) {
+    .frame-parent2 {
+      flex-wrap: wrap;
+    }
+  }
+  @media screen and (max-width: 309px) {
+    .brand-info {
+      flex-wrap: wrap;
+    }
+  }
