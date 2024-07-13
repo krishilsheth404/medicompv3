@@ -111,7 +111,7 @@ app.get('/', async (req, res)  => {
         .catch(error => {
             console.error(error);
         });
-        res.sendFile(__dirname+'/index.html');
+        res.sendFile(__dirname+'/Laptopindex.html');
 
     // if (req.session.user) {
     //     res.redirect('/home')
@@ -154,7 +154,7 @@ app.post('/home', (req, res) => {
 
     console.log(req.session.user)
     if (req.session.user) {
-        res.sendFile(__dirname+'/index.html');
+        res.sendFile(__dirname+'/Laptopindex.html');
     } else {
        res.redirect('/login')
     }
