@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    line-height: normal;
+  }
+  
+  :root {
+    /* fonts */
+    --font-montserrat: Montserrat;
+    --font-sf-pro-text: "SF Pro Text";
+    --h2-medical: Poppins;
+    --px-semi-bold: Roboto;
+    --font-sf-pro: "SF Pro";
+  
+    /* font sizes */
+    --px-semi-bold1-size: 16px;
+    --font-size-5xl: 24px;
+    --px-semi-bold2-size: 22px;
+    --font-size-mid: 17px;
+    --h4-medical-size: 14px;
+    --h2-medical-size: 20px;
+    --h5-medical-size: 12px;
+    --font-size-3xs: 10px;
+    --h3-medical-size: 18px;
+    --font-size-2xs-3: 10.3px;
+    --font-size-4xs: 9px;
+    --font-size-10xl: 29px;
+    --font-size-smi: 13px;
+    --h1-medical-size: 36px;
+    --font-size-lgi: 19px;
+  
+    /* Colors */
+    --white: #fff;
+    --neutral-neutral-900: #0d1217;
+    --neutral-100: #101010;
+    --color-gray-100: #010223;
+    --color-gray-200: #030303;
+    --black-secondary-20: rgba(0, 0, 0, 0.2);
+    --color-gray-300: rgba(13, 18, 23, 0.3);
+    --color-gray-400: rgba(255, 255, 255, 0.1);
+    --color-gray-500: rgba(8, 12, 47, 0.65);
+    --color-darkgray-100: #a7a7a7;
+    --neutral-neutral-200: #989da3;
+    --color-darkslateblue-100: #263257;
+    --color-darkslateblue-200: #232f55;
+    --color-darkslateblue-300: rgba(20, 55, 106, 0.45);
+    --color-cornflowerblue-100: #6a99f2;
+    --color-cornflowerblue-200: #6696f2;
+    --color-cornflowerblue-300: #4d7dd9;
+    --color-mediumblue: #313ef7;
+    --medicompboldcolor: #457fed;
+    --stroke: #f7f8f8;
+    --neutral-neutral-50: #e9eaeb;
+    --color-steelblue-100: #7d8bb7;
+    --labels-primary: #000;
+    --color-lemonchiffon: #fff9c8;
+    --color-aquamarine: #8ef4bc;
+    --color-lightslategray: #8a96bc;
+    --color-gainsboro: #d9d9d9;
+    --color-royalblue-100: #3c78ec;
+    --medicompcolorscheme: #3875eb;
+    --color-darkslategray-100: #464646;
+    --color-darkslategray-200: rgba(31, 42, 55, 0.05);
+    --no-color-0: rgba(196, 196, 196, 0);
+    --neutral-neutral-300: #697079;
+    --secondary-secondary-500: #ffc700;
+  
+    /* Gaps */
+    --gap-mini: 15px;
+    --gap-xl: 20px;
+    --gap-base: 16px;
+    --gap-4xl: 23px;
+    --gap-3xl: 22px;
+    --gap-11xl: 30px;
+    --gap-lgi: 19px;
+    --gap-2xs: 11px;
+    --gap-4xs: 9px;
+    --gap-9xs: 4px;
+    --gap-7xs: 6px;
+    --gap-xs: 12px;
+    --gap-8xs: 5px;
+    --gap-5xs: 8px;
+    --gap-21xl-5: 40.5px;
+    --gap-base-6: 16.6px;
+    --gap-45xl: 64px;
+    --gap-11xs: 2px;
+    --gap-6xs-3: 6.3px;
+  
+    /* Paddings */
+    --padding-2xl: 21px;
+    --padding-11xs: 2px;
+    --padding-8xs-7: 4.7px;
+    --padding-lgi: 19px;
+    --padding-30xl: 49px;
+    --padding-xl: 20px;
+    --padding-8xs: 5px;
+    --padding-3xs: 10px;
+    --padding-5xl: 24px;
+    --padding-7xl: 26px;
+    --padding-11xl: 30px;
+    --padding-8xl: 27px;
+    --padding-lg: 18px;
+    --padding-smi: 13px;
+    --padding-6xs: 7px;
+    --padding-9xs: 4px;
+    --padding-4xs: 9px;
+    --padding-7xs: 6px;
+    --padding-sm: 14px;
+    --padding-2xs: 11px;
+    --padding-mini: 15px;
+    --padding-mid: 17px;
+    --padding-5xs: 8px;
+    --padding-3xl: 22px;
+    --padding-15xl: 34px;
+    --padding-6xl: 25px;
+    --padding-4xl: 23px;
+    --padding-12xs: 1px;
+    --padding-35xl: 54px;
+    --padding-21xl: 40px;
+    --padding-base: 16px;
+    --padding-11xs-5: 1.5px;
+    --padding-smi-5: 12.5px;
+    --padding-10xs: 3px;
+    --padding-xs: 12px;
+    --padding-10xs-5: 2.5px;
+    --padding-mid-7: 17.7px;
+    --padding-base-8: 15.8px;
+    --padding-10xs-2: 2.2px;
+    --padding-56xl: 75px;
+    --padding-47xl: 66px;
+    --padding-5xs-5: 7.5px;
+    --padding-7xs-5: 5.5px;
+  
+    /* Border radiuses */
+    --br-13xl: 32px;
+    --br-10xs-5: 2.5px;
+    --br-3xs: 10px;
+    --br-mini-9: 14.9px;
+    --br-base-6: 16.6px;
+    --br-xl: 20px;
+    --br-mini: 15px;
+    --br-xs: 12px;
+    --br-9xl: 28px;
+    --br-3xl: 22px;
+    --br-8xs-3: 4.3px;
+    --br-5xs: 8px;
+    --br-81xl: 100px;
+    --br-2xs: 11px;
+    --br-9xs: 4px;
+    --br-3xs-3: 9.3px;
+    --br-7xs: 6px;
+  
+    /* Effects */
+    --shadow-2: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow: 0px 4px 12px rgba(13, 10, 44, 0.06);
+    --shadow-shadow: 6px 6px 60px rgba(0, 0, 0, 0.08);
+    --shadow-dark: 0px 6px 20px rgba(13, 10, 44, 0.1);
+  }

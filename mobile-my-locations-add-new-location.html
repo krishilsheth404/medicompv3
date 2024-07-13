@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./mobile-my-locations-add-new-location.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=SF Pro Text:wght@600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=SF Pro:wght@600&display=swap"
+    />
+  </head>
+  <body>
+    <div class="mobile-my-locations-add-new" style="padding-top: 30px;">
+      <div class="title-container">
+        <div class="title2">
+          <div class="button-icon4">
+            <img
+              class="outline-arrows-arrow-left2"
+              loading="lazy"
+              id="go_back"
+              alt=""
+              src="./public/outline--arrows--arrow-left.svg"
+            />
+          </div>
+          <div class="new-location-title">
+            <a class="add-new-location2">Add New Location</a>
+          </div>
+          <div class="button-icon5"></div>
+        </div>
+      </div>
+      <section class="map-wrapper-parent">
+        <div class="map-wrapper">
+          <img class="map-icon" alt="" src="./public/map@2x.png" />
+
+          <div class="my-location">
+            <img class="icon" loading="lazy" alt="" src="./public/icon.svg" />
+          </div>
+        </div>
+        <form class="bottom-sheet">
+          <div class="location-dropdown">
+            <div class="drop-button">
+              <div class="container1"></div>
+              <div class="indicator1"></div>
+            </div>
+            <div class="location">Location</div>
+          </div>
+          <div class="home-indicator1">
+            <div class="home-indicator2"></div>
+          </div>
+          <div class="input-parent">
+            <div class="input">
+              <input
+                class="your-location"
+                placeholder="Enter PinCode"
+                type="number"
+              />
+              <img
+                class="outline-map-location-map"
+                alt=""
+                src="./public/outline--map--location--map-point.svg"
+              />
+            </div>
+            <div class="input1">
+              <input
+                class="full-name"
+                placeholder="Location Name"
+                type="text"
+              />
+            </div>
+          </div>
+          <button class="button2" id="button" type="submit" disabled>
+            <div class="next2">Save</div>
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var button = document.getElementById("button");
+        var locationInput = document.querySelector(".your-location");
+        var nameInput = document.querySelector(".full-name");
+        var form = document.querySelector("form.bottom-sheet");
+    
+        function checkInputs() {
+          if (locationInput.value.trim() !== "" && nameInput.value.trim() !== "") {
+            button.classList.add("active");
+            button.disabled = false;
+          } else {
+            button.classList.remove("active");
+            button.disabled = true;
+          }
+        }
+    
+        locationInput.addEventListener("input", checkInputs);
+        nameInput.addEventListener("input", checkInputs);
+    
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (locationInput.value.trim() !== "" && nameInput.value.trim() !== "") {
+            window.location.href = "./mobile-my-locations.html";
+          }
+        });
+    
+        var go_back = document.getElementById("go_back");
+        go_back.onclick = function () {
+          window.history.back();
+        };
+    
+        checkInputs();
+      });
+    </script>
+    
+    
+    
+  </body>
+</html>
