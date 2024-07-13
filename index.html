@@ -24,20 +24,6 @@
 	<link rel="icon" type="image/png" href="medicomp_favicon.png">
 
 
-    <script>
-         document.getElementById('ftco-loader').style.opacity = 0;
-        document.getElementById('ftco-loader').style.visibility = 'hidden';
-        document.getElementById('ftco-loader-loading').style.visibility = 'hidden';
-        
-        document.addEventListener('DOMContentLoaded', function() {
-
-            const screenWidth = window.innerWidth;
-            console.log(screenWidth)
-        if (screenWidth < 618) {
-            window.location.href = 'MobileIndex.html';
-        } 
-        });
-    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
@@ -901,6 +887,21 @@ function toggleCurrentLocation() {
 }
     </script>
 
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const screenWidth = window.innerWidth;
+        console.log(screenWidth)
+        if (screenWidth < 618) {
+            window.location.href = 'MobileIndex.html';
+        } 
+        document.getElementById('ftco-loader').style.opacity = 0;
+       document.getElementById('ftco-loader').style.visibility = 'hidden';
+       document.getElementById('ftco-loader-loading').style.visibility = 'hidden';
+    
+    });
+</script>
 </body>
 
 </html>
