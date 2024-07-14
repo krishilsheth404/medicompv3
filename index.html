@@ -3,8 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        const screenWidth = window.innerWidth;
+        console.log(screenWidth)
+        if (screenWidth < 618) {
+            window.location.href = 'MobileIndex.html';
+        } 
+        </script>
+    
     <title>Medicomp India | India's 1st Platform To Compare Medicine Prices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
 	<meta name="title" content="Medicomp India | 	India's 1st Platform To Compare Medicine Prices">
 	<meta name="description"
@@ -30,23 +38,17 @@
     <link rel="stylesheet" href="./global.css" />
     <link rel="stylesheet" href="./Laptopindex.css" />
 
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Red Hat Display:wght@400;700;800;900&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Adamina:wght@400&display=swap" />
+  
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -98,7 +100,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     top: 0px;
     left: 0px;">
 
-        <img loading="lazy" src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
+        <img src="medicomp-loading-unscreen.gif" id="ftco-loader-loading"
             style="width: 220px;height: 130px;top: 50%;left: 50%;position: absolute;transform:translate(-50%,-50%);filter: brightness(1.1);display: block;visibility: hidden;"
             alt="">
     </div>
@@ -144,7 +146,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                 <div class="location-marker mx-5 me-lg-5" onclick="toggleCurrentLocation()">
                     <div class="d-flex justify-content-center align-items-center">
                         <p class="fs-6 m-0" style="font-weight: 700; font-family: Poppins, sans-serif;">Current Location
-                            <img loading="lazy" class="toggle-arrow down-icon ms-1" alt="" src=".//public/up.svg"
+                            <img class="toggle-arrow down-icon ms-1" alt="" src="./public/up.svg"
                                 onclick="toggleCurrentLocation()" />
                         </p>
                     </div>
@@ -188,7 +190,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                    <div class="card col-lg-7 col-xl-7 col-xxl-6 d-flex flex-row align-items-center ftco-animate fadeInUp ftco-animated" style="width: 100%;
     border: none;z-index: 101;min-width: 610px;" onclick="openSearchBar()" id="searchBar">
                         <div class="input col-lg-9">
-                            <img loading="lazy" class="outline-search-magnifer" alt="" src=".//public/outline--search--magnifer.svg" />
+                            <img class="outline-search-magnifer" alt="" src="./public/outline--search--magnifer.svg" />
                             <input class="search-bar" id="q" name="q" autocomplete="off" placeholder="Medicine Name" type="text" style="font-family: 'Poppins';" />
                         </div>
                         <button class="button col">
@@ -380,17 +382,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 
                     <div style="position: relative;top: 300px;opacity: 0.7;">
                         <ul style="display: flex;align-items: center;flex-direction: row;justify-content: start;padding-left: 0px;filter: grayscale(1);">
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/netmedsLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/apolloLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/pharmeasyLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/tata1mgLogo.png" alt="" style="height: 40px;width: 65px;filter: contrast(0)"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/pusleplusLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/medkartLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/truemedsLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/myUpcharLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/medplusmartLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/flipkartLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
-                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img loading="lazy" src="./public/pasumaiPharmacyLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/netmedsLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/apolloLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/pharmeasyLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/tata1mgLogo.png" alt="" style="height: 40px;width: 65px;filter: contrast(0)"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/pusleplusLogo.png" alt="" style="height: 60px;width: 60px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/medkartLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/truemedsLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/myUpcharLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/medplusmartLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/flipkartLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
+                            <li style="list-style-type: none;" class="ftco-animate fadeInUp ftco-animated"><img src="./public/pasumaiPharmacyLogo.png" alt="" style="height: 50px;width: 50px;"></li>    
                         </ul>
                     </div>
 
@@ -412,7 +414,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                 </div>
             </div>
             <div class="home-container-child-2 ms-auto" style="height: 100%;overflow: hidden;">
-                <img  class="w-100 ftco-animate fadeInUp ftco-animated" src="./public/bottom-background@2x.png"
+                <img class="w-100 ftco-animate fadeInUp ftco-animated" src="./public/bottom-background@2x.png"
                     style="height: 100%; object-fit: cover;    transform: scale(1.2);" />
             </div>
         </div>
@@ -587,7 +589,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     width: 100%;">
                 <div class="col-lg-6 d-flex justify-content-between align-items-center d-lg-flex"
                     style="height: 100%;display: block;">
-                    <img loading="lazy" class="mx-auto" src=".//public/screenshot-20240602-152044-1@2x.png"
+                    <img class="mx-auto" src="./public/screenshot-20240602-152044-1@2x.png"
                         style="width: 65%;height: 100%;object-fit: contain;" />
                 </div>
                 <div class="col-lg-6 d-flex justify-content-center text-md-center text-lg-start">
@@ -617,7 +619,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             <h1 class="primary-font" style="font-size: 45px; font-weight: 700;text-align: center;">Save Time and Money
                 with <br />
                 <p class="m-0" style="color: #457fed; font-weight: 700; font-size: 45px">MEDICOMP INDIA</p>
-                <video src="/public/Medicomp India (1) (1).mp4" poster=".//public/Medicomp India (1).gif"
+                <video src="./public/Medicomp India (1) (1).mp4" poster="./public/Medicomp India (1).gif"
                     controls="true" style="width: 100%;height: auto;border-radius: 30px;margin-top: 30px;">
                 </video>
         </div>
@@ -636,18 +638,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                             property management tools on the market.</p>
                     </div>
                     <div class="col-lg-6 px-2 py-2" style="height: 100%;">
-                        <img loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"
-                            src=".//public/-software-development@2x.png" />
+                        <img style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"
+                            src="./public/-software-development@2x.png" />
                     </div>
                 </div>
                 <div class="d-flex" style="height: 50%;">
                     <div class="col-lg-6 px-2 py-2" style="height: 100%;">
-                        <img loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"
-                            src=".//public/rectangle-34624193@2x.png" />
+                        <img style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"
+                            src="./public/rectangle-34624193@2x.png" />
                     </div>
                     <div class="col-lg-6 px-2 py-2" style="height: 100%;">
-                        <img loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"
-                            src=".//public/-software-development-1@2x.png" />
+                        <img style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"
+                            src="./public/-software-development-1@2x.png" />
                     </div>
                 </div>
             </div>
@@ -688,14 +690,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                             <h3 style="font-weight: 600; font-size: 32px; color: white;">REPEAT</h3>
                             <small style="color: rgba(255, 255, 255, 0.8);">Keep Apartments.com in the palm of your hand throughout your rental journey.</small>
                             <div class="d-flex flex-column mt-4" style="gap: 15px;">
-                                <img loading="lazy"
+                                <img
                                   class="pngegg-1-icon1"
                                   style="width: 200px;"
                                   loading="lazy"
                                   alt=""
                                   src="./public/GetitonGP.png"
                                 />
-                                <img loading="lazy"
+                                <img
                                   class="pngegg-1-icon1"
                                   style=""
                                   loading="lazy"
@@ -792,7 +794,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             <p class="mb-2" style="font-size: 14px;">Enter Pincode To Get More Accurate Results</p>
             <div class="input2" style="width: 230px;">
                 <input class="location-input-box" placeholder="Pin Code" type="number" id="zipcode" style="color: black;font-family:'Poppins';" oninput="startedAgain()"/>
-                <img loading="lazy" class="outline-search-magnifer2" alt="" src=".//public/outline--search--magnifer-1.svg" style="right: -18px;cursor: pointer;filter: invert(1);" onclick="fetchDetails()"/>
+                <img class="outline-search-magnifer2" alt="" src="./public/outline--search--magnifer-1.svg" style="right: -18px;cursor: pointer;filter: invert(1);" onclick="fetchDetails()"/>
             </div>
         </div>
 
@@ -874,12 +876,12 @@ function toggleCurrentLocation() {
     const locationContainer = document.querySelector('.location-main-container');
 
     if (arrow.classList.contains('down-icon')) {
-        arrow.src = './/public/down.svg'; 
+        arrow.src = './public/down.svg'; 
         arrow.classList.remove('down-icon');
         arrow.classList.add('up-icon');
         locationContainer.style.display = 'block';
     } else {
-        arrow.src = './/public/up.svg';
+        arrow.src = './public/up.svg';
         arrow.classList.remove('up-icon');
         arrow.classList.add('down-icon');
         locationContainer.style.display = 'none';
@@ -887,21 +889,6 @@ function toggleCurrentLocation() {
 }
     </script>
 
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        const screenWidth = window.innerWidth;
-        console.log(screenWidth)
-        if (screenWidth < 618) {
-            window.location.href = 'MobileIndex.html';
-        } 
-        document.getElementById('ftco-loader').style.opacity = 0;
-       document.getElementById('ftco-loader').style.visibility = 'hidden';
-       document.getElementById('ftco-loader-loading').style.visibility = 'hidden';
-    
-    });
-</script>
 </body>
 
 </html>
