@@ -83,7 +83,24 @@ integrity="sha512-e0BgZBWe7/3JF1To6KxVcaoki2aQd3f6aWyRf9R+dOPgDUfn7czha9/wLHzNgV
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
 
+<style>
+    .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
 
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+</style>
   <body>
     <div id="ftco-loader" class="show fullscreen" style="
     visibility: hidden;
@@ -114,7 +131,15 @@ left: 0px;">
     <div class="searchResults" style="margin-top: 200px;left: 1%;">
 
         <div class="d-flex px-3 justify-content-center mb-3">
-            <div id="searchResultsLists" class="col-lg-9 col-md-10 col-xl-11 col-xxl-9 d-flex flex-row align-items-center" style="gap: 20px;
+          
+          <div class="col-9"  id="loadingSearchBar" style="background-color: black; border-radius: 17px; border: 2px solid rgba(247, 248, 248, 1);
+          background: rgba(255, 255, 255, 1);width: 99%;max-width: 1600px;cursor:pointer;display: none !important;">
+                 
+             <h6 class="m-0 skeleton"  style="color: rgba(38, 50, 87, 1); font-weight: 500; font-family: Poppins, sans-serif;height: 20px;width: 50%;"></h6>
+             <p class="m-0 skeleton" style="font-size: 12px; font-weight: 500; color: rgba(138, 150, 188, 1);height:20px;width: 40%;"></p>
+          </div>
+          
+          <div id="searchResultsLists" class="col-lg-9 col-md-10 col-xl-11 col-xxl-9 d-flex flex-row align-items-center" style="gap: 20px;
             gap: 20px;
             width: 100%;
             position: relative;
@@ -774,15 +799,16 @@ display: flex;
                   
       
       if (document.getElementById('q').value.trim().length > 0) {
-      
-      document.getElementById('searchResultsLists').innerHTML = '';
+        
+        document.getElementById('searchResultsLists').innerHTML = '';
+        document.getElementById('loadingSearchBar').style.display='block';
       // document.getElementById('mlblock').style.display='none';
       
-      document.getElementById('searchResultsLists').innerHTML = `
-      <div class="skeleton">
-      <div class="skeleton__block"></div>
-      </div>
-      `;
+      // document.getElementById('searchResultsLists').innerHTML = `
+      // <div class="skeleton">
+      // <div class="skeleton__block"></div>
+      // </div>
+      // `;
       
 
       
@@ -797,6 +823,8 @@ display: flex;
           .then((res) => {
               console.log(res.data.length);
       
+              document.getElementById('loadingSearchBar').style.display='none';
+
               // document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
               // console.log(document.getElementById('idcontainer').style.height)
       
@@ -806,7 +834,7 @@ display: flex;
               // document.getElementById('idcontainer').style.transition='all 1s';
               // document.getElementById('fullheight').style.transition='all 1s';
       
-              document.getElementById('searchResultsLists').innerHTML = '';
+              // document.getElementById('searchResultsLists').innerHTML = '';
               // document.getElementById('medlist').style.height = 150 * res.data.length;
               // document.querySelectorAll('.services-section')[0].style.marginTop = 90 * res.data.length +"px";
               // document.getElementById('searchResultsLists').style.overflow = `scroll`;
