@@ -28657,7 +28657,7 @@ extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
 
         var simIndex=parseFloat(
             parseFloat(calculateSimilarity(a['props']['pageProps']['productDetails']['name'].toLowerCase(), nameOfMed.toLowerCase()) )+
-            parseFloat(calculateSimilarity( a['props']['pageProps']['productDetails']['manufacturer'].toLowerCase(), manufacturer.toLowerCase()))
+            parseFloat(calculateSimilarity( a['props']['pageProps']['productDetails']['manufacturer'] == null ? '':a['props']['pageProps']['productDetails']['manufacturer'].toLowerCase(), manufacturer.toLowerCase()))
         )/2;
 
         var salts= a['props']['pageProps']['productDetails']['compositions'].map(composition => composition.name)
@@ -28673,7 +28673,7 @@ extractDataOfPharmEasy = async (url, nameOfMed,manufacturer) => {
             finalCharge: parseFloat(a['props']['pageProps']['productDetails']['costPrice']) + dc,
             similarityIndex: simIndex,
             smed:parseFloat(calculateSimilarity(a['props']['pageProps']['productDetails']['name'].toLowerCase(), nameOfMed.toLowerCase()) ),
-            sman:parseFloat(calculateSimilarity( a['props']['pageProps']['productDetails']['manufacturer'].toLowerCase(), manufacturer.toLowerCase())),
+            sman:parseFloat(calculateSimilarity( a['props']['pageProps']['productDetails']['manufacturer'] == null ? '':a['props']['pageProps']['productDetails']['manufacturer'].toLowerCase(), manufacturer.toLowerCase())),
             manufacturerName: a['props']['pageProps']['productDetails']['manufacturer'],
             medicineAvailability:(a['props']['pageProps']['productDetails']['productAvailabilityFlags']['isAvailable']),
             minQty: a['props']['pageProps']['productDetails']['minQuantity'],
