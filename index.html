@@ -275,7 +275,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                             
                     if (document.getElementById('q').value.trim().length > 0) {
                         document.getElementById('searchResultsLists').innerHTML = '';
-                        document.getElementById('loadingSearchBar').style.display='block';
+                        document.getElementById('loadingSearchBar').style.display='block !important';
                     
                     // document.getElementById('mlblock').style.display='none';
                     
@@ -287,6 +287,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                         .then((res) => {
                             
                             console.log(res.data.length);
+                            document.getElementById('loadingSearchBar').style.display='none !important';
                             
                             // document.getElementById('text_change').innerHTML = `${res.data.length} Results Found.`;
                             // console.log(document.getElementById('idcontainer').style.height)
@@ -296,7 +297,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                             // document.getElementById('idcontainer').style.height = `${(res.data.length * 80) + 250}px`;
                             // document.getElementById('idcontainer').style.transition='all 1s';
                             // document.getElementById('fullheight').style.transition='all 1s';
-                            document.getElementById('loadingSearchBar').style.display='none';
                     
                             // document.getElementById('searchResultsLists').innerHTML = '';
                             // document.getElementById('medlist').style.height = 150 * res.data.length;
@@ -481,9 +481,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 												
                                                 <button class="button justify-content-center my-2"
                                                 style="z-index: 1; font-weight: 700; color: white;width: 100%;">View Comparision</button>
-											<input type="text" autocomplete="off" id="medname" style="word-wrap: break-word;display:none" contenteditable="false" name="medname" class="form-control foodItem_7" value="Gemfrac Injection">
+											<input type="text" autocomplete="off" id="medname" style="word-wrap: break-word;display:none" contenteditable="false" name="medname" class="form-control foodItem_7" value="Gemfrac Injection 1">
 											<input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word;display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_7" value="Alkem Laboratories Ltd">
-											<input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word;display:none" contenteditable="false" name="packSize" class="form-control foodItem_7" value="1 PreFilled Pen">
+											<input type="text" autocomplete="off" id="medicinePackSize" style="word-wrap: break-word;display:none" contenteditable="false" name="medicinePackSize" class="form-control foodItem_7" value="Pack of 1 UNIT">
 											<input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word;display:none" contenteditable="false" name="prodLink" class="form-control foodItem_7" value="https://www.truemeds.in/medicine/gemfrac-injection-1-tm-inon2-014872">
 						
 											</a>
@@ -520,7 +520,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                                                 style="z-index: 1; font-weight: 700; color: white;width: 100%;">View Comparision</button>
 											<input type="text" autocomplete="off" id="medname" style="word-wrap: break-word;display:none" contenteditable="false" name="medname" class="form-control foodItem_7" value="Endoreg Tablet 14's">
 											<input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word;display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_7" value="Jagsonapal Pharmaceuticals Ltd">
-											<input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word;display:none" contenteditable="false" name="packSize" class="form-control foodItem_7" value="Pack Of 14">
+											<input type="text" autocomplete="off" id="medicinePackSize" style="word-wrap: break-word;display:none" contenteditable="false" name="medicinePackSize" class="form-control foodItem_7" value="Pack Of 14">
 											<input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word;display:none" contenteditable="false" name="prodLink" class="form-control foodItem_7" value="https://www.truemeds.in/medicine/endoreg-2-mg-tablet-14-tm-tacr1-013431">
 						
 											</a>
@@ -556,7 +556,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                                         style="z-index: 1; font-weight: 700; color: white;width: 100%;">View Comparision</button>
                                     <input type="text" autocomplete="off" id="medname" style="word-wrap: break-word;display:none" contenteditable="false" name="medname" class="form-control foodItem_7" value=" Volini Pain Relief Spray, 40 gm">
                                     <input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word;display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_7" value="SUN PHARMACEUTICAL INDUSTRIES LTD">
-                                    <input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word;display:none" contenteditable="false" name="packSize" class="form-control foodItem_7" value="Bottle Of 40gm">
+                                    <input type="text" autocomplete="off" id="medicinePackSize" style="word-wrap: break-word;display:none" contenteditable="false" name="medicinePackSize" class="form-control foodItem_7" value="Bottle Of 40gm">
                                     <input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word;display:none" contenteditable="false" name="prodLink" class="form-control foodItem_7" value="https://www.truemeds.in/otc/volini-spray-40-gm-tm-sper1-000127">
                 
                                     </a>
@@ -590,7 +590,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                                         style="z-index: 1; font-weight: 700; color: white;width: 100%;">View Comparision</button>
                                     <input type="text" autocomplete="off" id="medname" style="word-wrap: break-word;display:none" contenteditable="false" name="medname" class="form-control foodItem_7" value="Dolo 650 Tablet 10">
                                     <input type="text" autocomplete="off" id="manufacturerName" style="word-wrap: break-word;display:none" contenteditable="false" name="manufacturerName" class="form-control foodItem_7" value="Micro Labs Ltd">
-                                    <input type="text" autocomplete="off" id="packSize" style="word-wrap: break-word;display:none" contenteditable="false" name="packSize" class="form-control foodItem_7" value="Strip Of 10 Units">
+                                    <input type="text" autocomplete="off" id="medicinePackSize" style="word-wrap: break-word;display:none" contenteditable="false" name="medicinePackSize" class="form-control foodItem_7" value="Strip Of 10 Units">
                                     <input type="text" autocomplete="off" id="prodLink" style="word-wrap: break-word;display:none" contenteditable="false" name="prodLink" class="form-control foodItem_7" value="https://www.truemeds.in/otc/dolo-650-mg-tablet-10-tm-tacr1-078605">
                 
                                     </a>
