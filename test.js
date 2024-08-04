@@ -36,6 +36,7 @@ const axiosParallel = require('axios-parallel');
 const { performance } = require('perf_hooks');
 const fs = require('fs');
 const ejs = require("ejs");
+const { ConnectAppContext } = require('twilio/lib/rest/api/v2010/account/connectApp');
 
 
 
@@ -28699,7 +28700,7 @@ extractManufacNameFromPharmeasy=async(url)=>{
 }
 extractDataOfPharmEasy = async (url, nameOfMed,medicinePackSize) => {
     try {
-    const { data } = await axios.get(url)
+    const { data } =  await axios.get(url, { timeout: 5000 });
 
         const $ = cheerio.load(data, { xmlMode: false });
 
@@ -28787,7 +28788,7 @@ extractDataOfMedkart = async (nameOfMed,medicinePackSize) => {
       'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzhlOGVkMTZiMTBlMmFiYzhiNDdkNDdkYTExZmI5MzFlYjNlMGZiNzBhZjg4Njg2NDI3MTFjMjU5ZjRiZjVjMGQ0MWU4MDhlNzhkZGM3MjUiLCJpYXQiOjE3MTk2NTkyNTYuMzYyOTY0LCJuYmYiOjE3MTk2NTkyNTYuMzYyOTY2LCJleHAiOjE3NTExOTUyNTYuMzQ5NzcsInN1YiI6IjQiLCJzY29wZXMiOltdfQ.jJw6_397To_aq8fdRqBIsJPNsSCJopU75SZIGOmzoe5iRlINC17d4yJrg1vW6GfBse8SEM8FHg98dQOFYc3nxaIfP8fZwLgk6LcGapBWtZPV4w3p9VqRP8Iwx8-z4R48W5MW9qLE-6SB0ikcuBZzYDj6adyxgBfZDvOGqqBgk3lDM-YCUZl6SFWvtO0emkPjq9ZnB5P_HUBArPgzEY5rE9U9kWbKYCgpB_N19qcSiconCSjJJDXu-cfPIudYsJvSYREluz9hfh02gyxFdcxmgafNM32MRjx3x7KU1OcD3F7tTzxkDDCunPNn9P36lKV5SHVCg0-3og621uTsl5Xc5tO137jupbNSTqCzyRZ4bzqt3amAhRD01aHkEl0jZ4qyFJDPy6c7z8wyQP4W2zk1paucsgFmvmZY0IqiY9EVe-YVN3jks5uTstUVvOWdladFVAQrmUsiL0wNKomRUY9slgi0zAN47fnCOGz5sTit7fYqRpNyS2g2luYtpgq6u_AGEve2sEjOXmxKcrm5hCOUL9xsIedv6KfttZmBqFmoMLbIYENc6GK4EwEn3UinC0_aOnARpzYE9r1LEdTTB76vRaONDvPLJzZdVZROtpWjEFPdp2v8JnsnOjwpDszwfFOYSqlcEaSb2VtaNW8Y1bL38vdaT3pTJbTdMtQZGnB_UxE',
     };
     
-    const response=await axios.get(url, { headers:headers })
+    const response=await axios.get(url, { headers:headers,timeout: 5000 })
 
       const products = response.data.data.products;
       // console.log(products);
@@ -28963,7 +28964,7 @@ getOffersOfNetmeds = async () => {
 extractDataOfNetMeds = async (url, nameOfMed,medicinePackSize) => {
     
     try {
-        const { data } = await axios.get(url);
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         const $ = cheerio.load(data);
         var dc = '';
@@ -29175,7 +29176,7 @@ function extractNumbersWithDecimalPoints(text) {
 FastextractDataOfApollo = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data, { xmlMode: false });
@@ -29345,7 +29346,7 @@ function getDeliveryChargeForTrueMeds(totalMedPrice) {
 extractDataOfTruemeds = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data, { xmlParse: false });
@@ -29538,7 +29539,7 @@ extractDataOfTata = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
         console.log(url);
-        const { data } = await axios.get(url);
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -29700,7 +29701,7 @@ getNameOfPulsePlus = async (url) => {
 extractDataOfmedplusMart = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -29802,7 +29803,7 @@ extractDataOfMyUpChar = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
         console.log("Myupchar link -> "+url)
-        const { data } = await axios.get(url)
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data, { xmlMode: false });
@@ -29898,7 +29899,7 @@ function getDeliveryChargeForTabletShablet(totalMedPrice) {
 extractDataOfOBP = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -29981,7 +29982,7 @@ extractDataOfOBP = async (url, nameOfMed,medicinePackSize) => {
 extractDataOfPP = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -30118,7 +30119,7 @@ function getDeliveryChargeForOgMedPlusMart(totalMedPrice) {
 extractDataOfOgMPM = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -30215,7 +30216,7 @@ function getDeliveryChargeForKauveryMeds(totalMedPrice) {
 extractDataOfKauveryMeds = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -30286,7 +30287,7 @@ extractDataOfKauveryMeds = async (url, nameOfMed,medicinePackSize) => {
 extractDataOfIndiMedo = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -30423,7 +30424,7 @@ function extractLargestNumber(inputString) {
 extractDataOfChemistBox = async (url, nameOfMed,medicinePackSize) => {
     try {
         // Fetching HTML
-        const { data } = await axios.get(url)
+        const { data } =  await axios.get(url, { timeout: 5000 });
 
         // Using cheerio to extract <a> tags
         const $ = cheerio.load(data);
@@ -31081,11 +31082,104 @@ function checkforzero(arr) {
     return count;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const tempfzz = [];
 
 app.get('/getUpdatesOfMultiMeds', async (req, res) => {
 
-    res.send(tempfzz);
+    // res.send(tempfzz);
+    
+async function extractMedInfoFromApiMyUpChar(nameOfMed,medicinePackSize){
+    const response = await axios.get(`https://www.myupchar.com/en/search/autocomplete_v2?query=${nameOfMed}`);
+    const products = response.data;
+    // console.log(products)
+
+    const filteredProducts = products.filter(product => extractLargestNumber(product.form) === medicinePackSize);
+
+    console.log(filteredProducts)
+
+    const targetString = "Crocin 650 Tablet";
+
+        let mostSimilarProduct = null;
+        let highestSimilarityScore = 0;
+
+        filteredProducts.forEach(product => {
+            const similarityScore = stringSimilarity.compareTwoStrings(product.text, targetString);
+            if (similarityScore > highestSimilarityScore) {
+                highestSimilarityScore = similarityScore;
+                mostSimilarProduct = product;
+            }
+        });
+
+        return ["MyUpChar",mostSimilarProduct.text,mostSimilarProduct["website-link"]];
+}
+
+async function extractMedInfoFromApiPulsePlus(nameOfMed,medicinePackSize){
+    const response = await axios.get(`https://www.pulseplus.in/Pulse/SearchProduct?searchText=${nameOfMed}&searchLength=10`);
+    const products = response.data;
+    // console.log(products)
+
+    const filteredProducts = products.filter(product => extractLargestNumber(product.Packing) === medicinePackSize);
+
+    console.log(filteredProducts)
+    console.log(extractLargestNumber("15 is a apple"))
+
+    const targetString = "Crocin 650 Tablet";
+
+        let mostSimilarProduct = null;
+        let highestSimilarityScore = 0;
+
+        filteredProducts.forEach(product => {
+            const similarityScore = stringSimilarity.compareTwoStrings(product.ProductName, targetString);
+            if (similarityScore > highestSimilarityScore) {
+                highestSimilarityScore = similarityScore;
+                mostSimilarProduct = product;
+            }
+        });
+
+        return ["PulsePlus",mostSimilarProduct.ProductName,mostSimilarProduct.ProductLinkUrl];
+}
+
+
+
+    console.log(await extractMedInfoFromApiMyUpChar("Crocin ",15));
+    console.log(await extractMedInfoFromApiPulsePlus("Crocin ",15));
+
+
+
 });
 
 app.get('/FastGetPharmaDataFromLinks', async (req, res) => {
